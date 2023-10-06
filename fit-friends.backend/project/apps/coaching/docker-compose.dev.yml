@@ -1,0 +1,40 @@
+version: '3.5'
+services:
+  fit-friend.coaching.postgres:
+    image: postgres:16-alpine
+    container_name: fit-friend.coaching.postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: fit-friend-coaching
+    ports:
+      - 5433:5432
+    volumes:
+      - fit-friend.postgres.coaching:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d readme-posts" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+    networks:
+      - fit-friend.coaching
+  fit-friend.coaching.pgadmin:
+    image: dpage/pgadmin4
+    container_name: fit-friend.coaching.pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "89179699365@mail.ru"
+      PGADMIN_DEFAULT_PASSWORD: "test"
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    ports:
+      - 8082:80
+    networks:
+      - fit-friend.coaching
+
+volumes:
+  fit-friend.postgres.coaching:
+
+networks:
+  fit-friend.coaching:
+      driver: bridge

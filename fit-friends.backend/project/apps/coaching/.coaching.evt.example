@@ -1,0 +1,5 @@
+PORT=3444
+POSTS_RESPONSE_LIMIT=50
+JWT_SECRET=jwt_secret
+HOST=localhost
+

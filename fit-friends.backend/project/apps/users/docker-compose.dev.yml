@@ -1,0 +1,42 @@
+version: '3.9'
+services:
+  fit-friend.users.mongo:
+    image: mongo:4.2
+    restart: always
+    container_name: fit-friend-users_mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: test
+      MONGO_INITDB_DATABASE: fit-friend-users-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - fit-friend-users_data:/data/db
+    networks:
+      - fit-friend.users
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/fit-friend-users --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  fit-friend.mongodb-express:
+    image: mongo-express:latest
+    restart: always
+    container_name: fit-friend-users_mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test
+      ME_CONFIG_MONGODB_URL: mongodb://admin:test@mongodb:27017/
+    networks:
+      - fit-friend.users
+
+volumes:
+  fit-friend-users_data:
+
+networks:
+  fit-friend.users:
+      driver: bridge
+

@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@project/config-bff": ["libs/config/config-bff/src/index.ts"],
+      "@project/config-coaching": ["libs/config/config-coaching/src/index.ts"],
+      "@project/config-notify": ["libs/config/config-notify/src/index.ts"],
+      "@project/config-uploader": ["libs/config/config-uploader/src/index.ts"],
+      "@project/config-users": ["libs/config/config-users/src/index.ts"],
+      "@project/configurations": ["libs/config/configurations/src/index.ts"],
+      "@project/modules-options": ["libs/modules-options/src/index.ts"],
+      "@project/shared-constants": [
+        "libs/shared/shared-constants/src/index.ts"
+      ],
+      "@project/shared-dto": ["libs/shared/shared-dto/src/index.ts"],
+      "@project/shared-types": ["libs/shared/shared-types/src/index.ts"],
+      "@project/util-core": ["libs/util/util-core/src/index.ts"],
+      "@project/util-types": ["libs/util/util-types/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
