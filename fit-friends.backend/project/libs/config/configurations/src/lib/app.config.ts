@@ -11,8 +11,8 @@ export interface ApplicationConfig {
 
 export default registerAs('application', (): ApplicationConfig => {
   const config: ApplicationConfig = {
-    environment: process.env['NODE_ENV'] || 'development',
-    port: parseInt(process.env['PORT'] || DEFAULT_PORT.toString(), 10),
+    environment: process.env.NODE_ENV || 'development',
+    port: parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10),
   };
 
   const validationSchema = Joi.object<ApplicationConfig>({

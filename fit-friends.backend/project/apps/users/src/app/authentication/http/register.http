@@ -1,0 +1,107 @@
+## Создать нового пользователя
+
+POST http://localhost:3111/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "toransmust@overlook.net",
+  "name": "Jack",
+  "password": "111111",
+  "avatarId": "222222222111111111111112",
+  "gender": "male",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "coach",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Звёздная",
+  "imagePath": "must be a string",
+  "level": "amateur",
+  "trainingType": ["aerobics", "yoga", "stretching"],
+  "isReady": "true",
+  "addition": {
+    "certificateId": "111111111111111111111111",
+    "merits": "must be shorter than or equal to 140 characters"
+  }
+}
+
+###
+
+## Создать нового пользователя
+
+POST http://localhost:3111/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "snowmust@pisem.local",
+  "name": "Bob",
+  "password": "111111",
+  "avatarId": "222222222111111111111112",
+  "gender": "female",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "sportsman",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Спортивная",
+  "imagePath": "must be a string",
+  "level": "beginner",
+  "trainingType": ["crossfit", "yoga", "pilates"],
+  "isReady": "true",
+  "addition": {
+    "trainingTime": "30 - 50",
+    "trainingCalories": 2000,
+    "daysCalories": 3000
+  }
+}
+
+###
+
+POST http://localhost:3111/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "ransmust@overlook.net",
+  "name": "Jack",
+  "password": "111111",
+  "avatarId": "222222222111111111111112",
+  "gender": "female",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "coach",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Удельная",
+  "imagePath": "must be a string",
+  "level": "professional",
+  "trainingType": ["box", "pilates", "stretching"],
+  "isReady": "true",
+  "addition": {
+    "certificateId": "111111111111111111111111",
+    "merits": "must be shorter than or equal to 140 characters"
+  }
+}
+
+###
+
+## Создать нового пользователя
+
+POST http://localhost:3111/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "owmust@pisem.local",
+  "name": "Bob",
+  "password": "111111",
+  "avatarId": "222222222111111111111112",
+  "gender": "male",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "sportsman",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Петроградская",
+  "imagePath": "must be a string",
+  "level": "beginner",
+  "trainingType": ["aerobics", "yoga", "running"],
+  "isReady": "true",
+  "addition": {
+    "trainingTime": "30 - 50",
+    "trainingCalories": 2000,
+    "daysCalories": 3000
+  }
+}
+
+###

@@ -1,0 +1,44 @@
+#sort=role
+#order=asc
+#limit=5
+#page=2
+#level=beginner
+#trainingType=running
+#location=Петроградская
+
+##Список
+
+GET http://localhost:3111/users HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmJkOTQ3Zjg3ZmJlMzEzNmUyNjgiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5Njc2OTQ0NywiZXhwIjoxNjk2NzcwMzQ3fQ.exPt-PkherWHv79CYLY8U0viHusqqlXqjea7Fp9YGos
+
+###
+
+GET http://localhost:3111/users?sort=role&order=asc&limit=5&page=2&level=beginner&trainingType=running&location=Петроградская HTTP/1.1
+
+###
+
+GET http://localhost:3111/users?sort=role&order=asc&limit=5&page=1 HTTP/1.1
+
+###
+
+GET http://localhost:3111/users?sort=role&order=asc&limit=5&page=1&trainingType=yoga HTTP/1.1
+
+###
+
+GET http://localhost:3111/users/6521fbd947f87fbe3136e268 HTTP/1.1
+
+###
+
+##Update
+
+PATCH http://localhost:3111/users/6522c9f678948ed73b15722a HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyYzlmNjc4OTQ4ZWQ3M2IxNTcyMmEiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5Njc4OTUwMywiZXhwIjoxNjk2NzkwNDAzfQ.qsMdQmkUBMnG1CqlHtCxWCWbBOg9XTli79hBozcfif4
+
+{
+  "name": "Bob",
+  "isReady": "true",
+  "addition": {
+    "trainingCalories": 3670
+  }
+}

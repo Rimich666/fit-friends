@@ -12,8 +12,8 @@ export interface HttpConfig {
 
 export default registerAs('http', (): HttpConfig => {
   const config: HttpConfig = {
-    maxRedirectCount : parseInt(process.env['HTTP_CLIENT_MAX_REDIRECTS']  || DEFAULT_MAX_REDIRECTS_COUNT.toString(), 10),
-    timeout: parseInt(process.env['HTTP_CLIENT_TIMEOUT'] || DEFAULT_TIMEOUT.toString(), 10),
+    maxRedirectCount : parseInt(process.env.HTTP_CLIENT_MAX_REDIRECTS  || DEFAULT_MAX_REDIRECTS_COUNT.toString(), 10),
+    timeout: parseInt(process.env.HTTP_CLIENT_TIMEOUT || DEFAULT_TIMEOUT.toString(), 10),
   };
 
   const validationSchema = Joi.object<HttpConfig>({

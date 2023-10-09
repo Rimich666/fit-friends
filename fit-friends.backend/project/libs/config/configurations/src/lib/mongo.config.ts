@@ -22,12 +22,12 @@ export interface MongoConfig {
 
 export default registerAs('mongo', (): MongoConfig => {
   const config: MongoConfig = {
-    host: process.env['MONGO_DB_HOST'] || DefaultMongoDbOptions.HOST,
-    port: parseInt(process.env['MONGO_DB_PORT'] || DefaultMongoDbOptions.PORT.toString(), 10),
-    name: process.env['MONGO_DB_NAME'] || DefaultMongoDbOptions.NAME,
-    user: process.env['MONGO_DB_USER'] || DefaultMongoDbOptions.USER,
-    password: process.env['MONGO_DB_PASSWORD'] || DefaultMongoDbOptions.PASSWORD,
-    authBase: process.env['MONGO_DB_AUTH_BASE'] || DefaultMongoDbOptions.AUTH_BASE,
+    host: process.env.MONGO_DB_HOST || DefaultMongoDbOptions.HOST,
+    port: parseInt(process.env.MONGO_DB_PORT || DefaultMongoDbOptions.PORT.toString(), 10),
+    name: process.env.MONGO_DB_NAME || DefaultMongoDbOptions.NAME,
+    user: process.env.MONGO_DB_USER || DefaultMongoDbOptions.USER,
+    password: process.env.MONGO_DB_PASSWORD || DefaultMongoDbOptions.PASSWORD,
+    authBase: process.env.MONGO_DB_AUTH_BASE || DefaultMongoDbOptions.AUTH_BASE,
   };
 
   const validationSchema = Joi.object<MongoConfig>({

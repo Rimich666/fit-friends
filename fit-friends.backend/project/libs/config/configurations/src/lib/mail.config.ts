@@ -20,11 +20,11 @@ export interface MailConfig {
 
 export default registerAs('mail', (): MailConfig => {
   const config: MailConfig = {
-    host: process.env['MAIL_SMTP_HOST'] || DefaultMailOptions.SMTP_HOST,
-    port: parseInt(process.env['MAIL_SMTP_PORT'] || DefaultMailOptions.SMTP_PORT.toString(), 10),
-    user: process.env['MAIL_USER_NAME'] || DefaultMailOptions.USER_NAME,
-    password: process.env['MAIL_USER_PASSWORD'] || DefaultMailOptions.USER_PASSWORD,
-    from: process.env['MAIL_FROM'] || DefaultMailOptions.FROM,
+    host: process.env.MAIL_SMTP_HOST || DefaultMailOptions.SMTP_HOST,
+    port: parseInt(process.env.MAIL_SMTP_PORT || DefaultMailOptions.SMTP_PORT.toString(), 10),
+    user: process.env.MAIL_USER_NAME || DefaultMailOptions.USER_NAME,
+    password: process.env.MAIL_USER_PASSWORD || DefaultMailOptions.USER_PASSWORD,
+    from: process.env.MAIL_FROM || DefaultMailOptions.FROM,
   };
 
   const validationSchema = Joi.object<MailConfig>({

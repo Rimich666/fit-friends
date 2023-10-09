@@ -44,7 +44,7 @@ export function parseTime(time: string): TimeInUnit {
     throw new Error(`[parseTime] Can't parse value count. Result is NaN.`);
   }
 
-  return { value, unit }
+  return { value, unit };
 }
 
 export function envStyleToCamelCase(env: string, firsUpper: number) {

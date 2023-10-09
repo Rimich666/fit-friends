@@ -12,7 +12,6 @@ const DefaultRabbitOptions = {
   PASSWORD: 'password',
   PORT: '5672',
   USER: 'user',
-  BINDING_KEYS: ''
 };
 
 export interface Queue {
@@ -101,11 +100,11 @@ const getExchangeOptions = (bindingKeys: string): Options => {
 
 export default registerAs('rabbit', (): RabbitConfig => {
   const  config: RabbitConfig = {
-    host: process.env['RABBIT_HOST'] || DefaultRabbitOptions.HOST,
-    password: process.env['RABBIT_PASSWORD'] || DefaultRabbitOptions.PASSWORD,
-    port: parseInt(process.env['RABBIT_PORT'] || DefaultRabbitOptions.PORT, 10),
-    user: process.env['RABBIT_USER'] || DefaultRabbitOptions.USER,
-    bindingKeys: process.env['RABBIT_BINDING_KEYS'] || DefaultRabbitOptions.BINDING_KEYS,
+    host: process.env.RABBIT_HOST || DefaultRabbitOptions.HOST,
+    password: process.env.RABBIT_PASSWORD || DefaultRabbitOptions.PASSWORD,
+    port: parseInt(process.env.RABBIT_PORT || DefaultRabbitOptions.PORT, 10),
+    user: process.env.RABBIT_USER || DefaultRabbitOptions.USER,
+    bindingKeys: process.env.RABBIT_BINDING_KEYS,
   };
 
   const validationSchema = Joi.object<RabbitConfig>({

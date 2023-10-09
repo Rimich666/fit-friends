@@ -8,7 +8,7 @@ export interface JWTConfig {
 
 export default registerAs('jwt', (): JWTConfig => {
   const config: JWTConfig = {
-    accessTokenSecret: process.env['JWT_SECRET'] || '',
+    accessTokenSecret: process.env.JWT_SECRET,
   };
 
   const validationSchema = Joi.object<JWTConfig>({

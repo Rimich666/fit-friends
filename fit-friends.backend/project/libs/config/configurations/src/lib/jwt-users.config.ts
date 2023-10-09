@@ -3,21 +3,28 @@ import * as Joi from 'joi';
 import * as process from 'process';
 
 const DEFAULT_JWT_EXPIRES_IN = '15m';
+const DEFAULT_JWT_RT_EXPIRES_IN = '7d';
 
 export interface JwtUsersConfig {
   accessTokenSecret: string;
   accessTokenExpiresIn: string;
+  refreshTokenSecret: string;
+  refreshTokenExpiresIn: string;
 }
 
 export default registerAs('jwt', (): JwtUsersConfig => {
   const config: JwtUsersConfig = {
-    accessTokenSecret: process.env['JWT_SECRET'] || '',
-    accessTokenExpiresIn: process.env['JWT_EXPIRES_IN'] || DEFAULT_JWT_EXPIRES_IN,
+    accessTokenSecret: process.env.JWT_SECRET,
+    accessTokenExpiresIn: process.env.JWT_EXPIRES_IN || DEFAULT_JWT_EXPIRES_IN,
+    refreshTokenSecret: process.env.JW_RT_SECRET,
+    refreshTokenExpiresIn: process.env.JW_RT_EXPIRES_IN || DEFAULT_JWT_RT_EXPIRES_IN,
   };
 
   const validationSchema = Joi.object<JwtUsersConfig>({
     accessTokenSecret: Joi.string().required(),
     accessTokenExpiresIn: Joi.string().required(),
+    refreshTokenSecret: Joi.string().required(),
+    refreshTokenExpiresIn: Joi.string().required(),
   });
 
   const { error } = validationSchema.validate(config, { abortEarly: true });

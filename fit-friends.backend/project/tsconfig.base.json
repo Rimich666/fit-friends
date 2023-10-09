@@ -21,11 +21,18 @@
       "@project/config-uploader": ["libs/config/config-uploader/src/index.ts"],
       "@project/config-users": ["libs/config/config-users/src/index.ts"],
       "@project/configurations": ["libs/config/configurations/src/index.ts"],
+      "@project/fit-users.model": ["libs/models/fit-users/src/index.ts"],
       "@project/modules-options": ["libs/modules-options/src/index.ts"],
+      "@project/refresh-token.model": [
+        "libs/models/refresh-token/src/index.ts"
+      ],
       "@project/shared-constants": [
         "libs/shared/shared-constants/src/index.ts"
       ],
       "@project/shared-dto": ["libs/shared/shared-dto/src/index.ts"],
+      "@project/shared-enhancers": [
+        "libs/shared/shared-enhancers/src/index.ts"
+      ],
       "@project/shared-types": ["libs/shared/shared-types/src/index.ts"],
       "@project/util-core": ["libs/util/util-core/src/index.ts"],
       "@project/util-types": ["libs/util/util-types/src/index.ts"]

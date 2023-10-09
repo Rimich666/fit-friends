@@ -12,9 +12,9 @@ export interface ApplicationsConfig {
 
 export default registerAs('applications', (): ApplicationsConfig => {
   const config: ApplicationsConfig = {
-    users : process.env['APP_USERS'] || '',
-    coaching: process.env['APP_COACHING'] || '',
-    files: process.env['APP_FILES'] || '',
+    users : process.env.APP_USERS,
+    coaching: process.env.APP_COACHING,
+    files: process.env.APP_FILES,
   };
 
   const validationSchema = Joi.object<ApplicationsConfig>(

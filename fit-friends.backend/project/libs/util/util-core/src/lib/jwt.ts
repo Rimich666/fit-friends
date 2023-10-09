@@ -1,9 +1,10 @@
-import {TokenPayload, UserType} from '@project/shared-types';
+import {TokenPayload, UserInterface} from '@project/shared-types';
 
-export function createJWTPayload(user: UserType): TokenPayload {
+export function createJWTPayload(user: UserInterface): TokenPayload {
   return {
-    id: user.id,
+    userId: user.id,
     email: user.email,
     name: user.name,
+    role: user.role
   };
 }

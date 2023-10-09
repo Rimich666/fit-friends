@@ -1,0 +1,89 @@
+# Authentication
+
+## Создать нового пользователя
+
+POST http://localhost:3111/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "torans@overlook.net",
+  "name": "Jack",
+  "password": "111111",
+  "avatarId": "222222222111111111111112",
+  "gender": "male",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "coach",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Пионерская",
+  "imagePath": "must be a string",
+  "level": "beginner",
+  "trainingType": ["aerobics", "yoga"],
+  "isReady": "true",
+  "addition": {
+    "certificateId": "111111111111111111111111",
+    "merits": "must be shorter than or equal to 140 characters"
+  }
+}
+
+###
+
+## Создать нового пользователя
+
+POST http://localhost:3111/register HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "snow@pisem.local",
+  "name": "Bob",
+  "password": "111111",
+  "avatarId": "222222222111111111111112",
+  "gender": "male",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "sportsman",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Пионерская",
+  "imagePath": "must be a string",
+  "level": "beginner",
+  "trainingType": ["aerobics", "yoga"],
+  "isReady": "true",
+  "addition": {
+    "trainingTime": "30 - 50",
+    "trainingCalories": 2000,
+    "daysCalories": 3000
+  }
+}
+
+###
+
+## Залогиниться
+
+POST http://localhost:3111/login HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmJkOTQ3Zjg3ZmJlMzEzNmUyNjgiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5Njc0NDY0NCwiZXhwIjoxNjk2NzQ1NTQ0fQ.OUUp7-27rHgvbm8oqvpLZjHGCQk3yvNLWTMUQQLdRNA
+
+{
+  "email": "snow@pisem.local",
+  "password": "111111"
+}
+
+###
+
+## Залогиниться
+
+POST http://localhost:3111/login HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmJkOTQ3Zjg3ZmJlMzEzNmUyNjgiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5Njc0NDY0NCwiZXhwIjoxNjk2NzQ1NTQ0fQ.OUUp7-27rHgvbm8oqvpLZjHGCQk3yvNLWTMUQQLdRNA
+
+{
+  "email": "torans@overlook.net",
+  "password": "111111"
+}
+
+###
+
+
+## Удалить refresh
+
+DELETE http://localhost:3111/refresh HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmJkOTQ3Zjg3ZmJlMzEzNmUyNjgiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsInRva2VuSWQiOiIwMmI1YzczZC05MWNmLTQ5MDQtYTQzNi1lODc1NTJjZmJiZGMiLCJpYXQiOjE2OTY3NDg5NTYsImV4cCI6MTY5NzM1Mzc1Nn0.KIiYkEwPW9D4BFLrP_IeaKRa6OvctXRgMWGqNvdCiEY
