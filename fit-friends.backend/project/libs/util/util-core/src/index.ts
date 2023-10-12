@@ -9,3 +9,5 @@ export * from './lib/exceptions/token-not-exists.exception';
 export * from './lib/exceptions/not-exists-user.exception';
 export * from './lib/exceptions/logged-user.exception';
 export * from './lib/exceptions/not-your-account.exception';
+export * from './lib/exceptions/not-exists-training.exception';
+export * from './lib/exceptions/not-subscribe.exception';

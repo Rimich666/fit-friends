@@ -3,6 +3,22 @@ export enum UsersSortFieldsEnum {
   role = 'role'
 }
 
+export enum CoachTrainingSortFieldsEnum {
+  createDate = 'createDate',
+
+}
+
+export enum SharedTrainingSortFieldsEnum {
+  createDate = 'createDate',
+  price = 'price'
+}
+
+export enum OrderSortFieldsEnum {
+  createDate = 'createDate',
+  count = 'count',
+  total = 'total'
+}
+
 export enum Order {
   asc = 'asc',
   desc = 'desc'
@@ -12,7 +28,7 @@ export enum Order {
 //   () => Object.values(SortFieldsEnum).filter((item) => isNaN(Number(item)))
 
 export const DefaultSort = {
-  FIELD: UsersSortFieldsEnum.createDate,
+  FIELD: 'createDate',
   ORDER: Order.desc
 };
 

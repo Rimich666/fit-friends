@@ -1,3 +1,3 @@
 export const EmailSubject = {
-  EmailRegisterUser: 'Регистрация на сайте магазина гитар',
+  EmailNewTraining: 'Создана новая тренировка',
 } as const;

@@ -24,8 +24,9 @@ export const validationConstraints : Constraints = {
   training: {
     name: {max: 15, min: 1},
     price: {min: 0},
-    trainingCalories: {max: 5000, min: 1000},
+    caloriesCount: {max: 5000, min: 1000},
     description: {max: 140, min: 10},
+    rating: {max: 5, min: 0}
   },
   feedback: {
     rating: {max: 5, min: 1},

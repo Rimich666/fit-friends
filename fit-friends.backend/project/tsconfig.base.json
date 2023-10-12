@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@project/coaching.model": ["libs/models/coaching/src/index.ts"],
       "@project/config-bff": ["libs/config/config-bff/src/index.ts"],
       "@project/config-coaching": ["libs/config/config-coaching/src/index.ts"],
       "@project/config-notify": ["libs/config/config-notify/src/index.ts"],
@@ -22,7 +23,9 @@
       "@project/config-users": ["libs/config/config-users/src/index.ts"],
       "@project/configurations": ["libs/config/configurations/src/index.ts"],
       "@project/fit-users.model": ["libs/models/fit-users/src/index.ts"],
+      "@project/helpers": ["libs/shared/helpers/src/index.ts"],
       "@project/modules-options": ["libs/modules-options/src/index.ts"],
+      "@project/notify.model": ["libs/models/notify/src/index.ts"],
       "@project/refresh-token.model": [
         "libs/models/refresh-token/src/index.ts"
       ],

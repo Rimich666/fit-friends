@@ -1,0 +1,25 @@
+# 6521fe64baaf09d0704c280e
+# 65224a1488c65f2a50c00c1f
+# 65229657b02e2b759bc7ee1a
+# 652296625388804a68b99e7c
+# 652296695388804a68b99e7f
+# 6522966d5388804a68b99e82
+
+POST http://localhost:3111/friends HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyYzlmNjc4OTQ4ZWQ3M2IxNTcyMmEiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5NzAyNjU3NiwiZXhwIjoxNjk3MDI3NDc2fQ.2mUH9abaYjC6mOiQ01A45lDySCRLwrnxobk6oFzay00
+
+{
+  "friendId": "6522966d5388804a68b99e82"
+}
+###
+
+DELETE http://localhost:3111/friends/6522966d5388804a68b99e82 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyYzlmNjc4OTQ4ZWQ3M2IxNTcyMmEiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5NzAyNjU3NiwiZXhwIjoxNjk3MDI3NDc2fQ.2mUH9abaYjC6mOiQ01A45lDySCRLwrnxobk6oFzay00
+
+###
+
+GET http://localhost:3111/friends HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyYzlmNjc4OTQ4ZWQ3M2IxNTcyMmEiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5NzAyOTIzNCwiZXhwIjoxNjk3MDMwMTM0fQ.hzcApbgsi3_Q7y9gkXkgLl9WbwEi-Occt4Pn9kc7hoA
+
+###

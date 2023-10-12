@@ -27,16 +27,16 @@ export class FitUsersController {
   @UseGuards(JwtAuthGuard, UserOnlyGuard)
   @UsePipes(new ValidationPipe({transform: true}))
   async index(@Query() filters: UsersFilterDto) {
-    const users = await this.userService.getUsers(filters);
-    return users.map((user) =>
-      ({... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number>)}));
+    return this.userService.getUsers(filters);
+    // return users.map((user) =>
+    //   ({... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number>)}));
   }
 
   @Get('/:id')
   @UseGuards(JwtAuthGuard)
   async show(@Param('id') userId: string) {
-    const user = await this.userService.getUser(userId);
-    return {... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number>)};
+    return this.userService.getUser(userId);
+    // return {... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number>)};
   }
 
   @Patch('/:id')
@@ -44,7 +44,7 @@ export class FitUsersController {
   @UseInterceptors(UserUpdateInterceptor)
   @UsePipes(new ValidationPipe({transform: true, whitelist: true}))
   async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
-    const updatedUser = await this.userService.update(id, dto);
-    return {... fillObject(UserRdo, updatedUser), addition: Object.fromEntries(updatedUser.addition as Map<string, string | number>)};
+    return this.userService.update(id, dto);
+    // return {... fillObject(UserRdo, updatedUser), addition: Object.fromEntries(updatedUser.addition as Map<string, string | number>)};
   }
 }

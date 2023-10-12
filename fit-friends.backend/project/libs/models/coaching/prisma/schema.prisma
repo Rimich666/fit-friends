@@ -1,0 +1,79 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Training {
+  id             Int        @id @default(autoincrement())
+  name           String
+  backgroundPath String     @map("background")
+  level          String
+  trainingType   String     @map("type")
+  trainingTime   String     @map("time")
+  price          Int
+  caloriesCount  Int        @map("calories")
+  description    String
+  gender         String
+  videoId        String     @map("video")
+  rating         Float
+  coachId        String     @map("coach")
+  isSpecialOffer Boolean    @map("spec")
+  createDate     DateTime   @map("create_date")
+  feedback       Feedback[]
+  orders         Order[]
+  balances       Balance[]
+
+  @@index([price])
+  @@index([caloriesCount])
+  @@index([rating])
+  @@index([trainingTime])
+  @@index([createDate])
+  @@map("trainings")
+}
+
+model Feedback {
+  id         Int      @id @default(autoincrement())
+  authorId   String   @map("author")
+  training   Training @relation(fields: [trainingId], references: [id])
+  trainingId Int      @map("training_id")
+  raiting    Int
+  text       String
+  createDate DateTime @map("create_date")
+
+  @@map("feedback")
+}
+
+model Order {
+  id            Int      @id @default(autoincrement())
+  userId        String   @map("user")
+  purchaseType  String   @map("type")
+  training      Training @relation(fields: [trainingId], references: [id])
+  trainingId    Int      @map("training_id")
+  price         Int
+  count         Int
+  total         Int
+  paymentOption String   @map("pay")
+  createDate    DateTime @map("create_date")
+
+  @@index([count])
+  @@index([total])
+  @@index([createDate])
+  @@map("orders")
+}
+
+model Balance {
+  id         Int      @id @default(autoincrement())
+  userId     String   @map("user")
+  training   Training @relation(fields: [trainingId], references: [id])
+  trainingId Int      @map("training_id")
+  count      Int
+
+  @@map("balances")
+}

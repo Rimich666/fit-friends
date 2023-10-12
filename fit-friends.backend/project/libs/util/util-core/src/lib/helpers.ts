@@ -52,9 +52,18 @@ export function envStyleToCamelCase(env: string, firsUpper: number) {
   index < firsUpper ? item : item[0].toUpperCase().concat(item.substring(1))).join('');
 }
 
+// export function camelCaseToEnvStyle(camel: string, prefix: string) {
+//   return `${ prefix ? `${prefix.toUpperCase()}_` : ''}${camel.split('').map((letter, index) =>
+//     isUppercase(letter) && index > 0 ? `_${letter}` : letter).join('').toUpperCase()}`;
+// }
+
 export function camelCaseToEnvStyle(camel: string, prefix: string) {
-  return `${ prefix ? `${prefix.toUpperCase()}_` : ''}${camel.split('').map((letter, index) =>
-    isUppercase(letter) && index > 0 ? `_${letter}` : letter).join('').toUpperCase()}`;
+  return `${ prefix ? `${prefix.toUpperCase()}_` : ''}${camelCaseToSnakeStyle(camel).toUpperCase()}`;
+}
+
+export function camelCaseToSnakeStyle(camel: string) {
+  return `${camel.split('').map((letter, index) =>
+    isUppercase(letter) && index > 0 ? `_${letter}` : letter).join('')}`;
 }
 
 export const getAuthHeader = (token: string) => ({

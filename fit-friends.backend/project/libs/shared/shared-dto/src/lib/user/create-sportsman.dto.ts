@@ -2,7 +2,7 @@ import {TrainingTime} from '@project/shared-types';
 import {IsEnum, IsInt, Max, Min} from 'class-validator';
 import {validationConstraints} from '@project/shared-constants';
 import {Expose} from 'class-transformer';
-import {trainingTypeError} from './error-mesages';
+import {trainingTypeError} from '../error-mesages';
 
 
 export class CreateSportsmanDto {

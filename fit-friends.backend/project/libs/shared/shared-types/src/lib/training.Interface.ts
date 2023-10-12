@@ -1,17 +1,17 @@
-import {TrainingTime, TrainingType, Gender, Level} from './enums';
-
 export interface TrainingInterface {
-  id?: string;
+  id?: number;
   name?: string;
-  level?: Level;
-  trainingType?: TrainingType;
-  trainingTime?: TrainingTime;
-  price?: number
-  trainingCalories?: number;
+  backgroundPath?: string;
+  level?: string;
+  trainingType?: string;
+  trainingTime?: string;
+  price?: number;
+  caloriesCount?: number;
   description?: string;
-  gender: Gender;
-  videoId: string;
-  rating: number;
-  coachId: string;
-  isSpecialOffer: boolean;
+  gender?: string;
+  videoId?: string;
+  rating?: number;
+  coachId?: string;
+  isSpecialOffer?: boolean;
+  createDate?: Date;
 }

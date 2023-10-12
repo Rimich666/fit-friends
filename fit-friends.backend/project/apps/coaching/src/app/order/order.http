@@ -1,0 +1,59 @@
+## Создать тренировку
+
+POST http://localhost:3444/order HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2ZDUzODg4MDRhNjhiOTllODIiLCJlbWFpbCI6Im93bXVzdEBwaXNlbS5sb2NhbCIsIm5hbWUiOiJCb2IiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk2OTUyNTE0LCJleHAiOjE2OTY5NTM0MTR9.uxExEsjorRf710TPlpmUC7mxMfsBNjSpyYBPEUQ9Gng
+
+{
+  "trainingId": 1,
+  "count": 3,
+  "paymentOption": "visa"
+}
+###
+
+POST http://localhost:3444/order HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2ZDUzODg4MDRhNjhiOTllODIiLCJlbWFpbCI6Im93bXVzdEBwaXNlbS5sb2NhbCIsIm5hbWUiOiJCb2IiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk2OTUyNTE0LCJleHAiOjE2OTY5NTM0MTR9.uxExEsjorRf710TPlpmUC7mxMfsBNjSpyYBPEUQ9Gng
+
+{
+  "trainingId": 2,
+  "count": 5,
+  "paymentOption": "visa"
+}
+###
+
+POST http://localhost:3444/order HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2ZDUzODg4MDRhNjhiOTllODIiLCJlbWFpbCI6Im93bXVzdEBwaXNlbS5sb2NhbCIsIm5hbWUiOiJCb2IiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk2OTUyNTE0LCJleHAiOjE2OTY5NTM0MTR9.uxExEsjorRf710TPlpmUC7mxMfsBNjSpyYBPEUQ9Gng
+
+{
+  "trainingId": 3,
+  "count": 6,
+  "paymentOption": "visa"
+}
+###
+
+POST http://localhost:3444/order HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2ZDUzODg4MDRhNjhiOTllODIiLCJlbWFpbCI6Im93bXVzdEBwaXNlbS5sb2NhbCIsIm5hbWUiOiJCb2IiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk2OTUyNTE0LCJleHAiOjE2OTY5NTM0MTR9.uxExEsjorRf710TPlpmUC7mxMfsBNjSpyYBPEUQ9Gng
+
+{
+  "trainingId": 4,
+  "count": 8,
+  "paymentOption": "visa"
+}
+###
+
+POST http://localhost:3444/order HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2ZDUzODg4MDRhNjhiOTllODIiLCJlbWFpbCI6Im93bXVzdEBwaXNlbS5sb2NhbCIsIm5hbWUiOiJCb2IiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk2OTUyNTE0LCJleHAiOjE2OTY5NTM0MTR9.uxExEsjorRf710TPlpmUC7mxMfsBNjSpyYBPEUQ9Gng
+
+{
+  "trainingId": 5,
+  "count": 20,
+  "paymentOption": "visa"
+}
+###
+
+GET http://localhost:3444/order HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmU2NGJhYWYwOWQwNzA0YzI4MGUiLCJlbWFpbCI6InRvcmFuc0BvdmVybG9vay5uZXQiLCJuYW1lIjoiSmFjayIsInJvbGUiOiJjb2FjaCIsImlhdCI6MTY5NzAxMTI2MywiZXhwIjoxNjk3MDEyMTYzfQ.8N50fL4MamCSOVqxNhh8OIoTpm-ib_MHngAMre84-vY

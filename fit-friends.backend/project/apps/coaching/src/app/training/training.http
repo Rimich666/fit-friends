@@ -1,0 +1,97 @@
+## Создать тренировку
+
+POST http://localhost:3444/training HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2OTUzODg4MDRhNjhiOTllN2YiLCJlbWFpbCI6InJhbnNtdXN0QG92ZXJsb29rLm5ldCIsIm5hbWUiOiJKYWNrIiwicm9sZSI6ImNvYWNoIiwiaWF0IjoxNjk2OTUyMjg5LCJleHAiOjE2OTY5NTMxODl9.kgLtAqqZwYtlcOJL8bV6SVAAvYirjBje4niY0Xk8GE8
+
+{
+  "name": "training name",
+  "backgroundPath": "project/apps/coaching/project.json",
+  "level": "amateur",
+  "trainingType": "running",
+  "trainingTime": "30 - 50",
+  "price": 1000,
+  "caloriesCount": 2500,
+  "description": "description string",
+  "gender": "female",
+  "videoId": "222222222111111111111112",
+  "isSpecialOffer": "false"
+}
+###
+
+## Создать тренировку
+
+POST http://localhost:3444/training HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2OTUzODg4MDRhNjhiOTllN2YiLCJlbWFpbCI6InJhbnNtdXN0QG92ZXJsb29rLm5ldCIsIm5hbWUiOiJKYWNrIiwicm9sZSI6ImNvYWNoIiwiaWF0IjoxNjk2OTUyMjg5LCJleHAiOjE2OTY5NTMxODl9.kgLtAqqZwYtlcOJL8bV6SVAAvYirjBje4niY0Xk8GE8
+
+{
+  "name": "another name",
+  "backgroundPath": "project/apps/coaching/project.json",
+  "level": "professional",
+  "trainingType": "stretching",
+  "trainingTime": "80 - 100",
+  "price": 10000,
+  "caloriesCount": 3500,
+  "description": "description string",
+  "gender": "male",
+  "videoId": "222222222111111111111112",
+  "isSpecialOffer": "true"
+}
+###
+
+POST http://localhost:3444/training HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2OTUzODg4MDRhNjhiOTllN2YiLCJlbWFpbCI6InJhbnNtdXN0QG92ZXJsb29rLm5ldCIsIm5hbWUiOiJKYWNrIiwicm9sZSI6ImNvYWNoIiwiaWF0IjoxNjk2OTUyMjg5LCJleHAiOjE2OTY5NTMxODl9.kgLtAqqZwYtlcOJL8bV6SVAAvYirjBje4niY0Xk8GE8
+
+{
+  "name": "training box",
+  "backgroundPath": "project/apps/coaching/project.json",
+  "level": "professional",
+  "trainingType": "box",
+  "trainingTime": "30 - 50",
+  "price": 1000,
+  "caloriesCount": 2500,
+  "description": "description string",
+  "gender": "female",
+  "videoId": "222222222111111111111112",
+  "isSpecialOffer": "false"
+}
+###
+
+
+## Изменить тренировку
+
+PATCH http://localhost:3444/training/1 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyOTY2OTUzODg4MDRhNjhiOTllN2YiLCJlbWFpbCI6InJhbnNtdXN0QG92ZXJsb29rLm5ldCIsIm5hbWUiOiJKYWNrIiwicm9sZSI6ImNvYWNoIiwiaWF0IjoxNjk2OTUyMjg5LCJleHAiOjE2OTY5NTMxODl9.kgLtAqqZwYtlcOJL8bV6SVAAvYirjBje4niY0Xk8GE8
+
+{
+  "name": "updated name"
+}
+###
+
+
+## Запрос тренировки
+GET http://localhost:3444/training/1 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmU2NGJhYWYwOWQwNzA0YzI4MGUiLCJlbWFpbCI6InRvcmFuc0BvdmVybG9vay5uZXQiLCJuYW1lIjoiSmFjayIsInJvbGUiOiJjb2FjaCIsImlhdCI6MTY5Njg2Mzc5NywiZXhwIjoxNjk2ODY0Njk3fQ.IKX_plansPXhaBz3cZxS25a5X6XR2nEm57OPSgNLlKY
+
+###
+
+## Запрос списка для тренера
+GET http://localhost:3444/training/coach HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmU2NGJhYWYwOWQwNzA0YzI4MGUiLCJlbWFpbCI6InRvcmFuc0BvdmVybG9vay5uZXQiLCJuYW1lIjoiSmFjayIsInJvbGUiOiJjb2FjaCIsImlhdCI6MTY5Njg2Njk0MiwiZXhwIjoxNjk2ODY3ODQyfQ.r8TSekhnIxuTtCEXrWsj2zSxmkg7nzgtTDOZJpHA-vs
+
+###
+
+## Запрос списка для тренера
+GET http://localhost:3444/training/coach?priceMin=5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmU2NGJhYWYwOWQwNzA0YzI4MGUiLCJlbWFpbCI6InRvcmFuc0BvdmVybG9vay5uZXQiLCJuYW1lIjoiSmFjayIsInJvbGUiOiJjb2FjaCIsImlhdCI6MTY5Njg3MDU5NCwiZXhwIjoxNjk2ODcxNDk0fQ.ByVbKeb0eNB3jIlu1w3TzJsoNIZXYhPIcMAc50g_dNo
+
+###
+
+## Запрос списка
+GET http://localhost:3444/training/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmU2NGJhYWYwOWQwNzA0YzI4MGUiLCJlbWFpbCI6InRvcmFuc0BvdmVybG9vay5uZXQiLCJuYW1lIjoiSmFjayIsInJvbGUiOiJjb2FjaCIsImlhdCI6MTY5Njg3MDU5NCwiZXhwIjoxNjk2ODcxNDk0fQ.ByVbKeb0eNB3jIlu1w3TzJsoNIZXYhPIcMAc50g_dNo
+
+###

@@ -5,7 +5,8 @@ import {FIELD_SEPARATOR} from '@project/shared-constants';
 
 
 export enum RabbitRoutingKeys {
-  RegisterUser = 'RegisterUser',
+  AddNotification = 'AddNotification',
+  SendNews = 'SendNews'
 }
 
 const keys = ['routingKey', 'exchange', 'queue'];

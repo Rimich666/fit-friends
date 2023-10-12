@@ -5,7 +5,9 @@ import { getMongooseOptions } from '@project/modules-options';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { RefreshTokenModule } from './refresh-token/refresh-token.module';
 import { FitUsersModule } from './fit-users/fit-users.module';
-import { NotifyModule } from './notify/notify.module';
+import { FriendsModule } from './friends/friends.module';
+import { NotificationModule } from './notification/notification.module';
+import { JoinTrainingModule } from './join-training/join-training.module';
 
 @Module({
   imports: [
@@ -14,7 +16,10 @@ import { NotifyModule } from './notify/notify.module';
     AuthenticationModule,
     RefreshTokenModule,
     FitUsersModule,
-    NotifyModule,
+    NotificationModule,
+    FriendsModule,
+    NotificationModule,
+    JoinTrainingModule,
   ],
   controllers: [],
   providers: [],

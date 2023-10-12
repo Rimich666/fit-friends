@@ -1,11 +1,14 @@
-import {PaymentOption, PurchaseType} from './enums';
+import {TrainingInterface} from './training.Interface';
 
 export interface OrderInterface {
-  purchaseType: PurchaseType,
-  serviceId: number,
-  price: number,
-  count: number,
-  total: number,
-  paymentOption: PaymentOption,
-  createDate: Date
+  id?: number,
+  userId?: string,
+  purchaseType?: string,
+  trainingId?: number,
+  price?: number,
+  count?: number,
+  total?: number,
+  paymentOption?: string,
+  createDate?: Date,
+  training?: TrainingInterface
 }

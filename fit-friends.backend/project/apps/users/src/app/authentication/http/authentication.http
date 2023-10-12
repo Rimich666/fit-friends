@@ -55,7 +55,7 @@ Content-Type: application/json
 
 ###
 
-## Залогиниться
+## Залогиниться спортсменом
 
 POST http://localhost:3111/login HTTP/1.1
 Content-Type: application/json
@@ -68,7 +68,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZ
 
 ###
 
-## Залогиниться
+## Залогиниться другим спортсменом
+
+POST http://localhost:3111/login HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmJkOTQ3Zjg3ZmJlMzEzNmUyNjgiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5Njc0NDY0NCwiZXhwIjoxNjk2NzQ1NTQ0fQ.OUUp7-27rHgvbm8oqvpLZjHGCQk3yvNLWTMUQQLdRNA
+
+{
+  "email": "owmust@pisem.local",
+  "password": "111111"
+}
+
+###
+
+## Залогиниться тренером
 
 POST http://localhost:3111/login HTTP/1.1
 Content-Type: application/json
@@ -76,6 +89,19 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZ
 
 {
   "email": "torans@overlook.net",
+  "password": "111111"
+}
+
+###
+
+## Залогиниться другим тренером
+
+POST http://localhost:3111/login HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIxZmJkOTQ3Zjg3ZmJlMzEzNmUyNjgiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5Njc0NDY0NCwiZXhwIjoxNjk2NzQ1NTQ0fQ.OUUp7-27rHgvbm8oqvpLZjHGCQk3yvNLWTMUQQLdRNA
+
+{
+  "email": "ransmust@overlook.net",
   "password": "111111"
 }
 
