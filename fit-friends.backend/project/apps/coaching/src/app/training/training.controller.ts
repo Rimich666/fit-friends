@@ -11,30 +11,35 @@ import {
   ValidationPipe
 } from '@nestjs/common';
 import {TrainingService} from './training.service';
-import {CoachOnlyGuard, JwtAuthGuard, User} from '@project/shared-enhancers';
+import {CoachOnlyGuard, JwtAuthGuard, Origin, User} from '@project/shared-enhancers';
 import {TokenPayloadInterface} from '@project/shared-types';
 import {fillObject} from '@project/util-core';
 import {TrainingAuthorGuard} from './training-author.guard';
 import {
   CoachTrainingFilterDto,
-  CreateTrainingDto,
+  CreateTrainingDto, EmailNotificationDto,
   SharedTrainingFilterDto,
 } from '@project/shared-dto';
 import {UpdateTrainingDto} from '@project/shared-dto';
 import {TrainingRdo} from '@project/shared-dto';
+import {NotifyService} from '../notify/notify.service';
+import {ControllerPrefix} from '@project/shared-constants';
 
-@Controller('training')
+@Controller(ControllerPrefix.training)
 @UseGuards(JwtAuthGuard)
 export class TrainingController {
   constructor(
     private readonly trainingService: TrainingService,
+    private readonly notifyService: NotifyService
   ) {}
 
   @Post('/')
   @UseGuards(CoachOnlyGuard)
   @UsePipes(new ValidationPipe({transform: true}))
-  async create(@User() {userId}: TokenPayloadInterface, @Body() dto: CreateTrainingDto) {
+  async create(@User() {userId, name}: TokenPayloadInterface, @Body() dto: CreateTrainingDto, @Origin() origin: string) {
     const newTraining = await this.trainingService.createTraining({...dto, coachId: userId});
+    await this.notifyService.sendNewTraining(fillObject(EmailNotificationDto, {
+      ...newTraining, coachName: name, url: `${origin}/${ControllerPrefix.training}/${newTraining.id}`}));
     return fillObject(TrainingRdo, newTraining);
   }
 

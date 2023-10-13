@@ -20,5 +20,6 @@ export * from './lib/friends-dto';
 export * from './lib/balance.dto';
 export * from './lib/subscribe.dto';
 export * from './lib/email-notification.dto';
-
+export * from './lib/join-traning/create-join-training.dto';
+export * from './lib/join-traning/update-join-training.dto';
 

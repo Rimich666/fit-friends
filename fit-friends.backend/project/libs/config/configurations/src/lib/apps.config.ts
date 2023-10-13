@@ -7,6 +7,7 @@ export interface ApplicationsConfig {
   users: string;
   coaching: string;
   files: string;
+  notify: string;
 }
 
 
@@ -15,6 +16,7 @@ export default registerAs('applications', (): ApplicationsConfig => {
     users : process.env.APP_USERS,
     coaching: process.env.APP_COACHING,
     files: process.env.APP_FILES,
+    notify: process.env.APP_NOTIFY
   };
 
   const validationSchema = Joi.object<ApplicationsConfig>(

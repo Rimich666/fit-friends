@@ -1,0 +1,17 @@
+POST http://localhost:3333/subscribe HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyYzlmNjc4OTQ4ZWQ3M2IxNTcyMmEiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5NzE4Mjc2NiwiZXhwIjoxNjk3MTgzNjY2fQ.djV0P-2NybrdJ8m2EK1oyO7rvlGVMyLGc97ZX7t3-u8
+
+{
+  "coachId": "6521fe64baaf09d0704c280e"
+}
+###
+
+DELETE http://localhost:3333/subscribe/6521fe64baaf09d0704c280e HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTIyYzlmNjc4OTQ4ZWQ3M2IxNTcyMmEiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsImlhdCI6MTY5NzE4MTY3MCwiZXhwIjoxNjk3MTgyNTcwfQ.MJa75UPnmTKCEvF42pc-yYMTdftHb44QttuEJnTy_nA
+
+###
+
+POST http://localhost:3333/notify HTTP/1.1
+
+###

@@ -8,6 +8,7 @@ import {RabbitMQModule} from '@golevelup/nestjs-rabbitmq';
 import {getRabbitMQOptions} from '@project/modules-options';
 import {MailModule} from '../mail/mail.module';
 import {ConfigModule} from '@nestjs/config';
+import {EmailSubscriberModule} from '../email-subscriber/email-subscriber.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import {ConfigModule} from '@nestjs/config';
     ),
     MailModule,
     ConfigModule,
+    EmailSubscriberModule
   ],
   controllers: [NotificationController],
   providers: [NotificationService, NotificationRepository],

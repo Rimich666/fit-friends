@@ -4,3 +4,5 @@ export * from './lib/signatures';
 export * from './lib/products.constants';
 export * from './lib/config.constants';
 export * from './lib/mail.constant';
+export * from './lib/controller-prefix';
+export * from './lib/get-notifications-options';

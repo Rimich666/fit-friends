@@ -3,7 +3,7 @@ import {TrainingRepository} from './training.repository';
 import {TrainingEntity} from './training.entity';
 import {TrainingInterface} from '@project/shared-types';
 import {UpdateTrainingDto} from '@project/shared-dto';
-import {QueryFilter} from '../../../../../libs/shared/helpers/src/lib/make-training-query';
+import {QueryFilter} from '@project/helpers';
 
 @Injectable()
 export class TrainingService {

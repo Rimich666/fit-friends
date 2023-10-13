@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
-import {appConfig, EnvPaths, jwtConfig} from '@project/configurations';
+import {appConfig, EnvPaths, jwtConfig, rabbitConfig} from '@project/configurations';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true,
-      load: [appConfig, jwtConfig],
+      load: [appConfig, jwtConfig, rabbitConfig],
       envFilePath: EnvPaths.coaching
     }),
   ]

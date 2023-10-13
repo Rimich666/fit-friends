@@ -26,8 +26,7 @@ export class MailService {
     }
 
     await Promise.all(notifications.map((notification) => {
-      console.log(notification);
-      this.mailerService.sendMail(getMailOptions(notification))}
-    ))
+      this.mailerService.sendMail(getMailOptions(notification));}
+    ));
   }
 }

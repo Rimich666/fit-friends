@@ -7,13 +7,15 @@ import {FriendsUsersModel} from '@project/fit-users.model';
 import {FriendUserSchema} from '@project/fit-users.model';
 import {JwtAccessStrategy} from '@project/util-core';
 import {FitUsersModule} from '../fit-users/fit-users.module';
+import {NotificationModule} from '../notification/notification.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       { name: FriendsUsersModel.name, schema: FriendUserSchema },
     ]),
-    FitUsersModule
+    FitUsersModule,
+    NotificationModule
   ],
   controllers: [FriendsController],
   providers: [FriendsService, FriendsRepository, JwtAccessStrategy],

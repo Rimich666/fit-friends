@@ -17,5 +17,4 @@ export class NotificationRepository {
   public async get() {
     return this.notificationModel.find();
   }
-
 }

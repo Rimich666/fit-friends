@@ -7,3 +7,5 @@ export * from './lib/guards/jwt-refresh.guard';
 export * from './lib/guards/user-only.guard';
 export * from './lib/user-update.interceptor';
 export * from './lib/guards/coach-only.guard';
+export * from './lib/decorators/token.decorator';
+export * from './lib/decorators/origin.decorator';

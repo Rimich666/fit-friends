@@ -21,7 +21,8 @@ export class NotificationService {
   }
 
   public async delete (notifications: EmailNotificationModel[]) {
-    console.log('delete');
+    const promises = notifications.map((notification) => notification.deleteOne());
+    await Promise.all(promises);
   }
 
   public async getNews () {

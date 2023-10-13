@@ -5,6 +5,7 @@ import { TrainingModule } from './training/training.module';
 import { OrderModule } from './order/order.module';
 import { BalanceModule } from './balance/balance.module';
 import { NotifyModule } from './notify/notify.module';
+import { FeedbackModule } from './feedback/feedback.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { NotifyModule } from './notify/notify.module';
     OrderModule,
     BalanceModule,
     NotifyModule,
+    FeedbackModule,
   ],
   controllers: [],
   providers: [],

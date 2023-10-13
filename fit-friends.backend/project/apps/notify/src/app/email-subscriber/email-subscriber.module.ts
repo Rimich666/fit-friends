@@ -4,6 +4,7 @@ import { EmailSubscriberService } from './email-subscriber.service';
 import { EmailSubscriberRepository } from './email-subscriber.repository';
 import {MongooseModule} from '@nestjs/mongoose';
 import {SubscriberModel, SubscriberSchema} from '@project/notify.model';
+import {JwtAccessStrategy} from '@project/util-core';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import {SubscriberModel, SubscriberSchema} from '@project/notify.model';
     ]),
   ],
   controllers: [EmailSubscriberController],
-  providers: [EmailSubscriberService, EmailSubscriberRepository],
+  providers: [EmailSubscriberService, EmailSubscriberRepository, JwtAccessStrategy],
+  exports: [EmailSubscriberRepository]
 })
 export class EmailSubscriberModule {}

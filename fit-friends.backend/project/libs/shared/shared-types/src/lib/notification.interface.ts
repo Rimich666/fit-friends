@@ -1,6 +1,6 @@
 export interface NotificationInterface {
   id?: string;
-  createDate: Date;
+  createDate?: Date;
   userId: string;
   text: string;
 }

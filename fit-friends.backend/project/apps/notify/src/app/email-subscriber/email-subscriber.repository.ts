@@ -19,7 +19,7 @@ export class EmailSubscriberRepository {
   }
 
   public async delete(id: string) {
-    this.subscribeModel.findOneAndDelete({id});
+    return this.subscribeModel.findByIdAndDelete(id);
   }
 
   public async getSubscribers(coachId: string) {

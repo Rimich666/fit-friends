@@ -1,11 +1,12 @@
-import {Body, Controller, Delete, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Param, Post, UseGuards} from '@nestjs/common';
 import {EmailSubscriberService} from './email-subscriber.service';
 import {JwtAuthGuard, User} from '@project/shared-enhancers';
 import {TokenPayloadInterface} from '@project/shared-types';
 import {SubscribeDto} from '@project/shared-dto';
 import {EmailSubscriberEntity} from './email-subscriber.entity';
+import {ControllerPrefix} from '@project/shared-constants';
 
-@Controller('subscribe')
+@Controller(ControllerPrefix.emailSubscriber)
 @UseGuards(JwtAuthGuard)
 export class EmailSubscriberController {
   constructor(
@@ -17,8 +18,8 @@ export class EmailSubscriberController {
     return this.emailSubscriberService.create(new EmailSubscriberEntity({coachId, email, name}));
   }
 
-  @Delete('/')
-  public async delete(@Body() {coachId}: SubscribeDto, @User() {email}: TokenPayloadInterface) {
-    return this.emailSubscriberService.delete(new EmailSubscriberEntity({coachId, email}));
+  @Delete('/:id')
+  public async delete(@Param('id') coachId: string, @User() {email}: TokenPayloadInterface) {
+    return await this.emailSubscriberService.delete(new EmailSubscriberEntity({coachId, email}));
   }
 }

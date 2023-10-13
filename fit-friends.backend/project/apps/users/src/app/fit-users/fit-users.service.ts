@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {FitUsersRepository} from './fit-users.repository';
 import {UpdateUserDto, UserRdo, UsersFilterDto} from '@project/shared-dto';
 import {UserEntity} from './user.entity';
 import {fillObject} from '@project/util-core';
-import {UserInterface} from '@project/shared-types';
+import {Role, UserInterface} from '@project/shared-types';
 
 @Injectable()
 export class FitUsersService {
@@ -31,5 +31,10 @@ export class FitUsersService {
     const user = await this.userRepository.update(id, new UserEntity(dto));
     return this.fillUser(user);
     // return this.userRepository.update(id, new UserEntity(dto));
+  }
+
+  public async isCoach(id: string) {
+    const user = await this.userRepository.findById(id);
+    return user ? user.role === Role.coach : false;
   }
 }
