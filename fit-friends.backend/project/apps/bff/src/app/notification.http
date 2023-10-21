@@ -1,0 +1,11 @@
+
+
+GET http://localhost:3333/notification HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3OTAxMDA2LCJleHAiOjE2OTc5MDE5MDZ9.S7zfXtepg-_1MtNdVart0Wkc35M0FxC-GRQeVlLow1M
+
+###
+
+DELETE http://localhost:3333/notification/6533e8e4d12ea08cc6a216dc HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3OTAxMDA2LCJleHAiOjE2OTc5MDE5MDZ9.S7zfXtepg-_1MtNdVart0Wkc35M0FxC-GRQeVlLow1M
+
+###

@@ -4,6 +4,7 @@ import {TrainingEntity} from './training.entity';
 import {TrainingInterface} from '@project/shared-types';
 import {UpdateTrainingDto} from '@project/shared-dto';
 import {QueryFilter} from '@project/helpers';
+import {NotExistsTrainingException} from "@project/util-core";
 
 @Injectable()
 export class TrainingService {
@@ -11,34 +12,46 @@ export class TrainingService {
     private readonly trainingRepository: TrainingRepository,
   ) {}
 
-  async createTraining(training: TrainingInterface): Promise<TrainingInterface>{
+  public async createTraining(training: TrainingInterface): Promise<TrainingInterface>{
     return this.trainingRepository.create(new TrainingEntity({
         ...training, createDate: new Date(), rating: 0}));
   }
 
-  async updateTraining(id: number, dto: UpdateTrainingDto) {
+  public async updateTraining(id: number, dto: UpdateTrainingDto) {
     return this.trainingRepository.update(id, new TrainingEntity(dto));
   }
 
-  async getTraining(id: number) {
-    return this.trainingRepository.findById(id);
+  public async getTraining(id: number) {
+    const training = await this.trainingRepository.findOrNull(id);
+    if (!training) {
+      throw new NotExistsTrainingException(id);
+    }
+    return  training;
   }
 
-  async getTrainingOrNull(id: number) {
+  public async getTrainingOrNull(id: number) {
     return this.trainingRepository.findOrNull(id);
   }
 
-  async getTrainings(filters: QueryFilter) {
+  public async getTrainings(filters: QueryFilter) {
     return this.trainingRepository.find(filters);
   }
 
-  async checkUser(trainingId: number, userId: string): Promise<boolean> {
+  public async checkUser(trainingId: number, userId: string): Promise<boolean> {
     const training = await this.trainingRepository.findById(trainingId);
     return training.coachId === userId;
   }
 
-  async checkTraining(id: number): Promise<boolean> {
+  public async checkTraining(id: number): Promise<boolean> {
     const training = await this.trainingRepository.findOrNull(id);
     return training !== null;
+  }
+
+  public async setRating(trainingId: number, rating: number) {
+    await this.trainingRepository.update(trainingId, new TrainingEntity({rating}));
+  }
+
+  public async getCount(filters: QueryFilter) {
+    return this.trainingRepository.count(filters);
   }
 }

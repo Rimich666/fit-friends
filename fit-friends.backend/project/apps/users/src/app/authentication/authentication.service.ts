@@ -58,7 +58,6 @@ export class AuthenticationService {
   }
 
   public async createUserToken(user: UserInterface) {
-    console.log(user);
     const accessTokenPayload = createJWTPayload(user);
     const refreshTokenPayload = { ...accessTokenPayload, tokenId: crypto.randomUUID() };
     await this.refreshTokenService.createRefreshSession(refreshTokenPayload);

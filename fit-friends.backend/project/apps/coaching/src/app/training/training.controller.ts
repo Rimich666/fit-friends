@@ -5,7 +5,7 @@ import {
   Param,
   ParseIntPipe,
   Patch,
-  Post, Query,
+  Post, Query, Response,
   UseGuards,
   UsePipes,
   ValidationPipe
@@ -23,7 +23,8 @@ import {
 import {UpdateTrainingDto} from '@project/shared-dto';
 import {TrainingRdo} from '@project/shared-dto';
 import {NotifyService} from '../notify/notify.service';
-import {ControllerPrefix} from '@project/shared-constants';
+import {ControllerPrefix, EndPoints} from '@project/shared-constants';
+import {Response as Res} from 'express';
 
 @Controller(ControllerPrefix.training)
 @UseGuards(JwtAuthGuard)
@@ -51,12 +52,13 @@ export class TrainingController {
     return fillObject(TrainingRdo, updatedTraining);
   }
 
-  @Get('/coach')
+  @Get(`/${EndPoints.coach}`)
   @UseGuards(CoachOnlyGuard)
   @UsePipes(new ValidationPipe({transform: true, whitelist: true}))
-  async list(@Query() filters: CoachTrainingFilterDto, @User() {userId}) {
+  async list(@Query() filters: CoachTrainingFilterDto, @User() {userId}, @Response() response: Res) {
     const trainings = await this.trainingService.getTrainings({...filters, coachId: userId});
-    return fillObject(TrainingRdo, trainings);
+    const count = await this.trainingService.getCount({...filters, coachId: userId});
+    return response.set({ 'List-Size': count }).json(fillObject(TrainingRdo, trainings));
   }
 
   @Get('/:id')
@@ -67,8 +69,9 @@ export class TrainingController {
 
   @Get('/')
   @UsePipes(new ValidationPipe({transform: true, whitelist: true}))
-  async index(@Query() filters: SharedTrainingFilterDto) {
+  async index(@Query() filters: SharedTrainingFilterDto, @Response() response: Res) {
     const trainings = await this.trainingService.getTrainings(filters);
-    return fillObject(TrainingRdo, trainings);
+    const count = await this.trainingService.getCount({...filters});
+    return response.set({ 'List-Size': count }).json(fillObject(TrainingRdo, trainings));
   }
 }

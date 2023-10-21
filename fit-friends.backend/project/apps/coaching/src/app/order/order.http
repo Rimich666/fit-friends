@@ -1,4 +1,4 @@
-## Создать тренировку
+## Создать заказ
 
 POST http://localhost:3444/order HTTP/1.1
 Content-Type: application/json

@@ -21,10 +21,18 @@ export class FitUsersService {
     // return this.userRepository.findById(id);
   }
 
+  public async checkUser(id: string) {
+    return !!await this.userRepository.findById(id);
+  }
+
   public async getUsers(filters: UsersFilterDto) {
     const users = await this.userRepository.find(filters);
     return users.map((user) => this.fillUser(user));
       // ({... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number>)}));
+  }
+
+  public async getPageCount(filters: UsersFilterDto) {
+    return this.userRepository.count(filters);
   }
 
   public async update(id: string, dto: UpdateUserDto) {

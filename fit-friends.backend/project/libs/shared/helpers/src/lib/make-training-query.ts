@@ -40,7 +40,6 @@ export const makeTrainingQueryFilters = (query: QueryFilter) => {
   if (query['coachId']) {
     where.coachId = query['coachId'];
   }
-  console.log(where);
 
   return {
     take: query.limit,

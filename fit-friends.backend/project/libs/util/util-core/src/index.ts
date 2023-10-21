@@ -11,3 +11,4 @@ export * from './lib/exceptions/logged-user.exception';
 export * from './lib/exceptions/not-your-account.exception';
 export * from './lib/exceptions/not-exists-training.exception';
 export * from './lib/exceptions/not-subscribe.exception';
+export * from './lib/random';

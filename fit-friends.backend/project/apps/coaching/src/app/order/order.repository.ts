@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import {PrismaService} from '../prisma/prisma.service';
 import {OrderInterface} from '@project/shared-types';
-import {makeOrderQueryFilters} from '@project/helpers';
+import {makeOrderCountQueryFilters, makeOrderQueryFilters} from '@project/helpers';
 import {OrderEntity} from './order.entity';
 import {OrderFilterDto} from '@project/shared-dto';
 
@@ -28,5 +28,10 @@ export class OrderRepository {
     const orders: OrderInterface[] = await this.prisma.$queryRawUnsafe(queryString);
     return orders.map((order) =>
       ({...order, total: Number(order.total), count: Number(order.count)}));
+  }
+
+  public async count(queryFilters: OrderFilterDto) {
+    const queryString = makeOrderCountQueryFilters(queryFilters);
+    return Number((await this.prisma.$queryRawUnsafe(queryString))[0].count);
   }
 }

@@ -19,7 +19,8 @@ export const validationConstraints : Constraints = {
     trainingCalories: {max: 5000, min: 1000},
     daysCalories: {max: 5000, min: 1000},
     merits: {max: 140, min: 10},
-    trainingType: {max: 3}
+    trainingType: {max: 3},
+    avatar: {max: 1024 * 1024},
   },
   training: {
     name: {max: 15, min: 1},

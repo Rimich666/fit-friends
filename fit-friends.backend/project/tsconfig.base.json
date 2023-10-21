@@ -37,6 +37,7 @@
         "libs/shared/shared-enhancers/src/index.ts"
       ],
       "@project/shared-types": ["libs/shared/shared-types/src/index.ts"],
+      "@project/uploader.model": ["libs/models/uploader/src/index.ts"],
       "@project/util-core": ["libs/util/util-core/src/index.ts"],
       "@project/util-types": ["libs/util/util-types/src/index.ts"]
     }

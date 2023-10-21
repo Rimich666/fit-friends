@@ -22,4 +22,11 @@ export * from './lib/subscribe.dto';
 export * from './lib/email-notification.dto';
 export * from './lib/join-traning/create-join-training.dto';
 export * from './lib/join-traning/update-join-training.dto';
-
+export * from './lib/feedback/create-feedback.dto';
+export * from './lib/feedback/feedback-filter.dto';
+export * from './lib/uploaded-file.rdo';
+export * from './lib/user/coach.rdo';
+export * from './lib/user/sportsman.rdo';
+export * from './lib/user/user-end.rdo';
+export * from './lib/training/training-end.rdo';
+export * from './lib/order/order.rdo';

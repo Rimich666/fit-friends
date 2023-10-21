@@ -49,4 +49,9 @@ export class TrainingRepository {
       }
     );
   }
+
+  public async count(queryFilters: QueryFilter) {
+    const filters = makeTrainingQueryFilters(queryFilters);
+    return this.prisma.training.count({where: filters.where});
+  }
 }

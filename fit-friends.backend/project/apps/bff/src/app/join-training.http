@@ -1,0 +1,21 @@
+
+
+POST http://localhost:3333/together HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3OTAwNjQ4LCJleHAiOjE2OTc5MDE1NDh9.ZOV_riFmvBpmxjdgLcNW95I2eOHUNz-U1f4nNCZcHk4
+
+{
+  "invitedId": "65329a910b645fb5e70f5f2d"
+}
+###
+
+PATCH http://localhost:3333/together HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMyOWE5MTBiNjQ1ZmI1ZTcwZjVmMmQiLCJlbWFpbCI6Im9tb3Z1LW9tb3Z1MEBvam95by5jb20iLCJuYW1lIjoiVG9zaGlhIiwicm9sZSI6ImNvYWNoIiwiaWF0IjoxNjk3OTAwNzU2LCJleHAiOjE2OTc5MDE2NTZ9.4-PYw9QiRbUAa9Tg2Qx6a0WHi4tYvkPquOpokpgQmCo
+
+{
+  "id": "6533e89ad12ea08cc6a216d0",
+  "state": "accepted"
+}
+
+###

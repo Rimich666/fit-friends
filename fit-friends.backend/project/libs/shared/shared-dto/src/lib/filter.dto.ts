@@ -1,19 +1,26 @@
-import {IsEnum, IsNumber, IsOptional} from 'class-validator';
+import {IsEnum, IsInt, IsOptional} from 'class-validator';
 import {DefaultSort, Order, RESPONSE_PAGE_LIMIT} from '@project/shared-types';
-import {Transform} from 'class-transformer';
+import {Expose, Transform} from 'class-transformer';
 
 export class FilterDto {
+  @Expose()
   @IsOptional()
   @IsEnum(Order)
+  @Transform((params) =>
+    params.value ? params.value : DefaultSort.ORDER)
   public order: Order = DefaultSort.ORDER;
 
+  @Expose()
   @IsOptional()
-  @IsNumber()
-  @Transform((params) => parseInt(params.value, 10))
+  @IsInt()
+  @Transform((params) =>
+    params.value ? parseInt(params.value, 10) : RESPONSE_PAGE_LIMIT)
   public limit: number = RESPONSE_PAGE_LIMIT;
 
+  @Expose()
   @IsOptional()
-  @IsNumber()
-  @Transform((params) => parseInt(params.value, 10))
+  @IsInt()
+  @Transform((params) =>
+    params.value ? parseInt(params.value, 10) : 1)
   public page = 1;
 }

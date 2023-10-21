@@ -3,5 +3,11 @@ export enum ControllerPrefix {
   emailSubscriber = 'subscribe',
   training = 'training',
   joinTraining = 'together',
-  notification = 'notification'
+  notification = 'notification',
+  feedback = 'feedback',
+  authentication = '',
+  balance = 'balance',
+  friends = 'friends',
+  order = 'order',
+  file = 'file'
 }

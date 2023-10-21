@@ -1,4 +1,38 @@
-import { Controller } from '@nestjs/common';
+import {Body, Controller, Get, Inject, Patch, Post, UseFilters} from '@nestjs/common';
+import {BalanceDto} from '@project/shared-dto';
+import {Token} from '@project/shared-enhancers';
+import {HttpService} from '@nestjs/axios';
+import {appsConfig} from '@project/configurations';
+import {ConfigType} from '@nestjs/config';
+import {ControllerPrefix} from '@project/shared-constants';
+import {getAuthHeader} from '@project/util-core';
+import {AxiosExceptionFilter} from './filters/axios-exception.filter';
 
-@Controller('balance')
-export class BalanceController {}
+@Controller(ControllerPrefix.balance)
+@UseFilters(AxiosExceptionFilter)
+export class BalanceController {
+  constructor(
+    private readonly httpService: HttpService,
+    @Inject (appsConfig.KEY) private readonly config: ConfigType<typeof appsConfig>,
+  ) {}
+
+  private url = `${this.config.coaching}/${ControllerPrefix.balance}`;
+
+  @Post('/')
+  public async add(@Body() balance: BalanceDto, @Token() token: string){
+    const {data} = await this.httpService.axiosRef.post(`${this.url}`, balance, getAuthHeader(token));
+    return data;
+  }
+
+  @Patch('/')
+  public async sub(@Body() balance: BalanceDto, @Token() token: string){
+    const {data} = await this.httpService.axiosRef.patch(`${this.url}`, balance, getAuthHeader(token));
+    return data;
+  }
+
+  @Get('/')
+  public async index(@Token() token: string){
+    const {data} = await this.httpService.axiosRef.get(`${this.url}`, getAuthHeader(token));
+    return data;
+  }
+}

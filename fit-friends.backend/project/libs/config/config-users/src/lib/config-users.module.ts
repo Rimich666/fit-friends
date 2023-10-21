@@ -8,7 +8,7 @@ import {appConfig, EnvPaths, jwtUsersConfig, mongoConfig, rabbitConfig} from '@p
       isGlobal: true,
       cache: true,
       load: [appConfig, mongoConfig, jwtUsersConfig, rabbitConfig],
-      envFilePath: EnvPaths.users
+      envFilePath: EnvPaths.users,
     }),
   ]
 })

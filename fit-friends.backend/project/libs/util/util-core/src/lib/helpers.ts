@@ -1,5 +1,6 @@
 import {ClassConstructor, plainToInstance} from 'class-transformer';
 import {isUppercase} from 'class-validator';
+import {readSingle} from 'read-env-file';
 
 export type DateTimeUnit = 's' | 'h' | 'd' | 'm' | 'y';
 export type TimeInUnit = { value: number; unit: DateTimeUnit };
@@ -25,9 +26,27 @@ export const getMongoURI = (
   auth: string
 ): string => `mongodb://${username}:${password}@${host}:${port}/${dbName}?authSource=${auth}`;
 
+export const getMongoUriFromEnv = (envPath: string): string => {
+  const environments = readSingle.sync(envPath);
+  return getMongoURI(
+          environments.MONGO_DB_USER,
+          environments.MONGO_DB_PASSWORD,
+          environments.MONGO_DB_HOST,
+          environments.MONGO_DB_PORT,
+          environments.MONGO_DB_NAME,
+          environments.MONGO_DB_AUTH_BASE);
+};
+
+export const getUploadDirectory = (envPath: string): string => {
+  const environments = readSingle.sync(envPath);
+  return environments.UPLOAD_DIRECTORY_PATH;
+};
+
+
 export function fillObject<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
-  return plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});
+  return plainToInstance(someDto, plainObject, {excludeExtraneousValues: true, enableImplicitConversion: true});
 }
+
 
 export function parseTime(time: string): TimeInUnit {
   const match = timeInUnitRegex.exec(time);
@@ -66,8 +85,11 @@ export function camelCaseToSnakeStyle(camel: string) {
     isUppercase(letter) && index > 0 ? `_${letter}` : letter).join('')}`;
 }
 
-export const getAuthHeader = (token: string) => ({
-  headers: {
-    'Authorization': token
-  }
-});
+export const getAuthHeader = (token: string, typeContent?: string) => {
+  const contentType = typeContent ? typeContent : 'application/json';
+  return {
+    headers: {
+      'Authorization': token,
+      'Content-Type': contentType
+    }};
+};

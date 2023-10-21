@@ -14,11 +14,11 @@ export class CreateSportsmanDto {
   @IsInt()
   @Max(validationConstraints.user.trainingCalories.max)
   @Min(validationConstraints.user.trainingCalories.min)
-  trainingCalories?: number;
+  public trainingCalories?: number;
 
   @Expose()
   @IsInt()
   @Max(validationConstraints.user.daysCalories.max)
   @Min(validationConstraints.user.daysCalories.min)
-  daysCalories?: number;
+  public daysCalories?: number;
 }

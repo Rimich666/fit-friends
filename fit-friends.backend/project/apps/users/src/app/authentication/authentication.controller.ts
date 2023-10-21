@@ -6,9 +6,10 @@ import {JwtRefreshGuard, LocalAuthGuard, User, UserCreateInterceptor} from '@pro
 import {LoginUserDto} from '@project/shared-dto';
 import {NoAuthGuard} from '@project/shared-enhancers';
 import {UserInterface} from '@project/shared-types';
+import {ControllerPrefix} from '@project/shared-constants';
 
 
-@Controller('')
+@Controller(ControllerPrefix.authentication)
 export class AuthenticationController {
   constructor(
     private authenticationService: AuthenticationService,

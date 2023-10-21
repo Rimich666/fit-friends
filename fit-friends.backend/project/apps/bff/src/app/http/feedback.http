@@ -1,0 +1,20 @@
+POST http://localhost:3333/feedback HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3ODgxNTQ3LCJleHAiOjE2OTc4ODI0NDd9.NXJreI36n9ayvkcuMKd3CjPR8yx0DG_eTiDc6IXVhJk
+
+{
+  "trainingId": 242,
+  "rating": 1,
+  "text": "string сто символов это много, это очень много, это невообразимо много, я не знаю кто бы мог написать столько букв"
+}
+###
+
+GET http://localhost:3333/feedback/242 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3ODgxNTQ3LCJleHAiOjE2OTc4ODI0NDd9.NXJreI36n9ayvkcuMKd3CjPR8yx0DG_eTiDc6IXVhJk
+
+###
+
+GET http://localhost:3333/feedback/242/rating HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3ODgxNTQ3LCJleHAiOjE2OTc4ODI0NDd9.NXJreI36n9ayvkcuMKd3CjPR8yx0DG_eTiDc6IXVhJk
+
+###

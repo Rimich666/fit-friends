@@ -1,4 +1,4 @@
-import {OrderInterface, TrainingInterface} from '@project/shared-types';
+import {OrderInterface} from '@project/shared-types';
 import {instanceToPlain} from 'class-transformer';
 
 export class OrderEntity implements OrderInterface {
@@ -12,8 +12,8 @@ export class OrderEntity implements OrderInterface {
   public paymentOption: string;
   public createDate: Date;
 
-  constructor(training: TrainingInterface) {
-    this.fillEntity(training);
+  constructor(order: OrderInterface) {
+    this.fillEntity(order);
   }
 
   public fillEntity(order: OrderInterface) {

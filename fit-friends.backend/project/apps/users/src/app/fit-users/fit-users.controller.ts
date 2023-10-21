@@ -8,14 +8,15 @@ import {
   UseGuards,
   UseInterceptors,
   UsePipes,
+  Response,
   ValidationPipe
 } from '@nestjs/common';
 import {UsersFilterDto} from '@project/shared-dto';
 import {FitUsersService} from './fit-users.service';
-import {JwtAuthGuard, UserOnlyGuard, UserUpdateInterceptor} from '@project/shared-enhancers';
+import {JwtAuthGuard, SelfOnlyGuard, UserOnlyGuard, UserUpdateInterceptor} from '@project/shared-enhancers';
 import {UpdateUserDto} from '@project/shared-dto';
 import {ControllerPrefix} from '@project/shared-constants';
-
+import { Response as Res } from 'express';
 
 @Controller(ControllerPrefix.fitUsers)
 export class FitUsersController {
@@ -26,8 +27,10 @@ export class FitUsersController {
   @Get('/')
   @UseGuards(JwtAuthGuard, UserOnlyGuard)
   @UsePipes(new ValidationPipe({transform: true}))
-  async index(@Query() filters: UsersFilterDto) {
-    return this.userService.getUsers(filters);
+  async index(@Query() filters: UsersFilterDto, @Response() response: Res) {
+    const users = await this.userService.getUsers(filters);
+    const count = await this.userService.getPageCount(filters);
+    return response.set({ 'List-Size': count }).json(users);
   }
 
   @Get('/:id')
@@ -37,12 +40,11 @@ export class FitUsersController {
   }
 
   @Patch('/:id')
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard, SelfOnlyGuard)
   @UseInterceptors(UserUpdateInterceptor)
   @UsePipes(new ValidationPipe({transform: true, whitelist: true}))
   async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
     return this.userService.update(id, dto);
-    // return {... fillObject(UserRdo, updatedUser), addition: Object.fromEntries(updatedUser.addition as Map<string, string | number>)};
   }
 
   @Get('/:id/isCoach/')

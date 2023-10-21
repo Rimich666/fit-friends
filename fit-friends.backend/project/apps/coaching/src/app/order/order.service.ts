@@ -9,11 +9,15 @@ export class OrderService {
   constructor(
     private readonly orderRepository: OrderRepository,
   ) {}
-  async createOrder(order: CreateOrderDto): Promise<OrderInterface>{
+  public async createOrder(order: CreateOrderDto): Promise<OrderInterface>{
     return this.orderRepository.create(new OrderEntity(order));
   }
 
-  async getOrders(filters: OrderFilterDto) {
+  public async getOrders(filters: OrderFilterDto) {
     return this.orderRepository.find(filters);
+  }
+
+  public async ordersCount(filters: OrderFilterDto) {
+    return this.orderRepository.count(filters);
   }
 }

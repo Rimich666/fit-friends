@@ -29,6 +29,11 @@ export class FitUsersRepository {
     return this.userModel.find(filter).sort({[sort]: order}).limit(limit).skip((page - 1) * limit).exec();
   }
 
+  public async count(options: UsersFilterDto) {
+    const {sort, order, limit, page, ...filter} = options;
+    return this.userModel.count(filter);
+  }
+
   public async update(id: string, item: UserEntity): Promise<UserInterface> {
     const updatedUser = await this.userModel.findById(id);
     item.addition = Object.assign(Object.fromEntries(updatedUser.addition as Map<string, string | number>), item.addition);

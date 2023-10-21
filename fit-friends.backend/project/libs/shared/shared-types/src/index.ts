@@ -14,4 +14,6 @@ export * from './lib/balance.interface';
 export * from './lib/subscriber.interface';
 export * from './lib/email-notification.interface';
 export * from './lib/join-training.interface';
-
+export * from './lib/file.interface';
+export * from './lib/user-files.type';
+export * from './lib/order-for-coach.interface';

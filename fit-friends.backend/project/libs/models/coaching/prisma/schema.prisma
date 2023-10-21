@@ -43,7 +43,7 @@ model Feedback {
   authorId   String   @map("author")
   training   Training @relation(fields: [trainingId], references: [id])
   trainingId Int      @map("training_id")
-  raiting    Int
+  rating     Int
   text       String
   createDate DateTime @map("create_date")
 

@@ -1,0 +1,71 @@
+{
+  "name": "fill-base",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/fill-base/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/fill-base",
+        "main": "apps/fill-base/src/main.ts",
+        "tsConfig": "apps/fill-base/tsconfig.app.json",
+        "assets": ["apps/fill-base/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/fill-base/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "fill-base:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "fill-base:build:development"
+        },
+        "production": {
+          "buildTarget": "fill-base:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/fill-base/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/fill-base/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "fill": {
+      "executor": "nx:run-commands",
+      "outputs": [],
+      "options": {
+        "command": "node dist/apps/fill-base/main.js"
+      }
+    }
+  },
+  "tags": []
+}

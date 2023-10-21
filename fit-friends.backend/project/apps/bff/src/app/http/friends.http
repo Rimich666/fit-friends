@@ -1,0 +1,18 @@
+POST http://localhost:3333/friends HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3ODg3MjUzLCJleHAiOjE2OTc4ODgxNTN9.AGsRYZ0G-03kJ8_GIV5fpr_LZLRwKc7h4rpOOIsgWlg
+
+{
+  "friendId": "65329a910b645fb5e70f5fc7"
+}
+###
+
+DELETE http://localhost:3333/friends/65329a910b645fb5e70f5fc7 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3ODg3MjUzLCJleHAiOjE2OTc4ODgxNTN9.AGsRYZ0G-03kJ8_GIV5fpr_LZLRwKc7h4rpOOIsgWlg
+
+###
+
+GET http://localhost:3333/friends HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3ODg3MjUzLCJleHAiOjE2OTc4ODgxNTN9.AGsRYZ0G-03kJ8_GIV5fpr_LZLRwKc7h4rpOOIsgWlg
+
+###

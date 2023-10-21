@@ -12,6 +12,9 @@ export class TrainingRdo {
   level: Level;
 
   @Expose()
+  backgroundPath: string;
+
+  @Expose()
   trainingType: TrainingType;
 
   @Expose()

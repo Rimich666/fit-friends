@@ -5,8 +5,9 @@ import {FriendsService} from './friends.service';
 import {NotFriendGuard} from './not-friend.guard';
 import {addedToFriendsNotification, removedFromFriendsNotification} from '@project/helpers';
 import {NotificationService} from '../notification/notification.service';
+import {ControllerPrefix} from '@project/shared-constants';
 
-@Controller('friends')
+@Controller(ControllerPrefix.friends)
 @UseGuards(JwtAuthGuard)
 export class FriendsController {
 

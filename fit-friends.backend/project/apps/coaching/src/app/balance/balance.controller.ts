@@ -1,9 +1,11 @@
-import {Body, Controller, Delete, Get, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Get, Patch, Post, UseGuards} from '@nestjs/common';
 import {BalanceService} from './balance.service';
 import {BalanceDto} from '@project/shared-dto';
 import {JwtAuthGuard, User, UserOnlyGuard} from '@project/shared-enhancers';
+import {ControllerPrefix} from '@project/shared-constants';
+import {BalanceGuard} from './balance.guard';
 
-@Controller('balance')
+@Controller(ControllerPrefix.balance)
 @UseGuards(JwtAuthGuard, UserOnlyGuard)
 export class BalanceController {
   constructor(
@@ -11,11 +13,13 @@ export class BalanceController {
   ) {}
 
   @Post('/')
+  @UseGuards(BalanceGuard)
   public async add(@Body() balance: BalanceDto, @User() {userId}){
     return this.balanceService.add({...balance, userId});
   }
 
-  @Delete('/')
+  @Patch('/')
+  @UseGuards(BalanceGuard)
   public async sub(@Body() balance: BalanceDto, @User() {userId}){
     return this.balanceService.sub({...balance, userId});
   }

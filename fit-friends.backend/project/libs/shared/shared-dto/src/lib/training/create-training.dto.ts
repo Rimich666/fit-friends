@@ -13,7 +13,7 @@ import {
 } from 'class-validator';
 import {Transform} from 'class-transformer';
 import {validationConstraints} from '@project/shared-constants';
-import {trainingTypeError} from "../error-mesages";
+import {trainingTypeError} from '../error-mesages';
 
 export class CreateTrainingDto {
   @MinLength(validationConstraints.training.name.min)
