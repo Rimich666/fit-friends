@@ -1,0 +1,1345 @@
+openapi: "3.0.2"
+info:
+  title: API сервер для проекта "fit-friends"
+  description: |-
+    * Список ресурсов и маршрутов сервера «FitFriends».
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: "1.0"
+servers:
+  - url: http://localhost:3333
+tags:
+  - name: authentication
+    description: Маршруты обслуживающие аутентификацию
+  - name: fitUsers
+    description: Действия с пользователями
+  - name: notify
+    description: Действия с email рассылкой
+  - name: emailSubscriber
+    description: Подписка на e-mail рассылку
+  - name: training
+    description: Действия с тренировками
+  - name: joinTraining
+    description: Действия с заявками на совместную тренировку
+  - name: notification
+    description: Действия с уведомлениями пользователя
+  - name: feedback
+    description: Действия с отзывами
+  - name: balance
+    description: Действия с балансом пользователя
+  - name: friends
+    description: Действия со списком друзей
+  - name: order
+    description: Действия с заказами
+
+paths:
+  /register:
+    post:
+      tags:
+        - authentication
+      summary: Регистрация пользователя
+      description: Регистрирует нового пользователя.
+      requestBody:
+        $ref: '#/components/requestBodies/registerUser'
+      responses:
+        "201":
+          $ref: '#/components/responses/registeredUser'
+        "409":
+          $ref: '#/components/responses/existedUserError'
+        "400":
+          $ref: '#/components/responses/validationError'
+
+  /login:
+    post:
+      tags:
+        - authentication
+      summary: Авторизация пользователя
+      description: Авторизует пользователя на основе логина и пароля
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/schemas/loginInformation'
+      responses:
+        "201":
+          $ref: '#/components/responses/loggedUser'
+        "409":
+          $ref: '#/components/responses/loggedUserError'
+        "401":
+          $ref: '#/components/responses/wrongPassword'
+
+  /refresh:
+    post:
+      tags:
+        - authentication
+      summary: Запрос новой пары токенов авторизации
+      description: Выдаёт пользователю обновлённую пару токенов авторизации на основании refresh токена
+      parameters:
+        - $ref: '#/components/parameters/refresh'
+      responses:
+        "401":
+          $ref: '#/components/responses/wrongRefresh'
+        "201":
+          $ref: '#/components/responses/refreshed'
+
+
+    delete:
+      tags:
+        - authentication
+      summary: Обнуление refresh токена
+      description: Удаляет переданный refresh токен
+
+      responses:
+        "401":
+          $ref: '#/components/responses/wrongRefresh'
+        "200":
+          $ref: '#/components/responses/deleteToken'
+
+
+  /users:
+    get:
+      tags:
+        - users
+      summary: Получение списка пользователей
+      description: Возвращает список пользователей
+
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/level'
+        - $ref: '#/components/parameters/trainingType'
+        - $ref: '#/components/parameters/location'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "200":
+
+          description: Статус авторизации пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+
+  /users/{id}:
+    get:
+      tags:
+        - users
+      summary: Получение пользователя по id
+      description: Возвращает пользователя
+      parameters:
+        - $ref: '#/components/parameters/idUser'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "200":
+          $ref: '#/components/responses/gotUser'
+
+    patch:
+      tags:
+        - users
+      summary: Обновление пользователя
+      description: Обновление пользователя
+      parameters:
+        - $ref: '#/components/parameters/idUser'
+      requestBody:
+        $ref: '#/components/requestBodies/updateUser'
+
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "200":
+          $ref: '#/components/responses/gotUser'
+        "409":
+          $ref: '#/components/responses/updateUserError'
+
+
+  /notify:
+    post:
+      tags:
+        - notify
+      summary: Рассылка email уведомлений.
+      description: Рассылка email уведомлений.
+      responses:
+        "200":
+          description: успешно
+
+
+  /training:
+    post:
+      tags:
+        - training
+      summary: Создание тренировки.
+      description: Создание тренировки.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/requestBodies/createTraining'
+      responses:
+        "401":
+          $ref: '#/components/responses/coachOnlyError'
+        "200":
+          $ref: '#/components/responses/createdTraining'
+        "400":
+          $ref: '#/components/responses/validationError'
+
+    get:
+      tags:
+        - training
+      summary: Получение списка тренировок.
+      description: Получение списка тренировок.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/trainingType'
+        - $ref: '#/components/parameters/trainingTime'
+        - $ref: '#/components/parameters/caloriesMax'
+        - $ref: '#/components/parameters/caloriesMin'
+        - $ref: '#/components/parameters/priceMax'
+        - $ref: '#/components/parameters/priceMin'
+        - $ref: '#/components/parameters/rating'
+        - $ref: '#/components/parameters/coachId'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "200":
+          $ref: '#/components/responses/listTrainings'
+        "400":
+          $ref: '#/components/responses/validationError'
+
+  /training/{id}:
+    patch:
+      tags:
+        - training
+      summary: Получение тренировки по id.
+      description: Получение тренировки по id.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/requestBodies/updateTraining'
+      responses:
+        "401":
+          $ref: '#/components/responses/coachOnlyError'
+        "409":
+          $ref: '#/components/responses/updateTrainingError'
+        "200":
+          $ref: '#/components/responses/updatedTraining'
+        "400":
+          $ref: '#/components/responses/validationError'
+    get:
+      tags:
+        - training
+      summary: Получение тренировки по id.
+      description: Получение тренировки по id.
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "200":
+          $ref: '#/components/responses/gotTraining'
+        "400":
+          $ref: '#/components/responses/notExistTrainingError'
+
+  /training/coach:
+    get:
+      tags:
+        - training
+      summary: Получение списка тренировок определённого тренера.
+      description: Получение списка тренировок определённого тренера.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/trainingType'
+        - $ref: '#/components/parameters/trainingTime'
+        - $ref: '#/components/parameters/caloriesMax'
+        - $ref: '#/components/parameters/caloriesMin'
+        - $ref: '#/components/parameters/priceMax'
+        - $ref: '#/components/parameters/priceMin'
+        - $ref: '#/components/parameters/rating'
+        - $ref: '#/components/parameters/coachId'
+      responses:
+        "401":
+          $ref: '#/components/responses/coachOnlyError'
+        "200":
+          $ref: '#/components/responses/listTrainings'
+        "400":
+          $ref: '#/components/responses/validationError'
+
+  /balance:
+    post:
+      tags:
+        - balance
+      summary: Увеличение баланса.
+      description: Увеличение баланса.
+      requestBody:
+        $ref: '#/components/requestBodies/balance'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "201":
+          $ref: '#/components/schemas/responseBalance'
+
+    patch:
+      tags:
+        - balance
+      summary: Уменьшение баланса.
+      description: Уменьшение баланса.
+      requestBody:
+        $ref: '#/components/requestBodies/balance'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "200":
+          $ref: '#/components/schemas/responseBalance'
+
+    get:
+      tags:
+        - balance
+      summary: Уменьшение баланса.
+      description: Уменьшение баланса.
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "200":
+          $ref: '#/components/schemas/responseBalance'
+
+  /subscribe:
+    post:
+      tags:
+        - emailSubscriber
+      summary: Подписка на e-mail рассылку.
+      description: Подписка на e-mail рассылку.
+      requestBody:
+        $ref: '#/components/requestBodies/subscribe'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "201":
+          $ref: '#/components/responses/subscribe'
+
+    delete:
+      tags:
+        - emailSubscriber
+      summary: Отписка от e-mail рассылки.
+      description: Отписка от e-mail рассылки.
+      parameters:
+        - $ref: '#/components/parameters/idUser'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "200":
+          $ref: '#/components/responses/dropSubscribe'
+
+  /feedback:
+    post:
+      tags:
+        - feedback
+      summary: Создать отзыв.
+      description: Создать отзыв.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/requestBodies/feedback'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "200":
+          $ref: '#/components/responses/feedback'
+
+  /feedback/{id}:
+    get:
+      tags:
+        - feedback
+      summary: Получить отзывы по id тренировки.
+      description: Получить отзывы по id тренировки.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/idTraining'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "200":
+          $ref: '#/components/responses/feedback'
+
+  /feedback/{id}/rating:
+    get:
+      tags:
+        - feedback
+      summary: Получить рейтинг тренировки.
+      description: Получить рейтинг тренировки.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/sportsmenOnlyError'
+        "200":
+          $ref: '#/components/responses/gotRating'
+
+  /together:
+    post:
+      tags:
+        - joinTraining
+      summary: Создать заявку на совместную тренировку.
+      description: Создать заявку на совместную тренировку.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/schemas/createJoin'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "201":
+          $ref: '#/components/schemas/responseJoin'
+
+    patch:
+      tags:
+        - joinTraining
+      summary: Изменить статус заявки на совместную тренировку.
+      description: Изменить статус заявки на совместную тренировку.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/schemas/updateJoin'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+        "201":
+          $ref: '#/components/schemas/responseJoin'
+
+  /friends:
+    post:
+      tags:
+        - friends
+      summary: Добавить в список друзей.
+      description: Добавить в список друзей.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+    get:
+      tags:
+        - friends
+      summary: Получить список друзей.
+      description: Получить список друзей.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+
+  /friends/{id}:
+    delete:
+      tags:
+        - friends
+      summary: Удалить из списка друзей.
+      description: Удалить из списка друзей.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+
+  /notification:
+    get:
+      tags:
+        - notification
+      summary: Получить список уведомлений.
+      description: Получить список уведомлений.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+  /notification/{id}:
+    delete:
+      tags:
+        - notification
+      summary: Удалить уведомление.
+      description: Удалить уведомление.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+
+  /order:
+    post:
+      tags:
+        - order
+      summary: Создать заказ тренировок.
+      description: Создать заказ тренировок.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+    get:
+      tags:
+        - order
+      summary: Получить список заказов.
+      description: Получить список заказов.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
+      responses:
+        "401":
+          $ref: '#/components/responses/401'
+
+
+components:
+  schemas:
+    user:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 6534cdaa4bc52ab9ffdb2b91
+        email:
+          type: string
+          example: toransmoran@overlook.net,
+        name:
+          type: string
+          example: Jack
+        gender:
+          type: string
+          example: male
+        createDate:
+          type: string
+          example: 2023-10-22T06:34:11.602Z
+        birthDate:
+          type: string
+          example: 2022-09-27T14:00:00.000Z
+        role:
+          type: string
+          example: coach
+        description:
+          type: string
+          example: must be shorter than or equal to 140 characters
+        location:
+          type: string
+          example: Пионерская
+        imagePath:
+          type: string
+          example: http://localhost:3333/static/users/user-card-photo2@2x.jpg
+        level":
+          type: string
+          example: beginner
+        trainingType:
+          type: array
+          example:
+            [
+              "aerobics",
+              "yoga"
+            ],
+        isReady:
+          type: boolean
+          example: true
+        addition:
+          type: object
+          example:
+            {
+              "merits": "must be shorter than or equal to 140 characters",
+              "certificatePath": "http://localhost:3222/static/2023/10/22/f180ae18-ff76-4707-a86b-06aa91107a2a.pdf"
+            }
+        avatarPath":
+          type: string
+          example: http://localhost:3222/static/2023/10/22/239c96a2-5323-480b-8fb2-1f59b30d691a.png
+
+    users:
+      type: array
+      items:
+        $ref: '#/components/schemas/user'
+
+    pairOfTokens:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwiaWF0IjoxNjk3OTYwMjgwLCJleHAiOjE2OTc5NjExODB9.TmD5fcRLoM_JDdaJRq9SfqAZ0_tydSdNmVTCv3BRugk,
+        refreshToken:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iaWsiLCJyb2xlIjoic3BvcnRzbWFuIiwidG9rZW5JZCI6ImE3YzhkZDIzLTAxMmYtNDkwMC1iZDkyLTE4YmMxYmEyMGI0MiIsImlhdCI6MTY5Nzk2MDI4MCwiZXhwIjoxNjk4NTY1MDgwfQ.f2lRFQYYgGZohLPJhlYcoq014MwH3hbwIJ0s6PCuzcU
+
+    loginInformation:
+      type: object
+      properties:
+        email:
+          type: string
+          example: keks@htmlacademy.ru
+
+        password:
+          type: string
+          example: 123456
+
+    training:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 244
+        name:
+          type: string
+          example: training name
+        level:
+          type: string
+          example: amateur
+        backgroundPath:
+          type: string
+          example: http://localhost:3333/static/trainings/training-1@2x.png
+        trainingType:
+          type: string
+          example: running
+        trainingTime:
+          type: string
+          example: 30 - 50
+        price:
+          type: number
+          example: 1000
+        caloriesCount:
+          type: number
+          example: 2500
+        description:
+          type: string
+          example: description string
+        gender:
+          type: string
+          example: female
+        videoPath:
+          type: string
+          example: http://localhost:3222/static/2023/10/22/267821bd-1c23-47ad-8217-7d29da1caf92.mov
+        rating:
+          type: number
+          example: 0,
+        coachId:
+          type: string
+          example: 65336216ef7e8833f07c1555
+        isSpecialOffer:
+          type: boolean
+          example: false,
+        createDate:
+          type: string
+          example: 2023-10-22T11:00:46.293Z
+
+    trainings:
+      type: array
+      items:
+        $ref: '#/components/schemas/training'
+
+    balance:
+      type: object
+      properties:
+        trainingId:
+          type: number
+          example: 243
+        count:
+          type: number
+          example: 30
+
+    responseBalance:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 293,
+        userId:
+          type: string
+          example: 6533486b3102158718d74409
+        trainingId:
+          type: number
+          example: 242
+        count:
+          type: number
+          example: 60
+        training:
+          $ref: '#/components/schemas/training'
+
+    subscribe:
+      type: object
+      properties:
+        coachId:
+          type: string
+          example: 6521fe64baaf09d0704c280e
+
+    subscriber:
+      type: object
+      properties:
+        email:
+          type: string
+          example: snow@pisem.local
+        name:
+          type: string
+          example: Bobik
+        coachId:
+          type: string
+          example: 65329a910b645fb5e70f5f2d
+        id:
+          type: string
+          example: 653518fec8a35e9d28b79013
+
+    feedback:
+      type: object
+      properties:
+        trainingId:
+          type: number
+          example: 242
+        rating:
+          type: number
+          example: 1
+        text:
+          type: string
+          example: string сто символов это много, это очень много, это невообразимо много, я не знаю кто бы мог написать столько букв
+
+    responseFeedback:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 415
+        authorId:
+          type: string
+          example: 6533486b3102158718d74409
+        trainingId:
+          type: number
+          example: 242
+        rating:
+          type: number
+          example: 1
+        text:
+          type: string
+          example: string сто символов это много, это очень много, это невообразимо много, я не знаю кто бы мог написать столько букв
+        createDate:
+          type: string
+          example: 2023-10-22T14:03:26.537Z
+        training:
+          $ref: '#/components/schemas/training'
+
+    feedbackItem:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 403
+        authorId:
+          type: string
+          example: 65329a910b645fb5e70f5fba
+        trainingId:
+          type: number
+          example: 242
+        rating:
+          type: number
+          example: 1
+        text:
+          type: string
+          example: string сто символов это много, это очень много, это невообразимо много, я не знаю кто бы мог написать столько букв
+        createDate:
+          type: string
+          example: 2023-10-20T15:19:46.796Z
+
+    listFeedback:
+      type: array
+      items:
+        $ref: '#/components/schemas/feedbackItem'
+
+    createJoin:
+      type: object
+      properties:
+        invitedId:
+          type: string
+          example: 65329a910b645fb5e70f5f2d
+
+    updateJoin:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 65329a910b645fb5e70f5f2d
+        state:
+          type: string
+          example: accepted
+
+    responseJoin:
+      type: object
+      properties:
+        requesterId:
+          type: string
+          example: 6533486b3102158718d74409
+        invitedId:
+          type: string
+          example: 65329a910b645fb5e70f5f2d
+        state:
+          type: string
+          example: consideration
+        id:
+          type: string
+          example: 65354a3121f8a3ca8f8ad575
+
+
+  requestBodies:
+    registerUser:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              user:
+                type: string
+                format: json
+                example:
+                  '{
+                    "email": "toransmor@overlook.net",
+                    "name": "Jack",
+                    "password": "111111",
+                    "gender": "male",
+                    "birthDate": "2022-09-27 18:00:00.000.",
+                    "role": "coach",
+                    "description": "must be shorter than or equal to 140 characters",
+                    "location": "Пионерская",
+                    "imagePath": "must be a string",
+                    "level": "beginner",
+                    "trainingType": [ "aerobics", "yoga" ],
+                    "isReady": "true",
+                    "addition": {
+                      "merits": "must be shorter than or equal to 140 characters"
+                    }
+                  }'
+              avatar:
+                type: string
+                format: binary
+              certificate:
+                type: string
+                format: binary
+          encoding:
+            avatar:
+              contentType: image/png, image/jpeg
+            certificate:
+              contentType: application/pdf
+
+    loginUser:
+      description: Информация о пользователе.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/loginInformation'
+      required: true
+
+    updateUser:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              user:
+                type: string
+                format: json
+                required: false
+                example:
+                  '{
+                     "name": "Bobik",
+                     "isReady": "true",
+                     "addition": {
+                       "trainingCalories": 3670
+                     }
+                   }'
+              avatar:
+                type: string
+                format: binary
+                required: false
+              certificate:
+                type: string
+                format: binary
+                required: false
+          encoding:
+            avatar:
+              contentType: image/png, image/jpeg
+            certificate:
+              contentType: application/pdf
+
+    createTraining:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              training:
+                type: string
+                format: json
+                required: true
+                example:
+                  '{
+                     "name": "training name",
+                     "backgroundPath": "project/apps/coaching/project.json",
+                     "level": "amateur",
+                     "trainingType": "running",
+                     "trainingTime": "30 - 50",
+                     "price": 1000,
+                     "caloriesCount": 2500,
+                     "description": "description string",
+                     "gender": "female",
+                     "isSpecialOffer": "false"
+                   }'
+              video:
+                required: true
+                type: string
+                format: binary
+          encoding:
+            video:
+              contentType: video/x-msvideo , video/mp4, video/quicktime
+
+    updateTraining:
+      content:
+        multipart/form-data:
+          schema:
+            type: object
+            properties:
+              training:
+                type: string
+                format: json
+                required: false
+                example:
+                  '{
+                     "name": "updated name"
+                   }'
+              video:
+                type: string
+                format: binary
+                required: false
+          encoding:
+            video:
+              contentType: video/x-msvideo , video/mp4, video/quicktime
+
+    balance:
+      description: Балансе.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/balance'
+      required: true
+
+    subscribe:
+      description: Подписка.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/subscribe'
+      required: true
+
+    feedback:
+      description: Отзыв.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/feedback'
+      required: true
+
+    createJoin:
+      description: Создание заявки на совместную тренировку.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createJoin'
+      required: true
+
+    updateJoin:
+      description: Изменение статуса заявки на совместную тренировку.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/updateJoin'
+      required: true
+
+  responses:
+    validationError:
+      description: Ошибка валидации
+      content:
+        text/plain; charset=utf-8:
+          schema:
+            type: string
+            example: Цена должна быть в пределах от 100 до 100 000
+
+    existedUserError:
+      description: Пользователь с таким e-mail существует.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "message": "User with this email-address already exists"
+            }
+
+    notExistTrainingError:
+      description: Тренировки с таким id не существует
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 400,
+              "statusText": "Bad Request",
+              "message": "Training with id: 13 does not exists"
+            }
+
+    loggedUserError:
+      description: Пользователь с таким e-mail существует.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "message": "User: 'snow@pisem.local' already logged."
+            }
+
+    coachOnlyError:
+      description: Доступно только для тренеров.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "message": "Only for coaches."
+            }
+
+    sportsmenOnlyError:
+      description: Доступно только для тренеров.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "message": "Only for sportsmen."
+            }
+
+    wrongPassword:
+      description: Неверный логин или пароль.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 401,
+              "statusText": "Unauthorized",
+              "message": "User login or password is wrong"
+            }
+
+    updateUserError:
+      description: Попытка редактирования чужого аккаунта.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "message": "You can only edit your account."
+            }
+
+    401:
+      description: Пользователь не авторизован
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 401,
+              "statusText": "Unauthorized",
+              "message": "Unauthorized"
+            }
+
+    wrongRefresh:
+      description: Неверный refresh token.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 401,
+              "statusText": "Unauthorized",
+              "message": "Token with ID 9a7fb3a3-9f03-48f0-b59f-1491fe2e1f89 does not exists"
+            }
+
+    updateTrainingError:
+      description: Попытка редактирования чужой тренировки.
+      content:
+        application/json:
+          example:
+            {
+              "statusCode": 409,
+              "statusText": "Conflict",
+              "message": "Forbidden to change the training of another users"
+            }
+
+    registeredUser:
+      description: Пользователь зарегистрирован.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+
+    loggedUser:
+      description: Пользователь залогинен.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/pairOfTokens'
+
+    refreshed:
+      description: Выдана новая пара токенов.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/pairOfTokens'
+
+    deleteToken:
+      description: Токен удалён
+      content:
+        text/plain; charset=utf-8:
+          schema:
+            type: string
+            example: Refresh token successfully neutralized
+
+    listUsers:
+      description: Возврат списка пользователей.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/users'
+
+    listTrainings:
+      description: Возврат списка тренировок.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/trainings'
+
+    gotUser:
+      description: Пользователь получен
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+
+    createdTraining:
+      description: Тренировка создана
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/training'
+
+    updatedTraining:
+      description: Тренировка создана
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/training'
+
+    gotTraining:
+      description: Тренировка получена
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/training'
+
+    balance:
+      description: Балансе
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/responseBalance'
+
+    subscribe:
+      description: Подписка
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/subscriber'
+
+    dropSubscribe:
+      description: Отписка
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/subscriber'
+
+    feedback:
+      description: Отзыв
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/responseFeedback'
+
+    feedbackList:
+      description: Список отзывов
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/listFeedback'
+
+    gotRating:
+      description: Получен рейтинг.
+      content:
+        text/plain; charset=utf-8:
+          schema:
+            type: number
+            example: 2
+
+  parameters:
+    Authorization:
+      name: Authorization
+      in: header
+      description: JWT Токен авторизации пользователя
+      required: true
+      schema:
+        type: string
+        example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZGM5OTZlMmM3NDA4MmZiYzdiNzBjZCIsImVtYWlsIjoic25vd0BwaXNlbS5sb2NhbCIsIm5hbWUiOiJCb2IiLCJpYXQiOjE2OTI1MTk4NTksImV4cCI6MTY5NTExMTg1OX0.wvXtCxwbjYugClkZl7zsw_SLhcqaANRD7kv8h-N2iCg
+    refresh:
+      name: refresh
+      in: header
+      description: refreshJWT token
+      required: true
+      schema:
+        type: string
+        example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzNDg2YjMxMDIxNTg3MThkNzQ0MDkiLCJlbWFpbCI6InNub3dAcGlzZW0ubG9jYWwiLCJuYW1lIjoiQm9iIiwicm9sZSI6InNwb3J0c21hbiIsInRva2VuSWQiOiI5YTdmYjNhMy05ZjAzLTQ4ZjAtYjU5Zi0xNDkxZmUyZTFmODkiLCJpYXQiOjE2OTc4NjQ1MjYsImV4cCI6MTY5ODQ2OTMyNn0.9l05hL4AGrDZOvCRG2SJoiAMCZ_QkgAa7PHrfC4r94Y
+
+    order:
+      name: order
+      in: query
+      description: порядок сортировки
+      required: false
+      schema:
+        type: string
+        example: asc
+    limit:
+      name: limit
+      in: query
+      description: записей в списке
+      required: false
+      schema:
+        type: number
+        example: 5
+    page:
+      name: page
+      in: query
+      description: запрашиваемая страница
+      required: false
+      schema:
+        type: number
+        example: 5
+
+    sort:
+      name: sort
+      in: query
+      description: поле сортировки
+      required: false
+      schema:
+        type: string
+        example: price
+    level:
+      name: level
+      in: query
+      description: уровень подготовки
+      required: false
+      schema:
+        type: string
+        example: beginner
+    trainingType:
+      name: trainingType
+      in: query
+      description: тип тренировки
+      required: false
+      schema:
+        type: string
+        example: running
+    location:
+      name: location
+      in: query
+      description: локация юзера
+      required: false
+      schema:
+        type: string
+        example: Петроградская
+
+    priceMin:
+      name: priceMin
+      in: query
+      description: минимальная цена тренировки
+      required: false
+      schema:
+        type: number
+        example: 5
+
+    priceMax:
+      name: priceMax
+      in: query
+      description: максимальная цена тренировки
+      required: false
+      schema:
+        type: number
+        example: 1000
+
+    caloriesMin:
+      name: caloriesMin
+      in: query
+      description: минимальное количество калорий
+      required: false
+      schema:
+        type: number
+        example: 1000
+
+    caloriesMax:
+      name: caloriesMax
+      in: query
+      description: максимальное количество калорий
+      required: false
+      schema:
+        type: number
+        example: 3000
+
+    rating:
+      name: rating
+      in: query
+      description: рейтинг тренировки
+      required: false
+      schema:
+        type: number
+        example: 4
+
+    trainingTime:
+      name: rating
+      in: query
+      description: длительность тренировки
+      required: false
+      schema:
+        type: string
+        example: 30 - 50
+
+    coachId:
+      name: rating
+      in: query
+      description: id тренера
+      required: false
+      schema:
+        type: string
+        example: 6533486b3102158718d74409
+
+    idUser:
+      name: id
+      in: path
+      description: id пользователя
+      required: true
+      schema:
+        type: string
+        example: 6533486b3102158718d74409
+
+    idTraining:
+      name: id
+      in: path
+      description: id тренировки
+      required: true
+      schema:
+        type: number
+        example: 243

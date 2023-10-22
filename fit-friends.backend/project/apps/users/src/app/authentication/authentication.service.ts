@@ -46,7 +46,7 @@ export class AuthenticationService {
     const existedUser = await this.fitUserRepository.findByEmail(email);
 
     if (!existedUser) {
-      throw new NotFoundException(UserExceptionMessage.UserNotFound);
+      throw new UnauthorizedException(UserExceptionMessage.UserPasswordWrong);
     }
 
     const userEntity = new UserEntity(existedUser);

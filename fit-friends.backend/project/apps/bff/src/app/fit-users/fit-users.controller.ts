@@ -9,7 +9,6 @@ import {
   Response, UseInterceptors, UploadedFiles, ParseFilePipe
 } from '@nestjs/common';
 import {AxiosExceptionFilter} from '../filters/axios-exception.filter';
-import {HttpService} from '@nestjs/axios';
 import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {ControllerPrefix} from '@project/shared-constants';
@@ -24,7 +23,6 @@ import {UserFilesType} from '@project/shared-types';
 @UseFilters(AxiosExceptionFilter)
 export class FitUsersController {
   constructor(
-    private readonly httpService: HttpService,
     @Inject (appsConfig.KEY) private readonly config: ConfigType<typeof appsConfig>,
     private readonly fitUsersService: FitUsersService
   ) {}

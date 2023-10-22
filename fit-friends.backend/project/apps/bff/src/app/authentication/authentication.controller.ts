@@ -60,7 +60,6 @@ export class AuthenticationController {
 
   @Post(EndPoints.refresh)
   public async refreshToken(@Token() token: string) {
-    console.log('refresh');
     const {data} = await this.httpService.axiosRef.post(`${this.url}${EndPoints.refresh}`,{} ,getAuthHeader(token));
     return data;
   }
