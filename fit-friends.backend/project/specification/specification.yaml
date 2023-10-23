@@ -278,6 +278,8 @@ paths:
         - balance
       summary: Увеличение баланса.
       description: Увеличение баланса.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
       requestBody:
         $ref: '#/components/requestBodies/balance'
       responses:
@@ -285,12 +287,16 @@ paths:
           $ref: '#/components/responses/sportsmenOnlyError'
         "201":
           $ref: '#/components/schemas/responseBalance'
+        "400":
+          $ref: '#/components/responses/validationError'
 
     patch:
       tags:
         - balance
       summary: Уменьшение баланса.
       description: Уменьшение баланса.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
       requestBody:
         $ref: '#/components/requestBodies/balance'
       responses:
@@ -298,12 +304,16 @@ paths:
           $ref: '#/components/responses/sportsmenOnlyError'
         "200":
           $ref: '#/components/schemas/responseBalance'
+        "400":
+          $ref: '#/components/responses/validationError'
 
     get:
       tags:
         - balance
-      summary: Уменьшение баланса.
-      description: Уменьшение баланса.
+      summary: Получить баланс пользователя.
+      description: Получить баланс пользователя.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
       responses:
         "401":
           $ref: '#/components/responses/sportsmenOnlyError'
@@ -316,6 +326,8 @@ paths:
         - emailSubscriber
       summary: Подписка на e-mail рассылку.
       description: Подписка на e-mail рассылку.
+      parameters:
+        - $ref: '#/components/parameters/Authorization'
       requestBody:
         $ref: '#/components/requestBodies/subscribe'
       responses:
@@ -330,12 +342,15 @@ paths:
       summary: Отписка от e-mail рассылки.
       description: Отписка от e-mail рассылки.
       parameters:
+        - $ref: '#/components/parameters/Authorization'
         - $ref: '#/components/parameters/idUser'
       responses:
         "401":
           $ref: '#/components/responses/sportsmenOnlyError'
         "200":
           $ref: '#/components/responses/dropSubscribe'
+        "400":
+          $ref: '#/components/responses/validationError'
 
   /feedback:
     post:
@@ -352,6 +367,8 @@ paths:
           $ref: '#/components/responses/sportsmenOnlyError'
         "200":
           $ref: '#/components/responses/feedback'
+        "400":
+          $ref: '#/components/responses/validationError'
 
   /feedback/{id}:
     get:
@@ -367,6 +384,8 @@ paths:
           $ref: '#/components/responses/sportsmenOnlyError'
         "200":
           $ref: '#/components/responses/feedback'
+        "400":
+          $ref: '#/components/responses/validationError'
 
   /feedback/{id}/rating:
     get:
@@ -376,11 +395,14 @@ paths:
       description: Получить рейтинг тренировки.
       parameters:
         - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/idTraining'
       responses:
         "401":
           $ref: '#/components/responses/sportsmenOnlyError'
         "200":
           $ref: '#/components/responses/gotRating'
+        "400":
+          $ref: '#/components/responses/validationError'
 
   /together:
     post:
@@ -391,12 +413,14 @@ paths:
       parameters:
         - $ref: '#/components/parameters/Authorization'
       requestBody:
-        $ref: '#/components/schemas/createJoin'
+        $ref: '#/components/requestBodies/createJoin'
       responses:
         "401":
           $ref: '#/components/responses/401'
         "201":
-          $ref: '#/components/schemas/responseJoin'
+          $ref: '#/components/responses/createJoin'
+        "400":
+          $ref: '#/components/responses/validationError'
 
     patch:
       tags:
@@ -406,12 +430,14 @@ paths:
       parameters:
         - $ref: '#/components/parameters/Authorization'
       requestBody:
-        $ref: '#/components/schemas/updateJoin'
+        $ref: '#/components/requestBodies/updateJoin'
       responses:
         "401":
           $ref: '#/components/responses/401'
         "201":
-          $ref: '#/components/schemas/responseJoin'
+          $ref: '#/components/responses/changeStatusJoin'
+        "400":
+          $ref: '#/components/responses/validationError'
 
   /friends:
     post:
@@ -419,11 +445,17 @@ paths:
         - friends
       summary: Добавить в список друзей.
       description: Добавить в список друзей.
+      requestBody:
+        $ref: '#/components/requestBodies/addFriend'
       parameters:
         - $ref: '#/components/parameters/Authorization'
       responses:
         "401":
           $ref: '#/components/responses/401'
+        "400":
+          $ref: '#/components/responses/validationError'
+        "201":
+          $ref: '#/components/responses/addFriend'
     get:
       tags:
         - friends
@@ -435,6 +467,7 @@ paths:
         "401":
           $ref: '#/components/responses/401'
 
+
   /friends/{id}:
     delete:
       tags:
@@ -443,9 +476,14 @@ paths:
       description: Удалить из списка друзей.
       parameters:
         - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/idUser'
       responses:
         "401":
           $ref: '#/components/responses/401'
+        "400":
+          $ref: '#/components/responses/validationError'
+        "200":
+          $ref: '#/components/responses/deleteFriend'
 
   /notification:
     get:
@@ -458,6 +496,9 @@ paths:
       responses:
         "401":
           $ref: '#/components/responses/401'
+        "200":
+          $ref: '#/components/responses/listNotification'
+
   /notification/{id}:
     delete:
       tags:
@@ -466,9 +507,14 @@ paths:
       description: Удалить уведомление.
       parameters:
         - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/idNotification'
       responses:
         "401":
           $ref: '#/components/responses/401'
+        "400":
+          $ref: '#/components/responses/validationError'
+        "200":
+          $ref: '#/components/responses/deleteNotification'
 
   /order:
     post:
@@ -478,9 +524,16 @@ paths:
       description: Создать заказ тренировок.
       parameters:
         - $ref: '#/components/parameters/Authorization'
+      requestBody:
+        $ref: '#/components/requestBodies/createOrder'
       responses:
         "401":
           $ref: '#/components/responses/401'
+        "400":
+          $ref: '#/components/responses/validationError'
+        "201":
+          $ref: '#/components/schemas/createOrder'
+
     get:
       tags:
         - order
@@ -488,10 +541,18 @@ paths:
       description: Получить список заказов.
       parameters:
         - $ref: '#/components/parameters/Authorization'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/order'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/coachId'
       responses:
         "401":
           $ref: '#/components/responses/401'
-
+        "400":
+          $ref: '#/components/responses/validationError'
+        "200":
+          $ref: '#/components/responses/listOrder'
 
 components:
   schemas:
@@ -555,7 +616,7 @@ components:
     users:
       type: array
       items:
-        $ref: '#/components/schemas/user'
+        - $ref: '#/components/schemas/user'
 
     pairOfTokens:
       type: object
@@ -630,7 +691,7 @@ components:
     trainings:
       type: array
       items:
-        $ref: '#/components/schemas/training'
+        - $ref: '#/components/schemas/training'
 
     balance:
       type: object
@@ -745,7 +806,7 @@ components:
     listFeedback:
       type: array
       items:
-        $ref: '#/components/schemas/feedbackItem'
+        - $ref: '#/components/schemas/feedbackItem'
 
     createJoin:
       type: object
@@ -780,6 +841,135 @@ components:
           type: string
           example: 65354a3121f8a3ca8f8ad575
 
+    notification:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 65329a920b645fb5e70f66b6,
+        createDate:
+          type: string
+          example: 2023-10-20T15:19:46.451Z
+        userId:
+          type: string
+          example: 65329a910b645fb5e70f5f2d
+        text:
+          type: string
+          example: Пользователь Mendy добавил Вас в список друзей.
+
+    notifications:
+      type: array
+      items:
+        - $ref: '#/components/schemas/notification'
+
+    createOrder:
+      type: object
+      properties:
+        trainingId:
+          type: number
+          example: 243
+        count:
+          type: number
+          example: 3
+        paymentOption:
+          type: string
+          example: visa
+
+    order:
+      type: object
+      properties:
+        id:
+          type: number
+          example: 456
+        userId:
+          type: string
+          example: 6533486b3102158718d74409
+        purchaseType:
+          type: string
+          example: membership
+        trainingId:
+          type: number
+          example: 243
+        price:
+          type: number
+          example: 1000
+        count:
+          type: number
+          example: 3
+        total:
+          type: number
+          example: 3000
+        paymentOption:
+          type: string
+          example: visa
+        createDate:
+          type: string
+          example: 2023-10-23T06:08:16.923Z
+        training:
+          $ref: '#/components/schemas/training'
+
+    orderItem:
+      type: object
+      properties:
+        name:
+          type: string
+          example: updated name,
+        backgroundPath:
+          type: string
+          example: http://localhost:3333/static/trainings/training-3@2x.png
+        level:
+          type: string
+          example: amateur
+        trainingType:
+          type: string
+          example: running
+        trainingTime:
+          type: string
+          example: 30 - 50
+        price:
+          type: number
+          example: 1000
+        caloriesCount:
+          type: number
+          example: 2500
+        description:
+          type: string
+          example: description string
+        gender:
+          type: string
+          example: female
+        rating:
+          type: number
+          example: 0
+        coachId:
+          type: string
+          example: 65336216ef7e8833f07c1555
+        spec:
+          type: boolean
+          example: false
+        createDate:
+          type: string
+          example: 2023-10-21T14:11:32.916Z
+        orderId:
+          type: number
+          example: 456,
+        count:
+          type: number
+          example: 18
+        total:
+          type: number
+          example: 18000
+        trainingId:
+          type: number
+          example: 243
+        videoPath:
+          type: string
+          example: http://localhost:3222/static/2023/10/21/04935b85-64f0-4c64-bd1b-fdfdf71b8ac5.mov
+
+    orders:
+      type: array
+      items:
+        - $ref: '#/components/schemas/orderItem'
 
   requestBodies:
     registerUser:
@@ -952,6 +1142,26 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/updateJoin'
+      required: true
+
+    addFriend:
+      description: Добавить в друзья.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              friendId:
+                type: string
+                example: 65329a910b645fb5e70f5fc7
+      required: true
+
+    createOrder:
+      description: Создание заказа на покупку тренировок.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createOrder'
       required: true
 
   responses:
@@ -1186,6 +1396,61 @@ components:
           schema:
             type: number
             example: 2
+    createJoin:
+      description: Создана заявка на совместную тренировку.
+      content:
+        text/plain; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/responseJoin'
+
+    changeStatusJoin:
+      description: Изменён статус заявки на совместную тренировку.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/responseJoin'
+
+    addFriend:
+      description: Добавлен в список друзей.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+
+    deleteFriend:
+      description: Удалён из списка друзей.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/user'
+
+    listNotification:
+      description: Список уведомлений.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notifications'
+
+    deleteNotification:
+      description: Удалено уведомление.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/notification'
+
+    createOrder:
+      description: Создан заказ на покупку тренировок.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/order'
+
+    listOrder:
+      description: Список заказов тренера.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/orders'
 
   parameters:
     Authorization:
@@ -1343,3 +1608,12 @@ components:
       schema:
         type: number
         example: 243
+
+    idNotification:
+      name: id
+      in: path
+      description: id уведомления
+      required: true
+      schema:
+        type: string
+        example: 6533486b3102158718d74409

@@ -55,8 +55,8 @@ export class BffService {
   }
 
   public async getTrainingPath(data: TrainingInterface) {
-    const training = {...data};
-    training.videoPath = await this.getPath(data.videoId);
+    const {videoId, ...training} = data;
+    training.videoPath = await this.getPath(videoId);
     return training;
   }
 

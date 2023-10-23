@@ -15,12 +15,14 @@ import {CreateFeedbackDto} from '@project/shared-dto';
 import {getAuthHeader} from '@project/util-core';
 import { Response as Res } from 'express';
 import {AxiosExceptionFilter} from './filters/axios-exception.filter';
+import {BffService} from './bff.service';
 
 
 @Controller(ControllerPrefix.feedback)
 @UseFilters(AxiosExceptionFilter)
 export class FeedbackController {
   constructor(
+    private readonly bffService: BffService,
     private readonly httpService: HttpService,
     @Inject (appsConfig.KEY) private readonly config: ConfigType<typeof appsConfig>,
   ) {}
@@ -30,7 +32,7 @@ export class FeedbackController {
   @Post('/')
   async create(@Body() dto: CreateFeedbackDto, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
-    return data;
+    return {...data, training: await this.bffService.getTrainingPath(data.training)};
   }
 
   @Get('/:id')

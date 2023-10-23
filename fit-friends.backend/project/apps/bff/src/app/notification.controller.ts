@@ -4,8 +4,9 @@ import {HttpService} from '@nestjs/axios';
 import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {Token} from '@project/shared-enhancers';
-import {getAuthHeader} from '@project/util-core';
+import {fillObject, getAuthHeader} from '@project/util-core';
 import {AxiosExceptionFilter} from './filters/axios-exception.filter';
+import {NotificationRdo} from '@project/shared-dto';
 
 @Controller(ControllerPrefix.notification)
 @UseFilters(AxiosExceptionFilter)
@@ -21,12 +22,12 @@ export class NotificationController {
   @Delete('/:id')
   async delete(@Param('id') idNotification: string, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.delete(`${this.url}/${idNotification}`, getAuthHeader(token));
-    return data;
+    return fillObject(NotificationRdo, data);
   }
 
   @Get('/')
   async index(@Token() token: string) {
     const {data} = await this.httpService.axiosRef.get(`${this.url}`, getAuthHeader(token));
-    return data;
+    return fillObject(NotificationRdo, data);
   }
 }

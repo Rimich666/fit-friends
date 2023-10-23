@@ -30,3 +30,6 @@ export * from './lib/user/sportsman.rdo';
 export * from './lib/user/user-end.rdo';
 export * from './lib/training/training-end.rdo';
 export * from './lib/order/order.rdo';
+export * from './lib/subscriber.rdo';
+export * from './lib/join-training.rdo';
+export * from './lib/notification.rdo';

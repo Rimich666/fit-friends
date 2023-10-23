@@ -25,13 +25,13 @@ export class FriendsController {
   @Post('/')
   async create(@Body() dto: FriendsDto, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
-    return data;
+    return this.bffService.getUsersPaths(data);
   }
 
   @Delete('/:id')
   async delete(@Param('id') friendId: string, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.delete(`${this.url}/${friendId}`, getAuthHeader(token));
-    return data;
+    return this.bffService.getUsersPaths(data);
   }
 
   @Get('/')

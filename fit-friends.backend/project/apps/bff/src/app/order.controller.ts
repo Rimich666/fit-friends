@@ -31,7 +31,7 @@ export class OrderController {
   @Post('/')
   async create(@Token() token: string, @Body() dto: CreateOrderDto) {
     const {data} = await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
-    return data;
+    return {...data, training: await this.bffService.getTrainingPath(data.training)};
   }
 
   @Get('/')

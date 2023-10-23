@@ -5,14 +5,17 @@ import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {CreateJoinTrainingDto, UpdateJoinTrainingDto} from '@project/shared-dto';
 import {Token} from '@project/shared-enhancers';
-import {getAuthHeader} from '@project/util-core';
+import {fillObject, getAuthHeader} from '@project/util-core';
 import {AxiosExceptionFilter} from './filters/axios-exception.filter';
+import {BffService} from './bff.service';
+import {JoinTrainingRdo} from '@project/shared-dto';
 
 @Controller(ControllerPrefix.joinTraining)
 @UseFilters(AxiosExceptionFilter)
 export class JoinTrainingController {
   constructor(
     private readonly httpService: HttpService,
+    private readonly bffService: BffService,
     @Inject (appsConfig.KEY) private readonly config: ConfigType<typeof appsConfig>,
   ) {}
 
@@ -21,12 +24,12 @@ export class JoinTrainingController {
   @Post('/')
   async create(@Body() dto: CreateJoinTrainingDto, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
-    return data;
+    return fillObject(JoinTrainingRdo, data);
   }
 
   @Patch('/')
   async changeStatus(@Body() dto: UpdateJoinTrainingDto, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.patch(`${this.url}`, dto, getAuthHeader(token));
-    return data;
+    return fillObject(JoinTrainingRdo, data);
   }
 }
