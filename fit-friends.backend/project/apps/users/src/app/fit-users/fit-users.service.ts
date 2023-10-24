@@ -18,7 +18,6 @@ export class FitUsersService {
   public async getUser(id: string) {
     const user = await this.userRepository.findById(id);
     return this.fillUser(user);
-    // return this.userRepository.findById(id);
   }
 
   public async checkUser(id: string) {
@@ -28,7 +27,6 @@ export class FitUsersService {
   public async getUsers(filters: UsersFilterDto) {
     const users = await this.userRepository.find(filters);
     return users.map((user) => this.fillUser(user));
-      // ({... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number>)}));
   }
 
   public async getPageCount(filters: UsersFilterDto) {
@@ -38,7 +36,6 @@ export class FitUsersService {
   public async update(id: string, dto: UpdateUserDto) {
     const user = await this.userRepository.update(id, new UserEntity(dto));
     return this.fillUser(user);
-    // return this.userRepository.update(id, new UserEntity(dto));
   }
 
   public async isCoach(id: string) {

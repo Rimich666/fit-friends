@@ -3,7 +3,7 @@ import {CreateUserDto, LoginUserDto} from '@project/shared-dto';
 import {Role, UserFilesType} from '@project/shared-types';
 import {getBackgroundFile} from '@project/helpers';
 import {Static} from '@project/shared-constants';
-import {fillObject, getAuthHeader} from '@project/util-core';
+import {getAuthHeader} from '@project/util-core';
 import {HttpService} from '@nestjs/axios';
 import {appConfig, appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';

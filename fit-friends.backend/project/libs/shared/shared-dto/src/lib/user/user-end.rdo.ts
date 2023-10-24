@@ -1,5 +1,4 @@
-import {UserRdo} from './user.rdo';
-import {Exclude, Expose, Type} from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 import {Gender, Level, Role, TrainingType, UserLocation} from '@project/shared-types';
 import {AdditionRdo} from './addition.rdo';
 import {SportsmanRdo} from './sportsman.rdo';

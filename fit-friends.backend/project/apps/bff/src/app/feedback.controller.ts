@@ -4,7 +4,7 @@ import {
   Get,
   Inject, Param,
   Post,
-  Response, UseFilters, UseGuards
+  Response, UseFilters
 } from '@nestjs/common';
 import {ControllerPrefix, EndPoints} from '@project/shared-constants';
 import {HttpService} from '@nestjs/axios';

@@ -15,13 +15,6 @@ async function bootstrap() {
   const globalPrefix = '';
   app.setGlobalPrefix(globalPrefix);
   const configService = app.get(ConfigService);
-  // const httpService = app.get(HttpService);
-  // httpService.axiosRef.interceptors.request.use(
-  //   (request) => {
-  //     console.log(request);
-  //     return request;
-  //   },
-  // );
 
   const port = configService.get<number>('port');
   await app.listen(port);

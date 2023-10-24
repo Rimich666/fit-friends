@@ -4,7 +4,7 @@ import {TrainingEntity} from './training.entity';
 import {TrainingInterface} from '@project/shared-types';
 import {UpdateTrainingDto} from '@project/shared-dto';
 import {QueryFilter} from '@project/helpers';
-import {NotExistsTrainingException} from "@project/util-core";
+import {NotExistsTrainingException} from '@project/util-core';
 
 @Injectable()
 export class TrainingService {

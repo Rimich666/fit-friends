@@ -2,8 +2,10 @@ import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
 import * as process from 'process';
 
-const DEFAULT_JWT_EXPIRES_IN = '15m';
-const DEFAULT_JWT_RT_EXPIRES_IN = '7d';
+const DefaultJwtExpiresIn = {
+  ACCESS: '15m',
+  REFRESH: '7d'
+};
 
 export interface JwtUsersConfig {
   accessTokenSecret: string;
@@ -15,9 +17,9 @@ export interface JwtUsersConfig {
 export default registerAs('jwt', (): JwtUsersConfig => {
   const config: JwtUsersConfig = {
     accessTokenSecret: process.env.JWT_SECRET,
-    accessTokenExpiresIn: process.env.JWT_EXPIRES_IN || DEFAULT_JWT_EXPIRES_IN,
+    accessTokenExpiresIn: process.env.JWT_EXPIRES_IN || DefaultJwtExpiresIn.ACCESS,
     refreshTokenSecret: process.env.JW_RT_SECRET,
-    refreshTokenExpiresIn: process.env.JW_RT_EXPIRES_IN || DEFAULT_JWT_RT_EXPIRES_IN,
+    refreshTokenExpiresIn: process.env.JW_RT_EXPIRES_IN || DefaultJwtExpiresIn.REFRESH,
   };
 
   const validationSchema = Joi.object<JwtUsersConfig>({

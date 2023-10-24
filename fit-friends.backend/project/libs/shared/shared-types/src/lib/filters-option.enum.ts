@@ -24,9 +24,6 @@ export enum Order {
   desc = 'desc'
 }
 
-// export const getSortNames =
-//   () => Object.values(SortFieldsEnum).filter((item) => isNaN(Number(item)))
-
 export const DefaultSort = {
   FIELD: 'createDate',
   ORDER: Order.desc

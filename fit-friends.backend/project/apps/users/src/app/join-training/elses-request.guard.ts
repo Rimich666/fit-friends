@@ -1,4 +1,4 @@
-import {CanActivate, ConflictException, ExecutionContext, Injectable} from "@nestjs/common";
+import {CanActivate, ConflictException, ExecutionContext, Injectable} from '@nestjs/common';
 import {JoinTrainingService} from './join-training.service';
 
 @Injectable()

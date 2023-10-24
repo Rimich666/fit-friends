@@ -5,7 +5,6 @@ export type LoggedUserExceptionPayLoad = {
   token: string
 }
 
-
 export class LoggedUserException extends ConflictException {
   constructor(payload: LoggedUserExceptionPayLoad) {
     super({

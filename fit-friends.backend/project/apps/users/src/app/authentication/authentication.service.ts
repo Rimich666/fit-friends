@@ -1,4 +1,4 @@
-import {ConflictException, Inject, Injectable, NotFoundException, UnauthorizedException} from '@nestjs/common';
+import {ConflictException, Inject, Injectable, UnauthorizedException} from '@nestjs/common';
 import {CreateUserDto, LoginUserDto} from '@project/shared-dto';
 import {UserInterface} from '@project/shared-types';
 import {FitUsersRepository} from '../fit-users/fit-users.repository';

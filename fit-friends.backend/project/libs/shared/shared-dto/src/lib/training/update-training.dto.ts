@@ -13,7 +13,7 @@ import {
 import {validationConstraints} from '@project/shared-constants';
 import {Gender, Level, TrainingTime, TrainingType} from '@project/shared-types';
 import {Transform} from 'class-transformer';
-import {trainingTypeError} from "../error-mesages";
+import {trainingTypeError} from '../error-mesages';
 
 export class UpdateTrainingDto {
   @IsOptional()

@@ -17,7 +17,6 @@ export const getSubscribeOption = (key: RabbitRoutingKeys) => {
     const options = Object.fromEntries(process.env[envName]
       .split(FIELD_SEPARATOR).map((item, index) => [keys[index], item]));
     Logger.log(`Environment: ${envName} has been read successfully`);
-    console.log(options);
     return options;
   } catch (error){
     Logger.error(`

@@ -4,7 +4,7 @@ import {appConfig, appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {BffService} from '../bff.service';
 import {CreateTrainingDto, TrainingEndRdo, UpdateTrainingDto} from '@project/shared-dto';
-import {EndPoints, Static} from '@project/shared-constants';
+import {Static} from '@project/shared-constants';
 import {getBackgroundFile} from '@project/helpers';
 import {fillObject, getAuthHeader} from '@project/util-core';
 import {Response as Res} from 'express';
