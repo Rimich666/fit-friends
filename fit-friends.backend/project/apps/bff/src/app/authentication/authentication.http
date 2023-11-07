@@ -70,8 +70,8 @@ Content-Type: text/plain
   "isReady": "true",
   "addition": {
     "trainingTime": "30 - 50",
-    "trainingCalories": 2000,
-    "daysCalories": 3000
+    "trainingCalories": 0,
+    "daysCalories": 0
   }
 }
 
@@ -129,5 +129,31 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMzN
 
 DELETE http://localhost:3333/refresh HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTMyOWE5MTBiNjQ1ZmI1ZTcwZjVmMmQiLCJlbWFpbCI6Im9tb3Z1LW9tb3Z1MEBvam95by5jb20iLCJuYW1lIjoiVG9zaGlhIiwicm9sZSI6ImNvYWNoIiwidG9rZW5JZCI6ImNlMWI3MWU5LTdjN2QtNDRiYi04OTkwLWM0MWI3MmI0MDgzNSIsImlhdCI6MTY5Nzk2MzQzMCwiZXhwIjoxNjk4NTY4MjMwfQ.VMrB6vx90WgyThMcpMuEsCvBbbolppsThzVVRkTnSDk
+
+###
+
+## Создать нового спортсмена
+
+POST http://localhost:3333/register HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+{
+  "email": "snow@pisem.local",
+  "name": "Bob",
+  "password": "111111",
+  "gender": "male",
+  "birthDate": "2022-09-27 18:00:00.000.",
+  "role": "sportsman",
+  "description": "must be shorter than or equal to 140 characters",
+  "location": "Пионерская",
+  "level": "beginner",
+  "trainingType": ["aerobics", "yoga"],
+  "isReady": "true",
+  "addition": {
+    "trainingTime": "30 - 50",
+    "trainingCalories": 0,
+    "daysCalories": 0
+  }
+}
 
 ###

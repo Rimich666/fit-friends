@@ -35,7 +35,7 @@ export const makeTrainingQueryFilters = (query: QueryFilter) => {
     where.trainingTime = query['trainingTime'];
   }
   if (query['trainingType']) {
-    where.trainingTime = query['trainingType'];
+    where.trainingType = query['trainingType'];
   }
   if (query['coachId']) {
     where.coachId = query['coachId'];

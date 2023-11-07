@@ -19,12 +19,15 @@ export class AxiosExceptionFilter implements ExceptionFilter {
     const status = error.response?.status || HttpStatus.INTERNAL_SERVER_ERROR;
     const statusText = error.response?.statusText || INTERNAL_SERVER_ERROR_MESSAGE;
     const message = error.response ? error.response.data['message'] : this.makeMessage(error);
+    delete error.response.data['message'];
+    const data = error.response ? error.response.data : {};
     response
       .status(status)
       .json({
         statusCode: status,
         statusText,
-        message
+        message,
+        data
       });
   }
 }

@@ -32,6 +32,7 @@ export class AuthenticationService {
     dto.imagePath =
       `http://${Static.HOST}:${this.applicationConfig.port}${Static.SERVE_ROOT}/${Static.Endpoint.USER}/${background}`;
     const {data} = await this.httpService.axiosRef.post(`${url}`, dto, getAuthHeader(token));
+    console.log(data);
     return this.bffService.getUsersPaths(data);
   }
 

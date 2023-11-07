@@ -8,6 +8,7 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 import {ConfigService} from '@nestjs/config';
+import {corsMiddleware} from '@project/shared-enhancers';
 
 
 async function bootstrap() {
@@ -17,6 +18,7 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
 
   const port = configService.get<number>('port');
+  app.use(corsMiddleware);
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

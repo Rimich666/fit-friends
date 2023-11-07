@@ -15,3 +15,4 @@ export * from './lib/decorators/query-raw.decorator';
 export * from './lib/file-validators/files-type.validator';
 export * from './lib/guards/self-only.guard';
 export * from './lib/json.pipe';
+export * from './lib/cors.middleware';

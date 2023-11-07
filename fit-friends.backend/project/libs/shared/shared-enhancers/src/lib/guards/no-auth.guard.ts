@@ -17,6 +17,10 @@ export class NoAuthGuard implements CanActivate {
     if (!token) {
       return true;
     }
+    const tokenEmail = this.jwtService.decode(token)['email'];
+    if(tokenEmail !== email) {
+      return true;
+    }
     try {
       await this.jwtService.verifyAsync(
         token,
