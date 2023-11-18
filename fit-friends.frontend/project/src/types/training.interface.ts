@@ -1,3 +1,5 @@
+import {UserInterface} from './user.interface';
+
 export interface TrainingInterface {
   id: number;
   name: string;
@@ -15,4 +17,10 @@ export interface TrainingInterface {
   coachId: string;
   isSpecialOffer: boolean;
   createDate: Date;
+  coach?: UserInterface;
+}
+
+export interface GetTrainingsInterface {
+  data: TrainingInterface[];
+  maxPrice: number;
 }

@@ -4,8 +4,6 @@ import MainMain from '../components/main-page/main/main.main';
 
 
 export default function Main(): JSX.Element {
-  useFetchSelf();
-
   return (
     <>
       <Header/>

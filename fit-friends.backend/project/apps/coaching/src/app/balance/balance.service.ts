@@ -30,4 +30,8 @@ export class BalanceService {
   public async getBalance(userId: string) {
     return this.balanceRepository.findMany(userId);
   }
+
+  public async getTrainingBalance(userId: string, trainingId: number) {
+    return this.balanceRepository.getCount(userId, trainingId);
+  }
 }

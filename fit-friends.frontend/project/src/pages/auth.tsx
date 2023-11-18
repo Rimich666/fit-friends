@@ -1,10 +1,12 @@
 import Logo from '../components/logo/logo';
-import {AppRoute, LoginMode} from '../settings';
+import {LoginMode} from '../settings';
 import LoginForm from '../components/auth/login-form/login-form';
 import RegisterForm from '../components/auth/register-form/register-form';
 import {useAppSelector} from '../hooks';
 import {selectIsAnotherError} from '../store/register-process/register-selectors';
 import {useNavigate} from 'react-router-dom';
+
+import {AppRoute} from "../app-route";
 
 type AuthProps = {
   mode: LoginMode;

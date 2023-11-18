@@ -1,15 +1,23 @@
+import {ComponentVariant} from '../../component-variant';
+import {BtnClass, LiClass} from '../training-catalog/variances';
+
 export type LookForCompanyItemProps = {
   id: string;
   src: string;
   name: string;
   location: string;
-  specialisation: string[];
+  specialization: string[];
+  dark: boolean;
+  variant: ComponentVariant;
 }
 
-export default function LookForCompanyItem({id, ...props}: LookForCompanyItemProps): JSX.Element {
+export default function UserCard({id, ...props}: LookForCompanyItemProps): JSX.Element {
+  const liClass = LiClass[props.variant as keyof typeof LiClass];
+  const btnClass = BtnClass[props.variant as keyof typeof BtnClass];
+
   return (
-    <li className="look-for-company__item">
-      <div className="thumbnail-user thumbnail-user--role-user thumbnail-user--dark">
+    <li className={liClass}>
+      <div className={`thumbnail-user thumbnail-user--role-user ${props.dark ? 'thumbnail-user--dark' : ''}`}>
         <div className="thumbnail-user__image">
           <picture>
             <img
@@ -28,13 +36,16 @@ export default function LookForCompanyItem({id, ...props}: LookForCompanyItemPro
           </div>
         </div>
         <ul className="thumbnail-user__hashtags-list">
-          {props.specialisation.map((spec) => (
+          {props.specialization.map((spec) => (
             <li className="thumbnail-user__hashtags-item" key={spec}>
               <div className="hashtag thumbnail-user__hashtag"><span>{`#${spec}`}</span></div>
             </li>
           ))}
         </ul>
-        <a className="btn btn--outlined btn--dark-bg btn--medium thumbnail-user__button" href="#">Подробнее</a>
+        <a className={`btn ${btnClass} ${props.dark ? 'btn--dark-bg' : ''} btn--medium thumbnail-user__button`}
+          href="#"
+        >Подробнее
+        </a>
       </div>
     </li>
   );

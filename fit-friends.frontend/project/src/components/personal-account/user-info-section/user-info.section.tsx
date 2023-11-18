@@ -3,22 +3,47 @@ import {useEffect, useState} from 'react';
 import UserInfoForm, {UserInfoFormProps} from './user-info.form';
 import {UserInfoMode} from '../constants';
 import InfoAvatar from './info-avatar';
-import {fillUpdateUser, getEmptyUpdateUser, getEmptyUpdateUserErrors} from '../../../helpers/get-new-update-user';
+import {
+  fillUpdateUser,
+  fillUpdateUserErrors,
+  getEmptyUpdateUser,
+  getEmptyUpdateUserErrors
+} from '../../../helpers/get-new-update-user';
 import {UpdateUserInterface} from '../../../types/update-user.interface';
 import {UpdateUserErrorsInterface} from '../../../types/update-user-errors.interface';
-import {useAppSelector} from '../../../hooks';
-import {selectUser} from '../../../store/user-process/user.selectors';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {updateUserValidators, validate} from '../../../utils/validate';
+import {makeUpdateUserPayload} from '../../../helpers/make-update-user-payload';
+import {updateUserAction} from '../../../store/api-actions/api-actions';
+import {selectCurrentUser} from '../../../store/register-process/register-selectors';
+import {UserInterface} from '../../../types/user.interface';
 
+type UserInfoSectionProps = {
+  user: UserInterface;
+}
 
-export default function UserInfoSection(): JSX.Element {
+export default function UserInfoSection({user}: UserInfoSectionProps): JSX.Element {
   const [mode, setMode] = useState(UserInfoMode.read);
   const [updateUser, setUpdateUser] = useState(getEmptyUpdateUser());
   const [errors, setErrors] = useState(getEmptyUpdateUserErrors());
 
-  const user = useAppSelector(selectUser);
+  // const user = useAppSelector(selectCurrentUser);
 
+  const dispatch = useAppDispatch();
   const saveChanges = () => {
-    console.log('saveChanges');
+    const validateErrors = validate(updateUser, updateUserValidators);
+    const isError = Object.values(validateErrors).join('').length > 0;
+    if (isError){
+      setErrors(fillUpdateUserErrors(validateErrors));
+      return;
+    }
+    if (Object.values(errors).join('').length === 0) {
+      const payload = makeUpdateUserPayload(updateUser, user);
+      if (!payload) {
+        return;
+      }
+      dispatch(updateUserAction({id: user.id, payload}));
+    }
   };
 
   useEffect(() => {
@@ -29,27 +54,33 @@ export default function UserInfoSection(): JSX.Element {
     if (mode === UserInfoMode.edit) {
       saveChanges();
       setMode(UserInfoMode.read);
+      return;
     }
+    setMode(UserInfoMode.edit);
+  };
+
+  const onSelectFile = (selectedFile: File) => {
+    updateUser.avatar = selectedFile;
   };
 
   const onInputName = (text: string) => {
-    user.name = text;
+    updateUser.name = text;
     errors.name = '';
   };
 
   const onInputDescription = (text: string) => {
-    user.name = text;
+    updateUser.description = text;
     errors.name = '';
   };
 
   const onSelect = (key: string) =>
     (value: never) => {
-      user[key as keyof UpdateUserInterface] = value;
+      updateUser[key as keyof UpdateUserInterface] = value;
       errors[key as keyof UpdateUserErrorsInterface] = '';
     };
 
   const onCheck = (value: boolean) => {
-    user.isReady = value;
+    updateUser.isReady = value;
   };
 
   const onChangeType = () => {
@@ -62,7 +93,7 @@ export default function UserInfoSection(): JSX.Element {
 
   return (
     <section className={`user-info${mode}`}>
-      <InfoAvatar mode={mode} src={updateUser.avatarPath}/>
+      <InfoAvatar mode={mode} url={updateUser.avatarPath} callback={onSelectFile}/>
       {mode === UserInfoMode.edit && <EditControls/>}
       <UserInfoForm {...props}/>
     </section>

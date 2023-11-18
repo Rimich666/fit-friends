@@ -5,7 +5,7 @@ export interface SportsmanRdo {
 }
 
 export interface CoachRdo {
-  certificatePath: string;
+  certificatePath: string[];
   merits: string;
 }
 

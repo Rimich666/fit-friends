@@ -55,6 +55,8 @@ export class CreateTrainingDto {
 
   @IsOptional()
   @IsBoolean()
-  @Transform(params => params.value.toLowerCase() === 'true')
+  @Transform(params =>
+    typeof params.value === 'boolean' ? params.value : params.value.toLowerCase() === 'true'
+  )
   isSpecialOffer = false;
 }

@@ -1,6 +1,6 @@
-import {Body, Controller, Get, Inject, Patch, Post, UseFilters} from '@nestjs/common';
+import {Body, Controller, Get, Inject, Param, ParseIntPipe, Patch, Post, UseFilters} from '@nestjs/common';
 import {BalanceDto} from '@project/shared-dto';
-import {Token} from '@project/shared-enhancers';
+import {Token, User} from '@project/shared-enhancers';
 import {HttpService} from '@nestjs/axios';
 import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
@@ -23,18 +23,25 @@ export class BalanceController {
   @Post('/')
   public async add(@Body() balance: BalanceDto, @Token() token: string){
     const {data} = await this.httpService.axiosRef.post(`${this.url}`, balance, getAuthHeader(token));
-    return {...data, training: await this.bffService.getTrainingPath(data.training)};
+    return data;
   }
 
   @Patch('/')
   public async sub(@Body() balance: BalanceDto, @Token() token: string){
     const {data} = await this.httpService.axiosRef.patch(`${this.url}`, balance, getAuthHeader(token));
-    return {...data, training: await this.bffService.getTrainingPath(data.training)};
+    return data;
   }
 
   @Get('/')
   public async index(@Token() token: string){
     const {data} = await this.httpService.axiosRef.get(`${this.url}`, getAuthHeader(token));
     return {...data, training: await this.bffService.getTrainingPath(data.training)};
+  }
+
+  @Get('/:id')
+  public async count(@Param('id') id: string, @Token() token: string){
+    console.log(id);
+    const {data} = await this.httpService.axiosRef.get(`${this.url}/${id}`, getAuthHeader(token));
+    return data;
   }
 }

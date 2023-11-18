@@ -4,7 +4,7 @@ import {QuestionnaireErrorsInterface} from '../types/questionnaire-errors.interf
 
 export const getNewQuestionnaire = (): QuestionnaireInterface => (
   {
-    certificate: undefined as unknown as File,
+    certificate: [],
     merits: '',
     isReady: false,
 

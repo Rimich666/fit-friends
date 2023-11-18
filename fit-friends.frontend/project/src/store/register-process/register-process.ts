@@ -1,6 +1,6 @@
 import {NameSpace} from '../../settings';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {registerAction} from '../api-actions/api-actions';
+import {fetchSelf, loginAction, registerAction} from '../api-actions/api-actions';
 import {RegisterState} from '../../types/register-state';
 import {QuestionnaireInterface} from '../../types/questionnaire.interface';
 import {RegisterUserInterface} from '../../types/register-user.interface';
@@ -9,6 +9,8 @@ import {QuestionnaireErrorsInterface} from '../../types/questionnaire-errors.int
 import {parseRegisterErrors} from '../../helpers/parse-register-errors';
 import {fillRegisterErrors} from '../../utils/get-new-register-user';
 import {fillQuestionnaireErrors} from '../../utils/get-new-questionnaire';
+import {UserInterface} from '../../types/user.interface';
+import {fillUser} from '../../helpers/fill-user';
 
 const initialState: RegisterState = {
   questionnaire: undefined as unknown as QuestionnaireInterface,
@@ -18,7 +20,10 @@ const initialState: RegisterState = {
   registerErrors: undefined as unknown as RegisterErrorsInterface,
   questionnaireErrors: undefined as unknown as QuestionnaireErrorsInterface,
   isAnotherError: false,
-  loginConflict: false
+  loginConflict: false,
+  currentUser: undefined as unknown as UserInterface,
+  isUserLoaded: false,
+  isUserLoading: false,
 };
 
 export const registerProcess = createSlice({
@@ -57,6 +62,21 @@ export const registerProcess = createSlice({
           return;
         }
         state.isAnotherError = true;
+      })
+      .addCase(loginAction.fulfilled, (state, action) => {
+        state.currentUser = fillUser(action.payload);
+      })
+      .addCase(fetchSelf.pending, (state) => {
+        state.isUserLoading = true;
+        state.isUserLoaded = false;
+      })
+      .addCase(fetchSelf.fulfilled, (state, action) => {
+        state.isUserLoading = false;
+        state.isUserLoaded = true;
+        state.currentUser = fillUser(action.payload);
+      })
+      .addCase(fetchSelf.rejected, (state, action) => {
+        state.isUserLoading = false;
       });
   }
 });

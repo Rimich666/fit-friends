@@ -4,6 +4,7 @@ import SpecialForYouItem, {SpecialForYouItemProps} from './special-for-you.item'
 import PlugYou from '../plug/plug-you';
 import {Direction} from '../../../enums';
 import {sliderHelpers} from '../../../helpers/slider.helpers';
+import {ComponentVariant} from "../../../component-variant";
 
 const SLIDER_VIEW_SIZE = 3;
 const MARGIN_RIGHT = 20;
@@ -43,7 +44,7 @@ export default function SpecialForYouList({specialProps}: SpecialForYouListProps
     <div className="special-for-you__wrapper special-for-you">
       <div className="special-for-you__title-wrapper">
         <h2 className="special-for-you__title">Специально подобрано для вас</h2>
-        <SliderControls class={'special-for-you'} outlined={false} callback={onClickControl}/>
+        <SliderControls class={'special-for-you'} outlined={false} callback={onClickControl} variant={ComponentVariant.popularTraining}/>
       </div>
       <ul className="special-for-you__list" style={{
         transform: `translateX(-${slideNumber * (IMAGE_WIDTH + MARGIN_RIGHT)}px)`,

@@ -68,4 +68,13 @@ export class BalanceRepository {
       }
     });
   }
+
+  public async getCount(userId: string, trainingId: number) {
+    const balance = await this.prisma.balance.findFirst({
+      where: {
+        userId: userId,
+        trainingId: trainingId
+      },});
+    return balance ? balance.count : 0;
+  }
 }

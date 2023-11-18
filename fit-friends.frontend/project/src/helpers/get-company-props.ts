@@ -1,12 +1,16 @@
 import {UserInterface} from '../types/user.interface';
-import {LookForCompanyItemProps} from '../components/main-page/look-for-company/look-for-company.item';
+import {LookForCompanyItemProps} from '../components/user-card-mini/user-card';
+import {Role} from '../enums';
+import {ComponentVariant} from '../component-variant';
 
 const fillProp = (user: UserInterface): LookForCompanyItemProps => ({
   id: user.id,
   src: user.avatarPath,
   name: user.name,
   location: user.location,
-  specialisation: [...user.trainingType],
+  specialization: [...user.trainingType],
+  dark: user.role === Role.coach,
+  variant: undefined as unknown as ComponentVariant
 });
 
 export const getCompanyProps = (users: UserInterface[]): LookForCompanyItemProps[] =>

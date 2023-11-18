@@ -1,16 +1,16 @@
-import {Gender, Level, UserLocation} from '../../../enums';
+import {GenderText, LevelText, UserLocationText} from '../../../enums';
 
 export const selectors = {
   location: {
     title: 'Локация',
-    options: UserLocation,
+    options: UserLocationText,
   },
   gender: {
     title: 'Пол',
-    options: Gender,
+    options: GenderText,
   },
   level: {
     title: 'Уровень',
-    options: Level,
-  }
+    options: LevelText,
+  },
 };

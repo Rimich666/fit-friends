@@ -13,10 +13,11 @@ import {
 } from '@nestjs/common';
 import {UsersFilterDto} from '@project/shared-dto';
 import {FitUsersService} from './fit-users.service';
-import {JwtAuthGuard, SelfOnlyGuard, UserOnlyGuard, UserUpdateInterceptor} from '@project/shared-enhancers';
+import {JwtAuthGuard, SelfOnlyGuard, User, UserOnlyGuard, UserUpdateInterceptor} from '@project/shared-enhancers';
 import {UpdateUserDto} from '@project/shared-dto';
 import {ControllerPrefix} from '@project/shared-constants';
 import { Response as Res } from 'express';
+import {TokenPayloadInterface, UserInterface} from '@project/shared-types';
 
 @Controller(ControllerPrefix.fitUsers)
 export class FitUsersController {
@@ -31,6 +32,12 @@ export class FitUsersController {
     const users = await this.userService.getUsers(filters);
     const count = await this.userService.getPageCount(filters);
     return response.set({ 'List-Size': count }).json(users);
+  }
+
+  @Get('/self')
+  @UseGuards(JwtAuthGuard)
+  async getSelf(@User() user: TokenPayloadInterface) {
+    return this.userService.getUser(user.userId);
   }
 
   @Get('/:id')

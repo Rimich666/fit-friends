@@ -1,6 +1,6 @@
 import {CertificateItemProps} from './certificate.item';
 
-export const certificates: CertificateItemProps[] = [
+export const certificates = [
   {
     src: '/img/content/certificates-and-diplomas/certificate-1.jpg',
     alt: 'Сертификат - Биомеханика ударов в боксе'

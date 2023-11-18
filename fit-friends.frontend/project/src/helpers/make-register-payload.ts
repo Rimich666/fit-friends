@@ -30,7 +30,9 @@ export const makeRegisterPayload = (user: RegisterUserInterface, questionnaire: 
   payload.append('user', JSON.stringify(dto));
   payload.append('avatar', user.avatar);
   if (isCoach) {
-    payload.append('certificate', questionnaire.certificate);
+    questionnaire.certificate.forEach((certificate) => {
+      payload.append('certificate', certificate);
+    });
   }
   return payload;
 };

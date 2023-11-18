@@ -1,11 +1,4 @@
-export enum AppRoute {
-  Root = '/',
-  Login = '/login',
-  Register = '/register',
-  Intro = '/intro',
-  Main = '/main',
-  Coach = '/coachOffice'
-}
+
 
 export enum Accept {
   avatar = '[.png", ".jpg", ".jpeg"]',
@@ -15,14 +8,6 @@ export enum LoginMode {
   Login = 'Login',
   Register = 'Register'
 }
-
-export const ApiRoute = {
-  Login: '/login',
-  Register: '/register',
-  Training: '/training',
-  User: '/users',
-  Verify: '/users/verify',
-} as const;
 
 export enum AuthorizationStatus {
   Auth = 'AUTH',
@@ -38,12 +23,22 @@ export enum NameSpace {
   Register = 'REGISTER',
   User = 'USER',
   Training = 'TRAINING',
+  Orders = 'ORDERS',
   Map = 'MAP',
+  Reviews = 'REVIEWS',
+  Balance = 'BALANCE',
+  Popup = 'POPUP'
 }
 
 export const SPECIALIZATION_LIMIT = 3;
 
-export enum ComponentVariant {
-  register = 'register',
-  update = 'update'
+enum Themes {
+  light = 'light',
+  dark = 'dark'
 }
+
+export const THEME = Themes.light;
+
+export const DISCOUNT = 10;
+
+export const LIMIT = 6;

@@ -38,7 +38,7 @@ export class FeedbackController {
   @Get('/:id')
   async index(@Param('id') filters: string, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.get(`${this.url}/${filters}`, getAuthHeader(token));
-    return data;
+    return this.bffService.getAuthors(data, token);
   }
 
   @Get(`/:id/${EndPoints.rating}`)

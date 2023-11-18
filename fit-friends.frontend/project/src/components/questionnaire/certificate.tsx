@@ -2,7 +2,7 @@ import FileLoad from '../file-load/file-load';
 
 type CertificateProps = {
   errorMessage: string;
-  callback: (file: File) => void;
+  callback: (file: File[]) => void;
 }
 
 export default function Certificate({errorMessage, callback}: CertificateProps): JSX.Element {
@@ -14,7 +14,9 @@ export default function Certificate({errorMessage, callback}: CertificateProps):
           class: 'questionnaire-coach__drag-and-drop',
           label: 'Загрузите сюда файлы формата PDF, JPG или PNG',
           errorMessage,
-          callback
+          callback,
+          icon: '#icon-import',
+          multiple: true
         }}
       />
     </div>

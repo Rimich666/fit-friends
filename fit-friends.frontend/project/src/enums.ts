@@ -10,6 +10,18 @@ export enum GenderText {
   all = 'Неважно'
 }
 
+export enum GenderTrainingText {
+  male = 'Мужчинам',
+  female = 'Женщинам',
+  all = 'Всем'
+}
+
+export enum GenderHash {
+  male = 'для_мужчин',
+  female = 'для_женщин',
+  all = 'для_всех'
+}
+
 export enum Role {
   coach = 'coach',
   sportsman = 'sportsman'
@@ -26,6 +38,14 @@ export enum UserLocation {
   regional = 'Удельная',
   starry = 'Звёздная',
   sportive = 'Спортивная'
+}
+
+export enum UserLocationText {
+  'Пионерская' = 'Пионерская',
+  'Петроградская' = 'Петроградская',
+  'Удельная' = 'Удельная',
+  'Звёздная' = 'Звёздная',
+  'Спортивная' = 'Спортивная'
 }
 
 export enum Level {
@@ -51,11 +71,29 @@ export enum TrainingType {
   stretching = 'stretching',
 }
 
+export enum TrainingTypeText {
+  yoga = 'Йога',
+  running = 'Бег',
+  power = 'Силовые',
+  aerobics = 'Аэробика',
+  crossfit = 'Кроссфит',
+  box = 'Бокс',
+  pilates = 'Пилатес',
+  stretching = 'Стрейчинг',
+};
+
 export enum TrainingTime {
   '10 - 30' = '10 - 30',
   '30 - 50' = '30 - 50',
   '50 - 80' = '50 - 80',
   '80 - 100' = '80 - 100',
+}
+
+export enum TrainingTimeHash {
+  '10 - 30' = '10_30',
+  '30 - 50' = '30_50',
+  '50 - 80' = '50_80',
+  '80 - 100' = '80_100',
 }
 
 export enum PurchaseType {
@@ -77,4 +115,9 @@ export enum RequestState {
 export enum Direction {
   forward = 1,
   back = -1,
+}
+
+export enum Order {
+  asc = 'asc',
+  desc = 'desc'
 }

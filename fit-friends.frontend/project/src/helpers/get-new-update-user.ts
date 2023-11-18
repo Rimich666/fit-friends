@@ -1,14 +1,7 @@
 import {UpdateUserInterface} from '../types/update-user.interface';
 import {UpdateUserErrorsInterface} from '../types/update-user-errors.interface';
 import {UserInterface} from '../types/user.interface';
-import {Gender, Level, UserLocation} from "../enums";
-
-export const getNewUpdateUser = (): UpdateUserInterface => <UpdateUserInterface>(
-  {
-    name: '',
-    description: ''
-  }
-);
+import {Gender, Level, UserLocation} from '../enums';
 
 export const getEmptyUpdateUserErrors = (): UpdateUserErrorsInterface => (
   {
@@ -17,7 +10,8 @@ export const getEmptyUpdateUserErrors = (): UpdateUserErrorsInterface => (
     trainingType: '',
     level: '',
     gender: '',
-    location: ''
+    location: '',
+    avatar: ''
   }
 );
 
@@ -29,8 +23,9 @@ export const getEmptyUpdateUser = (): UpdateUserInterface => ({
   gender: undefined as unknown as Gender,
   location: undefined as unknown as UserLocation,
   isReady: false,
-  avatarPath: ''
-})
+  avatarPath: '',
+  avatar: undefined as unknown as File,
+});
 
 
 export const fillUpdateUser = (user: UserInterface): UpdateUserInterface => ({
@@ -41,5 +36,16 @@ export const fillUpdateUser = (user: UserInterface): UpdateUserInterface => ({
   gender: user.gender,
   location: user.location,
   isReady: user.isReady,
-  avatarPath: user.avatarPath
+  avatarPath: user.avatarPath,
+  avatar: undefined as unknown as File,
+});
+
+export const fillUpdateUserErrors = (errors: {[k: string]: string}): UpdateUserErrorsInterface => ({
+  name: errors.name ? errors.name : '',
+  description: errors.description ? errors.description : '',
+  gender: errors.gender ? errors.gender : '',
+  location: errors.location ? errors.location : '',
+  avatar: errors.avatar ? errors.avatar : '',
+  trainingType: errors.trainingType ? errors.trainingType : '',
+  level: errors.level ? errors.level : '',
 });

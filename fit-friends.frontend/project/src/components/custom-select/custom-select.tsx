@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {ComponentVariant} from '../../settings';
+
+import {ComponentVariant} from '../../component-variant';
 
 type CustomSelectProps = {
   title: string;
@@ -7,7 +8,7 @@ type CustomSelectProps = {
   callback: (value: never) => void;
   errorMessage: string;
   value?: string;
-  disabled?: boolean;
+  disabled: boolean;
   variant?: ComponentVariant;
   mode?: string;
 }
@@ -32,7 +33,6 @@ export default function CustomSelect({errorMessage, ...props}: CustomSelectProps
     setSelection(props.options[env.currentTarget.title]);
     props.callback(env.currentTarget.title as never);
   };
-
   return (
     <div className={
       `custom-select${isOpen ? ' is-open' : ''}${selection ? ' not-empty' : ''} ${isError ?
@@ -41,12 +41,13 @@ export default function CustomSelect({errorMessage, ...props}: CustomSelectProps
     }
     >
       <span className="custom-select__label">{props.title}</span>
-      {props.value && <div className="custom-select__placeholder">{props.value}</div>}
+      {props.value && <div className="custom-select__placeholder">{props.options[props.value]}</div>}
       <button
         className="custom-select__button"
         type="button"
         aria-label="Выберите одну из опций"
         onClick={arrowClickHandle}
+        disabled={props.disabled}
       >
         <span className="custom-select__text">{selection}</span>
         <span className="custom-select__icon">

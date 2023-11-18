@@ -3,10 +3,12 @@ import {Expose} from 'class-transformer';
 import {validationConstraints} from '@project/shared-constants';
 
 export class UpdateCoachDto {
-  @IsMongoId()
+  @IsMongoId({
+    each: true,
+  })
   @Expose()
   @IsOptional()
-  public certificateId?: string;
+  public certificateId?: string[];
 
   @Expose()
   @IsOptional()

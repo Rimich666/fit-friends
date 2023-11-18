@@ -22,7 +22,8 @@ import {registerAction} from '../../store/api-actions/api-actions';
 import {QuestionnaireErrorsInterface} from '../../types/questionnaire-errors.interface';
 import {SpinnerCircular} from 'spinners-react';
 import ReadyCheck from '../ready-check/ready.check';
-import {ComponentVariant} from '../../settings';
+
+import {ComponentVariant} from '../../component-variant';
 
 export default function Questionnaire(): JSX.Element {
   const [questionnaire, setQuestion] = useState(getNewQuestionnaire());
@@ -35,8 +36,6 @@ export default function Questionnaire(): JSX.Element {
     isQuestionnaireError,
     question,
   } = useAppSelector(selectQuestion);
-
-  console.log(questionnaire.trainingType);
 
   useEffect(() => {
     if (isQuestionnaireError) {
@@ -60,7 +59,7 @@ export default function Questionnaire(): JSX.Element {
     errors[field as keyof QuestionnaireErrorsInterface] = '';
   };
 
-  const onSelectFile = (selectedFile: File) => {
+  const onSelectFile = (selectedFile: File[]) => {
     questionnaire.certificate = selectedFile;
     errors.certificate = '';
   };
@@ -72,6 +71,7 @@ export default function Questionnaire(): JSX.Element {
 
   const onCheckReady = (value: boolean) => {
     questionnaire.isReady = value;
+    errors.isReady = '';
   };
 
   const onChangeType = () => {
@@ -86,7 +86,6 @@ export default function Questionnaire(): JSX.Element {
       setErrors(fillQuestionnaireErrors(validateErrors));
       return;
     }
-    console.log('submitHandle', Object.values(errors).join(''));
     if (Object.values(errors).join('').length === 0) {
       dispatch(setQuestionnaire(questionnaire));
       dispatch(registerAction());
@@ -113,9 +112,12 @@ export default function Questionnaire(): JSX.Element {
                       trainingTypes={questionnaire.trainingType}
                       errorMessage={errors.trainingType}
                       callback={onChangeType}
+                      isDisabled={false}
                     />
                     {role === Role.sportsman && <TimeRadioBlock value={TrainingTime['30 - 50']} callback={onSelectTime}/>}
-                    <LevelRadioBlock role={role} callback={onSelectLevel} value={Level.beginner}/>
+                    <LevelRadioBlock role={role} callback={onSelectLevel} value={Level.beginner}
+                      variant={ComponentVariant.register}
+                    />
                     {role === Role.sportsman &&
                       <CaloriesBlock
                         callback={onInputCalories}
@@ -127,7 +129,9 @@ export default function Questionnaire(): JSX.Element {
                     {role === Role.coach &&
                       <div className="questionnaire-coach__block">
                         <Merits callback={onInputMerits} errorMessage={errors.merits}/>
-                        <ReadyCheck callback={onCheckReady} checked={questionnaire.isReady} variant={ComponentVariant.register}/>
+                        <ReadyCheck callback={onCheckReady} isChecked={questionnaire.isReady}
+                          variant={ComponentVariant.register} isDisabled={false}
+                        />
                       </div>}
                   </div>
                   <button className="btn questionnaire-user__button" type="submit">Продолжить</button>

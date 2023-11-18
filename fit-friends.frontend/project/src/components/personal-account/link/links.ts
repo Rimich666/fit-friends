@@ -1,8 +1,11 @@
 import {PersonalAccountLinkInterFace} from './personal-account-link.interface';
 
+
+import {AppRoute} from "../../../app-route";
+
 export const link: {[k: string]: PersonalAccountLinkInterFace} = {
   friends: {
-    href: '#',
+    href: AppRoute.CoachFriends,
     icon: '#icon-friends',
     text: 'Мои друзья'
   },
@@ -12,17 +15,17 @@ export const link: {[k: string]: PersonalAccountLinkInterFace} = {
     text: 'Мои покупки'
   },
   flash: {
-    href: '#',
+    href: AppRoute.CoachTrainings,
     icon: '#icon-flash',
     text: 'Мои тренировки'
   },
   add: {
-    href: '#',
+    href: AppRoute.CreateTraining,
     icon: '#icon-add',
     text: 'Создать тренировку'
   },
   bag: {
-    href: '#',
+    href: AppRoute.CoachOrders,
     icon: '#icon-bag',
     text: 'Мои заказы'
   }

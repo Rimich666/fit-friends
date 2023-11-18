@@ -22,6 +22,7 @@ export class TrainingRepository {
 
   public async find(queryFilters: QueryFilter): Promise<TrainingInterface[]> {
     const filters = makeTrainingQueryFilters(queryFilters);
+    console.log(filters);
     return this.prisma.training.findMany(filters);
   }
 
@@ -53,5 +54,21 @@ export class TrainingRepository {
   public async count(queryFilters: QueryFilter) {
     const filters = makeTrainingQueryFilters(queryFilters);
     return this.prisma.training.count({where: filters.where});
+  }
+
+  public async maxPrice(coachID?: string) {
+    const args: Prisma.TrainingAggregateArgs = {
+      _max: {
+        price: true,
+      },
+    };
+    if (coachID) {
+      args.where = {
+        coachId: coachID
+      };
+    }
+
+    const aggregations = await this.prisma.training.aggregate(args);
+      return aggregations._max.price;
   }
 }

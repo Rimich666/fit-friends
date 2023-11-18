@@ -1,3 +1,6 @@
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../../app-route';
+
 export type PopularTrainingItemProps = {
   id: number;
   src: string;
@@ -20,16 +23,21 @@ export default function PopularTrainingItem({id, ...props}: PopularTrainingItemP
             </picture>
           </div>
           <p className="thumbnail-training__price">
-            <span className="thumbnail-training__price-value">{props.price}</span><span>₽</span>
+            <span className="thumbnail-training__price-value">{props.price}</span>
+            <span>₽</span>
           </p>
           <h3 className="thumbnail-training__title">{props.name}</h3>
           <div className="thumbnail-training__info">
             <ul className="thumbnail-training__hashtags-list">
               <li className="thumbnail-training__hashtags-item">
-                <div className="hashtag thumbnail-training__hashtag"><span>{`#${props.type}`}</span></div>
+                <div className="hashtag thumbnail-training__hashtag">
+                  <span>{`#${props.type}`}</span>
+                </div>
               </li>
               <li className="thumbnail-training__hashtags-item">
-                <div className="hashtag thumbnail-training__hashtag"><span>{`#${props.caloriesCount}ккал`}</span></div>
+                <div className="hashtag thumbnail-training__hashtag">
+                  <span>{`#${props.caloriesCount}ккал`}</span>
+                </div>
               </li>
             </ul>
             <div className="thumbnail-training__rate">
@@ -43,7 +51,10 @@ export default function PopularTrainingItem({id, ...props}: PopularTrainingItemP
             <p className="thumbnail-training__text">{props.description}</p>
           </div>
           <div className="thumbnail-training__button-wrapper">
-            <a className="btn btn--small thumbnail-training__button-catalog" href="#">Подробнее</a>
+            <Link className="btn btn--small thumbnail-training__button-catalog"
+              to={AppRoute.SportsmanTraining}
+            >Подробнее
+            </Link>
             <a className="btn btn--small btn--outlined thumbnail-training__button-catalog" href="#">Отзывы</a>
           </div>
         </div>

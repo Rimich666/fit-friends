@@ -4,8 +4,8 @@ import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {ControllerPrefix} from '@project/shared-constants';
 import {TrainingEndRdo, UploadedFileRdo} from '@project/shared-dto';
-import {CoachAddition, TrainingInterface, UserInterface} from '@project/shared-types';
-import {fillObject} from '@project/util-core';
+import {CoachAddition, FeedbackInterface, TrainingInterface, UserInterface} from '@project/shared-types';
+import {fillObject, getAuthHeader} from '@project/util-core';
 import {OrderForCoachInterface} from '@project/shared-types';
 
 @Injectable()
@@ -41,6 +41,12 @@ export class BffService {
     return file.data.path;
   }
 
+  public async getUser(id: string, token: string) {
+    const url = `${this.config.users}/${ControllerPrefix.fitUsers}/${id}`;
+    const {data} = await this.httpService.axiosRef.get(url, getAuthHeader(token));
+    return this.getUsersPaths(data);
+  }
+
   public async getUsersPaths(data: UserInterface) {
     const {avatarId, ...user} = data;
     if (avatarId) {
@@ -48,13 +54,16 @@ export class BffService {
     }
     if (data.addition['certificateId']) {
       const {certificateId, ...addition} = data.addition as CoachAddition;
-      addition['certificatePath'] = await this.getPath(certificateId);
+      const certificates = Array.isArray(certificateId) ? certificateId : [certificateId];
+      const promises = certificates.map((certificate) => this.getPath(certificate));
+      addition['certificatePath'] = await Promise.all(promises);
       user.addition = addition;
     }
     return user;
   }
 
   public async getTrainingPath(data: TrainingInterface) {
+    console.log(data);
     const {videoId, ...training} = data;
     training.videoPath = await this.getPath(videoId);
     return training;
@@ -78,5 +87,14 @@ export class BffService {
 
   public async getOrders(data: OrderForCoachInterface[]) {
     return Promise.all(data.map((item: OrderForCoachInterface) => this.getOrderPath(item)));
+  }
+
+  public async getAuthor(data: FeedbackInterface, token: string) {
+    return {...data, author: await this.getUser(data.authorId, token)};
+  }
+
+  public async getAuthors(data: FeedbackInterface[], token: string) {
+    const promises = data.map((feedback) => this.getAuthor(feedback, token));
+    return Promise.all(promises);
   }
 }

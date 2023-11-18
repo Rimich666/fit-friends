@@ -30,7 +30,8 @@ export enum TrainingType {
   stretching = 'stretching',
   crossfit = 'crossfit',
   aerobics = 'aerobics',
-  pilates = 'pilates'
+  pilates = 'pilates',
+  power = 'power'
 }
 
 export enum TrainingTime {
@@ -38,6 +39,13 @@ export enum TrainingTime {
   '30 - 50' = '30 - 50',
   '50 - 80' = '50 - 80',
   '80 - 100' = '80 - 100',
+}
+
+export enum TrainingQueryTime {
+  '10 - 30' = '10-30',
+  '30 - 50' = '30-50',
+  '50 - 80' = '50-80',
+  '80 - 100' = '80-100',
 }
 
 export enum PurchaseType {

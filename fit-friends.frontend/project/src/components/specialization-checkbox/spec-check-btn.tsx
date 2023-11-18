@@ -1,38 +1,31 @@
-import {TrainingType} from '../../enums';
-import React, {useState} from 'react';
+import {TrainingType, TrainingTypeText} from '../../enums';
+import React, {useEffect, useState} from 'react';
 
 type SpecCheckBtnProps = {
   callback: (value: TrainingType, checked: boolean) => void;
   value: TrainingType;
-  checked: boolean;
+  isChecked: boolean;
   disabled: boolean;
 }
 
-const text = {
-  yoga: 'Йога',
-  running: 'Бег',
-  power: 'Силовые',
-  aerobics: 'Аэробика',
-  crossfit: 'Кроссфит',
-  box: 'Бокс',
-  pilates: 'Пилатес',
-  stretching: 'Стрейчинг',
-};
-
-export default function SpecCheckBtn(props: SpecCheckBtnProps): JSX.Element {
-  const [checked, setChecked] = useState(props.checked);
+export default function SpecCheckBtn({isChecked, ...props}: SpecCheckBtnProps): JSX.Element {
+  const [isCheck, setIsCheck] = useState(isChecked);
   const changeHandle = (evt: React.FormEvent<HTMLInputElement>) => {
     props.callback(evt.currentTarget.value as TrainingType, evt.currentTarget.checked);
-    setChecked(!checked);
+    setIsCheck(!isCheck);
   };
+
+  useEffect(() => {
+    setIsCheck(isChecked);
+  }, [isChecked]);
 
   return (
     <div className="btn-checkbox">
       <label>
         <input className="visually-hidden" type="checkbox" name="specialisation" disabled={props.disabled}
-          value={props.value} checked={checked} onChange={changeHandle}
+          value={props.value} checked={isCheck} onChange={changeHandle}
         />
-        <span className="btn-checkbox__btn">{text[props.value as keyof typeof text]}</span>
+        <span className="btn-checkbox__btn">{TrainingTypeText[props.value as keyof typeof TrainingTypeText]}</span>
       </label>
     </div>
   );

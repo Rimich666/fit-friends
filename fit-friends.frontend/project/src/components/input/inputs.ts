@@ -16,6 +16,11 @@ type InputsType = {
   registerPassword: InputAttributes;
   trainingCalories: InputAttributes;
   daysCalories: InputAttributes;
+  trainingName: InputAttributes;
+  trainingCaloriesTraining: InputAttributes;
+  price: InputAttributes;
+  cardTrainingName: InputAttributes;
+  cardTrainingPrice: InputAttributes;
 }
 
 export const Inputs: InputsType = {
@@ -75,5 +80,40 @@ export const Inputs: InputsType = {
     class: 'custom-input--with-text-right questionnaire-user__input',
     label: '',
     text: 'ккал'
+  },
+  trainingName: {
+    type: 'text',
+    name: 'training-name',
+    class: 'create-training__input',
+    label: 'Название тренировки',
+    text: ''
+  },
+  cardTrainingName: {
+    type: 'text',
+    name: 'training',
+    class: 'training',
+    label: '',
+    text: ''
+  },
+  cardTrainingPrice: {
+    type: 'number',
+    name: 'price',
+    class: 'price',
+    label: 'Стоимость',
+    text: ''
+  },
+  trainingCaloriesTraining: {
+    type: 'number',
+    name: 'calories',
+    class: 'custom-input--with-text-right',
+    label: 'Сколько калорий потратим',
+    text: 'ккал'
+  },
+  price: {
+    type: 'number',
+    name: 'price',
+    class: 'custom-input--with-text-right',
+    label: 'Стоимость тренировки',
+    text: '₽'
   },
 };

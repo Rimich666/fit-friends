@@ -5,7 +5,9 @@ type FileLoadProps = {
   class: string;
   label: string;
   accept: string;
-  callback: (file: File) => void;
+  callback: (files: File[]) => void;
+  icon: string;
+  multiple?: boolean;
 }
 
 export default function FileLoad({errorMessage, ...props}: FileLoadProps): JSX.Element {
@@ -18,9 +20,10 @@ export default function FileLoad({errorMessage, ...props}: FileLoadProps): JSX.E
 
   const inputHandle = (evt: React.FormEvent<HTMLInputElement>) => {
     if (evt.currentTarget.files){
-      setFileName(evt.currentTarget.files[0].name);
+      setFileName(Array.from(evt.currentTarget.files, (file) => file.name).join(', '));
       setIsError(false);
-      props.callback(evt.currentTarget.files[0]);
+      const files = Array.from(evt.currentTarget.files);
+      props.callback(files);
     }
   };
 
@@ -32,7 +35,7 @@ export default function FileLoad({errorMessage, ...props}: FileLoadProps): JSX.E
             <use xlinkHref="#icon-import"/>
           </svg>
         </span>
-        <input type="file" name="import" tabIndex={-1} accept={props.accept} onInput={inputHandle}/>
+        <input type="file" name="import" tabIndex={-1} accept={props.accept} onInput={inputHandle} multiple={props.multiple}/>
         <span className="custom-input__error">{errorMessage}</span>
       </label>
     </div>

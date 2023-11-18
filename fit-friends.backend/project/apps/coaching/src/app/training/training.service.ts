@@ -54,4 +54,8 @@ export class TrainingService {
   public async getCount(filters: QueryFilter) {
     return this.trainingRepository.count(filters);
   }
+
+  public async getMaxPrice(coachId?: string) {
+    return this.trainingRepository.maxPrice(coachId);
+  }
 }

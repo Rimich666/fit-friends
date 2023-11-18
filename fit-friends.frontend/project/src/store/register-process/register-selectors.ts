@@ -6,6 +6,7 @@ import {RegisterErrorsInterface} from '../../types/register-errors.interface';
 import {QuestionnaireErrorsInterface} from '../../types/questionnaire-errors.interface';
 import {createSelector} from '@reduxjs/toolkit';
 import {QuestionnaireInterface} from '../../types/questionnaire.interface';
+import {UserInterface} from '../../types/user.interface';
 
 export const selectRegisterUser = (state: RootState): RegisterUserInterface => state[NameSpace.Register].registerUser;
 
@@ -34,3 +35,9 @@ export const selectQuestion = createSelector([selectQuestionnaireError, selectIs
   selectQuestionnaire, selectIsRegisterError],(questionnaireErrors,
   isQuestionError, question, isRegisterError) =>
   ({questionnaireErrors, isQuestionnaireError: isQuestionError || isRegisterError, question}));
+
+export const selectCurrentUser = (state: RootState): UserInterface => state[NameSpace.Register].currentUser;
+
+export const selectIsUserLoading = (state: RootState): boolean => state[NameSpace.Register].isUserLoading;
+
+export const selectIsUserLoaded = (state: RootState): boolean => state[NameSpace.Register].isUserLoaded;

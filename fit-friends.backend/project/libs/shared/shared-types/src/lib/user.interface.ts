@@ -1,7 +1,7 @@
 import {TrainingTime, TrainingType, Gender, Level, Role, UserLocation} from './enums';
 
 export type CoachAddition = {
-  certificateId?: string;
+  certificateId?: string[];
   merits?: string;
 }
 

@@ -2,7 +2,7 @@ import {Level, TrainingTime, TrainingType} from '../enums';
 import {Field} from './field.interface';
 
 export interface QuestionnaireInterface extends Field {
-  certificate: File;
+  certificate: File[];
   merits: string;
   isReady: boolean;
 

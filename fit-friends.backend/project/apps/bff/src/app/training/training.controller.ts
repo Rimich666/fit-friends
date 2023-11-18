@@ -67,7 +67,9 @@ export class TrainingController {
   @Get('/:id')
   async show(@Param('id') trainingId: string, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.get(`${this.url}/${trainingId}`, getAuthHeader(token));
-    return fillObject(TrainingEndRdo, {...await this.bffService.getTrainingPath(data)});
+    return {...fillObject(TrainingEndRdo,
+        {...await this.bffService.getTrainingPath(data)}),
+      coach: (await this.bffService.getUser(data.coachId, token))};
   }
 
   @Get('/')

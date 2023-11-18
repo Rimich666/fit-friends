@@ -5,4 +5,5 @@ export interface UpdateUserErrorsInterface {
   gender: string;
   level: string;
   location: string;
+  avatar: string;
 }

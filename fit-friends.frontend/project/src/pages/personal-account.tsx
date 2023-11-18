@@ -4,7 +4,7 @@ import {Role} from '../enums';
 import PersonalAccountUser from '../components/personal-account/user/personal-account-user';
 import PersonalAccountCoach from '../components/personal-account/coach/personal-account-coach';
 import {useAppSelector} from '../hooks';
-import {selectIsUserLoaded, selectIsUserLoading, selectUser} from '../store/user-process/user.selectors';
+import {selectCurrentUser, selectIsUserLoaded, selectIsUserLoading} from '../store/register-process/register-selectors';
 import {SpinnerCircular} from 'spinners-react';
 import NotFoundMain from '../components/main-not-found/not-found.main';
 import useFetchSelf from '../hooks/use-fetch-self';
@@ -18,7 +18,7 @@ export default function PersonalAccount({role}: PersonalAccountProps): JSX.Eleme
 
   const isLoading = useAppSelector(selectIsUserLoading);
   const isLoaded = useAppSelector(selectIsUserLoaded);
-
+  const user = useAppSelector(selectCurrentUser);
   if (isLoading){
     return (<SpinnerCircular/>);
   }
@@ -26,7 +26,7 @@ export default function PersonalAccount({role}: PersonalAccountProps): JSX.Eleme
   if (!isLoaded){
     return (<NotFoundMain/>);
   }
-
+  console.log(user.certificate);
   return (
     <>
       <Header/>
@@ -35,10 +35,10 @@ export default function PersonalAccount({role}: PersonalAccountProps): JSX.Eleme
           <div className="container">
             <div className="inner-page__wrapper">
               <h1 className="visually-hidden">Личный кабинет</h1>
-              <UserInfoSection/>
+              <UserInfoSection user={user}/>
               <div className="inner-page__content">
                 {role === Role.sportsman && <PersonalAccountUser/>}
-                {role === Role.coach && <PersonalAccountCoach/>}
+                {role === Role.coach && <PersonalAccountCoach certificates={user.certificate as string[]}/>}
               </div>
             </div>
           </div>

@@ -4,6 +4,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {fetchCompany, fetchUser} from '../api-actions/api-actions';
 import {fillUser} from '../../helpers/fill-user';
+import {FriendInterface} from '../../types/friend.interface';
 
 const initialState: UserState = {
   company: [],
@@ -11,7 +12,8 @@ const initialState: UserState = {
   isCompanyLoading: false,
   isUserLoaded: false,
   user: undefined as unknown as UserInterface,
-  isUserLoading: false
+  isUserLoading: false,
+  friends: [],
 };
 
 export const userProcess = createSlice({
@@ -21,6 +23,9 @@ export const userProcess = createSlice({
     setIsUserLoading: (state, action: PayloadAction<boolean>) => {
       state.isUserLoading = action.payload;
     },
+    loadFriends: (state, action: PayloadAction<FriendInterface[]>) => {
+      state.friends = action.payload;
+    }
   },
   extraReducers(builder) {
     builder
@@ -47,10 +52,8 @@ export const userProcess = createSlice({
       })
       .addCase(fetchCompany.rejected, (state, action) => {
         state.isCompanyLoading = false;
-      })
-    ;
-
-  }
+      });
+}
 });
 
-export const {setIsUserLoading} = userProcess.actions;
+export const {setIsUserLoading, loadFriends} = userProcess.actions;

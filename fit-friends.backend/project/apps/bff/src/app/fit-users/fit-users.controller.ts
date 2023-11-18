@@ -6,14 +6,19 @@ import {
   Param,
   Patch,
   UseFilters,
-  Response, UseInterceptors, UploadedFiles, ParseFilePipe
+  Response, UseInterceptors, UploadedFiles, ParseFilePipe, UseGuards
 } from '@nestjs/common';
 import {AxiosExceptionFilter} from '../filters/axios-exception.filter';
 import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {ControllerPrefix} from '@project/shared-constants';
 import {UpdateUserDto} from '@project/shared-dto';
-import {QueryRaw, Token, FilesTypeValidator, UserUpdateInterceptor} from '@project/shared-enhancers';
+import {
+  QueryRaw,
+  Token,
+  FilesTypeValidator,
+  UserUpdateInterceptor,
+} from '@project/shared-enhancers';
 import { Response as Res } from 'express';
 import {FitUsersService} from './fit-users.service';
 import {FileFieldsInterceptor} from '@nestjs/platform-express';
@@ -37,6 +42,11 @@ export class FitUsersController {
   @Get('/:id')
   async show(@Param('id') userId: string, @Token() token: string) {
     return this.fitUsersService.getUser(token, `${this.url}/${userId}`);
+  }
+
+  @Get('/self')
+  async getSelf(@Token() token: string) {
+    return this.fitUsersService.getSelf(token, `${this.url}/self`);
   }
 
   @Patch('/:id')

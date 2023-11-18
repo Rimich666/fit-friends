@@ -26,6 +26,11 @@ export class FitUsersService {
     return this.bffService.getUsersPaths(data);
   }
 
+  public async getSelf(token: string, url: string) {
+    const {data} = await this.httpService.axiosRef.get(`${url}`, getAuthHeader(token));
+    return this.bffService.getUsersPaths(data);
+  }
+
   public async update(dto: UpdateUserDto, files: UserFilesType, token: string, url: string) {
     if (files.avatar) {
       const image = await this.bffService.upload(files.avatar[0]);

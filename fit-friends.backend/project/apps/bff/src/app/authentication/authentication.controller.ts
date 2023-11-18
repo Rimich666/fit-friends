@@ -37,7 +37,7 @@ export class AuthenticationController {
 
   @Post(EndPoints.register)
   @UseInterceptors(
-    FileFieldsInterceptor([{name: 'avatar', maxCount: 1},{name: 'certificate', maxCount: 1}]),
+    FileFieldsInterceptor([{name: 'avatar', maxCount: 1},{name: 'certificate'}]),
     UserCreateInterceptor
   )
   public async register(

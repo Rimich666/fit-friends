@@ -1,3 +1,6 @@
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../../app-route';
+
 export type SpecialForYouItemProps = {
   src: string;
   type: string;
@@ -16,7 +19,7 @@ export default function SpecialForYouItem(props: SpecialForYouItemProps): JSX.El
         <div className="thumbnail-preview__inner">
           <h3 className="thumbnail-preview__title">{`${props.type} ${props.id}`}</h3>
           <div className="thumbnail-preview__button-wrapper">
-            <a className="btn btn--small thumbnail-preview__button" href="#">Подробнее</a>
+            <Link className="btn btn--small thumbnail-preview__button" to={AppRoute.SportsmanTraining}>Подробнее</Link>
           </div>
         </div>
       </div>

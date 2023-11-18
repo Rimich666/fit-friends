@@ -1,5 +1,7 @@
 import {NavLink, useNavigate} from 'react-router-dom';
-import {AppRoute} from '../settings';
+
+
+import {AppRoute} from "../app-route";
 
 export default function Intro(): JSX.Element {
   const navigate = useNavigate();

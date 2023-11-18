@@ -1,6 +1,7 @@
 import {Gender, Level, TrainingType, UserLocation} from '../enums';
+import {Field} from './field.interface';
 
-export interface UpdateUserInterface {
+export interface UpdateUserInterface extends Field{
   name: string;
   description: string;
   trainingType: TrainingType[];
@@ -9,4 +10,5 @@ export interface UpdateUserInterface {
   location: UserLocation;
   isReady: boolean;
   avatarPath: string;
+  avatar: File;
 }

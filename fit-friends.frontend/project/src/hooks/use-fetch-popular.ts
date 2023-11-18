@@ -1,6 +1,6 @@
 import {useAppDispatch} from './index';
 import {useEffect, useState} from 'react';
-import {fetchTrainingsForYou, fetchTrainingsPopular} from '../store/api-actions/api-actions';
+import {fetchTrainingsPopular} from '../store/api-actions/api-actions';
 
 const LIMIT = 9;
 

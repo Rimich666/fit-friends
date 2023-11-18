@@ -58,7 +58,8 @@ export class TrainingController {
   async list(@Query() filters: CoachTrainingFilterDto, @User() {userId}, @Response() response: Res) {
     const trainings = await this.trainingService.getTrainings({...filters, coachId: userId});
     const count = await this.trainingService.getCount({...filters, coachId: userId});
-    return response.set({ 'List-Size': count }).json(fillObject(TrainingRdo, trainings));
+    const maxPrice = await this.trainingService.getMaxPrice(userId);
+    return response.set({ 'List-Size': count, 'Max-Price': maxPrice }).json(fillObject(TrainingRdo, trainings));
   }
 
   @Get('/:id')
@@ -72,6 +73,7 @@ export class TrainingController {
   async index(@Query() filters: SharedTrainingFilterDto, @Response() response: Res) {
     const trainings = await this.trainingService.getTrainings(filters);
     const count = await this.trainingService.getCount({...filters});
-    return response.set({ 'List-Size': count }).json(fillObject(TrainingRdo, trainings));
+    const maxPrice = await this.trainingService.getMaxPrice();
+    return response.set({ 'List-Size': count, 'Max-Price': maxPrice }).json(fillObject(TrainingRdo, trainings));
   }
 }

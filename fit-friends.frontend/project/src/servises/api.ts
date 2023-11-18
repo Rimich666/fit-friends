@@ -1,10 +1,13 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
-import {ApiRoute, AppRoute, REQUEST_TIMEOUT} from '../settings';
+import {REQUEST_TIMEOUT} from '../settings';
 import {getToken} from './token';
 import {getBaseUrl} from '../utils/get-base-url';
 import {toast} from 'react-toastify';
 import {getErrorToastMessage} from './error-toast-message';
 import {browserHistory} from '../browser-history';
+
+import {AppRoute} from "../app-route";
+import {ApiRoute} from "../api-route";
 
 type ErrorData = {
   statusCode: string;

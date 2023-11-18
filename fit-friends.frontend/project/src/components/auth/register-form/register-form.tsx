@@ -13,6 +13,8 @@ import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {setRegisterUser} from '../../../store/register-process/register-process';
 import {selectRegistration} from '../../../store/register-process/register-selectors';
 
+import {ComponentVariant} from "../../../component-variant";
+
 export default function RegisterForm(): JSX.Element {
   const [user, setUser] = useState(getNewRegisterUser());
   const [errors, setErrors] = useState(getEmptyRegisterErrors());
@@ -97,9 +99,10 @@ export default function RegisterForm(): JSX.Element {
             options={UserLocation}
             callback={onSelectLocation}
             errorMessage={errors.location}
+            disabled={false}
           />
           <Input {...{...Inputs.registerPassword, callback: onInputPassword, errorMessage: errors.password, value: user.password}}/>
-          <UserGenderRadioGroup callback={onChangeGender} value={user.gender}/>
+          <UserGenderRadioGroup callback={onChangeGender} value={user.gender} variant={ComponentVariant.register}/>
         </div>
         <SelectRoleGroup callback={onSelectRole} value={user.role}/>
         <div className="sign-up__checkbox">

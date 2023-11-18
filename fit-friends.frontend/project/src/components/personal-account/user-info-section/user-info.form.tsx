@@ -1,16 +1,16 @@
 import Input from '../../input/input';
 import {Inputs} from '../../input/inputs';
 import React from 'react';
-import TextArea from '../../questionnaire/text-area';
+import TextArea from '../../text-area/text-area';
 import SpecializationCheckbox from '../../specialization-checkbox/specialization.checkbox';
 import {Role} from '../../../enums';
 import CustomSelect from '../../custom-select/custom-select';
-import {ComponentVariant} from '../../../settings';
 import {selectors} from './selectors';
 import {UpdateUserInterface} from '../../../types/update-user.interface';
 import {UpdateUserErrorsInterface} from '../../../types/update-user-errors.interface';
 import ReadyCheck from '../../ready-check/ready.check';
 import {UserInfoMode} from '../constants';
+import {ComponentVariant} from '../../../component-variant';
 
 export interface UserInfoFormProps {
   mode: UserInfoMode;
@@ -43,17 +43,21 @@ export default function UserInfoForm({mode, errors, user, ...props}: UserInfoFor
         <Input {...{...Inputs.name,
           callback: props.onInputName,
           class: `${isRead ? 'custom-input--readonly' : ''} user-info${mode}__input`,
+          value: user.name,
           disabled: isRead,
           errorMessage: errors.name
         }}
         />
         <TextArea class={`${isRead ? 'custom-textarea--readonly' : ''} user-info${mode}__textarea`}
-          label={'Описание'} callback={props.onInputDescription} errorMessage={errors.description} disabled={isRead}
+          label={'Описание'} callback={props.onInputDescription} errorMessage={errors.description}
+          disabled={isRead} value={user.description}
         />
       </div>
       <div className="user-info__section user-info__section--status">
         <h2 className="user-info__title user-info__title--status">Статус</h2>
-        <ReadyCheck checked={user.isReady} callback={props.onCheck} variant={ComponentVariant.update}/>
+        <ReadyCheck isChecked={user.isReady} callback={props.onCheck} variant={ComponentVariant.update}
+          isDisabled={isRead}
+        />
       </div>
       <div className="user-info__section">
         <h2 className="user-info__title user-info__title--specialization">Специализация</h2>
@@ -63,6 +67,7 @@ export default function UserInfoForm({mode, errors, user, ...props}: UserInfoFor
           errorMessage={errors.trainingType}
           variant={ComponentVariant.update}
           callback={props.onChangeType}
+          isDisabled={isRead}
         />
       </div>
       {Object.keys(selectors).map((key) => (
@@ -71,6 +76,7 @@ export default function UserInfoForm({mode, errors, user, ...props}: UserInfoFor
             callback: props.onSelect(key),
             errorMessage: errors[key as keyof UpdateUserErrorsInterface],
             disabled: isRead,
+            value: user[key as keyof UpdateUserInterface] as string,
             variant,
             mode
           }}

@@ -1,7 +1,8 @@
 import {Role, roleClass, TrainingType} from '../../enums';
 import SpecCheckBtn from './spec-check-btn';
 import React, {useEffect, useState} from 'react';
-import {SPECIALIZATION_LIMIT, ComponentVariant} from '../../settings';
+import {SPECIALIZATION_LIMIT} from '../../settings';
+import {ComponentVariant} from "../../component-variant";
 
 
 type SpecializationCheckboxProps = {
@@ -10,10 +11,11 @@ type SpecializationCheckboxProps = {
   errorMessage: string;
   variant?: ComponentVariant;
   callback: () => void;
+  isDisabled: boolean;
 }
 
 export default function SpecializationCheckbox({errorMessage, ...props}: SpecializationCheckboxProps): JSX.Element {
-  const [trainingTypes, setTrainingTypes] = useState(props.trainingTypes);
+  const [trainingTypes, setTrainingTypes] = useState<TrainingType[]>(props.trainingTypes);
   const [isLimit, setIsLimit] =
     useState(props.trainingTypes.length === SPECIALIZATION_LIMIT);
   const [isError, setIsError] = useState(false);
@@ -24,6 +26,7 @@ export default function SpecializationCheckbox({errorMessage, ...props}: Special
 
   useEffect(() => {
     setTrainingTypes(props.trainingTypes);
+    setIsLimit(props.trainingTypes.length === SPECIALIZATION_LIMIT);
   }, [props.trainingTypes]);
 
   const onChangeCheck = (value: TrainingType, checked: boolean) => {
@@ -42,8 +45,8 @@ export default function SpecializationCheckbox({errorMessage, ...props}: Special
             <SpecCheckBtn
               callback={onChangeCheck}
               value={key as TrainingType}
-              checked={trainingTypes.includes(key as TrainingType)}
-              disabled={!trainingTypes.includes(key as TrainingType) && isLimit}
+              isChecked={trainingTypes.includes(key as TrainingType)}
+              disabled={props.isDisabled ? true : (!trainingTypes.includes(key as TrainingType) && isLimit)}
               key={key}
             />
           ))}
@@ -61,7 +64,7 @@ export default function SpecializationCheckbox({errorMessage, ...props}: Special
           <SpecCheckBtn
             callback={onChangeCheck}
             value={key as TrainingType}
-            checked={trainingTypes.includes(key as TrainingType)}
+            isChecked={trainingTypes.includes(key as TrainingType)}
             disabled={!trainingTypes.includes(key as TrainingType) && isLimit}
             key={key}
           />

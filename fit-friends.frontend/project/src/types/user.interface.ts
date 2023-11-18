@@ -14,7 +14,7 @@ export interface UserInterface {
   level: Level;
   trainingType: TrainingType[];
   isReady: boolean;
-  certificate?: string;
+  certificate?: string[];
   merits?: string;
   trainingTime?: TrainingTime;
   trainingCalories?: number;

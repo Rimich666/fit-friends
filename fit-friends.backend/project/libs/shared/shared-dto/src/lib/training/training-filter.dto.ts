@@ -34,4 +34,18 @@ export class TrainingFilterDto extends FilterDto {
   @Min(validationConstraints.training.rating.min)
   @Max(validationConstraints.training.rating.max)
   public rating: number;
+
+  @IsOptional()
+  @IsInt()
+  @Transform((params) => parseInt(params.value, 10))
+  @Min(validationConstraints.training.rating.min)
+  @Max(validationConstraints.training.rating.max)
+  public ratingMin: number;
+
+  @IsOptional()
+  @IsInt()
+  @Transform((params) => parseInt(params.value, 10))
+  @Min(validationConstraints.training.rating.min)
+  @Max(validationConstraints.training.rating.max)
+  public ratingMax: number;
 }

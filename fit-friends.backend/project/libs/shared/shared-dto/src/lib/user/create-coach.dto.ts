@@ -3,9 +3,11 @@ import {validationConstraints} from '@project/shared-constants';
 import {Expose} from 'class-transformer';
 
 export class CreateCoachDto {
-  @IsMongoId()
+  @IsMongoId({
+    each: true,
+  })
   @Expose()
-  public certificateId: string;
+  public certificateId: string[];
 
   @Expose()
   @IsOptional()

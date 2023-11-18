@@ -1,8 +1,7 @@
 import SpecialForYouSection from '../special-for-you/special-for-you.section';
 import SpecialOfferList from '../special-offer/special-offer.list';
-import {Direction} from '../../../enums';
 import {useAppSelector} from '../../../hooks';
-import {selectIsUserLoaded, selectIsUserLoading} from '../../../store/user-process/user.selectors';
+import {selectIsUserLoaded, selectIsUserLoading} from '../../../store/register-process/register-selectors';
 import {SpinnerCircular} from 'spinners-react';
 import NotFoundMain from '../../main-not-found/not-found.main';
 import Plug from '../plug/plug';

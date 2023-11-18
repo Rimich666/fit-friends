@@ -1,6 +1,7 @@
 import {TrainingFilterDto} from './training-filter.dto';
 import {IsEnum, IsOptional} from 'class-validator';
 import {CoachTrainingSortFieldsEnum, DefaultSort, TrainingTime} from '@project/shared-types';
+import {Transform} from 'class-transformer';
 
 export class CoachTrainingFilterDto extends TrainingFilterDto {
   @IsOptional()
@@ -8,8 +9,9 @@ export class CoachTrainingFilterDto extends TrainingFilterDto {
   public sort: string = DefaultSort.FIELD;
 
   @IsOptional()
-  @IsEnum(TrainingTime)
-  public trainingTime: string;
+  @IsEnum(TrainingTime, {each: true})
+  @Transform((params) => params.value.split(','))
+  public trainingTime: string[];
 
   @IsOptional()
   public coachId: string;

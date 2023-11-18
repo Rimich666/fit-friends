@@ -2,25 +2,42 @@ import SliderControls from '../../main-page/slider-controls/slider-controls';
 import {sliderHelpers} from '../../../helpers/slider.helpers';
 import React, {useEffect, useState} from 'react';
 import {Direction} from '../../../enums';
-import CertificateItem, {CertificateItemProps} from './certificate.item';
+import CertificateItem from './certificate.item';
+import {ComponentVariant} from '../../../component-variant';
 
 const SLIDER_VIEW_SIZE = 3;
 const MARGIN_RIGHT = 20;
 const LI_WIDTH = 334;
 
 type CertificateListProps = {
-  certificateProps: CertificateItemProps[];
+  certificates: string[];
 }
 
-export default function CertificateList({certificateProps}: CertificateListProps): JSX.Element {
-  const helpers = sliderHelpers(getElement, getPlug, certificateProps, SLIDER_VIEW_SIZE);
+export default function CertificateList({certificates}: CertificateListProps): JSX.Element {
+  const onDeleteItem = (index: number) => {
+    console.log(index);
+  };
+  const onChangeItem = (index: number) => {
+    console.log(index);
+  };
+  const onSaveItem = (index: number) => {
+    console.log(index);
+  };
+  const helpers = sliderHelpers(getElement, getPlug, certificates, SLIDER_VIEW_SIZE);
   const [slideNumber, setSlideNumber] = useState(helpers.initSliderNumber());
   const [indexes] = useState(new Array(SLIDER_VIEW_SIZE + 2).fill(0).map((_, index) =>
-    helpers.initIndex(index, certificateProps.length)));
+    helpers.initIndex(index, certificates.length)));
   const [items,] = useState(helpers.initItems(indexes));
 
   function getElement(key: number, index: number) {
-    return (<CertificateItem {...certificateProps[index]} key={key}/>);
+    return (
+      <CertificateItem {...{
+        src: certificates[index],
+        index,
+        onSave: onSaveItem,
+        changeHandle: onChangeItem,
+        deleteHandle: onDeleteItem}} key={key}
+      />);
   }
 
   function getPlug(key: number) {
@@ -32,7 +49,7 @@ export default function CertificateList({certificateProps}: CertificateListProps
   }, [slideNumber]);
 
   const onClickControl = (value: Direction) => {
-    if (certificateProps.length <= SLIDER_VIEW_SIZE) {
+    if (certificates.length <= SLIDER_VIEW_SIZE) {
       return;
     }
     setSlideNumber(slideNumber + value);
@@ -48,7 +65,7 @@ export default function CertificateList({certificateProps}: CertificateListProps
           </svg>
           <span>Загрузить</span>
         </button>
-        <SliderControls class={'personal-account-coach'} outlined={false} callback={onClickControl}/>
+        <SliderControls class={'personal-account-coach'} outlined={false} callback={onClickControl} variant={ComponentVariant.popularTraining}/>
       </div>
       <ul className="personal-account-coach__list" style={{
         transform: `translateX(-${slideNumber * (LI_WIDTH + MARGIN_RIGHT)}px)`,

@@ -47,6 +47,6 @@ export class TrainingService {
     const {data, headers} =
       await this.httpService.axiosRef.get(`${url}`, getAuthHeader(token));
     const trainings = await this.bffService.getTrainings(data);
-    return response.set({ 'List-Size': headers['list-size']}).json(trainings);
+    return response.set({ 'List-Size': headers['list-size'], 'Max-Price': headers['max-price']}).json(trainings);
   }
 }

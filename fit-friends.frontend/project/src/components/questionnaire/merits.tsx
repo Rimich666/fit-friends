@@ -1,4 +1,4 @@
-import TextArea from './text-area';
+import TextArea from '../text-area/text-area';
 
 interface MeritsProps {
   callback: (value: string) => void;
