@@ -1,6 +1,7 @@
 import {useAppDispatch} from './index';
 import {useEffect, useState} from 'react';
-import {fetchCompany} from '../store/api-actions/api-actions';
+
+import {fetchCompany} from "../store/api-actions/users-actions";
 
 const LIMIT = 8;
 

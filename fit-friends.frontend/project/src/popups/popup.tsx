@@ -1,6 +1,7 @@
-import BuyPopup from "./buy-popup";
-import React from "react";
-import FeedbackPopup from "./feedback-popup";
+import BuyPopup from './buy-popup';
+import React from 'react';
+import FeedbackPopup from './feedback-popup';
+import MapPopup from './map-popup';
 
 export enum PopupType {
   buy = 'buy',
@@ -37,6 +38,7 @@ export default function Popup({popup, title, location, onClose}: PopupProps): JS
           </div>
           {popup === PopupType.buy && <BuyPopup onClose={onClose}/>}
           {popup === PopupType.feedback && <FeedbackPopup onClose={onClose}/>}
+          {popup === PopupType.map && <MapPopup location={location as string}/>}
         </div>
       </section>
     </div>

@@ -24,14 +24,30 @@ export class FitUsersRepository {
     return this.userModel.findById(id);
   }
 
+  private async makeFilter(filters: UsersFilterDto) {
+    const getOption = (filter: {[p: string]: string | string[]}, key: string) => {
+      if (key === 'trainingType') {
+        return {$elemMatch: {$in: [...filter[key]]}};
+      }
+      return {$in: [...filter[key]]};
+    };
+    const {sort, order, limit, page, ...filter} = filters;
+    const f = Object.keys(filter).reduce((acc, key) => {
+      acc[key] = Array.isArray(filter[key]) ? getOption(filter, key) : filter[key];
+      return acc;
+    }, {});
+
+    return {sort, order, limit, page, filter: f};
+  }
+
   public async find(options: UsersFilterDto) {
-    const {sort, order, limit, page, ...filter} = options;
+    const {sort, order, limit, page, filter} = await this.makeFilter(options);
     return this.userModel.find(filter).sort({[sort]: order}).limit(limit).skip((page - 1) * limit).exec();
   }
 
   public async count(options: UsersFilterDto) {
-    const {sort, order, limit, page, ...filter} = options;
-    return this.userModel.count(filter);
+    const filters = await this.makeFilter(options);
+    return this.userModel.count(filters.filter);
   }
 
   public async update(id: string, item: UserEntity): Promise<UserInterface> {

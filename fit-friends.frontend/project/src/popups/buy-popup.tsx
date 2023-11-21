@@ -3,7 +3,8 @@ import {selectBuyProps} from '../store/popup-process/popup.selectors';
 import {useState} from 'react';
 import {PaymentOption, PurchaseType} from '../enums';
 import PaymentItem from './payment.item';
-import {addBalance, createOrderAction} from '../store/api-actions/api-actions';
+import {createOrderAction} from '../store/api-actions/api-actions';
+import {addBalance} from "../store/api-actions/balance-actions";
 
 type BuyPopupProps = {
   onClose: () => void;

@@ -36,4 +36,9 @@ export class FriendsController {
   async index(@User() {userId}) {
     return await this.friendsService.getFriends(userId);
   }
+
+  @Get('/:id')
+  async isFriend(@Param('id') friendId: string, @User() {userId}) {
+    return this.friendsService.isFriends({sweetCouple: [userId, friendId]});
+  }
 }

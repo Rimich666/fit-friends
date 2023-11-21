@@ -1,17 +1,19 @@
-import UserCard, {LookForCompanyItemProps} from '../../user-card-mini/user-card';
+import UserCard, {UserCardProps} from '../../user-card-mini/user-card';
 import SliderControls from '../slider-controls/slider-controls';
 import {sliderHelpers} from '../../../helpers/slider.helpers';
 import {useEffect, useState} from 'react';
 import {Direction} from '../../../enums';
 import PlugCompany from '../plug/plug-company';
 import {ComponentVariant} from '../../../component-variant';
+import {AppRoute} from '../../../app-route';
+import {useNavigate} from 'react-router-dom';
 
 const LI_WIDTH = 334;
 const MARGIN_RIGHT = 20;
 const SLIDER_VIEW_SIZE = 4;
 
 type LookForCompanyListProps = {
-  propsLook: LookForCompanyItemProps[];
+  propsLook: UserCardProps[];
 }
 
 export default function LookForCompanyList({propsLook}: LookForCompanyListProps): JSX.Element {
@@ -20,6 +22,7 @@ export default function LookForCompanyList({propsLook}: LookForCompanyListProps)
   const [indexes] = useState(new Array(SLIDER_VIEW_SIZE + 2).fill(0).map((_, index) =>
     helpers.initIndex(index, propsLook.length)));
   const [items,] = useState(helpers.initItems(indexes));
+  const navigate = useNavigate();
 
   function getElement(key: number, index: number) {
     return (<UserCard {...{...propsLook[index], dark: true, variant: ComponentVariant.lookForCompany}} key={key}/>);
@@ -40,11 +43,16 @@ export default function LookForCompanyList({propsLook}: LookForCompanyListProps)
     setSlideNumber(slideNumber + value);
   };
 
+  const clickAllHandle = () => {
+    navigate(AppRoute.UserCatalog);
+  };
+
   return (
     <div className="look-for-company__wrapper special-for-you">
       <div className="look-for-company__title-wrapper">
         <h2 className="look-for-company__title">Ищут компанию для тренировки</h2>
-        <button className="btn-flat btn-flat--light look-for-company__button" type="button"><span>Смотреть все</span>
+        <button className="btn-flat btn-flat--light look-for-company__button" type="button" onClick={clickAllHandle}>
+          <span>Смотреть все</span>
           <svg width="14" height="10" aria-hidden="true">
             <use xlinkHref="#arrow-right"/>
           </svg>

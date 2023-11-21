@@ -12,6 +12,7 @@ export class NotInvitedGuard implements CanActivate {
     const req = context.switchToHttp().getRequest();
     const invitedId = req.body['invitedId'];
     const userId = req.user.id;
+    console.log(invitedId);
     if (invitedId === userId) {
       throw new ConflictException('Train with yourself without an invitation');
     }

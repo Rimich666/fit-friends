@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@nestjs/common';
 import {HttpService} from '@nestjs/axios';
 import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
-import {ControllerPrefix} from '@project/shared-constants';
+import {ControllerPrefix, EndPoints} from '@project/shared-constants';
 import {TrainingEndRdo, UploadedFileRdo} from '@project/shared-dto';
 import {CoachAddition, FeedbackInterface, TrainingInterface, UserInterface} from '@project/shared-types';
 import {fillObject, getAuthHeader} from '@project/util-core';
@@ -63,7 +63,6 @@ export class BffService {
   }
 
   public async getTrainingPath(data: TrainingInterface) {
-    console.log(data);
     const {videoId, ...training} = data;
     training.videoPath = await this.getPath(videoId);
     return training;
@@ -96,5 +95,18 @@ export class BffService {
   public async getAuthors(data: FeedbackInterface[], token: string) {
     const promises = data.map((feedback) => this.getAuthor(feedback, token));
     return Promise.all(promises);
+  }
+
+  public async getRating(trainingId: string, token: string) {
+    const url = `${this.config.coaching}/${ControllerPrefix.feedback}`;
+    const {data} =
+      await this.httpService.axiosRef.get(`${url}/${trainingId}/${EndPoints.rating}`, getAuthHeader(token));
+    return Math.round(data);
+  }
+
+  public async isFriend(userId: string, token: string) {
+    const url = `${this.config.users}/${ControllerPrefix.friends}/${userId}`;
+    const {data} = await this.httpService.axiosRef.get(url, getAuthHeader(token));
+    return data;
   }
 }

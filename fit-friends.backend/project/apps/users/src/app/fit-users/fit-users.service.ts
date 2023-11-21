@@ -12,7 +12,6 @@ export class FitUsersService {
   ) {}
 
   private fillUser(user: UserInterface) {
-    console.log(user);
     return {... fillObject(UserRdo, user), addition: Object.fromEntries(user.addition as Map<string, string | number | string[]>)};
   }
 

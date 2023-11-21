@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Param, Post, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, UseGuards} from '@nestjs/common';
 import {EmailSubscriberService} from './email-subscriber.service';
 import {JwtAuthGuard, User} from '@project/shared-enhancers';
 import {TokenPayloadInterface} from '@project/shared-types';
@@ -21,5 +21,10 @@ export class EmailSubscriberController {
   @Delete('/:id')
   public async delete(@Param('id') coachId: string, @User() {email}: TokenPayloadInterface) {
     return await this.emailSubscriberService.delete(new EmailSubscriberEntity({coachId, email}));
+  }
+
+  @Get('/:id')
+  public async check(@Param('id') coachId: string, @User() {email}: TokenPayloadInterface) {
+    return this.emailSubscriberService.check(new EmailSubscriberEntity({coachId, email}));
   }
 }

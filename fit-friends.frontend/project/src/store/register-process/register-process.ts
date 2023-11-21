@@ -1,6 +1,6 @@
 import {NameSpace} from '../../settings';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {fetchSelf, loginAction, registerAction} from '../api-actions/api-actions';
+import {loginAction, registerAction} from '../api-actions/api-actions';
 import {RegisterState} from '../../types/register-state';
 import {QuestionnaireInterface} from '../../types/questionnaire.interface';
 import {RegisterUserInterface} from '../../types/register-user.interface';
@@ -11,6 +11,7 @@ import {fillRegisterErrors} from '../../utils/get-new-register-user';
 import {fillQuestionnaireErrors} from '../../utils/get-new-questionnaire';
 import {UserInterface} from '../../types/user.interface';
 import {fillUser} from '../../helpers/fill-user';
+import {fetchSelf} from '../api-actions/users-actions';
 
 const initialState: RegisterState = {
   questionnaire: undefined as unknown as QuestionnaireInterface,
@@ -22,8 +23,8 @@ const initialState: RegisterState = {
   isAnotherError: false,
   loginConflict: false,
   currentUser: undefined as unknown as UserInterface,
-  isUserLoaded: false,
-  isUserLoading: false,
+  isCurrentUserLoaded: false,
+  isCurrentUserLoading: false,
 };
 
 export const registerProcess = createSlice({
@@ -67,16 +68,16 @@ export const registerProcess = createSlice({
         state.currentUser = fillUser(action.payload);
       })
       .addCase(fetchSelf.pending, (state) => {
-        state.isUserLoading = true;
-        state.isUserLoaded = false;
+        state.isCurrentUserLoading = true;
+        state.isCurrentUserLoaded = false;
       })
       .addCase(fetchSelf.fulfilled, (state, action) => {
-        state.isUserLoading = false;
-        state.isUserLoaded = true;
+        state.isCurrentUserLoading = false;
+        state.isCurrentUserLoaded = true;
         state.currentUser = fillUser(action.payload);
       })
       .addCase(fetchSelf.rejected, (state, action) => {
-        state.isUserLoading = false;
+        state.isCurrentUserLoading = false;
       });
   }
 });

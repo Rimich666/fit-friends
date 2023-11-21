@@ -8,5 +8,8 @@ export const ApiRoute = {
   CoachTrainings: '/training/coach',
   Feedback: '/feedback',
   Balance: '/balance',
-  Order: '/order'
+  Order: '/order',
+  Friend: '/friends',
+  Join: '/together',
+  Subscribe: '/subscribe'
 } as const;

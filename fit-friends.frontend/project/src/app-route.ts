@@ -12,8 +12,12 @@ export enum AppRoute {
   TrainingCatalog = '/main/catalog',
   CoachTraining = '/coachOffice/training',
   SportsmanTraining = '/main/training',
+  UserCatalog = '/main/userCatalog',
+  UserCard = '/main/userCard',
+  CoachCard = '/main/coachCard',
 }
 
 export const RouteParam = {
   Training: ':training',
+  UserId: ':userId'
 } as const;

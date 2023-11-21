@@ -42,7 +42,7 @@ export class AuthenticationService {
     const {data} = await this.httpService.axiosRef.post(`${url}`, dto, getAuthHeader(token));
     const {id, accessToken, refreshToken} = data;
     const usersUrl = `${this.config.users}/${ControllerPrefix.fitUsers}`;
-    const user = await this.fitUsersService.getUser(`Bearer ${accessToken}`, `${usersUrl}/${id}`);
+    const user = await this.fitUsersService.getUser(`Bearer ${accessToken}`, usersUrl, id);
     return {user, accessToken, refreshToken};
   }
 }

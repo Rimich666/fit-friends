@@ -22,8 +22,7 @@ export class TrainingRepository {
 
   public async find(queryFilters: QueryFilter): Promise<TrainingInterface[]> {
     const filters = makeTrainingQueryFilters(queryFilters);
-    console.log(filters);
-    return this.prisma.training.findMany(filters);
+     return this.prisma.training.findMany(filters);
   }
 
   public async findById(id: number): Promise<TrainingInterface> {

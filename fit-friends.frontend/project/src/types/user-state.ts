@@ -1,5 +1,6 @@
 import {UserInterface} from './user.interface';
 import {FriendInterface} from './friend.interface';
+import {UserCardInterface} from './user-card.interface';
 
 export type UserState = {
   isUserLoaded: boolean;
@@ -9,4 +10,9 @@ export type UserState = {
   isCompanyLoaded: boolean;
   company: UserInterface[];
   friends: FriendInterface[];
+  catalog: UserCardInterface[];
+  isCatalogLoaded: boolean;
+  isCatalogLoading: boolean;
+  isFriend: boolean;
+  isSubscribe: boolean;
 };

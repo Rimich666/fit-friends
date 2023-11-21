@@ -1,3 +1,5 @@
+import {MapLocation} from "./types/map-location";
+
 export enum Gender {
   male = 'male',
   female = 'female',
@@ -47,6 +49,29 @@ export enum UserLocationText {
   'Звёздная' = 'Звёздная',
   'Спортивная' = 'Спортивная'
 }
+
+export const UserLocationMap = {
+  'Пионерская': {
+    latitude: 60.004695,
+    longitude: 30.297583,
+  },
+  'Петроградская': {
+    latitude: 59.966390,
+    longitude: 30.313147,
+  },
+  'Удельная' : {
+    latitude: 60.019363,
+    longitude: 30.316809,
+  },
+  'Звёздная' : {
+    latitude: 59.834624,
+    longitude: 30.344274,
+  },
+  'Спортивная' : {
+    latitude: 59.956980,
+    longitude: 30.280187,
+  },
+};
 
 export enum Level {
   beginner = 'beginner',

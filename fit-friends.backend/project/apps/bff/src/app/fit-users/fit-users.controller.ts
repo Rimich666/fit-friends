@@ -29,7 +29,7 @@ import {UserFilesType} from '@project/shared-types';
 export class FitUsersController {
   constructor(
     @Inject (appsConfig.KEY) private readonly config: ConfigType<typeof appsConfig>,
-    private readonly fitUsersService: FitUsersService
+    private readonly fitUsersService: FitUsersService,
   ) {}
 
   private url = `${this.config.users}/${ControllerPrefix.fitUsers}`;
@@ -41,7 +41,7 @@ export class FitUsersController {
 
   @Get('/:id')
   async show(@Param('id') userId: string, @Token() token: string) {
-    return this.fitUsersService.getUser(token, `${this.url}/${userId}`);
+    return this.fitUsersService.getUser(token, this.url, userId);
   }
 
   @Get('/self')

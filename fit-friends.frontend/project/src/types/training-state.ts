@@ -1,5 +1,6 @@
 import {TrainingInterface} from './training.interface';
 import {TrainingCardInterface} from './training-card.interface';
+import {PopularTrainingItemProps} from '../components/main-page/popular-training/popular-training.item';
 export type RangeConstraint = {
   min: number;
   max: number;
@@ -27,4 +28,7 @@ export type TrainingState = {
   isCatalogTrainingsLoaded: boolean;
   isCatalogTrainingsLoading: boolean;
   catalogTrainings: TrainingInterface[];
+  isCoachCardLoaded: boolean;
+  isCoachCardLoading: boolean;
+  coachCardTrainings: PopularTrainingItemProps[];
 };

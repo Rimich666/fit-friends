@@ -1,5 +1,5 @@
 import {CoachRdo, SportsmanRdo, UserRdo} from '../types/user.rdo';
-import {UserInterface} from '../types/user.interface'
+import {UserInterface} from '../types/user.interface';
 import {Gender, Level, Role, TrainingTime, TrainingType, UserLocation} from '../enums';
 
 export const fillUser = (rdo: UserRdo): UserInterface => {
@@ -16,7 +16,8 @@ export const fillUser = (rdo: UserRdo): UserInterface => {
     location: rdo.location as UserLocation,
     name: rdo.name,
     role: rdo.role as Role,
-    trainingType: [...rdo.trainingType as TrainingType[]]
+    imagePath: rdo.imagePath,
+    trainingType: [...rdo.trainingType as TrainingType[]],
   };
   return user.role === Role.sportsman ? Object.assign(user, {
     trainingTime: (rdo.addition as SportsmanRdo).trainingTime as TrainingTime,

@@ -3,9 +3,6 @@ import {CoachTrainingFilterDto, SharedTrainingFilterDto} from '@project/shared-d
 
 export type QueryFilter = CoachTrainingFilterDto | SharedTrainingFilterDto
 
-
-
-
 export const makeTrainingQueryFilters = (query: QueryFilter) => {
   const where: Prisma.TrainingWhereInput = {};
   const orderBy: Prisma.TrainingOrderByWithAggregationInput = {[query.sort]: query.order};

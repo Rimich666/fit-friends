@@ -15,13 +15,13 @@ export class FriendsService {
 
   public async create(friends : FriendsInterface){
     const pair = await this.friendsRepository.create(new FriendsEntity(friends));
-    return this.fitUserService.getUser(pair.sweetCouple[1]);
+    return !!pair.sweetCouple[1];
   }
 
 
   public async delete({sweetCouple} : FriendsInterface){
     const pair = await this.friendsRepository.delete(sweetCouple);
-    return this.fitUserService.getUser(pair.sweetCouple[1]);
+    return !!pair.sweetCouple[1];
   }
 
 
@@ -34,5 +34,9 @@ export class FriendsService {
   async checkUser(userId: string): Promise<boolean> {
     const user = await this.fitUserRepository.findById(userId);
     return user !== null;
+  }
+
+  async isFriends(friends : FriendsInterface) {
+    return this.friendsRepository.isFriends(new FriendsEntity(friends));
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {Injectable} from '@nestjs/common';
 import {FriendsEntity} from './friends.entity';
 import {InjectModel} from '@nestjs/mongoose';
 import {Model} from 'mongoose';
@@ -23,7 +23,11 @@ export class FriendsRepository {
   public async find(id: string) {
     const pairs: PairType[] = (await this.friendModel.find({sweetCouple: id})).
       map((friend) => friend.sweetCouple);
-    const friends = pairs.map((pair) => pair[(pair.indexOf(id) -1) * -1]);
-    return friends;
+    return pairs.map((pair) => pair[(pair.indexOf(id) - 1) * -1]);
+  }
+
+  public async isFriends(friends: FriendsEntity) {
+    const found = await this.friendModel.findOne({sweetCouple: { $all: friends.sweetCouple}});
+    return !!found;
   }
 }

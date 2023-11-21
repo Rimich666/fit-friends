@@ -27,4 +27,5 @@ export interface UserRdo {
   isReady: boolean;
   avatarPath: string;
   addition: CoachRdo | SportsmanRdo;
+  isFriend?: boolean;
 }

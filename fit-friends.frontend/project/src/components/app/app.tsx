@@ -16,6 +16,9 @@ import TrainingCatalog from '../../pages/training-catalog';
 import CoachTrainingCard from '../../pages/coach-training-card';
 import SportsmanTrainingCard from '../../pages/sportsman-training-card';
 import useFetchSelf from '../../hooks/use-fetch-self';
+import UserCatalog from '../../pages/user-catalog';
+import SportsmanCard from '../../pages/sportsman-card';
+import CoachCard from '../../pages/coach-card';
 
 function App(): JSX.Element {
   const role = getSelfRole();
@@ -32,7 +35,6 @@ function App(): JSX.Element {
         <Route path={AppRoute.CoachFriends} element={<CoachFriends/>}/>
         <Route path={AppRoute.CoachOrders} element={<MyOrders/>}/>
         <Route path={AppRoute.TrainingCatalog} element={<TrainingCatalog/>}/>
-        {/*<Route path={AppRoute.CoachTraining} element={<CoachTrainingCard/>}/>*/}
         <Route path={`${AppRoute.SportsmanTraining}/${RouteParam.Training}`}
           element={<SportsmanTrainingCard/>}
         />
@@ -40,6 +42,10 @@ function App(): JSX.Element {
           path={`${AppRoute.CoachTrainings}/${RouteParam.Training}`}
           element={<CoachTrainingCard />}
         />
+        <Route path={AppRoute.UserCatalog} element={<UserCatalog/>}/>
+        <Route path={`${AppRoute.UserCard}/${RouteParam.UserId}`} element={<SportsmanCard/>}/>
+        <Route path={`${AppRoute.CoachCard}/${RouteParam.UserId}`} element={<CoachCard/>}/>
+
         {/*  <PrivateRoute>*/}
         {/*    <Product />*/}
         {/*  </PrivateRoute>*/}

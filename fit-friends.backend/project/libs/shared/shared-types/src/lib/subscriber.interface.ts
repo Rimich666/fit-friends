@@ -1,6 +1,6 @@
 export interface SubscriberInterface {
   id?: string;
-  email: string;
+  email?: string;
   name?: string;
   coachId: string;
 }

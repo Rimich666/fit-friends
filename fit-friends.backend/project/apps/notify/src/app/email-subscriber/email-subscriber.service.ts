@@ -22,4 +22,9 @@ export class EmailSubscriberService {
     }
     return this.emailSubscriberRepository.delete(found.id);
   }
+
+  public async check(entity: EmailSubscriberEntity) {
+    const found = await this.emailSubscriberRepository.find(entity);
+    return !!found;
+  }
 }

@@ -33,8 +33,7 @@ export class OrderController {
   @UseInterceptors(OrderInterceptor)
   @UsePipes(new ValidationPipe({transform: true}))
   async create(@User() {userId}: TokenPayloadInterface, @Body() dto: CreateOrderDto) {
-    console.log(dto);
-    return this.orderService.createOrder({...dto, userId});
+     return this.orderService.createOrder({...dto, userId});
   }
 
   @UseGuards(CoachOnlyGuard)

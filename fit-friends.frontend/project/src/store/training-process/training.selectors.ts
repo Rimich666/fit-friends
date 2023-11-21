@@ -3,7 +3,9 @@ import {NameSpace} from '../../settings';
 import {TrainingInterface} from '../../types/training.interface';
 import {createSelector} from '@reduxjs/toolkit';
 import {fillTrainingMiniCard} from '../../helpers/fill-training-card';
-import {ComponentVariant} from "../../component-variant";
+import {ComponentVariant} from '../../component-variant';
+import {PopularTrainingItemProps} from "../../components/main-page/popular-training/popular-training.item";
+import {selectUserIsLoaded} from "../user-process/user.selectors";
 
 export const selectIsForYouLoading = (state: RootState): boolean => state[NameSpace.Training].isForYouLoading;
 
@@ -38,4 +40,14 @@ export const makeSelectTrainings = createSelector(
 
 export const selectIsTrainingCardLoading = (state: RootState): boolean => state[NameSpace.Training].isTrainingCardLoading;
 
+export const selectCoachCardTrainings = (state: RootState): PopularTrainingItemProps[] =>
+  state[NameSpace.Training].coachCardTrainings;
 
+export const selectIsCoachCardLoading = (state: RootState): boolean => state[NameSpace.Training].isCoachCardLoading;
+
+export const selectIsCoachCardLoaded = (state: RootState): boolean => state[NameSpace.Training].isCoachCardLoaded;
+
+export const selectTrainingsForCoachCard = createSelector(
+  [selectCoachCardTrainings, selectIsCoachCardLoading, selectIsCoachCardLoaded], (
+    trainings, isLoading, isLoaded
+  ) => ({trainings, isLoading, isLoaded}));

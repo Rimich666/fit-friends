@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {BalanceState} from '../../types/balance-state';
-import {addBalance, fetchBalance, subBalance} from '../api-actions/api-actions';
+
+import {addBalance, fetchBalance, subBalance} from "../api-actions/balance-actions";
 
 const initialState: BalanceState = {
   balance: 0,

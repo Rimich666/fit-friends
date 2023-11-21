@@ -8,6 +8,7 @@ export interface UserInterface {
   gender: Gender;
   location: UserLocation;
   avatarPath: string;
+  imagePath: string;
   role: Role;
   description: string;
   createDate: Date;
@@ -19,4 +20,4 @@ export interface UserInterface {
   trainingTime?: TrainingTime;
   trainingCalories?: number;
   daysCalories?: number;
-}
+ }

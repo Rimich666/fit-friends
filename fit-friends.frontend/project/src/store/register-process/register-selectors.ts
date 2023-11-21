@@ -38,6 +38,6 @@ export const selectQuestion = createSelector([selectQuestionnaireError, selectIs
 
 export const selectCurrentUser = (state: RootState): UserInterface => state[NameSpace.Register].currentUser;
 
-export const selectIsUserLoading = (state: RootState): boolean => state[NameSpace.Register].isUserLoading;
+export const selectIsUserLoading = (state: RootState): boolean => state[NameSpace.Register].isCurrentUserLoading;
 
-export const selectIsUserLoaded = (state: RootState): boolean => state[NameSpace.Register].isUserLoaded;
+export const selectIsUserLoaded = (state: RootState): boolean => state[NameSpace.Register].isCurrentUserLoaded;

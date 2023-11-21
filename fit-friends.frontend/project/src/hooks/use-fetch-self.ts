@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {useAppDispatch} from './index';
-import {fetchSelf} from '../store/api-actions/api-actions';
+
+import {fetchSelf} from '../store/api-actions/users-actions';
 
 export default function useFetchSelf() {
   const [fetch] = useState({first: true});

@@ -30,9 +30,12 @@ export class FeedbackController {
   private url = `${this.config.coaching}/${ControllerPrefix.feedback}`;
 
   @Post('/')
-  async create(@Body() dto: CreateFeedbackDto, @Token() token: string) {
-    const {data} = await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
-    return {...data, training: await this.bffService.getTrainingPath(data.training)};
+  async create(@Body() dto: CreateFeedbackDto, @Token() token: string, @Response() response: Res) {
+    await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
+    const {data} = await this.httpService.axiosRef.get(`${this.url}/${dto.trainingId}`, getAuthHeader(token));
+    const feedbacks = await this.bffService.getAuthors(data, token);
+    const rating = await this.bffService.getRating(dto.trainingId.toString(), token);
+    return response.set({ 'Rating': rating}).json(feedbacks);
   }
 
   @Get('/:id')
@@ -42,9 +45,7 @@ export class FeedbackController {
   }
 
   @Get(`/:id/${EndPoints.rating}`)
-  async rating(@Param('id') trainingId: string, @Token() token: string, @Response() response: Res) {
-    const {data, headers} =
-      await this.httpService.axiosRef.get(`${this.url}/${trainingId}/${EndPoints.rating}`, getAuthHeader(token));
-    return response.set({ 'List-Size': headers['list-size']}).json(data);
+  async rating(@Param('id') trainingId: string, @Token() token: string) {
+    return this.bffService.getRating(trainingId, token);
   }
 }

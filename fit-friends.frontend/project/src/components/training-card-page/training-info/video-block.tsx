@@ -5,8 +5,9 @@ import useAppFilePicker from '../../../hooks/use-app-file-picker';
 import {Accept} from '../../../settings';
 import {makeUpdateTrainingCardPayload} from '../../../helpers/make-update-training-payload';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {subBalance, updateTrainingCard} from '../../../store/api-actions/api-actions';
+import {updateTrainingCard} from '../../../store/api-actions/api-actions';
 import {selectBalance} from '../../../store/balance-process/balance.selectors';
+import {subBalance} from "../../../store/api-actions/balance-actions";
 
 type VideoBlockProps = {
   role: Role;

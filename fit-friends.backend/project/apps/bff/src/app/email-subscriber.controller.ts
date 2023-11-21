@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Inject, Param, Post, UseFilters, UseGuards} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Inject, Param, Post, UseFilters, UseGuards} from '@nestjs/common';
 import {SubscribeDto, SubscriberRdo} from '@project/shared-dto';
 import {Token} from '@project/shared-enhancers';
 import {HttpService} from '@nestjs/axios';
@@ -31,5 +31,11 @@ export class EmailSubscriberController {
   async delete(@Param('id') coachId: string, @Token() token: string) {
     const {data} = await this.httpService.axiosRef.delete(`${this.url}/${coachId}`,getAuthHeader(token));
     return fillObject(SubscriberRdo, data);
+  }
+
+  @Get('/:id')
+  async check(@Param('id') coachId: string, @Token() token: string) {
+    const {data} = await this.httpService.axiosRef.get(`${this.url}/${coachId}`,getAuthHeader(token));
+    return data;
   }
 }

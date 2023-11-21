@@ -1,7 +1,10 @@
 import {ComponentVariant} from '../../component-variant';
 import {BtnClass, LiClass} from '../training-catalog/variances';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../app-route';
+import {Role} from '../../enums';
 
-export type LookForCompanyItemProps = {
+export type UserCardProps = {
   id: string;
   src: string;
   name: string;
@@ -9,9 +12,10 @@ export type LookForCompanyItemProps = {
   specialization: string[];
   dark: boolean;
   variant: ComponentVariant;
+  role: Role;
 }
 
-export default function UserCard({id, ...props}: LookForCompanyItemProps): JSX.Element {
+export default function UserCard({id, ...props}: UserCardProps): JSX.Element {
   const liClass = LiClass[props.variant as keyof typeof LiClass];
   const btnClass = BtnClass[props.variant as keyof typeof BtnClass];
 
@@ -42,10 +46,10 @@ export default function UserCard({id, ...props}: LookForCompanyItemProps): JSX.E
             </li>
           ))}
         </ul>
-        <a className={`btn ${btnClass} ${props.dark ? 'btn--dark-bg' : ''} btn--medium thumbnail-user__button`}
-          href="#"
+        <Link className={`btn ${btnClass} ${props.dark ? 'btn--dark-bg' : ''} btn--medium thumbnail-user__button`}
+          to={props.role === Role.coach ? `${AppRoute.CoachCard}/${id}` : `${AppRoute.UserCard}/${id}`}
         >Подробнее
-        </a>
+        </Link>
       </div>
     </li>
   );

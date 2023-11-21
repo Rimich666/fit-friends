@@ -8,6 +8,8 @@ import {useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../app-route';
 import Card from '../training-card-mini/card';
 import {ComponentVariant} from '../../component-variant';
+import {useAppSelector} from "../../hooks";
+import {selectTrainingsForCoachCard} from "../../store/training-process/training.selectors";
 
 const IMAGE_WIDTH = 330;
 const MARGIN_RIGHT = 20;
@@ -76,19 +78,19 @@ export default function TrainingCardSlider({trainingProps, variant}: TrainingCar
       </div>}
       {
         variant === ComponentVariant.userCard &&
-        <div className="user-card-coach__training">
-          <div className="user-card-coach__training-head">
-            <h2 className="user-card-coach__training-title">Тренировки</h2>
-            <SliderControls class={'popular-trainings'} outlined={false} callback={onClickControl} variant={variant}/>
-          </div>
-          <ul className="user-card-coach__training-list" style={{
-            transform: `translateX(-${slideNumber * (IMAGE_WIDTH + MARGIN_RIGHT)}px)`,
-            transition: 'transform 0.5s ease-in-out'
-          }}
-          >
-            {items.map((item) => item.element)}
-          </ul>
-        </div>
+          <>
+            <div className="user-card-coach__training-head">
+              <h2 className="user-card-coach__training-title">Тренировки</h2>
+              <SliderControls class={'popular-trainings'} outlined={false} callback={onClickControl} variant={variant}/>
+            </div>
+            <ul className="user-card-coach__training-list" style={{
+              transform: `translateX(-${slideNumber * (IMAGE_WIDTH + MARGIN_RIGHT)}px)`,
+              transition: 'transform 0.5s ease-in-out'
+            }}
+            >
+              {items.map((item) => item.element)}
+            </ul>
+          </>
       }
     </>
   );

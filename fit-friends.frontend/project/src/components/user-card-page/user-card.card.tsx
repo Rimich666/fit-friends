@@ -1,4 +1,6 @@
 import {Role, TrainingType, UserLocation} from '../../enums';
+import React from 'react';
+import FriendButton from './friend.button';
 
 const user = {
   src: '',
@@ -10,7 +12,8 @@ const user = {
   specialization: [TrainingType.box, TrainingType.crossfit, TrainingType.power, TrainingType.yoga],
 };
 
-type UserCardCardProps = {
+export type UserCardCardProps = {
+  id: string;
   role: Role;
   src: string;
   name: string;
@@ -19,10 +22,16 @@ type UserCardCardProps = {
   description: string;
   specialization: string[];
   imagePath: string;
+  onPlaceClick: () => void;
 }
 
 export default function UserCardCard({role, ...props}: UserCardCardProps): JSX.Element {
   const tail = role === Role.coach ? '-coach' : '';
+
+  const placeClickHandle = (evt: React.FormEvent<HTMLElement>) => {
+    evt.preventDefault();
+    props.onPlaceClick();
+  };
 
   return (
     <div className={role === Role.coach ? 'user-card-coach__card' : ''}>
@@ -31,25 +40,29 @@ export default function UserCardCard({role, ...props}: UserCardCardProps): JSX.E
           <h2 className={`user-card${tail}__title`}>{props.name}</h2>
         </div>
         <div className={`user-card${tail}__label`}>
-          <a href="popup-user-map.html">
+          <a href="#" onClick={placeClickHandle}>
             <svg className={`user-card${tail}__icon-location`} width="12" height="14" aria-hidden="true">
               <use xlinkHref="#icon-location"/>
             </svg>
             <span>{props.location}</span>
           </a>
         </div>
-        <div className={`user-card${tail}__status-container`}>
-          <div className={`user-card${tail}__status user-card-coach__status--tag`}>
-            <svg className={`user-card${tail}__icon-cup`} width="12" height="13" aria-hidden="true">
-              <use xlinkHref="#icon-cup"/>
-            </svg>
-            <span>Тренер</span>
-          </div>
-          <div className={`user-card${tail}__status user-card-coach__status--check`}>
-            {role === Role.coach && <span>{props.isReady ? 'Готов тренировать' : 'Не готов тренировать'}</span>}
-            {role === Role.sportsman && <span>{props.isReady ? 'Готов к тренировке' : 'Не готов к тренировке'}</span>}
-          </div>
-        </div>
+        {role === Role.coach &&
+          <div className={`user-card${tail}__status-container`}>
+            <div className={`user-card${tail}__status user-card-coach__status--tag`}>
+              <svg className={`user-card${tail}__icon-cup`} width="12" height="13" aria-hidden="true">
+                <use xlinkHref="#icon-cup"/>
+              </svg>
+              <span>Тренер</span>
+            </div>
+            <div className={`user-card${tail}__status user-card-coach__status--check`}>
+              <span>{props.isReady ? 'Готов тренировать' : 'Не готов тренировать'}</span>
+            </div>
+          </div>}
+        {role === Role.sportsman &&
+          <div className="user-card__status">
+            <span>{props.isReady ? 'Готов к тренировке' : 'Не готов к тренировке'}</span>
+          </div>}
         <div className={`user-card${tail}__text`}>
           <p>{props.description}</p>
         </div>
@@ -69,7 +82,7 @@ export default function UserCardCard({role, ...props}: UserCardCardProps): JSX.E
             </li>
           ))}
         </ul>
-        <button className={`btn user-card${tail}__btn`} type="button">Добавить в друзья</button>
+        <FriendButton tail={tail} id={props.id}/>
       </div>
       <div className={`user-card${tail}__gallary`}>
         <ul className={`user-card${tail}__gallary-list`}>

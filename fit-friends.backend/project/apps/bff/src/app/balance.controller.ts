@@ -40,7 +40,6 @@ export class BalanceController {
 
   @Get('/:id')
   public async count(@Param('id') id: string, @Token() token: string){
-    console.log(id);
     const {data} = await this.httpService.axiosRef.get(`${this.url}/${id}`, getAuthHeader(token));
     return data;
   }

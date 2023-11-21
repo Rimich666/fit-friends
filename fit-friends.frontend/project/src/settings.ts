@@ -27,7 +27,8 @@ export enum NameSpace {
   Map = 'MAP',
   Reviews = 'REVIEWS',
   Balance = 'BALANCE',
-  Popup = 'POPUP'
+  Popup = 'POPUP',
+  Back = 'BACK'
 }
 
 export const SPECIALIZATION_LIMIT = 3;

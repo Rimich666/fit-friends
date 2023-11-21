@@ -14,9 +14,9 @@ import {UpdateUserErrorsInterface} from '../../../types/update-user-errors.inter
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {updateUserValidators, validate} from '../../../utils/validate';
 import {makeUpdateUserPayload} from '../../../helpers/make-update-user-payload';
-import {updateUserAction} from '../../../store/api-actions/api-actions';
 import {selectCurrentUser} from '../../../store/register-process/register-selectors';
 import {UserInterface} from '../../../types/user.interface';
+import {updateUserAction} from "../../../store/api-actions/users-actions";
 
 type UserInfoSectionProps = {
   user: UserInterface;

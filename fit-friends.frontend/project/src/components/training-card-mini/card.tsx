@@ -17,7 +17,7 @@ export type CardProps = {
 }
 export default function Card(props: CardProps): JSX.Element {
   return (
-    <li className={`${TrainingCardClass[props.variant as keyof typeof TrainingCardClass]}__item`}>
+    <li className={`${TrainingCardClass[props.variant as keyof typeof TrainingCardClass]}`}>
       <div className="thumbnail-training">
         <div className="thumbnail-training__inner">
           <div className="thumbnail-training__image">

@@ -5,6 +5,7 @@ import {UpdateUserDto} from '@project/shared-dto';
 import {getAuthHeader} from '@project/util-core';
 import { Response as Res } from 'express';
 import {UserFilesType} from '@project/shared-types';
+import {ControllerPrefix} from "@project/shared-constants";
 
 @Injectable()
 export class FitUsersService {
@@ -21,9 +22,12 @@ export class FitUsersService {
     return response.set({ 'List-Size': headers['list-size']}).json(users);
   }
 
-  public async getUser(token: string, url: string) {
-    const {data} = await this.httpService.axiosRef.get(`${url}`, getAuthHeader(token));
-    return this.bffService.getUsersPaths(data);
+
+  public async getUser(token: string, url: string, userId: string) {
+    const {data} = await this.httpService.axiosRef.get(`${url}/${userId}`, getAuthHeader(token));
+    const isFriend = await this.bffService.isFriend(userId, token);
+
+    return {...(await this.bffService.getUsersPaths(data)), isFriend};
   }
 
   public async getSelf(token: string, url: string) {

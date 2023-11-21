@@ -52,9 +52,11 @@ export default function CatalogMain({variant}: CatalogTrainingsMainProps): JSX.E
                 <ButtonBlock/>
               </div>}
             {variant === ComponentVariant.userCatalog &&
-              <div className="users-catalog">
-                <CardList variant={variant}/>
-                <ButtonBlock/>
+              <div className="inner-page__content">
+                <div className="users-catalog">
+                  <CardList variant={variant}/>
+                  <ButtonBlock/>
+                </div>
               </div>}
           </div>
         </div>

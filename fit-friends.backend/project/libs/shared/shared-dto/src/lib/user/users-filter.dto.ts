@@ -6,6 +6,7 @@ import {
   UserLocation, UsersSortFieldsEnum,
 } from '@project/shared-types';
 import {FilterDto} from '../filter.dto';
+import {Transform} from 'class-transformer';
 
 export class UsersFilterDto extends FilterDto {
   @IsOptional()
@@ -17,10 +18,12 @@ export class UsersFilterDto extends FilterDto {
   public level: Level;
 
   @IsOptional()
-  @IsEnum(TrainingType)
-  public trainingType: TrainingType;
+  @IsEnum(TrainingType, {each: true})
+  @Transform((params) => params.value.split(','))
+  public trainingType: TrainingType[];
 
   @IsOptional()
-  @IsEnum(UserLocation)
-  public location: UserLocation;
+  @IsEnum(UserLocation, {each: true})
+  @Transform((params) => params.value.split(','))
+  public location: UserLocation[];
 }

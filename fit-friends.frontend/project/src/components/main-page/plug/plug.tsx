@@ -3,7 +3,7 @@ type PluProps = {
 }
 
 export default function Plug(props: PluProps): JSX.Element {
-  const text = props.text || 'Скоро здесь появится что - то полезное'
+  const text = props.text || 'Скоро здесь появится что - то полезное';
   return (
     <div className="thumbnail-spec-gym">
       <div className="thumbnail-spec-gym__image">

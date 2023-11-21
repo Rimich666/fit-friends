@@ -5,7 +5,7 @@ export function corsMiddleware(req: Request, res: Response, next: NextFunction) 
   if (req.headers.origin) {
     res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
   }
-  res.setHeader('Access-Control-Expose-Headers', 'List-Size, Max-Price');
+  res.setHeader('Access-Control-Expose-Headers', 'List-Size, Max-Price, Rating');
   if (req.method === RequestMethod[RequestMethod.OPTIONS]) {
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Origin');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');

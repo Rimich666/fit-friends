@@ -31,7 +31,6 @@ export class BalanceController {
 
   @Get('/:id')
   public async count(@Param('id', ParseIntPipe) id: number, @User() {userId}){
-    console.log(id);
-    return this.balanceService.getTrainingBalance(userId, id);
+     return this.balanceService.getTrainingBalance(userId, id);
   }
 }

@@ -5,6 +5,11 @@ export type BuyProps = {
   trainingId: number;
 }
 
+export type FeedbackProps = {
+  trainingId: number,
+}
+
 export type PopupState = {
   buy: BuyProps;
+  feedback: FeedbackProps
 };

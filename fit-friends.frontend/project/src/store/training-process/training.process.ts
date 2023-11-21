@@ -3,7 +3,7 @@ import {NameSpace} from '../../settings';
 import {
   fetchCatalogTrainings,
   fetchCoachTrainings,
-  fetchTrainingCard,
+  fetchTrainingCard, fetchTrainingsCoachCard,
   fetchTrainingsForYou,
   fetchTrainingsPopular, updateTrainingCard
 } from '../api-actions/api-actions';
@@ -11,6 +11,8 @@ import {RangeConstraint, TrainingState} from '../../types/training-state';
 import {validationConstraints} from '../../validation-constraints';
 import {TrainingCardInterface} from '../../types/training-card.interface';
 import {fillTrainingCard, fillUpdateTrainingCard, getEmptyTrainingCard} from '../../helpers/fill-training-card';
+import {createFeedback} from '../api-actions/feedback-actions';
+import {fillCoachCardTraining} from "../../helpers/fill-coach-card-training";
 
 const initialState: TrainingState = {
   forYouTrainings: [],
@@ -35,6 +37,10 @@ const initialState: TrainingState = {
   trainingCard: getEmptyTrainingCard(),
   isTrainingCardLoading: false,
   isTrainingCardLoaded: false,
+
+  isCoachCardLoaded: false,
+  isCoachCardLoading: false,
+  coachCardTrainings: [],
 };
 
 export const trainingProcess = createSlice({
@@ -115,6 +121,21 @@ export const trainingProcess = createSlice({
 
       .addCase(updateTrainingCard.fulfilled, (state, action) => {
         state.trainingCard = fillUpdateTrainingCard(action.payload, state.trainingCard);
+      })
+      .addCase(createFeedback.fulfilled, (state, action) => {
+        state.trainingCard = {...state.trainingCard, rating: action.payload.rating};
+      })
+      .addCase(fetchTrainingsCoachCard.pending, (state) => {
+        state.isCoachCardLoading = true;
+        state.isCoachCardLoaded = false;
+      })
+      .addCase(fetchTrainingsCoachCard.fulfilled, (state, action) => {
+        state.isCoachCardLoading = false;
+        state.isCoachCardLoaded = true;
+        state.coachCardTrainings = action.payload.map((training) => fillCoachCardTraining(training));
+      })
+      .addCase(fetchTrainingsCoachCard.rejected, (state, action) => {
+        state.isCoachCardLoading = false;
       })
     ;
   }

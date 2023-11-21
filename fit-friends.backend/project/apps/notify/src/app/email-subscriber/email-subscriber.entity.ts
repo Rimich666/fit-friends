@@ -2,7 +2,7 @@ import { SubscriberInterface } from '@project/shared-types';
 
 export class EmailSubscriberEntity implements SubscriberInterface {
   public id?: string;
-  public email: string;
+  public email?: string;
   public name?: string;
   public coachId: string;
 

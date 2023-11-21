@@ -1,7 +1,7 @@
 import {PersonalAccountLinkInterFace} from './personal-account-link.interface';
 
 
-import {AppRoute} from "../../../app-route";
+import {AppRoute} from '../../../app-route';
 
 export const link: {[k: string]: PersonalAccountLinkInterFace} = {
   friends: {

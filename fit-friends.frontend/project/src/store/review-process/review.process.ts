@@ -2,8 +2,8 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {ReviewState} from '../../types/review-state';
 import {ReviewInterface} from '../../types/review.interface';
-import {fetchFeedbacks} from '../api-actions/api-actions';
 import {fillReview} from '../../helpers/fill-review';
+import {createFeedback, fetchFeedbacks} from "../api-actions/feedback-actions";
 
 const initialState: ReviewState = {
   reviews: [],
@@ -21,6 +21,9 @@ export const reviewsProcess = createSlice({
     builder
       .addCase(fetchFeedbacks.fulfilled, (state, action) => {
         state.reviews = action.payload.map((feedback) => fillReview(feedback));
+      })
+      .addCase(createFeedback.fulfilled, (state, action) => {
+        state.reviews = action.payload.feedbacks.map((feedback) => fillReview(feedback));
       });
   }
 });

@@ -60,8 +60,8 @@ export enum LiClass {
 }
 
 export enum BtnClass {
-  lookForCompany = 'look-for-company__item',
-  userCatalog = 'btn--outlined'
+  lookForCompany = 'btn--outlined look-for-company__item',
+  userCatalog = ''
 }
 
 export enum CheckName {

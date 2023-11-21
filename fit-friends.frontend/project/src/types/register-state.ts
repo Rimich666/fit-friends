@@ -14,6 +14,6 @@ export type RegisterState = {
   isAnotherError: boolean;
   loginConflict: boolean;
   currentUser: UserInterface;
-  isUserLoaded: boolean;
-  isUserLoading: boolean;
+  isCurrentUserLoaded: boolean;
+  isCurrentUserLoading: boolean;
 };

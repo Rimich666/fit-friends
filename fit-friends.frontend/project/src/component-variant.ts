@@ -15,15 +15,26 @@ export enum ComponentVariant {
 }
 
 export enum TrainingCardClass {
-  trainingCatalog = 'training-catalog',
-  myTraining = 'my-trainings',
-  myOrders = 'my-orders',
-  userCatalog = 'user-catalog',
-  popularTraining = 'popular-trainings',
+  trainingCatalog = 'training-catalog__item',
+  myTraining = 'my-trainings__item',
+  myOrders = 'my-orders__item',
+  userCatalog = 'users-catalog__item',
+  popularTraining = 'popular-trainings__item',
+  userCard = 'user-card-coach__training-item'
 }
+
+export enum CatalogListClass {
+  trainingCatalog = 'training-catalog__list',
+  myTraining = 'my-trainings__list',
+  myOrders = 'my-orders__list',
+  userCatalog = 'users-catalog__list',
+  popularTraining = 'popular-trainings__list',
+}
+
 
 export const miniCardLink = {
   trainingCatalog: AppRoute.SportsmanTraining,
   myTraining: AppRoute.CoachTrainings,
   popularTraining: AppRoute.SportsmanTraining,
+  userCard: AppRoute.SportsmanTraining
 };

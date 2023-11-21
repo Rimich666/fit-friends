@@ -7,6 +7,7 @@ import {ordersProcess} from './orders-process/order.process';
 import {reviewsProcess} from './review-process/review.process';
 import {balanceProcess} from './balance-process/balance.process';
 import {popupProcess} from './popup-process/popup.process';
+import {backProcess} from './back-process/back.process';
 
 export const RootReducer = combineReducers({
   [NameSpace.Register]: registerProcess.reducer,
@@ -15,7 +16,8 @@ export const RootReducer = combineReducers({
   [NameSpace.Orders]: ordersProcess.reducer,
   [NameSpace.Reviews]: reviewsProcess.reducer,
   [NameSpace.Balance]: balanceProcess.reducer,
-  [NameSpace.Popup]: popupProcess.reducer
+  [NameSpace.Popup]: popupProcess.reducer,
+  [NameSpace.Back]: backProcess.reducer
 });
 
 export type Reducer = ReturnType<typeof RootReducer>;

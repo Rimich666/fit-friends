@@ -2,9 +2,12 @@ import {UserState} from '../../types/user-state';
 import {UserInterface} from '../../types/user.interface';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
-import {fetchCompany, fetchUser} from '../api-actions/api-actions';
 import {fillUser} from '../../helpers/fill-user';
 import {FriendInterface} from '../../types/friend.interface';
+import {fetchCompany, fetchUser, fetchUsers} from '../api-actions/users-actions';
+import {fillUserCard} from '../../helpers/fill-user-card';
+import {createFriend, deleteFriend} from '../api-actions/friends-actions';
+import {createSubscribe, deleteSubscribe} from "../api-actions/subscribe-actions";
 
 const initialState: UserState = {
   company: [],
@@ -12,8 +15,13 @@ const initialState: UserState = {
   isCompanyLoading: false,
   isUserLoaded: false,
   user: undefined as unknown as UserInterface,
+  isFriend: false,
+  isSubscribe: false,
   isUserLoading: false,
   friends: [],
+  catalog: [],
+  isCatalogLoaded: false,
+  isCatalogLoading: false,
 };
 
 export const userProcess = createSlice({
@@ -37,6 +45,7 @@ export const userProcess = createSlice({
         state.isUserLoading = false;
         state.isUserLoaded = true;
         state.user = fillUser(action.payload);
+        state.isFriend = action.payload.isFriend as boolean;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.isUserLoading = false;
@@ -52,8 +61,33 @@ export const userProcess = createSlice({
       })
       .addCase(fetchCompany.rejected, (state, action) => {
         state.isCompanyLoading = false;
-      });
-}
+      })
+      .addCase(fetchUsers.pending, (state) => {
+        state.isCatalogLoading = true;
+        state.isCatalogLoaded = false;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
+        state.isCatalogLoading = false;
+        state.isCatalogLoaded = true;
+        state.catalog = action.payload.map((item) => fillUserCard(item));
+      })
+      .addCase(fetchUsers.rejected, (state, action) => {
+        state.isCompanyLoading = false;
+      })
+      .addCase(createFriend.fulfilled, (state, action) => {
+        state.isFriend = action.payload;
+      })
+      .addCase(deleteFriend.fulfilled, (state, action) => {
+        state.isFriend = action.payload;
+      })
+      .addCase(createSubscribe.fulfilled, (state, action) => {
+        state.isSubscribe = true;
+      })
+      .addCase(deleteSubscribe.fulfilled, (state, action) => {
+        state.isSubscribe = false;
+      })
+    ;
+  }
 });
 
 export const {setIsUserLoading, loadFriends} = userProcess.actions;
