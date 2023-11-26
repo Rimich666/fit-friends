@@ -33,3 +33,5 @@ export * from './lib/order/order.rdo';
 export * from './lib/subscriber.rdo';
 export * from './lib/join-training.rdo';
 export * from './lib/notification.rdo';
+export * from './lib/training/for-you-filter.dto';
+export * from './lib/training/training-sql.rdo';

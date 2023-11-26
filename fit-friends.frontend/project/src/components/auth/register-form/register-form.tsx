@@ -6,7 +6,7 @@ import {Gender, Role, UserLocation} from '../../../enums';
 import CustomSelect from '../../custom-select/custom-select';
 import Avatar from '../avatar/avatar';
 import SelectRoleGroup from '../select-role-group/select-role-group';
-import {fillRegisterErrors, getEmptyRegisterErrors, getNewRegisterUser} from '../../../utils/get-new-register-user';
+import {fillRegisterErrors, getEmptyRegisterErrors, getNewRegisterUser} from '../../../helpers/get-new-register-user';
 import {registerValidators, validate} from '../../../utils/validate';
 import Questionnaire from '../../questionnaire/questionnaire';
 import {useAppDispatch, useAppSelector} from '../../../hooks';

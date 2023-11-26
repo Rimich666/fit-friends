@@ -13,7 +13,6 @@ export default function LookForCompanySection(): JSX.Element {
     return (<SpinnerCircular/>);
   }
   const companyProps = getCompanyProps(users);
-
   return (
     <section className="look-for-company">
       <div className="container">

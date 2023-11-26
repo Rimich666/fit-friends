@@ -23,6 +23,7 @@ export const fillUser = (rdo: UserRdo): UserInterface => {
     trainingTime: (rdo.addition as SportsmanRdo).trainingTime as TrainingTime,
     trainingCalories: (rdo.addition as SportsmanRdo).trainingCalories,
     daysCalories: (rdo.addition as SportsmanRdo).daysCalories,
+    certificate: [],
   }) : Object.assign(user, {
     certificate: [...(rdo.addition as CoachRdo).certificatePath],
     merits: (rdo.addition as CoachRdo).merits,

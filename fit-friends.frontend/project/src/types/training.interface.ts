@@ -22,5 +22,6 @@ export interface TrainingInterface {
 
 export interface GetTrainingsInterface {
   data: TrainingInterface[];
-  maxPrice: number;
+  maxPrice?: number;
+  pages: number;
 }

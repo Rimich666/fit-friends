@@ -3,5 +3,17 @@ export enum EndPoints {
   login = 'login',
   refresh = 'refresh',
   coach = 'coach',
-  rating = 'rating'
+  rating = 'rating',
+  forYou = 'forYou',
+  popular = 'popular',
+  special = 'special',
+  self = 'self',
+  company = 'company',
+  purchases = 'purchases',
+  certificates = 'certificates'
+}
+
+export enum PurchasesVariant {
+  active = 'active',
+  noActive = 'noActive'
 }

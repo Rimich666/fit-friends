@@ -10,6 +10,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.aerobics],
     isReady: true,
     isRequest: true,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5901',
@@ -19,6 +20,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.box],
     isReady: true,
     isRequest: true,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5902',
@@ -28,6 +30,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.crossfit],
     isReady: true,
     isRequest: true,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5903',
@@ -37,6 +40,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.aerobics],
     isReady: false,
     isRequest: false,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5904',
@@ -46,6 +50,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.aerobics, TrainingType.box],
     isReady: true,
     isRequest: false,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5905',
@@ -55,6 +60,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.aerobics, TrainingType.box, TrainingType.stretching],
     isReady: false,
     isRequest: false,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5906',
@@ -64,6 +70,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.crossfit, TrainingType.stretching],
     isReady: true,
     isRequest: false,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5907',
@@ -73,6 +80,7 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.crossfit, TrainingType.box],
     isReady: false,
     isRequest: false,
+    idRequest: ''
   },
   {
     id: '65329a910b645fb5e70f5908',
@@ -82,5 +90,6 @@ export const coachFriends: FriendInterface[] = [
     trainingTypes: [TrainingType.stretching, TrainingType.box],
     isReady: true,
     isRequest: false,
+    idRequest: ''
   },
 ];

@@ -10,16 +10,16 @@ import {
   getEmptyQuestionnaireErrors,
   getNewQuestionnaire,
   getQuestionnaire
-} from '../../utils/get-new-questionnaire';
+} from '../../helpers/get-new-questionnaire';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {selectQuestion, selectRegisterUserRole,} from '../../store/register-process/register-selectors';
 import Certificate from './certificate';
 import Merits from './merits';
-import {QuestionnaireInterface} from '../../types/questionnaire.interface';
+import {QuestionnaireInterface} from '../../types/auth/questionnaire.interface';
 import {questionnaireValidators, validate} from '../../utils/validate';
 import {setQuestionnaire} from '../../store/register-process/register-process';
 import {registerAction} from '../../store/api-actions/api-actions';
-import {QuestionnaireErrorsInterface} from '../../types/questionnaire-errors.interface';
+import {QuestionnaireErrorsInterface} from '../../types/auth/questionnaire-errors.interface';
 import {SpinnerCircular} from 'spinners-react';
 import ReadyCheck from '../ready-check/ready.check';
 

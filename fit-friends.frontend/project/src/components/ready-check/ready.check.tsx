@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {divClass, svgClass, text, name} from './options';
-import {ComponentVariant} from "../../component-variant";
+import {ComponentVariant} from '../../component-variant';
 
 type RedyCheckProps = {
   callback: (checked: boolean) => void;

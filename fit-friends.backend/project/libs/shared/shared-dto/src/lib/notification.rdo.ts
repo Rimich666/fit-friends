@@ -5,7 +5,10 @@ export class NotificationRdo {
   id: string;
 
   @Expose()
-  createDate: string;
+  createDate: Date;
+
+  @Expose()
+  createdAt: Date;
 
   @Expose()
   userId: string;

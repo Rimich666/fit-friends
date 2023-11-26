@@ -11,7 +11,6 @@ export class FileTypeValidator extends FileValidator {
   }
 
   isValid(file: Express.Multer.File | IFile): boolean | Promise<boolean> {
-    console.log(this.validationOptions['types']);
     return this.validationOptions['types'].map((type: string) =>
       validators[type](file)).reduce((acc: boolean, res: boolean) => acc || res, false);
   }

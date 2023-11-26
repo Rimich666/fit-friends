@@ -19,6 +19,8 @@ import { Static } from '@project/shared-constants';
 import { AuthenticationService } from './authentication/authentication.service';
 import { FitUsersService } from './fit-users/fit-users.service';
 import { TrainingService } from './training/training.service';
+import { PurchasesController } from './purchases.controller';
+import { CertificatesController } from './certificates.controller';
 
 @Module({
   imports: [
@@ -53,6 +55,8 @@ import { TrainingService } from './training/training.service';
     TrainingController,
     EmailSubscriberController,
     FeedbackController,
+    PurchasesController,
+    CertificatesController,
   ],
   providers: [
     BffService,

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
-import {ReviewState} from '../../types/review-state';
+import {ReviewState} from '../../types/states/review-state';
 import {ReviewInterface} from '../../types/review.interface';
 import {fillReview} from '../../helpers/fill-review';
 import {createFeedback, fetchFeedbacks} from "../api-actions/feedback-actions";

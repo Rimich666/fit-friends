@@ -34,8 +34,8 @@ export default function OfficeMain({role}: OfficeMainProps): JSX.Element {
             <h1 className="visually-hidden">Личный кабинет</h1>
             <UserInfoSection user={user}/>
             <div className="inner-page__content">
-              {role === Role.sportsman && <PersonalAccountUser/>}
-              {role === Role.coach && <PersonalAccountCoach certificates={user.certificate as string[]}/>}
+              {role === Role.sportsman && <PersonalAccountUser caloriesCount={user.daysCalories as number}/>}
+              {role === Role.coach && <PersonalAccountCoach/>}
             </div>
           </div>
         </div>

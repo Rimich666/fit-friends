@@ -11,7 +11,7 @@ export type SportsmanAddition = {
   daysCalories?: number;
 }
 
-export type Addition = CoachAddition | SportsmanAddition | Map<string, string | number>;
+export type Addition = CoachAddition | SportsmanAddition | Map<string, string | number | string[]>;
 
 export interface UserInterface {
   id?: string;

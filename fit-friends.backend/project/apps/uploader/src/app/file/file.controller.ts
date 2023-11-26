@@ -1,8 +1,8 @@
-import {Controller, Get, Inject, Param, Post, UploadedFile, UseInterceptors} from '@nestjs/common';
+import {Controller, Get, Inject, Param, Post, UploadedFile, UploadedFiles, UseInterceptors} from '@nestjs/common';
 import {FileService} from './file.service';
 import {appConfig, uploaderConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
-import {FileInterceptor} from '@nestjs/platform-express';
+import {FileInterceptor, FilesInterceptor} from '@nestjs/platform-express';
 import {fillObject} from '@project/util-core';
 import {UploadedFileRdo} from '@project/shared-dto';
 import {ControllerPrefix} from '@project/shared-constants';
@@ -27,6 +27,15 @@ export class FileController {
     const newFile = await this.fileService.saveFile(file);
     const path = `${this.path(newFile.path)}`;
     return fillObject(UploadedFileRdo, Object.assign(newFile, { path }));
+  }
+
+  @Post('/uploads')
+  @UseInterceptors(FilesInterceptor('file'))
+  public async uploadFiles(@UploadedFiles() files: Express.Multer.File[]) {
+    const newFiles = await Promise.all(files.map((file) => this.fileService.saveFile(file)));
+    console.log(newFiles);
+    return fillObject(UploadedFileRdo, newFiles.map((file) =>
+      Object.assign(file, { path: `${this.path(file.path)}` })));
   }
 
   @Get('/:fileId')

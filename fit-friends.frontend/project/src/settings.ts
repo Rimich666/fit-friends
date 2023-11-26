@@ -2,6 +2,7 @@
 
 export enum Accept {
   avatar = '[.png", ".jpg", ".jpeg"]',
+  certificate = '[.png", ".jpg", ".jpeg", ".pdf"]',
 }
 
 export enum LoginMode {
@@ -28,17 +29,22 @@ export enum NameSpace {
   Reviews = 'REVIEWS',
   Balance = 'BALANCE',
   Popup = 'POPUP',
-  Back = 'BACK'
+  Back = 'BACK',
+  Friend = 'FRIEND',
+  Notification = 'NOTIFICATION'
 }
 
 export const SPECIALIZATION_LIMIT = 3;
 
-enum Themes {
+export enum Themes {
   light = 'light',
   dark = 'dark'
 }
 
-export const THEME = Themes.light;
+export enum RoleTheme {
+  coach = Themes.dark,
+  sportsman = Themes.light
+}
 
 export const DISCOUNT = 10;
 

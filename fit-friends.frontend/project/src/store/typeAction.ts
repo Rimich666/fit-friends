@@ -1,3 +1,5 @@
+import {addCertificates} from "./api-actions/certificate.actions";
+
 export const TypeAction = {
   register: 'authentication/register',
   login: 'authentication/login',
@@ -5,6 +7,7 @@ export const TypeAction = {
   redirectToRoute: 'redirect/redirectToRoute',
   fetchTrainingsForYou: 'trainings/forYou',
   fetchTrainingsPopular: 'trainings/popular',
+  fetchSpecialOffers: 'trainings/special',
   fetchUser: 'user/user',
   fetchCompany: 'user/company',
   updateUser: 'user/update',
@@ -17,13 +20,21 @@ export const TypeAction = {
   fetchFeedbacks: 'feedback/feedbacks',
   createFeedbacks: 'feedback/create',
   fetchBalance: 'balance/balance',
-  createOrder: 'order/order',
+  createOrder: 'order/create',
+  fetchOrders: 'order/fetchOrders',
   addBalance: 'balance/add',
   subBalance: 'balance/sub',
   createFriend: 'friend/create',
   deleteFriend: 'friend/delete',
   createQuestion: 'joinTraining/create',
+  changeStateQuestion: 'joinTraining/changeState',
   createSubscribe: 'subscribe/create',
   deleteSubscribe: 'subscribe/delete',
-  checkSubscribe: 'subscribe/check'
+  checkSubscribe: 'subscribe/check',
+  fetchNotification: 'notification/notifications',
+  deleteNotification: 'notification/delete',
+  fetchPurchases: 'purchases/fetch',
+  addCertificates: 'certificates/add',
+  deleteCertificates: 'certificates/delete',
+  saveChangeCertificate: 'certificates/change',
 } as const;

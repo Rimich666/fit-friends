@@ -13,9 +13,9 @@ import UserGenderRadioGroup from '../../auth/user-gender-radio-group/user-gender
 import TextArea from '../../text-area/text-area';
 import FileLoad from '../../file-load/file-load';
 import {createTrainingValidators, validate} from '../../../utils/validate';
-import {selectUserId} from '../../../store/user-process/user.selectors';
 import {createTrainingAction} from '../../../store/api-actions/api-actions';
 import {ComponentVariant} from '../../../component-variant';
+import {selectCurrentUser} from '../../../store/register-process/register-selectors';
 
 export default function CreateTrainingForm(): JSX.Element {
   const [training] = useState(getNewCreateTraining());
@@ -23,7 +23,7 @@ export default function CreateTrainingForm(): JSX.Element {
   // const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useAppDispatch();
 
-  const userId = useAppSelector(selectUserId);
+  const userId = useAppSelector(selectCurrentUser).id;
 
   const onInputName = (text: string) => {
     training.name = text;

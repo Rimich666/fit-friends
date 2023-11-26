@@ -1,6 +1,6 @@
-import {Body, Controller, Get, Inject, Param, ParseIntPipe, Patch, Post, UseFilters} from '@nestjs/common';
+import {Body, Controller, Get, Inject, Param, Patch, Post, UseFilters} from '@nestjs/common';
 import {BalanceDto} from '@project/shared-dto';
-import {Token, User} from '@project/shared-enhancers';
+import {Token} from '@project/shared-enhancers';
 import {HttpService} from '@nestjs/axios';
 import {appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';

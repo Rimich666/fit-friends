@@ -1,5 +1,5 @@
-import {Level, TrainingTime, TrainingType} from '../enums';
-import {Field} from './field.interface';
+import {Level, TrainingTime, TrainingType} from '../../enums';
+import {Field} from '../field.interface';
 
 export interface QuestionnaireInterface extends Field {
   certificate: File[];

@@ -4,7 +4,7 @@ import {UpdateUserPayload} from '../../types/update-user.dto';
 import {AppDispatch, RootState} from '../index';
 import {AxiosInstance} from 'axios';
 import {TypeAction} from '../typeAction';
-import {ApiRoute} from '../../api-route';
+import {ApiRoute, EndPoints} from '../../api-route';
 
 export const fetchSelf = createAsyncThunk<UserRdo, void, {
   dispatch: AppDispatch;
@@ -49,15 +49,15 @@ export const updateUserAction = createAsyncThunk<UserRdo, UpdateUserPayload, {
   }
 );
 
-export const fetchCompany = createAsyncThunk<UserRdo[], string, {
+export const fetchCompany = createAsyncThunk<UserRdo[], number, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
 }>(
   TypeAction.fetchCompany,
-  async (options: string, {extra: axiosApi}) => {
+  async (limit: number, {extra: axiosApi}) => {
     const {data} = await axiosApi.get<UserRdo[]>(
-      `${ApiRoute.User}?${options}}`
+      `${ApiRoute.User}/${EndPoints.company}/${limit}`
     );
     return data;
   }
@@ -70,7 +70,6 @@ export const fetchUsers = createAsyncThunk<UserRdo[], string, {
 }>(
   TypeAction.fetchUsers,
   async (options: string, {extra: axiosApi}) => {
-    console.log(options);
     const {data} = await axiosApi.get<UserRdo[]>(
       `${ApiRoute.User}?${options}`
     );

@@ -1,5 +1,3 @@
-import {MapLocation} from "./types/map-location";
-
 export enum Gender {
   male = 'male',
   female = 'female',
@@ -105,7 +103,7 @@ export enum TrainingTypeText {
   box = 'Бокс',
   pilates = 'Пилатес',
   stretching = 'Стрейчинг',
-};
+}
 
 export enum TrainingTime {
   '10 - 30' = '10 - 30',
@@ -145,4 +143,9 @@ export enum Direction {
 export enum Order {
   asc = 'asc',
   desc = 'desc'
+}
+
+export enum PurchasesVariant {
+  active = 'active',
+  noActive = 'noActive'
 }

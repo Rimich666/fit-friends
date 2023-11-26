@@ -8,7 +8,7 @@ export interface SpecialOfferInterface {
   name: string;
   text: string;
   price: number;
-  oldPrice: number;
+  newPrice: number;
   sup: string;
 }
 
@@ -48,7 +48,7 @@ export default function SpecialOfferItem({id, ...props}: SpecialOfferItemProps):
             ))}
           </div>
           <div className="promo-slider__price-container">
-            <p className="promo-slider__price">{`${props.price} ₽`}</p>
+            <p className="promo-slider__price">{`${props.newPrice} ₽`}</p>
             <p className="promo-slider__sup">{props.sup}</p>
             <p className="promo-slider__old-price">{`${props.price} ₽`}</p>
           </div>

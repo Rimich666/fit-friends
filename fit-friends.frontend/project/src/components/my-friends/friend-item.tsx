@@ -1,5 +1,7 @@
-import {TrainingType, TrainingTypeText, UserLocation} from '../../enums';
-import {THEME} from '../../settings';
+import {RequestState, TrainingType, TrainingTypeText, UserLocation} from '../../enums';
+import {Themes} from '../../settings';
+import {useAppDispatch} from "../../hooks";
+import {changeStateQuestion} from "../../store/api-actions/join-actions";
 
 type FriendItemProps = {
   name: string;
@@ -8,13 +10,23 @@ type FriendItemProps = {
   trainingTypes: TrainingType[];
   isReady: boolean;
   isRequest: boolean;
+  idRequest: string;
 }
 
 export default function FriendItem(props: FriendItemProps): JSX.Element {
+  const dispatch = useAppDispatch();
+  const clickAcceptHandle = () => {
+    dispatch(changeStateQuestion({id: props.idRequest, state: RequestState.accepted}));
+  };
+
+  const clickRejectHandle = () => {
+    dispatch(changeStateQuestion({id: props.idRequest, state: RequestState.rejected}));
+  };
+
   return (
     <li className="friends-list__item">
       <div className="thumbnail-friend">
-        <div className={`thumbnail-friend__info thumbnail-friend__info--theme-${THEME}`}>
+        <div className={`thumbnail-friend__info thumbnail-friend__info--theme-${Themes.light}`}>
           <div className="thumbnail-friend__image-status">
             <div className="thumbnail-friend__image">
               <picture>
@@ -51,8 +63,14 @@ export default function FriendItem(props: FriendItemProps): JSX.Element {
           <div className="thumbnail-friend__request-status thumbnail-friend__request-status--role-user">
             <p className="thumbnail-friend__request-text">Запрос на&nbsp;персональную тренировку</p>
             <div className="thumbnail-friend__button-wrapper">
-              <button className="btn btn--medium btn--dark-bg thumbnail-friend__button" type="button">Принять</button>
-              <button className="btn btn--medium btn--outlined btn--dark-bg thumbnail-friend__button" type="button">Отклонить</button>
+              <button className="btn btn--medium btn--dark-bg thumbnail-friend__button" type="button"
+                onClick={clickAcceptHandle}
+              >Принять
+              </button>
+              <button className="btn btn--medium btn--outlined btn--dark-bg thumbnail-friend__button" type="button"
+                onClick={clickRejectHandle}
+              >Отклонить
+              </button>
             </div>
           </div>
         )}

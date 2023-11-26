@@ -58,7 +58,8 @@ export class UpdateUserDto {
 
   @IsBoolean()
   @IsOptional()
-  @Transform(params => params.value.toLowerCase() === 'true')
+  @Transform(params =>
+    typeof params.value === 'boolean' ? params.value : params.value.toLowerCase() === 'true')
   isReady?: boolean;
 
   @IsDefined()

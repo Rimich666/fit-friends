@@ -11,7 +11,8 @@ export enum ComponentVariant {
   popularTraining = 'popularTraining',
   userCatalog = 'userCatalog',
   lookForCompany = 'lookForCompany',
-  userCard = 'userCard'
+  userCard = 'userCard',
+  purchases = 'purchases'
 }
 
 export enum TrainingCardClass {
@@ -20,7 +21,8 @@ export enum TrainingCardClass {
   myOrders = 'my-orders__item',
   userCatalog = 'users-catalog__item',
   popularTraining = 'popular-trainings__item',
-  userCard = 'user-card-coach__training-item'
+  userCard = 'user-card-coach__training-item',
+  purchases = 'my-purchases__item'
 }
 
 export enum CatalogListClass {
@@ -29,6 +31,7 @@ export enum CatalogListClass {
   myOrders = 'my-orders__list',
   userCatalog = 'users-catalog__list',
   popularTraining = 'popular-trainings__list',
+  purchases = 'my-purchases__list'
 }
 
 

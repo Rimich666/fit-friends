@@ -3,6 +3,7 @@ import {JoinTrainingEntity} from './join-training.entity';
 import {InjectModel} from '@nestjs/mongoose';
 import {JoinTrainingModel} from '@project/fit-users.model';
 import {Model} from 'mongoose';
+import {RequestState} from "@project/shared-types";
 
 @Injectable()
 export class JoinTrainingRepository {
@@ -21,5 +22,9 @@ export class JoinTrainingRepository {
   public async update(entity: JoinTrainingEntity) {
     const updated = await this.joinTrainingModel.findByIdAndUpdate(entity.id, entity);
     return this.findById(updated.id);
+  }
+
+  public async getConsideration(id: string) {
+    return this.joinTrainingModel.find({id: id, state: RequestState.consideration});
   }
 }

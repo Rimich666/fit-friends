@@ -9,7 +9,7 @@ import PersonalAccount from '../../pages/personal-account';
 import {getSelfRole} from '../../servises/token';
 import MyTrainings from '../../pages/my-trainings';
 import CreateTraining from '../../pages/create-training';
-import CoachFriends from '../../pages/coach-friends';
+import Friends from '../../pages/friends';
 import MyOrders from '../../pages/my-orders';
 import {AppRoute, RouteParam} from '../../app-route';
 import TrainingCatalog from '../../pages/training-catalog';
@@ -19,6 +19,7 @@ import useFetchSelf from '../../hooks/use-fetch-self';
 import UserCatalog from '../../pages/user-catalog';
 import SportsmanCard from '../../pages/sportsman-card';
 import CoachCard from '../../pages/coach-card';
+import Purchases from '../../pages/purchases';
 
 function App(): JSX.Element {
   const role = getSelfRole();
@@ -29,10 +30,14 @@ function App(): JSX.Element {
         <Route index element={<Navigate to={AppRoute.Intro}/>}/>
         <Route path={AppRoute.Intro} element={<Intro />}/>
         <Route path={AppRoute.Main} element={role === Role.sportsman ? <Main/> : <Navigate to={AppRoute.Coach}/>}/>
+        <Route path={AppRoute.Office} element={role === Role.coach ? <Navigate to={AppRoute.Coach}/> :
+          <Navigate to={AppRoute.Sportsman}/>}
+        />
         <Route path={AppRoute.Coach} element={<PersonalAccount role={Role.coach}/>}/>
+        <Route path={AppRoute.Sportsman} element={<PersonalAccount role={Role.sportsman}/>}/>
         <Route path={AppRoute.CoachTrainings} element={<MyTrainings/>}/>
         <Route path={AppRoute.CreateTraining} element={<CreateTraining/>}/>
-        <Route path={AppRoute.CoachFriends} element={<CoachFriends/>}/>
+        <Route path={AppRoute.Friends} element={<Friends role={role as Role}/>}/>
         <Route path={AppRoute.CoachOrders} element={<MyOrders/>}/>
         <Route path={AppRoute.TrainingCatalog} element={<TrainingCatalog/>}/>
         <Route path={`${AppRoute.SportsmanTraining}/${RouteParam.Training}`}
@@ -45,7 +50,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.UserCatalog} element={<UserCatalog/>}/>
         <Route path={`${AppRoute.UserCard}/${RouteParam.UserId}`} element={<SportsmanCard/>}/>
         <Route path={`${AppRoute.CoachCard}/${RouteParam.UserId}`} element={<CoachCard/>}/>
-
+        <Route path={AppRoute.Purchases} element={<Purchases/>}/>
         {/*  <PrivateRoute>*/}
         {/*    <Product />*/}
         {/*  </PrivateRoute>*/}

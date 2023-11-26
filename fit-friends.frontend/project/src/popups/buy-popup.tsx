@@ -3,8 +3,8 @@ import {selectBuyProps} from '../store/popup-process/popup.selectors';
 import {useState} from 'react';
 import {PaymentOption, PurchaseType} from '../enums';
 import PaymentItem from './payment.item';
-import {createOrderAction} from '../store/api-actions/api-actions';
-import {addBalance} from "../store/api-actions/balance-actions";
+import {addBalance} from '../store/api-actions/balance-actions';
+import {createOrderAction} from '../store/api-actions/order.action';
 
 type BuyPopupProps = {
   onClose: () => void;
@@ -40,7 +40,7 @@ export default function BuyPopup({onClose}: BuyPopupProps): JSX.Element {
       total: sum,
       trainingId: trainingId
     }));
-    dispatch(addBalance({count, trainingId}));
+    // dispatch(addBalance({count, trainingId}));
     onClose();
   };
 

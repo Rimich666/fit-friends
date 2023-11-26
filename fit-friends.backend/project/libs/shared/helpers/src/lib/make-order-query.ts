@@ -27,3 +27,32 @@ export const makeOrderCountQueryFilters = (query: OrderFilterDto) => {
                   LEFT JOIN trainings ON orders."training_id" = trainings.id
            WHERE trainings.coach = '${query.coachId}')`;
 };
+
+export const makeQueryFilterOrders = (query: OrderFilterDto) => {
+  return `
+    SELECT * FROM(
+    SELECT trainings.*, totals.count, totals.total FROM trainings
+    RIGHT JOIN
+    (SELECT SUM("count") as count, SUM("total") as total, "coach" , "training_id"
+    FROM "orders" JOIN "trainings"
+        ON "trainings".id = "orders"."training_id"
+    GROUP BY "training_id", "coach") as totals
+    ON totals."training_id"=trainings.id) as group_totals
+    WHERE coach='${query.coachId}'
+    ORDER BY ${camelCaseToSnakeStyle(query.sort).toLowerCase()} ${query.order.toUpperCase()}
+    LIMIT ${query.limit}
+    OFFSET ${(query.page - 1) * query.limit};`;
+};
+
+export const makeQueryFilterOrdersCount = (query: OrderFilterDto) => {
+  return `
+    SELECT COUNT(*) FROM(
+    SELECT trainings.* FROM trainings
+    RIGHT JOIN
+    (SELECT "coach" , "training_id"
+    FROM "orders" JOIN "trainings"
+        ON "trainings".id = "orders"."training_id"
+    GROUP BY "training_id", "coach") as totals
+    ON totals."training_id"=trainings.id) as group_totals
+    WHERE coach='${query.coachId}';`;
+};

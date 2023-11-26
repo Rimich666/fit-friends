@@ -8,6 +8,8 @@ import {selectCurrentUser, selectIsUserLoaded, selectIsUserLoading} from '../sto
 import {SpinnerCircular} from 'spinners-react';
 import NotFoundMain from '../components/main-not-found/not-found.main';
 import useFetchSelf from '../hooks/use-fetch-self';
+import {setBackRoute} from '../utils/back-route';
+import {AppRoute} from '../app-route';
 
 type PersonalAccountProps = {
   role: Role;
@@ -15,6 +17,7 @@ type PersonalAccountProps = {
 
 export default function PersonalAccount({role}: PersonalAccountProps): JSX.Element {
   useFetchSelf();
+  setBackRoute(AppRoute.Office);
 
   const isLoading = useAppSelector(selectIsUserLoading);
   const isLoaded = useAppSelector(selectIsUserLoaded);
@@ -26,7 +29,6 @@ export default function PersonalAccount({role}: PersonalAccountProps): JSX.Eleme
   if (!isLoaded){
     return (<NotFoundMain/>);
   }
-  console.log(user.certificate);
   return (
     <>
       <Header/>
@@ -37,8 +39,8 @@ export default function PersonalAccount({role}: PersonalAccountProps): JSX.Eleme
               <h1 className="visually-hidden">Личный кабинет</h1>
               <UserInfoSection user={user}/>
               <div className="inner-page__content">
-                {role === Role.sportsman && <PersonalAccountUser/>}
-                {role === Role.coach && <PersonalAccountCoach certificates={user.certificate as string[]}/>}
+                {role === Role.sportsman && <PersonalAccountUser caloriesCount={user.daysCalories as number}/>}
+                {role === Role.coach && <PersonalAccountCoach/>}
               </div>
             </div>
           </div>

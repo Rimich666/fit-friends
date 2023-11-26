@@ -8,4 +8,5 @@ export interface FriendInterface {
   trainingTypes: TrainingType[];
   isReady: boolean;
   isRequest: boolean;
+  idRequest: string;
 }

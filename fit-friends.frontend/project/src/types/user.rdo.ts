@@ -1,3 +1,5 @@
+import {CertificateInterface} from "./certificate.interface";
+
 export interface SportsmanRdo {
   trainingTime: string;
   trainingCalories: number;
@@ -5,7 +7,7 @@ export interface SportsmanRdo {
 }
 
 export interface CoachRdo {
-  certificatePath: string[];
+  certificatePath: CertificateInterface[];
   merits: string;
 }
 
@@ -28,4 +30,6 @@ export interface UserRdo {
   avatarPath: string;
   addition: CoachRdo | SportsmanRdo;
   isFriend?: boolean;
+  isRequest?: boolean;
+  idRequest?: string;
 }

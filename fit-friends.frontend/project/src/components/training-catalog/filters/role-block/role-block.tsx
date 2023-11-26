@@ -1,4 +1,3 @@
-import SortButton from '../sort-block/sort-button';
 import RoleButton, {RoleSort} from './role.button';
 import {useState} from 'react';
 

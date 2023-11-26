@@ -9,5 +9,7 @@ export enum ControllerPrefix {
   balance = 'balance',
   friends = 'friends',
   order = 'order',
-  file = 'file'
+  file = 'file',
+  purchases = 'purchases',
+  certificates = 'certificates'
 }

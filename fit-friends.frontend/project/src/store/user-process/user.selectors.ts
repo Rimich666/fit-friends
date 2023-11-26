@@ -1,7 +1,6 @@
 import {RootState} from '../index';
 import {NameSpace} from '../../settings';
 import {UserInterface} from '../../types/user.interface';
-import {FriendInterface} from '../../types/friend.interface';
 import {UserCardInterface} from '../../types/user-card.interface';
 import {fillUserCardCard} from '../../helpers/fill-user-card';
 import {createSelector} from '@reduxjs/toolkit';
@@ -24,7 +23,7 @@ export const selectIsCompanyLoaded = (state: RootState): boolean => state[NameSp
 
 export const selectCompany = (state: RootState): UserInterface[] => state[NameSpace.User].company;
 
-export const selectFriends = (state: RootState): FriendInterface[] => state[NameSpace.User].friends;
+// export const selectFriends = (state: RootState): FriendInterface[] => state[NameSpace.User].friends;
 
 export const selectUserCatalog = (state: RootState): UserCardInterface[] => state[NameSpace.User].catalog;
 

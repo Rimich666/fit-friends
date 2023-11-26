@@ -17,7 +17,7 @@ type LookForCompanyListProps = {
 }
 
 export default function LookForCompanyList({propsLook}: LookForCompanyListProps): JSX.Element {
-  const helpers = sliderHelpers(getElement, getPlug, propsLook, SLIDER_VIEW_SIZE);
+  const helpers = sliderHelpers(getElement, getPlug, propsLook.length, SLIDER_VIEW_SIZE);
   const [slideNumber, setSlideNumber] = useState(helpers.initSliderNumber());
   const [indexes] = useState(new Array(SLIDER_VIEW_SIZE + 2).fill(0).map((_, index) =>
     helpers.initIndex(index, propsLook.length)));

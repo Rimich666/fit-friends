@@ -36,4 +36,9 @@ export class JoinTrainingService {
       id, state, changeDate: new Date()
     }));
   }
+
+  public async getConsideration(id: string) {
+    return (await this.joinTrainingRepository.getConsideration(id)).map((request) =>
+      ({requesterId: request.requesterId, id: request.id}));
+  }
 }

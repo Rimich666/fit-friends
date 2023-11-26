@@ -2,28 +2,32 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {
   fetchCatalogTrainings,
-  fetchCoachTrainings,
+  fetchCoachTrainings, fetchPurchases, fetchSpecialOffers,
   fetchTrainingCard, fetchTrainingsCoachCard,
   fetchTrainingsForYou,
   fetchTrainingsPopular, updateTrainingCard
 } from '../api-actions/api-actions';
-import {RangeConstraint, TrainingState} from '../../types/training-state';
+import {RangeConstraint, TrainingState} from '../../types/states/training-state';
 import {validationConstraints} from '../../validation-constraints';
 import {TrainingCardInterface} from '../../types/training-card.interface';
 import {fillTrainingCard, fillUpdateTrainingCard, getEmptyTrainingCard} from '../../helpers/fill-training-card';
 import {createFeedback} from '../api-actions/feedback-actions';
-import {fillCoachCardTraining} from "../../helpers/fill-coach-card-training";
+import {fillCoachCardTraining} from '../../helpers/fill-coach-card-training';
+import {fillSpecialOffers} from '../../helpers/fill-special-offers';
 
 const initialState: TrainingState = {
   forYouTrainings: [],
   isForYouLoaded: false,
   isForYouLoading: false,
+  specialOffers: [],
+  isSpecialOffersLoaded: false,
+  isSpecialOffersLoading: false,
   isPopularLoading: false,
   isPopularLoaded: false,
   popularTrainings: [],
   range : {
     calories: {...validationConstraints.training.caloriesCount as RangeConstraint},
-    price: {...validationConstraints.training.price as RangeConstraint, max: 3000},
+    price: {...validationConstraints.training.price as RangeConstraint, max: NaN},
     rating: {...validationConstraints.training.rating as RangeConstraint}
   },
   isCoachTrainingsLoaded: false,
@@ -41,6 +45,10 @@ const initialState: TrainingState = {
   isCoachCardLoaded: false,
   isCoachCardLoading: false,
   coachCardTrainings: [],
+
+  isPurchasesLoaded: false,
+  isPurchasesLoading: false,
+  purchases: [],
 };
 
 export const trainingProcess = createSlice({
@@ -56,6 +64,19 @@ export const trainingProcess = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchSpecialOffers.pending, (state) => {
+        state.isSpecialOffersLoading = true;
+        state.isSpecialOffersLoaded = false;
+      })
+      .addCase(fetchSpecialOffers.fulfilled, (state, action) => {
+        state.isSpecialOffersLoading = false;
+        state.isSpecialOffersLoaded = true;
+        state.specialOffers = action.payload.map((training, index) =>
+          ({...fillSpecialOffers(training), id: index}), );
+      })
+      .addCase(fetchSpecialOffers.rejected, (state, action) => {
+        state.isForYouLoading = false;
+      })
       .addCase(fetchTrainingsForYou.pending, (state) => {
         state.isForYouLoading = true;
         state.isForYouLoaded = false;
@@ -88,7 +109,7 @@ export const trainingProcess = createSlice({
         state.isCoachTrainingsLoading = false;
         state.isCoachTrainingsLoaded = true;
         state.coachTrainings = [...action.payload.data];
-        state.range.price.max = action.payload.maxPrice;
+        state.range.price.max = action.payload.maxPrice as number;
       })
       .addCase(fetchCoachTrainings.rejected, (state, action) => {
         state.isCoachTrainingsLoading = false;
@@ -101,7 +122,7 @@ export const trainingProcess = createSlice({
         state.isTrainingCardLoading = false;
         state.isCatalogTrainingsLoaded = true;
         state.catalogTrainings = [...action.payload.data];
-        state.range.price.max = action.payload.maxPrice;
+        state.range.price.max = action.payload.maxPrice as number;
       })
       .addCase(fetchCatalogTrainings.rejected, (state, action) => {
         state.isPopularLoading = false;
@@ -136,6 +157,18 @@ export const trainingProcess = createSlice({
       })
       .addCase(fetchTrainingsCoachCard.rejected, (state, action) => {
         state.isCoachCardLoading = false;
+      })
+      .addCase(fetchPurchases.pending, (state) => {
+        state.isPurchasesLoading = true;
+        state.isPurchasesLoaded = false;
+      })
+      .addCase(fetchPurchases.fulfilled, (state, action) => {
+        state.isPurchasesLoading = false;
+        state.isPurchasesLoaded = true;
+        state.purchases = [...action.payload.data];
+      })
+      .addCase(fetchPurchases.rejected, (state, action) => {
+        state.isPurchasesLoading = false;
       })
     ;
   }

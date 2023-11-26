@@ -1,5 +1,5 @@
-import {Gender, Role, UserLocation} from '../enums';
-import {Field} from './field.interface';
+import {Gender, Role, UserLocation} from '../../enums';
+import {Field} from '../field.interface';
 
 export interface RegisterUserInterface extends Field{
   password: string;

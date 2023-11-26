@@ -1,6 +1,6 @@
 import {Level, Role, TrainingTime} from '../enums';
-import {QuestionnaireInterface} from '../types/questionnaire.interface';
-import {QuestionnaireErrorsInterface} from '../types/questionnaire-errors.interface';
+import {QuestionnaireInterface} from '../types/auth/questionnaire.interface';
+import {QuestionnaireErrorsInterface} from '../types/auth/questionnaire-errors.interface';
 
 export const getNewQuestionnaire = (): QuestionnaireInterface => (
   {

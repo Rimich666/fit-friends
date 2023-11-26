@@ -1,6 +1,6 @@
-import {UserInterface} from './user.interface';
-import {FriendInterface} from './friend.interface';
-import {UserCardInterface} from './user-card.interface';
+import {UserInterface} from '../user.interface';
+import {FriendInterface} from '../friend.interface';
+import {UserCardInterface} from '../user-card.interface';
 
 export type UserState = {
   isUserLoaded: boolean;

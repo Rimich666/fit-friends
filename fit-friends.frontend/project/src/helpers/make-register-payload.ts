@@ -1,6 +1,6 @@
-import {RegisterUserInterface} from '../types/register-user.interface';
-import {QuestionnaireInterface} from '../types/questionnaire.interface';
-import {RegisterDto} from '../types/register.dto';
+import {RegisterUserInterface} from '../types/auth/register-user.interface';
+import {QuestionnaireInterface} from '../types/auth/questionnaire.interface';
+import {RegisterDto} from '../types/auth/register.dto';
 import {Role} from '../enums';
 
 export const makeRegisterPayload = (user: RegisterUserInterface, questionnaire: QuestionnaireInterface) => {

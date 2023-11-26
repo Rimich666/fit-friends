@@ -1,4 +1,5 @@
 import {Gender, Level, Role, TrainingTime, TrainingType, UserLocation} from '../enums';
+import {CertificateInterface} from "./certificate.interface";
 
 export interface UserInterface {
   id: string;
@@ -15,7 +16,7 @@ export interface UserInterface {
   level: Level;
   trainingType: TrainingType[];
   isReady: boolean;
-  certificate?: string[];
+  certificate?: CertificateInterface[];
   merits?: string;
   trainingTime?: TrainingTime;
   trainingCalories?: number;

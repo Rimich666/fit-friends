@@ -17,6 +17,8 @@ export class BffService {
   }
 
   private uploadUrl = `${this.config.files}/${ControllerPrefix.file}`;
+  private joinUrl = `${this.config.users}/${ControllerPrefix.joinTraining}`;
+  private balanceUrl = `${this.config.coaching}/${ControllerPrefix.balance}`;
 
   public async isCoach(id: string) {
     const url = `${this.config.users}/${ControllerPrefix.fitUsers}/${id}/isCoach`;
@@ -36,9 +38,26 @@ export class BffService {
     return image.data;
   }
 
+  public async uploads(files: Express.Multer.File[]): Promise<UploadedFileRdo[]> {
+    const form = new FormData();
+    files.forEach((file) =>
+    {form.append('file', new Blob([file.buffer]), file.originalname);});
+    const image = await this.httpService.axiosRef.post(
+      `${this.uploadUrl}/uploads`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+    return image.data;
+  }
+
   public async getPath(idFile: string) {
     const file = await this.httpService.axiosRef.get(`${this.uploadUrl}/${idFile}`);
     return file.data.path;
+  }
+
+  private async getCertificate(idFile: string) {
+    return {id: idFile, path: await this.getPath(idFile)};
   }
 
   public async getUser(id: string, token: string) {
@@ -55,7 +74,8 @@ export class BffService {
     if (data.addition['certificateId']) {
       const {certificateId, ...addition} = data.addition as CoachAddition;
       const certificates = Array.isArray(certificateId) ? certificateId : [certificateId];
-      const promises = certificates.map((certificate) => this.getPath(certificate));
+      const promises = certificates.map((certificate) =>
+        this.getCertificate(certificate));
       addition['certificatePath'] = await Promise.all(promises);
       user.addition = addition;
     }
@@ -71,6 +91,14 @@ export class BffService {
   public async getUsers(data: UserInterface[]) {
     const promises = data.map((item: UserInterface) => this.getUsersPaths(item));
     return Promise.all(promises);
+  }
+
+  public async getRequesters(users: UserInterface[], token: string) {
+    const {data} = await this.httpService.axiosRef.get(this.joinUrl, getAuthHeader(token));
+    return (await this.getUsers(users)).map((user) => {
+      const request = data.find((item: {requesterId: string, id: string}) => item.requesterId === user.id);
+      return {...user, isRequest: !!request, idRequest: request ? request.id : ''};
+    });
   }
 
   public async getTrainings(data: TrainingInterface[]) {
@@ -107,6 +135,11 @@ export class BffService {
   public async isFriend(userId: string, token: string) {
     const url = `${this.config.users}/${ControllerPrefix.friends}/${userId}`;
     const {data} = await this.httpService.axiosRef.get(url, getAuthHeader(token));
+    return data;
+  }
+
+  public async addBalance(trainingId: number, count: number, token: string) {
+    const {data} = await this.httpService.axiosRef.post(this.balanceUrl, {trainingId, count},getAuthHeader(token));
     return data;
   }
 }

@@ -4,7 +4,7 @@ import SpecialForYouItem, {SpecialForYouItemProps} from './special-for-you.item'
 import PlugYou from '../plug/plug-you';
 import {Direction} from '../../../enums';
 import {sliderHelpers} from '../../../helpers/slider.helpers';
-import {ComponentVariant} from "../../../component-variant";
+import {ComponentVariant} from '../../../component-variant';
 
 const SLIDER_VIEW_SIZE = 3;
 const MARGIN_RIGHT = 20;
@@ -15,7 +15,7 @@ type SpecialForYouListProps = {
 }
 
 export default function SpecialForYouList({specialProps}: SpecialForYouListProps): JSX.Element {
-  const helpers = sliderHelpers(getElement, getPlug, specialProps, SLIDER_VIEW_SIZE);
+  const helpers = sliderHelpers(getElement, getPlug, specialProps.length, SLIDER_VIEW_SIZE);
   const [slideNumber, setSlideNumber] = useState(helpers.initSliderNumber());
   const [indexes] = useState(new Array(SLIDER_VIEW_SIZE + 2).fill(0).map((_, index) =>
     helpers.initIndex(index, specialProps.length)));

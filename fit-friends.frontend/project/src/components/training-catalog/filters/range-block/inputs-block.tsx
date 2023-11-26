@@ -1,6 +1,6 @@
 import {RangeClass, RangeName} from '../../variances';
 import React, {useLayoutEffect, useState} from 'react';
-import {RangeConstraint} from '../../../../types/training-state';
+import {RangeConstraint} from '../../../../types/states/training-state';
 
 type InputsBlockProps = {
   type: string;

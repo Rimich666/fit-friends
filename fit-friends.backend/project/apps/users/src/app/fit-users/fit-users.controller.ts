@@ -9,15 +9,21 @@ import {
   UseInterceptors,
   UsePipes,
   Response,
-  ValidationPipe
+  ValidationPipe, ParseIntPipe, Post, Delete
 } from '@nestjs/common';
 import {UsersFilterDto} from '@project/shared-dto';
 import {FitUsersService} from './fit-users.service';
-import {JwtAuthGuard, SelfOnlyGuard, User, UserOnlyGuard, UserUpdateInterceptor} from '@project/shared-enhancers';
+import {
+  JwtAuthGuard,
+  SelfOnlyGuard,
+  User,
+  UserOnlyGuard,
+  UserUpdateInterceptor
+} from '@project/shared-enhancers';
 import {UpdateUserDto} from '@project/shared-dto';
-import {ControllerPrefix} from '@project/shared-constants';
+import {ControllerPrefix, EndPoints} from '@project/shared-constants';
 import { Response as Res } from 'express';
-import {TokenPayloadInterface, UserInterface} from '@project/shared-types';
+import {TokenPayloadInterface} from '@project/shared-types';
 
 @Controller(ControllerPrefix.fitUsers)
 export class FitUsersController {
@@ -58,5 +64,29 @@ export class FitUsersController {
   async isCoach(@Param('id') coachId: string)
   {
     return this.userService.isCoach(coachId);
+  }
+
+  @UseGuards(JwtAuthGuard, UserOnlyGuard)
+  @Get(`/${EndPoints.company}/:limit`)
+  async getCompany(@Param('limit', ParseIntPipe) limit: number) {
+    return this.userService.getCompany(limit);
+  }
+
+  @Post(`/${EndPoints.certificates}`)
+  @UseGuards(JwtAuthGuard)
+  async addCertificates(@Body() certificates: string[], @User() {userId}) {
+    return this.userService.addCertificates(userId, certificates);
+  }
+
+  @Delete(`/${EndPoints.certificates}/:id`)
+  @UseGuards(JwtAuthGuard)
+  async deleteCertificates(@Param('id') certificate: string, @User() {userId}) {
+    return this.userService.deleteCertificates(userId, certificate);
+  }
+
+  @Patch(`/${EndPoints.certificates}/:id`)
+  @UseGuards(JwtAuthGuard)
+  async changeCertificates(@Body() add: string[], @Param('id') del: string, @User() {userId}) {
+    return this.userService.changeCertificates(userId, add, del);
   }
 }

@@ -4,12 +4,16 @@ import {TrainingInterface} from '../../types/training.interface';
 import {createSelector} from '@reduxjs/toolkit';
 import {fillTrainingMiniCard} from '../../helpers/fill-training-card';
 import {ComponentVariant} from '../../component-variant';
-import {PopularTrainingItemProps} from "../../components/main-page/popular-training/popular-training.item";
-import {selectUserIsLoaded} from "../user-process/user.selectors";
+import {PopularTrainingItemProps} from '../../components/main-page/popular-training/popular-training.item';
+import {SpecialOfferInterface} from '../../components/main-page/special-offer/special-offer.item';
 
 export const selectIsForYouLoading = (state: RootState): boolean => state[NameSpace.Training].isForYouLoading;
 
 export const selectTrainingsForYou = (state: RootState): TrainingInterface[] => state[NameSpace.Training].forYouTrainings;
+
+export const selectIsSpecialOffersLoading = (state: RootState): boolean => state[NameSpace.Training].isSpecialOffersLoading;
+
+export const selectSpecialOffers = (state: RootState): SpecialOfferInterface[] => state[NameSpace.Training].specialOffers;
 
 export const selectIsPopularLoading = (state: RootState): boolean => state[NameSpace.Training].isPopularLoading;
 
@@ -32,10 +36,39 @@ export const selectCoachTrainings = (state: RootState) => state[NameSpace.Traini
 export const selectCatalogTrainings = (state: RootState) => state[NameSpace.Training].catalogTrainings
   .map((training) => fillTrainingMiniCard(training));
 
+export const selectIsCatalogLoading = (state: RootState) => state[NameSpace.Training].isCatalogTrainingsLoading;
+
+export const selectIsCoachTrainingLoading = (state: RootState) => state[NameSpace.Training].isCoachTrainingsLoading;
+
+export const selectIsPurchasesLoading = (state: RootState) => state[NameSpace.Training].isPurchasesLoading;
+
+export const selectPurchases = (state: RootState) => state[NameSpace.Training].purchases
+  .map((training) => fillTrainingMiniCard(training));
+
+export const makeSelectIsTrainingsLoading = createSelector(
+  [selectVariant, selectIsCatalogLoading, selectIsCoachTrainingLoading, selectIsPurchasesLoading],
+  (variant, catalog, trainings, purchases) => {
+    if (variant === ComponentVariant.trainingCatalog) {
+      return catalog;
+    }
+    if (variant === ComponentVariant.purchases) {
+      return purchases;
+    }
+    return trainings;
+  }
+);
+
 export const makeSelectTrainings = createSelector(
-  [selectVariant, selectCatalogTrainings, selectCoachTrainings],
-  (variant, catalog, trainings) =>
-    variant === ComponentVariant.trainingCatalog ? catalog : trainings
+  [selectVariant, selectCatalogTrainings, selectCoachTrainings, selectPurchases],
+  (variant, catalog, trainings, purchases) => {
+    if (variant === ComponentVariant.trainingCatalog) {
+      return catalog;
+    }
+    if (variant === ComponentVariant.purchases) {
+      return purchases;
+    }
+    return trainings;
+  }
 );
 
 export const selectIsTrainingCardLoading = (state: RootState): boolean => state[NameSpace.Training].isTrainingCardLoading;

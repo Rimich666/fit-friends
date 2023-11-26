@@ -1,22 +1,58 @@
 import {useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {makeSelectCertificate} from '../../../store/register-process/register-selectors';
+import {FileContent} from 'use-file-picker/types';
+import useAppFilePicker from '../../../hooks/use-app-file-picker';
+import {Accept} from '../../../settings';
+import {
+  dropIsEditCertificate,
+  setCertificate,
+  setIsEditCertificate
+} from '../../../store/register-process/register-process';
+import {saveChangeCertificate} from "../../../store/api-actions/certificate.actions";
 
 export type CertificateItemProps = {
-  src: string;
-  alt?: string;
   index: number;
-  deleteHandle: (index: number) => void;
-  changeHandle: (index: number) => void;
-  onSave: (index: number) => void;
+  deleteHandle: (id: string) => void;
 }
 
-export default function CertificateItem({src, ...props}: CertificateItemProps): JSX.Element {
-  const [isEdit, setIsEdit] = useState(false);
-  const alt = props.alt ? props.alt : '';
-  const isPdf = src.endsWith('.pdf');
+export default function CertificateItem(props: CertificateItemProps): JSX.Element {
+  const alt = '';
+  const certificate = useAppSelector((state) => makeSelectCertificate(state, props.index));
+  const dispatch = useAppDispatch();
+
+
+  const src = certificate.path;
+  const isPdf = certificate.ext === '.pdf' || certificate.ext === 'application/pdf';
+  const isEdit = certificate.isEdit;
+  const selectFilesHandle = (plainFile: File, file: FileContent<string>) => {
+    dispatch(setCertificate({
+      index: props.index,
+      path: URL.createObjectURL(plainFile),
+      ext: plainFile.type,
+      file: plainFile
+    }));
+  };
+  const openFilePicker = useAppFilePicker(selectFilesHandle, Accept.certificate);
+
+  const clickLoadHandle = () => {
+    openFilePicker();
+  };
 
   const saveHandle = () => {
-    props.onSave(props.index);
-    setIsEdit(false);
+    if (!certificate.file) {
+      dispatch(dropIsEditCertificate(props.index));
+      return;
+    }
+    dispatch(saveChangeCertificate(certificate));
+  };
+
+  const clickEditHandle = () => {
+    dispatch(setIsEditCertificate(props.index));
+  };
+
+  const deleteHandle = () => {
+    props.deleteHandle(certificate.id as string);
   };
 
   return (
@@ -30,7 +66,7 @@ export default function CertificateItem({src, ...props}: CertificateItemProps): 
         </div>
         <div className="certificate-card__buttons">
           <button className="btn-flat btn-flat--underlined certificate-card__button certificate-card__button--edit"
-            type="button" onClick={() => setIsEdit(true)}
+            type="button" onClick={clickEditHandle}
           >
             <svg width="12" height="12" aria-hidden="true">
               <use xlinkHref="#icon-edit"/>
@@ -47,14 +83,14 @@ export default function CertificateItem({src, ...props}: CertificateItemProps): 
           </button>
           <div className="certificate-card__controls">
             <button className="btn-icon certificate-card__control" type="button" aria-label="next"
-              onClick={() => {props.changeHandle(props.index);}}
+              onClick={clickLoadHandle}
             >
               <svg width="16" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-change"/>
               </svg>
             </button>
             <button className="btn-icon certificate-card__control" type="button" aria-label="next"
-              onClick={() => {props.deleteHandle(props.index);}}
+              onClick={deleteHandle}
             >
               <svg width="14" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-trash"/>

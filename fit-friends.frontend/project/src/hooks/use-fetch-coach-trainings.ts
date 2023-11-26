@@ -1,7 +1,7 @@
 import {useAppDispatch} from './index';
 import {useEffect, useState} from 'react';
 import {fetchCoachTrainings} from '../store/api-actions/api-actions';
-import {CoachTrainingsFilterInterface} from '../types/coach-trainings-filter.interface';
+import {CoachTrainingsFilterInterface} from '../types/filters/coach-trainings-filter.interface';
 import {makeCoachTrainingFilter} from '../helpers/make-coach-training-filter';
 
 export default function useFetchCoachTrainings(filter: CoachTrainingsFilterInterface) {

@@ -25,7 +25,7 @@ export default function CoachCardTrainings({isReady}: CoachCardProps): JSX.Eleme
     <div className="user-card-coach__training popular-trainings">
       <TrainingCardSlider trainingProps={trainings} variant={ComponentVariant.userCard}/>
       <form className="user-card-coach__training-form">
-        <WantTrainingButton/>
+        {isReady && <WantTrainingButton/>}
         <div className="user-card-coach__training-check">
           <div className="custom-toggle custom-toggle--checkbox">
             <label>

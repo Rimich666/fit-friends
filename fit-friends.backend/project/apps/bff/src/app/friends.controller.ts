@@ -38,6 +38,6 @@ export class FriendsController {
   @Get('/')
   async index(@Token() token: string) {
     const {data} = await this.httpService.axiosRef.get(`${this.url}`, getAuthHeader(token));
-    return this.bffService.getUsers(data);
+    return this.bffService.getRequesters(data, token);
   }
 }

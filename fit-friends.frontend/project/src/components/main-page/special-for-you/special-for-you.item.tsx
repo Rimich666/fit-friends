@@ -17,9 +17,12 @@ export default function SpecialForYouItem(props: SpecialForYouItemProps): JSX.El
           </picture>
         </div>
         <div className="thumbnail-preview__inner">
-          <h3 className="thumbnail-preview__title">{`${props.type} ${props.id}`}</h3>
+          <h3 className="thumbnail-preview__title">{`${props.type}`}</h3>
           <div className="thumbnail-preview__button-wrapper">
-            <Link className="btn btn--small thumbnail-preview__button" to={AppRoute.SportsmanTraining}>Подробнее</Link>
+            <Link className="btn btn--small thumbnail-preview__button"
+              to={`${AppRoute.SportsmanTraining}/${props.id}`}
+            >Подробнее
+            </Link>
           </div>
         </div>
       </div>

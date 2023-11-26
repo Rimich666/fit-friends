@@ -1,13 +1,9 @@
 import CertificateList from './certificate.list';
 
-type CertificateSectionProps = {
-  certificates: string[];
-}
-
-export default function CertificateSection({certificates}: CertificateSectionProps): JSX.Element {
+export default function CertificateSection(): JSX.Element {
   return (
     <div className="personal-account-coach__additional-info">
-      <CertificateList certificates={certificates}/>
+      <CertificateList/>
     </div>
   );
 }

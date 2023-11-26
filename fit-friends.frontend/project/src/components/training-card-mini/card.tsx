@@ -32,7 +32,7 @@ export default function Card(props: CardProps): JSX.Element {
             </>
           )}
           </p>
-          {props.variant === ComponentVariant.myOrders ?
+          {(props.variant === ComponentVariant.myOrders || props.variant === ComponentVariant.purchases) ?
             <h2 className="thumbnail-training__title">{props.name}</h2> :
             <h3 className="thumbnail-training__title">{props.name}</h3>}
           <div className="thumbnail-training__info">

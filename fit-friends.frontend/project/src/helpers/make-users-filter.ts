@@ -1,8 +1,8 @@
 import {LIMIT} from '../settings';
-import {CoachTrainingsFilterInterface} from '../types/coach-trainings-filter.interface';
+import {CoachTrainingsFilterInterface} from '../types/filters/coach-trainings-filter.interface';
 import {RoleSort} from '../components/training-catalog/filters/role-block/role.button';
 import {Level, Order, UserLocation} from '../enums';
-import {CatalogUsersFilterInterface} from '../types/catalog-users-filter.interface';
+import {CatalogUsersFilterInterface} from '../types/filters/catalog-users-filter.interface';
 
 
 type Props = {

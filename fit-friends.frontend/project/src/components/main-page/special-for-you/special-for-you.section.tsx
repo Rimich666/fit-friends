@@ -12,6 +12,7 @@ export default function SpecialForYouSection(): JSX.Element {
   if (isLoading){
     return (<SpinnerCircular/>);
   }
+
   const props: SpecialForYouItemProps[] = trainings.map((training) =>
     ({id: training.id, src: training.backgroundPath, type: training.trainingType}));
   return (

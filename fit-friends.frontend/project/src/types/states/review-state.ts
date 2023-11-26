@@ -1,4 +1,4 @@
-import {ReviewInterface} from './review.interface';
+import {ReviewInterface} from '../review.interface';
 
 export type ReviewState = {
   reviews: ReviewInterface[];

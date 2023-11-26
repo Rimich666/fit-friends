@@ -11,13 +11,13 @@ import {
   ValidationPipe
 } from '@nestjs/common';
 import {TrainingService} from './training.service';
-import {CoachOnlyGuard, JwtAuthGuard, Origin, User} from '@project/shared-enhancers';
+import {CoachOnlyGuard, JwtAuthGuard, Origin, Token, User, UserOnlyGuard} from '@project/shared-enhancers';
 import {TokenPayloadInterface} from '@project/shared-types';
-import {fillObject} from '@project/util-core';
+import {fillObject, getAuthHeader} from '@project/util-core';
 import {TrainingAuthorGuard} from './training-author.guard';
 import {
   CoachTrainingFilterDto,
-  CreateTrainingDto, EmailNotificationDto,
+  CreateTrainingDto, EmailNotificationDto, ForYouFilterDto,
   SharedTrainingFilterDto,
 } from '@project/shared-dto';
 import {UpdateTrainingDto} from '@project/shared-dto';
@@ -60,6 +60,24 @@ export class TrainingController {
     const count = await this.trainingService.getCount({...filters, coachId: userId});
     const maxPrice = await this.trainingService.getMaxPrice(userId);
     return response.set({ 'List-Size': count, 'Max-Price': maxPrice }).json(fillObject(TrainingRdo, trainings));
+  }
+
+  @Get(`/${EndPoints.forYou}`)
+  @UseGuards(UserOnlyGuard)
+  async getForYou(@Query() filters: ForYouFilterDto) {
+    return this.trainingService.getForYou(filters);
+  }
+
+  @Get(`/${EndPoints.popular}/:limit`)
+  @UseGuards(UserOnlyGuard)
+  async getPopular(@Param('limit', ParseIntPipe) limit: number) {
+    return this.trainingService.getPopular(limit);
+  }
+
+  @Get(`/${EndPoints.special}/:limit`)
+  @UseGuards(UserOnlyGuard)
+  async getSpecial(@Param('limit', ParseIntPipe) limit: number) {
+    return this.trainingService.getSpecial(limit);
   }
 
   @Get('/:id')

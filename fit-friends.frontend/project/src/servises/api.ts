@@ -1,13 +1,13 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {REQUEST_TIMEOUT} from '../settings';
-import {getToken} from './token';
-import {getBaseUrl} from '../utils/get-base-url';
+import {getExp, getToken} from './token';
+import {getBaseUrl} from '../helpers/get-base-url';
 import {toast} from 'react-toastify';
 import {getErrorToastMessage} from './error-toast-message';
 import {browserHistory} from '../browser-history';
 
-import {AppRoute} from "../app-route";
-import {ApiRoute} from "../api-route";
+import {AppRoute} from '../app-route';
+import {ApiRoute} from '../api-route';
 
 type ErrorData = {
   statusCode: string;
@@ -28,7 +28,7 @@ export const createAPI = (): AxiosInstance => {
       if (token && config.headers) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
-
+      console.log(getExp());
       return config;
     },
   );

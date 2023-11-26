@@ -20,4 +20,12 @@ export class OrderService {
   public async ordersCount(filters: OrderFilterDto) {
     return this.orderRepository.count(filters);
   }
+
+  public async getPurchases(userId: string, limit: number, page: number, isActive: boolean) {
+    return this.orderRepository.purchases(userId, limit, page, isActive);
+  }
+
+  public async purchasesCount(userId: string, limit: number, isActive: boolean) {
+    return Math.ceil(Number(await this.orderRepository.purchasesCount(userId, isActive)) / limit);
+  }
 }

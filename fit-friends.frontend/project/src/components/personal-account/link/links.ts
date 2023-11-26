@@ -5,12 +5,12 @@ import {AppRoute} from '../../../app-route';
 
 export const link: {[k: string]: PersonalAccountLinkInterFace} = {
   friends: {
-    href: AppRoute.CoachFriends,
+    href: AppRoute.Friends,
     icon: '#icon-friends',
     text: 'Мои друзья'
   },
   shopping: {
-    href: '#',
+    href: AppRoute.Purchases,
     icon: '#icon-shopping-cart',
     text: 'Мои покупки'
   },

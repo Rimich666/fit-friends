@@ -1,4 +1,4 @@
-import {Body, Controller, Patch, Post, UseGuards, ValidationPipe} from '@nestjs/common';
+import {Body, Controller, Get, Patch, Post, UseGuards, ValidationPipe} from '@nestjs/common';
 import {ControllerPrefix} from '@project/shared-constants';
 import {JoinTrainingService} from './join-training.service';
 import {CreateJoinTrainingDto, UpdateJoinTrainingDto} from '@project/shared-dto';
@@ -32,5 +32,10 @@ export class JoinTrainingController {
     await this.notificationService.create({
       userId: changed.requesterId, text: changeStatusNotification(name, changed.state as RequestState)});
     return changed;
+  }
+
+  @Get('/')
+  async getConsideration(@User() {id}) {
+    return this.joinTrainingService.getConsideration(id);
   }
 }

@@ -3,7 +3,7 @@ import InputsBlock from './inputs-block';
 import {useAppSelector} from '../../../../hooks';
 import {makeSelectRangeConstraint} from '../../../../store/training-process/training.selectors';
 import React, {useEffect, useRef, useState} from 'react';
-import {RangeConstraint} from '../../../../types/training-state';
+import {RangeConstraint} from '../../../../types/states/training-state';
 
 type RangeBlockProps = {
   formClass: string;
@@ -19,7 +19,7 @@ const Options = {
 export default function RangeBlock({formClass, type, callback}: RangeBlockProps): JSX.Element {
   const rangeSelector = makeSelectRangeConstraint;
   const range = useAppSelector((state) => rangeSelector(state, type));
-  const [currentRange] = useState({...range});
+  const [currentRange, setCurrentRange] = useState({...range});
   const scale = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLDivElement>(null);
   const minButton = useRef<HTMLButtonElement>(null);
@@ -37,8 +37,11 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
 
     }
   }, [scale.current]);
+  useEffect(() => {
+    setCurrentRange({...range});
+  }, [range]);
 
-  const mouseUpHandle = () => {
+  const endDrag = () => {
     if (!isDown.max && !isDown.min) {
       return;
     }
@@ -47,7 +50,16 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
     callback(type, currentRange);
   };
 
-  const mouseMinDownHandle = (evt: React.MouseEvent) => {
+  const mouseUpHandle = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    endDrag();
+  };
+
+  const mouseLeaveHandle = () => {
+    console.log('mouseLeaveHandle');
+    endDrag();
+  };
+
+  const mouseMinDownHandle = (evt: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     isDown.min = true;
   };
 
@@ -71,7 +83,7 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
     return x;
   };
 
-  const mouseMoveHandle = (evt: React.MouseEvent) => {
+  const mouseMoveHandle = (evt: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (isDown.min) {
       const x = minLeft + evt.movementX;
       currentRange.min = Math.round(((x + Options.BUTTON_SIZE / 2) / widthBar * (range.max - range.min)) + range.min);
@@ -88,6 +100,8 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
     isDown.max = true;
   };
 
+  const onHandle = (on: string) => {console.log(on)};
+
   const onInput = ({min, max}: RangeConstraint) => {
     currentRange.max = max;
     currentRange.min = min;
@@ -98,8 +112,8 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
   const rangeClass = RangeClass[type as keyof typeof RangeClass];
   const controlClass = ControlClass[type as keyof typeof ControlClass];
   return (
-    <div className={`${formClass}__block ${formClass}__block--${rangeClass}`}
-      onMouseUp={mouseUpHandle} onMouseLeave={mouseUpHandle} onMouseMove={mouseMoveHandle}
+    <div className={`${formClass}__block ${formClass}__block--${rangeClass}`} onMouseMove={mouseMoveHandle}
+      onMouseUp={mouseUpHandle} onMouseLeave={mouseLeaveHandle}
     >
       <h4 className={`${formClass}__block-title`}>{RangeTitle[type as keyof typeof RangeTitle]}</h4>
       {type !== RangeTypes.rating && <InputsBlock {...{...currentRange, type, callback: onInput, range}}/>}
@@ -121,6 +135,7 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
             <span className="visually-hidden">Минимальное значение</span>
           </button>
           {type === RangeTypes.rating && <span>{currentRange.min}</span>}
+          {type !== RangeTypes.rating && <span style={{marginBottom: 10}}>{}</span>}
           <button className={`filter-${controlClass}__max-toggle`} ref={maxButton}
             style={{ left: maxLeft }}
             onMouseDown={mouseMaxDownHandle}

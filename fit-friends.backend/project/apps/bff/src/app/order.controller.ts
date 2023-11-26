@@ -1,10 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Inject,
-  Post, Response, UseFilters,
-} from '@nestjs/common';
+import {Body, Controller, Get, Inject, Post, Response, UseFilters,} from '@nestjs/common';
 import {ControllerPrefix} from '@project/shared-constants';
 import {HttpService} from '@nestjs/axios';
 import {appsConfig} from '@project/configurations';
@@ -30,8 +24,8 @@ export class OrderController {
 
   @Post('/')
   async create(@Token() token: string, @Body() dto: CreateOrderDto) {
-    const {data} = await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
-    return {...data, training: await this.bffService.getTrainingPath(data.training)};
+    await this.httpService.axiosRef.post(`${this.url}`, dto, getAuthHeader(token));
+    return this.bffService.addBalance(dto.trainingId, dto.count, token);
   }
 
   @Get('/')

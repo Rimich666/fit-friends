@@ -1,6 +1,6 @@
-import {RegisterUserInterface} from '../types/register-user.interface';
+import {RegisterUserInterface} from '../types/auth/register-user.interface';
 import {Gender, Role, UserLocation} from '../enums';
-import {RegisterErrorsInterface} from '../types/register-errors.interface';
+import {RegisterErrorsInterface} from '../types/auth/register-errors.interface';
 
 export const getNewRegisterUser = (): RegisterUserInterface => (
   {

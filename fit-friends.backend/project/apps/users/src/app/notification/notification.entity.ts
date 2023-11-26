@@ -14,7 +14,7 @@ export class NotificationEntity implements NotificationInterface {
     this.id = entity.id;
     this.userId = entity.userId;
     this.text = entity.text;
-    this.createDate = entity.createDate;
+    this.createDate = new Date;
   }
 
   public toObject(): NotificationEntity {

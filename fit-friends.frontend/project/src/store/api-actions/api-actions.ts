@@ -2,20 +2,19 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, RootState} from '../index';
 import {TypeAction} from '../typeAction';
 import {AxiosInstance,} from 'axios';
-import {RegisterDto} from '../../types/register.dto';
+import {RegisterDto} from '../../types/auth/register.dto';
 import {makeRegisterPayload} from '../../helpers/make-register-payload';
 import {redirectToRoute} from '../actions';
-import {LoginType, TokenType} from '../../types/login.types';
+import {LoginType, TokenType} from '../../types/auth/login.types';
 import {saveToken} from '../../servises/token';
 import {saveRefresh} from '../../servises/refresh-token';
 import {GetTrainingsInterface, TrainingInterface} from '../../types/training.interface';
 import {UserRdo} from '../../types/user.rdo';
 
 import {AppRoute} from '../../app-route';
-import {ApiRoute} from '../../api-route';
+import {ApiRoute, EndPoints} from '../../api-route';
 import {UpdateTrainingCard} from '../../helpers/make-update-training-payload';
-import {CreateOrderInterface} from '../../types/create-order.interface';
-import {OrderInterface} from '../../types/order.interface';
+import {PurchasesVariant} from '../../enums';
 
 export const registerAction = createAsyncThunk<RegisterDto, void, {
   dispatch: AppDispatch;
@@ -59,7 +58,7 @@ export const fetchCoachTrainings = createAsyncThunk<GetTrainingsInterface, strin
     const {data, headers} = await axiosApi.get<TrainingInterface[]>(
       `${ApiRoute.CoachTrainings}?${options}`,
     );
-    return {data, maxPrice: parseInt(headers['max-price'], 10)};
+    return {data, maxPrice: parseInt(headers['max-price'], 10), pages: parseInt(headers['list-size'], 10) };
   }
 );
 
@@ -90,29 +89,43 @@ export const updateTrainingCard = createAsyncThunk<TrainingInterface, UpdateTrai
 
 );
 
-export const fetchTrainingsForYou = createAsyncThunk<TrainingInterface[], string, {
+export const fetchTrainingsForYou = createAsyncThunk<TrainingInterface[], number, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
 }>(
   TypeAction.fetchTrainingsForYou,
-  async (options,{extra: axiosApi}) => {
+  async (limit,{extra: axiosApi}) => {
     const {data} = await axiosApi.get<TrainingInterface[]>(
-      `${ApiRoute.Training}?${options}`,
+      `${ApiRoute.ForYou}/${limit}`,
     );
     return data;
   }
 );
 
-export const fetchTrainingsPopular = createAsyncThunk<TrainingInterface[], string, {
+export const fetchTrainingsPopular = createAsyncThunk<TrainingInterface[], number, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
 }>(
   TypeAction.fetchTrainingsPopular,
-  async (options,{extra: axiosApi}) => {
+  async (limit,{extra: axiosApi}) => {
     const {data} = await axiosApi.get<TrainingInterface[]>(
-      `${ApiRoute.Training}?${options}`,
+      `${ApiRoute.Training}/${EndPoints.popular}/${limit}`,
+    );
+    return data;
+  }
+);
+
+export const fetchSpecialOffers = createAsyncThunk<TrainingInterface[], number, {
+  dispatch: AppDispatch;
+  state: RootState;
+  extra: AxiosInstance;
+}>(
+  TypeAction.fetchSpecialOffers,
+  async (limit,{extra: axiosApi}) => {
+    const {data} = await axiosApi.get<TrainingInterface[]>(
+      `${ApiRoute.Training}/${EndPoints.special}/${limit}`,
     );
     return data;
   }
@@ -142,7 +155,7 @@ export const fetchCatalogTrainings = createAsyncThunk<GetTrainingsInterface, str
     const {data, headers} = await axiosApi.get<TrainingInterface[]>(
       `${ApiRoute.Training}?${options}`,
     );
-    return {data, maxPrice: parseInt(headers['max-price'], 10)};
+    return {data, maxPrice: parseInt(headers['max-price'], 10), pages: parseInt(headers['list-size'], 10) };
   }
 );
 
@@ -162,16 +175,20 @@ export const createTrainingAction = createAsyncThunk<TrainingInterface, FormData
   }
 );
 
-export const createOrderAction = createAsyncThunk<OrderInterface, CreateOrderInterface, {
+export const fetchPurchases = createAsyncThunk<GetTrainingsInterface,
+  {
+    variant: PurchasesVariant;
+    param: string;
+  }, {
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
 }>(
-  TypeAction.createOrder,
-  async (payload, {dispatch, extra: axiosApi}) => {
-    const {data} = await axiosApi.post<OrderInterface>(
-      ApiRoute.Order,
-      payload);
-    return data;
+  TypeAction.fetchPurchases,
+  async (options,{extra: axiosApi}) => {
+    const {data, headers} = await axiosApi.get<TrainingInterface[]>(
+      `${ApiRoute.Purchases}/${options.variant}?${options.param}`,
+    );
+    return {data, pages: parseInt(headers['list-size'], 10) };
   }
 );

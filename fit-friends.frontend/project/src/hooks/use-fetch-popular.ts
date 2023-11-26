@@ -9,7 +9,7 @@ export default function useFetchPopular() {
   const [fetch] = useState({first: true});
   useEffect(() => {
     if (fetch.first){
-      dispatch(fetchTrainingsPopular(`limit=${LIMIT}&rating=5`));
+      dispatch(fetchTrainingsPopular(LIMIT));
       fetch.first = false;
     }
   });

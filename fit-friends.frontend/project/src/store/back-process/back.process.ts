@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {AppRoute} from '../../app-route';
-import {BackState} from '../../types/back-state';
+import {BackState} from '../../types/states/back-state';
 
 const initialState: BackState = {
   back: undefined as unknown as AppRoute

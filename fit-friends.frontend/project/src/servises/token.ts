@@ -1,5 +1,5 @@
 import {decodeToken} from 'react-jwt';
-import {TokenPayloadInterface} from "../types/token-payload.interface";
+import {TokenPayloadInterface} from '../types/auth/token-payload.interface';
 
 export const AUTH_TOKEN_KEY_NAME = 'guest-fit-friends-token';
 
@@ -26,4 +26,9 @@ export const getSelfId = () => {
 export const getSelfRole = () => {
   const payload = decodeToken(getToken()) as TokenPayloadInterface;
   return payload.role;
+};
+
+export const getExp = () => {
+  const payload = decodeToken(getToken()) as TokenPayloadInterface;
+  return new Date().getTime() / 1000 - payload.exp;
 };

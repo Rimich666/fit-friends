@@ -1,4 +1,4 @@
-import {UserState} from '../../types/user-state';
+import {UserState} from '../../types/states/user-state';
 import {UserInterface} from '../../types/user.interface';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
@@ -7,7 +7,7 @@ import {FriendInterface} from '../../types/friend.interface';
 import {fetchCompany, fetchUser, fetchUsers} from '../api-actions/users-actions';
 import {fillUserCard} from '../../helpers/fill-user-card';
 import {createFriend, deleteFriend} from '../api-actions/friends-actions';
-import {createSubscribe, deleteSubscribe} from "../api-actions/subscribe-actions";
+import {checkSubscribe, createSubscribe, deleteSubscribe} from '../api-actions/subscribe-actions';
 
 const initialState: UserState = {
   company: [],
@@ -25,7 +25,7 @@ const initialState: UserState = {
 };
 
 export const userProcess = createSlice({
-  name: NameSpace.Register,
+  name: NameSpace.User,
   initialState,
   reducers: {
     setIsUserLoading: (state, action: PayloadAction<boolean>) => {
@@ -85,6 +85,9 @@ export const userProcess = createSlice({
       })
       .addCase(deleteSubscribe.fulfilled, (state, action) => {
         state.isSubscribe = false;
+      })
+      .addCase(checkSubscribe.fulfilled, (state, action) => {
+        state.isSubscribe = action.payload;
       })
     ;
   }

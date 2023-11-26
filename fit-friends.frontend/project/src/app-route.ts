@@ -5,9 +5,11 @@ export enum AppRoute {
   Intro = '/intro',
   Main = '/main',
   Coach = '/coachOffice',
+  Office = '/office',
+  Sportsman = '/sportsmanOffice',
   CoachTrainings = '/coachOffice/coachTrainings',
   CreateTraining = '/coachOffice/createTraining',
-  CoachFriends = '/coachOffice/friends',
+  Friends = '/friends',
   CoachOrders = '/coachOffice/orders',
   TrainingCatalog = '/main/catalog',
   CoachTraining = '/coachOffice/training',
@@ -15,6 +17,7 @@ export enum AppRoute {
   UserCatalog = '/main/userCatalog',
   UserCard = '/main/userCard',
   CoachCard = '/main/coachCard',
+  Purchases = '/userOffice/purchases'
 }
 
 export const RouteParam = {

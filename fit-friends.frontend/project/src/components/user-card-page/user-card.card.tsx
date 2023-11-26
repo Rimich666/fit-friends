@@ -34,7 +34,7 @@ export default function UserCardCard({role, ...props}: UserCardCardProps): JSX.E
   };
 
   return (
-    <div className={role === Role.coach ? 'user-card-coach__card' : ''}>
+    <>
       <div className={`user-card${tail}__content`}>
         <div className={`user-card${tail}__head`}>
           <h2 className={`user-card${tail}__title`}>{props.name}</h2>
@@ -94,6 +94,6 @@ export default function UserCardCard({role, ...props}: UserCardCardProps): JSX.E
           </li>
         </ul>
       </div>
-    </div>
+    </>
   );
 }

@@ -8,8 +8,6 @@ import {useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../app-route';
 import Card from '../training-card-mini/card';
 import {ComponentVariant} from '../../component-variant';
-import {useAppSelector} from "../../hooks";
-import {selectTrainingsForCoachCard} from "../../store/training-process/training.selectors";
 
 const IMAGE_WIDTH = 330;
 const MARGIN_RIGHT = 20;
@@ -21,7 +19,7 @@ type TrainingCardSliderProps = {
 }
 
 export default function TrainingCardSlider({trainingProps, variant}: TrainingCardSliderProps): JSX.Element {
-  const helpers = sliderHelpers(getElement, getPlug, trainingProps, SLIDER_VIEW_SIZE);
+  const helpers = sliderHelpers(getElement, getPlug, trainingProps.length, SLIDER_VIEW_SIZE);
   const [slideNumber, setSlideNumber] = useState(helpers.initSliderNumber());
   const [indexes] = useState(new Array(SLIDER_VIEW_SIZE + 2).fill(0).map((_, index) =>
     helpers.initIndex(index, trainingProps.length

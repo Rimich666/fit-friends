@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import {Get, Injectable, Param, ParseIntPipe, UseGuards} from '@nestjs/common';
 import {TrainingRepository} from './training.repository';
 import {TrainingEntity} from './training.entity';
 import {TrainingInterface} from '@project/shared-types';
-import {UpdateTrainingDto} from '@project/shared-dto';
+import {ForYouFilterDto, UpdateTrainingDto} from '@project/shared-dto';
 import {QueryFilter} from '@project/helpers';
 import {NotExistsTrainingException} from '@project/util-core';
+import {EndPoints} from "@project/shared-constants";
+import {UserOnlyGuard} from "@project/shared-enhancers";
 
 @Injectable()
 export class TrainingService {
@@ -37,6 +39,18 @@ export class TrainingService {
     return this.trainingRepository.find(filters);
   }
 
+  public async getForYou(filters: ForYouFilterDto) {
+    return this.trainingRepository.getForYou(filters);
+  }
+
+  public async getPopular(limit: number) {
+    return this.trainingRepository.getPopular(limit);
+  }
+
+  public async getSpecial(limit: number) {
+    return this.trainingRepository.getSpecial(limit);
+  }
+
   public async checkUser(trainingId: number, userId: string): Promise<boolean> {
     const training = await this.trainingRepository.findById(trainingId);
     return training.coachId === userId;
@@ -52,7 +66,7 @@ export class TrainingService {
   }
 
   public async getCount(filters: QueryFilter) {
-    return this.trainingRepository.count(filters);
+    return Math.ceil(await this.trainingRepository.count(filters) / filters.limit);
   }
 
   public async getMaxPrice(coachId?: string) {

@@ -3,11 +3,12 @@ import {HttpService} from '@nestjs/axios';
 import {appConfig, appsConfig} from '@project/configurations';
 import {ConfigType} from '@nestjs/config';
 import {BffService} from '../bff.service';
-import {CreateTrainingDto, TrainingEndRdo, UpdateTrainingDto} from '@project/shared-dto';
-import {Static} from '@project/shared-constants';
+import {CreateTrainingDto, TrainingEndRdo, UpdateTrainingDto, UserRdo} from '@project/shared-dto';
+import {ControllerPrefix, Static} from '@project/shared-constants';
 import {getBackgroundFile} from '@project/helpers';
 import {fillObject, getAuthHeader} from '@project/util-core';
 import {Response as Res} from 'express';
+import {SportsmanAddition, UserInterface} from '@project/shared-types';
 
 @Injectable()
 export class TrainingService {
@@ -17,6 +18,8 @@ export class TrainingService {
     private readonly bffService: BffService,
     @Inject (appConfig.KEY) private readonly applicationConfig: ConfigType<typeof appConfig>
   ) {}
+
+  private url = `${this.config.coaching}/${ControllerPrefix.training}`;
 
   public async create(token: string, dto: CreateTrainingDto, origin: string, file: Express.Multer.File, url: string) {
     const background = await getBackgroundFile(Static.Endpoint.TRAINING);
@@ -48,5 +51,12 @@ export class TrainingService {
       await this.httpService.axiosRef.get(`${url}`, getAuthHeader(token));
     const trainings = await this.bffService.getTrainings(data);
     return response.set({ 'List-Size': headers['list-size'], 'Max-Price': headers['max-price']}).json(trainings);
+  }
+
+  public async getForYou(user: UserInterface, token: string, limit: number) {
+    const options = `limit=${limit}&trainingType=${user.trainingType.join(',')}&caloriesCount=${(user
+      .addition as SportsmanAddition).trainingCalories}&gender=${user.gender}`;
+    const {data} = await this.httpService.axiosRef.get(`${this.url}?${options}`, getAuthHeader(token));
+    return this.bffService.getTrainings(data);
   }
 }

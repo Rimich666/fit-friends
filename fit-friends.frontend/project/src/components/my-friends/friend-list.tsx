@@ -1,5 +1,5 @@
 import {useAppSelector} from '../../hooks';
-import {selectFriends} from '../../store/user-process/user.selectors';
+import {selectFriends} from '../../store/friends-process/friend.selectors';
 import FriendItem from './friend-item';
 
 

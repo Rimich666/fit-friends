@@ -1,7 +1,7 @@
 import {useAppDispatch} from './index';
 import {useEffect, useState} from 'react';
 
-import {fetchCompany} from "../store/api-actions/users-actions";
+import {fetchCompany} from '../store/api-actions/users-actions';
 
 const LIMIT = 8;
 
@@ -10,7 +10,7 @@ export default function useFetchCompany() {
   const [fetch] = useState({first: true});
   useEffect(() => {
     if (fetch.first){
-      dispatch(fetchCompany(`limit=${LIMIT}`));
+      dispatch(fetchCompany(LIMIT));
       fetch.first = false;
     }
   });

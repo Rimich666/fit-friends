@@ -1,6 +1,6 @@
-import {CatalogTrainingsFilterInterface} from '../types/catalog-trainings-filter.interface';
+import {CatalogTrainingsFilterInterface} from '../types/filters/catalog-trainings-filter.interface';
 import {LIMIT} from '../settings';
-import {CoachTrainingsFilterInterface} from '../types/coach-trainings-filter.interface';
+import {CoachTrainingsFilterInterface} from '../types/filters/coach-trainings-filter.interface';
 import {TrainingSort} from '../components/training-catalog/filters/sort-block/sort-button';
 import {Order} from '../enums';
 
@@ -11,11 +11,15 @@ type Props = {
 }
 
 export const prepareCatalogTrainingsFilter = ({coachFilter, check, sortFilter}: Props): CatalogTrainingsFilterInterface => {
+  const trainingType = Object.keys(check.type).filter((key) => check.type[key]);
+
   const filter: CatalogTrainingsFilterInterface = {
     ...coachFilter,
-    trainingType: Object.keys(check.type).filter((key) =>
-      check.type[key])
   };
+  if (trainingType.length > 0) {
+    filter.trainingType = trainingType;
+  }
+
   if (sortFilter.sort) {
     if (sortFilter.sort === TrainingSort.freebie) {
       filter.priceMin = 0;

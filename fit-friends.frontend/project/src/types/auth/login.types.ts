@@ -1,4 +1,4 @@
-import {UserRdo} from './user.rdo';
+import {UserRdo} from '../user.rdo';
 
 export type LoginType = {
   email: string;

@@ -1,14 +1,14 @@
 import {useAppDispatch} from './index';
 import {useEffect, useState} from 'react';
-import {MyOrderInterface} from '../types/card-interface';
-import {loadOrders} from '../store/orders-process/order.process';
+import {fetchOrders} from '../store/api-actions/order.action';
 
-export default function useFetchOrders(orders: MyOrderInterface[]) {
+export default function useFetchOrders(options: string) {
   const dispatch = useAppDispatch();
   const [fetch] = useState({first: true});
+  console.log('useFetchOrders', options);
   useEffect(() => {
     if (fetch.first){
-      dispatch(loadOrders([...orders]));
+      dispatch(fetchOrders(options));
       fetch.first = false;
     }
   });
