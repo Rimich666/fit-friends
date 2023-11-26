@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {makeSelectCertificate} from '../../../store/register-process/register-selectors';
 import {FileContent} from 'use-file-picker/types';
@@ -9,7 +8,7 @@ import {
   setCertificate,
   setIsEditCertificate
 } from '../../../store/register-process/register-process';
-import {saveChangeCertificate} from "../../../store/api-actions/certificate.actions";
+import {saveChangeCertificate} from '../../../store/api-actions/certificate.actions';
 
 export type CertificateItemProps = {
   index: number;
@@ -44,6 +43,7 @@ export default function CertificateItem(props: CertificateItemProps): JSX.Elemen
       dispatch(dropIsEditCertificate(props.index));
       return;
     }
+    URL.revokeObjectURL(certificate.path);
     dispatch(saveChangeCertificate(certificate));
   };
 

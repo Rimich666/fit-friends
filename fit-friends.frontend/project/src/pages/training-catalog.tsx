@@ -6,6 +6,7 @@ import {useAppDispatch} from '../hooks';
 import {setBack} from '../store/back-process/back.process';
 import {AppRoute} from '../app-route';
 import {setBackRoute} from '../utils/back-route';
+import {Helmet} from 'react-helmet';
 
 
 export default function TrainingCatalog(): JSX.Element {
@@ -14,6 +15,9 @@ export default function TrainingCatalog(): JSX.Element {
   setBackRoute(AppRoute.TrainingCatalog);
   return (
     <>
+      <Helmet>
+        <title>Каталог тренировок — FitFriends</title>
+      </Helmet>
       <Header/>
       <CatalogMain variant={ComponentVariant.trainingCatalog}/>
     </>

@@ -1,6 +1,6 @@
-import {AppRoute} from "../../app-route";
-import {TrainingTime, TrainingType, TrainingTypeText, UserLocation} from "../../enums";
-import {ComponentVariant} from "../../component-variant";
+import {AppRoute} from '../../app-route';
+import {TrainingTime, TrainingType, TrainingTypeText, UserLocation} from '../../enums';
+import {ComponentVariant} from '../../component-variant';
 
 export enum FilterPlace {
   myTraining = 'my-training',

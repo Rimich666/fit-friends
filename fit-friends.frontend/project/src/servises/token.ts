@@ -25,7 +25,7 @@ export const getSelfId = () => {
 
 export const getSelfRole = () => {
   const payload = decodeToken(getToken()) as TokenPayloadInterface;
-  return payload.role;
+  return payload ? payload.role : null;
 };
 
 export const getExp = () => {

@@ -4,6 +4,8 @@ import {RegisterErrorsInterface} from '../auth/register-errors.interface';
 import {QuestionnaireErrorsInterface} from '../auth/questionnaire-errors.interface';
 import {UserInterface} from '../user.interface';
 import {CertificateInterface} from '../certificate.interface';
+import {UpdateUserInterface} from "../update-user.interface";
+import {UpdateUserErrorsInterface} from "../update-user-errors.interface";
 
 export type RegisterState = {
   registerUser: RegisterUserInterface;
@@ -18,4 +20,7 @@ export type RegisterState = {
   isCurrentUserLoaded: boolean;
   isCurrentUserLoading: boolean;
   certificate: CertificateInterface[];
+  changeUserErrors: UpdateUserErrorsInterface;
+  isChangeUserError: boolean;
+  changeUser: UpdateUserInterface;
 };

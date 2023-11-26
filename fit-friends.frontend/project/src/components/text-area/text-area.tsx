@@ -35,7 +35,7 @@ export default function TextArea({value, callback, errorMessage, ...props}: Text
       <div className="training-info__textarea">
         <label>
           <span className="training-info__label">{props.label}</span>
-          <textarea name="description" onInput={inputHandle} disabled={props.disabled}>{input}</textarea>
+          <textarea name="description" onInput={inputHandle} disabled={props.disabled} value={input}></textarea>
         </label>
         <div className="training-info__error">{errorMessage}</div>
       </div>

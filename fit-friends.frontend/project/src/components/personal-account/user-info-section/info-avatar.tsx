@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import {FileContent} from 'use-file-picker/types';
 import useAppFilePicker from '../../../hooks/use-app-file-picker';
 import {Accept} from '../../../settings';
+import EditControls from './edit-controls';
 
 type InfoAvatarProps = {
   mode: UserInfoMode;
@@ -29,18 +30,26 @@ export default function InfoAvatar({mode, url, callback}: InfoAvatarProps): JSX.
     }
   };
 
+  const onDelete = () => {
+    setSrc('');
+    callback(undefined as unknown as File);
+  };
+
   return (
-    <div className={`user-info${mode}__header`}>
-      <div className="input-load-avatar">
-        <label>
-          <input className="visually-hidden" type="file" name="user-photo-1" accept="image/png, image/jpeg"
-            onClick={(event) => {event.preventDefault();}}
-          />
-          <span className="input-load-avatar__avatar" onClick={clickHandle}>
-            <img src={src} width="98" height="98" alt="user photo"/>
-          </span>
-        </label>
+    <>
+      <div className={`user-info${mode}__header`}>
+        <div className="input-load-avatar">
+          <label>
+            <input className="visually-hidden" type="file" name="user-photo-1" accept="image/png, image/jpeg"
+              onClick={(event) => {event.preventDefault();}}
+            />
+            <span className="input-load-avatar__avatar" onClick={clickHandle}>
+              <img src={src} width="98" height="98" alt="user photo"/>
+            </span>
+          </label>
+        </div>
       </div>
-    </div>
+      {mode === UserInfoMode.edit && <EditControls editClickHandle={clickHandle} deleteClickHandle={onDelete}/>}
+    </>
   );
 }

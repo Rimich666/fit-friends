@@ -1,4 +1,4 @@
-import {ConflictException, Inject, Injectable, UnauthorizedException} from '@nestjs/common';
+import {BadRequestException, ConflictException, Inject, Injectable, UnauthorizedException} from '@nestjs/common';
 import {CreateUserDto, LoginUserDto} from '@project/shared-dto';
 import {UserInterface} from '@project/shared-types';
 import {FitUsersRepository} from '../fit-users/fit-users.repository';
@@ -46,12 +46,12 @@ export class AuthenticationService {
     const existedUser = await this.fitUserRepository.findByEmail(email);
 
     if (!existedUser) {
-      throw new UnauthorizedException(UserExceptionMessage.UserPasswordWrong);
+      throw new BadRequestException(UserExceptionMessage.UserPasswordWrong);
     }
 
     const userEntity = new UserEntity(existedUser);
     if (!await userEntity.comparePassword(password)) {
-      throw new UnauthorizedException(UserExceptionMessage.UserPasswordWrong);
+      throw new BadRequestException(UserExceptionMessage.UserPasswordWrong);
     }
 
     return userEntity.toObject();

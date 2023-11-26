@@ -12,11 +12,9 @@ type CardListProps = {
 }
 
 export default function CardList({variant}: CardListProps): JSX.Element {
-  const trainingCatalogSelector = makeSelectTrainings;
-  const isTrainingsLoading = makeSelectIsTrainingsLoading;
-  const isLoading = useAppSelector((state) => isTrainingsLoading(state, variant));
+  const isLoading = useAppSelector((state) => makeSelectIsTrainingsLoading(state, variant));
   const trainingCatalog =
-    useAppSelector((state) => trainingCatalogSelector(state, variant));
+    useAppSelector((state) => makeSelectTrainings(state, variant));
   const userCatalog = useAppSelector(selectUserCatalog);
 
   if (isLoading) {

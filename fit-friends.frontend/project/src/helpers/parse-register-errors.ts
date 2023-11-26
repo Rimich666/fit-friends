@@ -1,22 +1,3 @@
-// user:
-
-// password
-// name
-// birthDate
-// location
-// avatar
-//
-// questionnaire:
-
-// certificate: string;
-// merits: string;
-//
-// trainingTime: string;
-// trainingCalories: string;
-// daysCalories: string;
-//
-// trainingType: string;
-
 const Mapping = {
   email: {
     class: 'user',
@@ -46,12 +27,15 @@ const Mapping = {
     class: 'questionnaire',
     field: 'trainingType',
   },
+  description: {
+    field: 'description',
+    class: ''
+  }
 };
 
 const parseKey = (error: string) => {
   const words = error.split(' ').map((word) => word.startsWith('addition.') ?
     word.substring(9) : word);
-  console.log(words);
   return words[words.findIndex((item) => Object.keys(Mapping).includes(item))];
 };
 
@@ -62,11 +46,20 @@ export const parseRegisterErrors = (errorString: string) => {
   if (!Array.isArray(errors)) {
     return parsed;
   }
-  console.log(errors);
   parsed = errors.map((error) => ([parseKey(error), error]))
     .reduce((acc, curr) => ({...acc, [Mapping[curr[0] as keyof typeof Mapping].class]:
           {...acc[Mapping[curr[0] as keyof typeof Mapping].class as keyof typeof parsed] ,
             [Mapping[curr[0] as keyof typeof Mapping].field]: curr[1]}}),
     parsed);
+  return parsed;
+};
+
+export const parseUpdateUserErrors = (errorString: string) => {
+  let parsed = {};
+  const errors = JSON.parse(errorString) as Array<string>;
+  if (!Array.isArray(errors)) {
+    return parsed;
+  }
+  parsed = Object.fromEntries(errors.map((error) => ([parseKey(error), error])));
   return parsed;
 };

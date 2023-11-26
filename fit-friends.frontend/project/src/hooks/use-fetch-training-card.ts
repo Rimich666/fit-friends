@@ -7,9 +7,7 @@ export default function useFetchTrainingCard(id: number) {
   const dispatch = useAppDispatch();
   const [fetch] = useState({first: true});
   dispatch(setIsTrainingCardLoading(true));
-  console.log('useFetchTrainingCard', fetch);
   useEffect(() => {
-    console.log('useFetchTrainingCard', id);
     if (fetch.first){
       dispatch(fetchTrainingCard(id));
       fetch.first = false;

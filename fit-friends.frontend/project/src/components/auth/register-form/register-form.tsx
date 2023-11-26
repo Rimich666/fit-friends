@@ -13,7 +13,7 @@ import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {setRegisterUser} from '../../../store/register-process/register-process';
 import {selectRegistration} from '../../../store/register-process/register-selectors';
 
-import {ComponentVariant} from "../../../component-variant";
+import {ComponentVariant} from '../../../component-variant';
 
 export default function RegisterForm(): JSX.Element {
   const [user, setUser] = useState(getNewRegisterUser());

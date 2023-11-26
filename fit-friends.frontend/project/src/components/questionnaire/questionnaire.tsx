@@ -24,6 +24,7 @@ import {SpinnerCircular} from 'spinners-react';
 import ReadyCheck from '../ready-check/ready.check';
 
 import {ComponentVariant} from '../../component-variant';
+import {Helmet} from 'react-helmet';
 
 export default function Questionnaire(): JSX.Element {
   const [questionnaire, setQuestion] = useState(getNewQuestionnaire());
@@ -97,50 +98,55 @@ export default function Questionnaire(): JSX.Element {
   }
 
   return (
-    <main>
-      <Logo/>
-      <div className="popup-form popup-form--questionnaire-user">
-        <div className="popup-form__wrapper">
-          <div className="popup-form__content">
-            <div className="popup-form__form">
-              <form method="get" onSubmit={submitHandle}>
-                <div className="questionnaire-user">
-                  <h1 className="visually-hidden">Опросник</h1>
-                  <div className="questionnaire-user__wrapper">
-                    <SpecializationCheckbox
-                      role={role}
-                      trainingTypes={questionnaire.trainingType}
-                      errorMessage={errors.trainingType}
-                      callback={onChangeType}
-                      isDisabled={false}
-                    />
-                    {role === Role.sportsman && <TimeRadioBlock value={TrainingTime['30 - 50']} callback={onSelectTime}/>}
-                    <LevelRadioBlock role={role} callback={onSelectLevel} value={Level.beginner}
-                      variant={ComponentVariant.register}
-                    />
-                    {role === Role.sportsman &&
+    <>
+      <Helmet>
+        <title>Опросник — FitFriends</title>
+      </Helmet>
+      <main>
+        <Logo/>
+        <div className="popup-form popup-form--questionnaire-user">
+          <div className="popup-form__wrapper">
+            <div className="popup-form__content">
+              <div className="popup-form__form">
+                <form method="get" onSubmit={submitHandle}>
+                  <div className="questionnaire-user">
+                    <h1 className="visually-hidden">Опросник</h1>
+                    <div className="questionnaire-user__wrapper">
+                      <SpecializationCheckbox
+                        role={role}
+                        trainingTypes={questionnaire.trainingType}
+                        errorMessage={errors.trainingType}
+                        callback={onChangeType}
+                        isDisabled={false}
+                      />
+                      {role === Role.sportsman && <TimeRadioBlock value={TrainingTime['30 - 50']} callback={onSelectTime}/>}
+                      <LevelRadioBlock role={role} callback={onSelectLevel} value={Level.beginner}
+                        variant={ComponentVariant.register}
+                      />
+                      {role === Role.sportsman &&
                       <CaloriesBlock
                         callback={onInputCalories}
                         errors={{trainingCalories: errors.trainingCalories, daysCalories: errors.daysCalories}}
                         values={{trainingCalories: questionnaire.trainingCalories.toString(),
                           daysCalories: questionnaire.daysCalories.toString()}}
                       />}
-                    {role === Role.coach && <Certificate errorMessage={errors.certificate} callback={onSelectFile}/>}
-                    {role === Role.coach &&
+                      {role === Role.coach && <Certificate errorMessage={errors.certificate} callback={onSelectFile}/>}
+                      {role === Role.coach &&
                       <div className="questionnaire-coach__block">
                         <Merits callback={onInputMerits} errorMessage={errors.merits}/>
                         <ReadyCheck callback={onCheckReady} isChecked={questionnaire.isReady}
                           variant={ComponentVariant.register} isDisabled={false}
                         />
                       </div>}
+                    </div>
+                    <button className="btn questionnaire-user__button" type="submit">Продолжить</button>
                   </div>
-                  <button className="btn questionnaire-user__button" type="submit">Продолжить</button>
-                </div>
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

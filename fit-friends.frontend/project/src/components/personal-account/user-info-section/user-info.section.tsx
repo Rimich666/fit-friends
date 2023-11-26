@@ -1,4 +1,3 @@
-import EditControls from './edit-controls';
 import {useEffect, useState} from 'react';
 import UserInfoForm, {UserInfoFormProps} from './user-info.form';
 import {UserInfoMode} from '../constants';
@@ -11,11 +10,12 @@ import {
 } from '../../../helpers/get-new-update-user';
 import {UpdateUserInterface} from '../../../types/update-user.interface';
 import {UpdateUserErrorsInterface} from '../../../types/update-user-errors.interface';
-import {useAppDispatch} from '../../../hooks';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {updateUserValidators, validate} from '../../../utils/validate';
 import {makeUpdateUserPayload} from '../../../helpers/make-update-user-payload';
 import {UserInterface} from '../../../types/user.interface';
 import {updateUserAction} from '../../../store/api-actions/users-actions';
+import {selectChangeUser, selectUpdateUser} from '../../../store/register-process/register-selectors';
 
 type UserInfoSectionProps = {
   user: UserInterface;
@@ -25,6 +25,15 @@ export default function UserInfoSection({user}: UserInfoSectionProps): JSX.Eleme
   const [mode, setMode] = useState(UserInfoMode.read);
   const [updateUser, setUpdateUser] = useState(getEmptyUpdateUser());
   const [errors, setErrors] = useState(getEmptyUpdateUserErrors());
+
+  const {changeUserErrors, isChangeUserError} =
+    useAppSelector(selectUpdateUser);
+
+  useEffect(() => {
+    if (isChangeUserError) {
+      setErrors({...changeUserErrors});
+    }
+  }, [isChangeUserError]);
 
   const dispatch = useAppDispatch();
   const saveChanges = () => {
@@ -91,7 +100,6 @@ export default function UserInfoSection({user}: UserInfoSectionProps): JSX.Eleme
   return (
     <section className={`user-info${mode}`}>
       <InfoAvatar mode={mode} url={updateUser.avatarPath} callback={onSelectFile}/>
-      {mode === UserInfoMode.edit && <EditControls/>}
       <UserInfoForm {...props}/>
     </section>
   );

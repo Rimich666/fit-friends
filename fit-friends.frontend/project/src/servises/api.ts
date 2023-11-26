@@ -8,13 +8,13 @@ import {browserHistory} from '../browser-history';
 
 import {AppRoute} from '../app-route';
 import {ApiRoute} from '../api-route';
+import {memoizedRefreshToken} from './refresh-token';
 
 type ErrorData = {
   statusCode: string;
   statusText: string;
   message: string[];
 }
-
 
 export const createAPI = (): AxiosInstance => {
   const api = axios.create({
@@ -28,13 +28,14 @@ export const createAPI = (): AxiosInstance => {
       if (token && config.headers) {
         config.headers['Authorization'] = `Bearer ${token}`;
       }
-      console.log(getExp());
+
       return config;
     },
   );
 
   api.interceptors.response.use((response: AxiosResponse) => response,
-    (error: AxiosError) => {
+    async (error: AxiosError) => {
+      const config = error.config;
       const errorData: ErrorData = error.response?.data as ErrorData;
       const message = errorData.message ?
         getErrorToastMessage([errorData.statusCode, errorData.statusText].concat(errorData.message)) :
@@ -48,9 +49,18 @@ export const createAPI = (): AxiosInstance => {
       {
         browserHistory.push(AppRoute.Main);
       }
-      if (parseInt(errorData.statusCode, 10) === 401) {
-        browserHistory.push(AppRoute.Login);
+      if (error?.response?.status === 401) {
+        const accessToken = await memoizedRefreshToken();
+        if (accessToken) {
+          config.headers = {
+            ...config.headers,
+            authorization: `Bearer ${accessToken}`,
+          };
+        }
+
+        return axios(config);
       }
+
       return Promise.reject(error);
     });
 

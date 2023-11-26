@@ -37,7 +37,8 @@ export enum CatalogListClass {
 
 export const miniCardLink = {
   trainingCatalog: AppRoute.SportsmanTraining,
-  myTraining: AppRoute.CoachTrainings,
+  myTraining: AppRoute.CoachTraining,
   popularTraining: AppRoute.SportsmanTraining,
-  userCard: AppRoute.SportsmanTraining
+  userCard: AppRoute.SportsmanTraining,
+  purchases: AppRoute.SportsmanTraining,
 };

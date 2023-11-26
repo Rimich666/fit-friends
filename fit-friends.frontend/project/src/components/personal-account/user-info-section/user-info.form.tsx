@@ -59,17 +59,14 @@ export default function UserInfoForm({mode, errors, user, ...props}: UserInfoFor
           isDisabled={isRead}
         />
       </div>
-      <div className="user-info__section">
-        <h2 className="user-info__title user-info__title--specialization">Специализация</h2>
-        <SpecializationCheckbox
-          role={Role.sportsman}
-          trainingTypes={user.trainingType}
-          errorMessage={errors.trainingType}
-          variant={ComponentVariant.update}
-          callback={props.onChangeType}
-          isDisabled={isRead}
-        />
-      </div>
+      <SpecializationCheckbox
+        role={Role.sportsman}
+        trainingTypes={user.trainingType}
+        errorMessage={errors.trainingType}
+        variant={ComponentVariant.update}
+        callback={props.onChangeType}
+        isDisabled={isRead}
+      />
       {Object.keys(selectors).map((key) => (
         <CustomSelect
           {...{...selectors[key as keyof typeof selectors],

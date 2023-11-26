@@ -10,6 +10,7 @@ import NotFoundMain from '../components/main-not-found/not-found.main';
 import useFetchSelf from '../hooks/use-fetch-self';
 import {setBackRoute} from '../utils/back-route';
 import {AppRoute} from '../app-route';
+import {Helmet} from 'react-helmet';
 
 type PersonalAccountProps = {
   role: Role;
@@ -19,18 +20,21 @@ export default function PersonalAccount({role}: PersonalAccountProps): JSX.Eleme
   useFetchSelf();
   setBackRoute(AppRoute.Office);
 
-  const isLoading = useAppSelector(selectIsUserLoading);
   const isLoaded = useAppSelector(selectIsUserLoaded);
+  const isLoading = useAppSelector(selectIsUserLoading);
   const user = useAppSelector(selectCurrentUser);
   if (isLoading){
     return (<SpinnerCircular/>);
   }
 
   if (!isLoaded){
-    return (<NotFoundMain/>);
+    return (<NotFoundMain name={'личный кабинет'}/>);
   }
   return (
     <>
+      <Helmet>
+        <title>Личный кабинет — FitFriends</title>
+      </Helmet>
       <Header/>
       <main>
         <section className="inner-page">

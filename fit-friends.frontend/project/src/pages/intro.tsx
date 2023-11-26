@@ -1,7 +1,9 @@
 import {NavLink, useNavigate} from 'react-router-dom';
 
 
-import {AppRoute} from "../app-route";
+import {AppRoute} from '../app-route';
+import {dropRefresh} from "../servises/refresh-token";
+import {dropToken} from "../servises/token";
 
 export default function Intro(): JSX.Element {
   const navigate = useNavigate();
@@ -9,6 +11,11 @@ export default function Intro(): JSX.Element {
   function handleRegisterClick() {
     navigate(AppRoute.Register);
   }
+
+  const handleLogoClick = () => {
+    dropRefresh();
+    dropToken();
+  };
 
   return (
     <main>
@@ -24,7 +31,7 @@ export default function Intro(): JSX.Element {
           </picture>
         </div>
         <div className="intro__wrapper">
-          <svg className="intro__icon" width="60" height="60" aria-hidden="true">
+          <svg className="intro__icon" width="60" height="60" aria-hidden="true" onClick={handleLogoClick}>
             <use xlinkHref="#icon-logotype"></use>
           </svg>
           <div className="intro__title-logo">

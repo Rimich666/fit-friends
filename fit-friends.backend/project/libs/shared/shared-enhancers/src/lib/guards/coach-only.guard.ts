@@ -1,4 +1,4 @@
-import {CanActivate, ExecutionContext, Injectable, UnauthorizedException} from "@nestjs/common";
+import {CanActivate, ExecutionContext, ForbiddenException, Injectable, UnauthorizedException} from "@nestjs/common";
 import {Role} from '@project/shared-types';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class CoachOnlyGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const role = request.user.role;
     if (role !== Role.coach) {
-      throw new UnauthorizedException('Only for coaches.');
+      throw new ForbiddenException('Only for coaches.');
     }
     return true;
   }

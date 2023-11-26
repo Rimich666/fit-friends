@@ -119,7 +119,7 @@ export const trainingProcess = createSlice({
         state.isCatalogTrainingsLoaded = false;
       })
       .addCase(fetchCatalogTrainings.fulfilled, (state, action) => {
-        state.isTrainingCardLoading = false;
+        state.isCatalogTrainingsLoading = false;
         state.isCatalogTrainingsLoaded = true;
         state.catalogTrainings = [...action.payload.data];
         state.range.price.max = action.payload.maxPrice as number;

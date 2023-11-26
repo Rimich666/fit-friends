@@ -25,7 +25,7 @@ import {FileFieldsInterceptor} from '@nestjs/platform-express';
 import {UserFilesType} from '@project/shared-types';
 import {getAuthHeader} from '@project/util-core';
 import {HttpService} from '@nestjs/axios';
-import {BffService} from "../bff.service";
+import {BffService} from '../bff.service';
 
 @Controller(ControllerPrefix.fitUsers)
 @UseFilters(AxiosExceptionFilter)

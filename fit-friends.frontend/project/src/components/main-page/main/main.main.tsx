@@ -1,7 +1,7 @@
 import SpecialForYouSection from '../special-for-you/special-for-you.section';
 import SpecialOfferList from '../special-offer/special-offer.list';
 import {useAppSelector} from '../../../hooks';
-import {selectIsUserLoaded, selectIsUserLoading} from '../../../store/register-process/register-selectors';
+import {selectIsUserLoading} from '../../../store/register-process/register-selectors';
 import {SpinnerCircular} from 'spinners-react';
 import NotFoundMain from '../../main-not-found/not-found.main';
 import Plug from '../plug/plug';
@@ -9,16 +9,16 @@ import PopularTrainingSection from '../popular-training/popular-training.section
 import LookForCompanySection from '../look-for-company/look-for-company.section';
 import {AppRoute} from '../../../app-route';
 import {setBackRoute} from '../../../utils/back-route';
+import {getToken} from '../../../servises/token';
 
 export default function MainMain(): JSX.Element {
   const isLoading = useAppSelector(selectIsUserLoading);
-  const isLoaded = useAppSelector(selectIsUserLoaded);
+  const isAuth = !!getToken();
   if (isLoading){
     return (<SpinnerCircular/>);
   }
-
-  if (!isLoaded){
-    return (<NotFoundMain/>);
+  if (!isAuth){
+    return (<NotFoundMain name={'юзера нет'}/>);
   }
   setBackRoute(AppRoute.Main);
   return (
