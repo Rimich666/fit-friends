@@ -67,4 +67,4 @@ export const getEmptyTrainingCard = (): TrainingCardInterface => ({
   isSpecialOffer: false,
   videoPath: '',
   backgroundPath: ''
-})
+});

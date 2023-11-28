@@ -15,7 +15,6 @@ type Props = {
 }
 
 export const prepareUsersFilter = ({coachFilter, check, usersFilter}: Props): CatalogUsersFilterInterface => {
-  console.log(check);
   const trainingType = Object.keys(check.specialization).filter((key) => check.specialization[key]);
   const location = Object.keys(check.location).filter((key) => check.location[key]).map((key) =>
     UserLocation[key as keyof typeof UserLocation]);
@@ -36,7 +35,6 @@ export const prepareUsersFilter = ({coachFilter, check, usersFilter}: Props): Ca
     filter.sort = 'role';
     filter.order = usersFilter.role === RoleSort.coach ? Order.asc : Order.desc;
   }
-  console.log(filter);
   return filter;
 };
 

@@ -1,7 +1,7 @@
 import {useAppDispatch} from './index';
 import {useEffect, useState} from 'react';
 
-import {fetchFeedbacks} from "../store/api-actions/feedback-actions";
+import {fetchFeedbacks} from '../store/api-actions/feedback-actions';
 
 export default function useFetchFeedbacks(id: number) {
   const dispatch = useAppDispatch();

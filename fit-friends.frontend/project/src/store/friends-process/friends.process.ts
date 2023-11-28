@@ -35,7 +35,6 @@ export const friendProcess = createSlice({
         if (friend) {
           friend.isRequest = false;
         }
-      })
-    ;
+      });
   }
 });

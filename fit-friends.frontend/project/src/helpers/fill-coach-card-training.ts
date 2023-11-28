@@ -12,4 +12,4 @@ export const fillCoachCardTraining = (training: TrainingInterface): PopularTrain
     rating: training.rating,
     description: training.description
   }
-)
+);

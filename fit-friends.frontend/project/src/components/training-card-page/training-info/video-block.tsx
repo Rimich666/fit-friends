@@ -7,7 +7,7 @@ import {makeUpdateTrainingCardPayload} from '../../../helpers/make-update-traini
 import {useAppDispatch, useAppSelector} from '../../../hooks';
 import {updateTrainingCard} from '../../../store/api-actions/api-actions';
 import {selectBalance} from '../../../store/balance-process/balance.selectors';
-import {subBalance} from "../../../store/api-actions/balance-actions";
+import {subBalance} from '../../../store/api-actions/balance-actions';
 
 type VideoBlockProps = {
   role: Role;

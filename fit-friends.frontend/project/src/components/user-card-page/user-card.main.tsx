@@ -8,7 +8,7 @@ import CoachCardTrainings from './coach-card/coach-card-trainings';
 import React, {useState} from 'react';
 import Popup, {PopupType} from '../../popups/popup';
 import {useNavigate} from 'react-router-dom';
-import {getBackRoute} from "../../utils/back-route";
+import {getBackRoute} from '../../utils/back-route';
 
 type UserCardMainProps = {
   role: Role;

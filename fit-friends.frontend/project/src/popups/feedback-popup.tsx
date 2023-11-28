@@ -3,7 +3,7 @@ import RateItem from './rate.item';
 import TextArea from '../components/text-area/text-area';
 import {useAppDispatch, useAppSelector} from '../hooks';
 import {selectFeedbackProps} from '../store/popup-process/popup.selectors';
-import {createFeedback} from "../store/api-actions/feedback-actions";
+import {createFeedback} from '../store/api-actions/feedback-actions';
 
 type FeedbackPopupProps = {
   onClose: () => void;

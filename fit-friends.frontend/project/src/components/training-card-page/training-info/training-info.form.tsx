@@ -36,8 +36,6 @@ export default function TrainingInfoForm(props: TrainingInfoFormProps): JSX.Elem
 
   const count = useAppSelector(selectBalance);
 
-  console.log(count);
-
   const clickHandle = () => {
     setIsSpecial(!isSpecial);
     onChangeDiscount(!isSpecial);

@@ -1,5 +1,3 @@
-import {addCertificates} from "./api-actions/certificate.actions";
-
 export const TypeAction = {
   register: 'authentication/register',
   login: 'authentication/login',
@@ -13,6 +11,7 @@ export const TypeAction = {
   updateUser: 'user/update',
   fetchUsers: 'user/catalog',
   createTraining: 'training/create',
+  updateTraining: 'training/update',
   fetchCoachTrainings: 'trainings/coach',
   fetchCatalogTrainings: 'trainings/catalog',
   fetchTrainingsCoachCard: 'trainings/coachCard',

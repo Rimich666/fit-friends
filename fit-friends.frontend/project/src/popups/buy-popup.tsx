@@ -3,7 +3,6 @@ import {selectBuyProps} from '../store/popup-process/popup.selectors';
 import {useState} from 'react';
 import {PaymentOption, PurchaseType} from '../enums';
 import PaymentItem from './payment.item';
-import {addBalance} from '../store/api-actions/balance-actions';
 import {createOrderAction} from '../store/api-actions/order.action';
 
 type BuyPopupProps = {

@@ -10,21 +10,23 @@
 ### 1. Запуск бэка:
 
 1. Перейти в директорию:
-   1. `./fit-friend.backend/project` 
+   1. `./fit-friend.backend/project`
+    
+2. Создать env. файлы как описано ниже.
 
-2. Поднять четыре докер контейнера:
-   1. `docker compose --file ./apps/uploader/docker-compose.dev.yml`
-   2. `docker compose --file ./apps/coaching/docker-compose.dev.yml`
-   3. `docker compose --file ./apps/notify/docker-compose.dev.yml`
-   4. `docker compose --file ./apps/users/docker-compose.dev.yml`
+3. Поднять четыре докер контейнера:
+   1. `docker compose --file ./apps/uploader/docker-compose.dev.yml up -d`
+   2. `docker compose --file ./apps/coaching/docker-compose.dev.yml up -d`
+   3. `docker compose --file ./apps/notify/docker-compose.dev.yml up -d`
+   4. `docker compose --file ./apps/users/docker-compose.dev.yml up -d`
  
-3. Инициировать Prisma-client:
+4. Инициировать Prisma-client:
    1. `nx run coaching:db:generate`
 
-4. Сделать миграцию в базу:
+5. Сделать миграцию в базу:
    1. `npx prisma migrate dev --name "first migrate" --schema ./libs/models/coaching/prisma/schema.prisma --skip-generate --skip-seed`
 
-5. Запустить пять сервисов:
+6. Запустить пять сервисов:
    1. `nx run bff:serve`
    2. `nx run users:serve`
    3. `nx run coaching:serve`
@@ -245,3 +247,16 @@ URI к Postgres:
 
 `JW_RT_SECRET=jwt_refresh_secret`
 `JW_RT_EXPIRES_IN=7d`
+
+### 1. Запуск фронта:
+
+1. Перейти в директорию:
+   1. `./fit-friend.frontend/project`
+    
+2. Создать env. файл как описано ниже. (можно обойтись)
+   1. Можно задать порт.
+   2. И запретить ESLint`у мешать процессу.
+    
+3. npm start
+
+Вроде всё.

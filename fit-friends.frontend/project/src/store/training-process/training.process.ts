@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {
+  createTrainingAction,
   fetchCatalogTrainings,
   fetchCoachTrainings, fetchPurchases, fetchSpecialOffers,
   fetchTrainingCard, fetchTrainingsCoachCard,
@@ -14,6 +15,10 @@ import {fillTrainingCard, fillUpdateTrainingCard, getEmptyTrainingCard} from '..
 import {createFeedback} from '../api-actions/feedback-actions';
 import {fillCoachCardTraining} from '../../helpers/fill-coach-card-training';
 import {fillSpecialOffers} from '../../helpers/fill-special-offers';
+import {parseErrors} from '../../helpers/parse-register-errors';
+import {CreateTrainingInterface} from '../../types/create-training.interface';
+import {CreateTrainingErrorsInterface} from '../../types/create-training-errors.interface';
+import {fillCreateTrainingErrors} from '../../helpers/get-new-create-training';
 
 const initialState: TrainingState = {
   forYouTrainings: [],
@@ -49,6 +54,11 @@ const initialState: TrainingState = {
   isPurchasesLoaded: false,
   isPurchasesLoading: false,
   purchases: [],
+
+  isCreateTrainingError: false,
+  createTraining: undefined as unknown as CreateTrainingInterface,
+  createTrainingErrors: undefined as unknown as CreateTrainingErrorsInterface,
+  isAnotherError: false
 };
 
 export const trainingProcess = createSlice({
@@ -170,7 +180,27 @@ export const trainingProcess = createSlice({
       .addCase(fetchPurchases.rejected, (state, action) => {
         state.isPurchasesLoading = false;
       })
-    ;
+
+      .addCase(createTrainingAction.pending, (state) => {
+        state.isCreateTrainingError = false;
+        state.isAnotherError = false;
+      })
+      .addCase(createTrainingAction.fulfilled, (state, action) => {
+        state.createTraining = undefined as unknown as CreateTrainingInterface;
+        state.isCreateTrainingError = false;
+        state.createTrainingErrors = undefined as unknown as CreateTrainingErrorsInterface;
+      })
+
+      .addCase(createTrainingAction.rejected, (state, action) => {
+        if (action.error.code === 'Bad Request' && action.error.message) {
+          const errors = parseErrors(action.error.message);
+          state.createTrainingErrors = fillCreateTrainingErrors(errors);
+          state.isCreateTrainingError = Object.values(state.createTrainingErrors).join('').length > 0;
+          return;
+        }
+        state.isAnotherError = true;
+      });
+
   }
 });
 

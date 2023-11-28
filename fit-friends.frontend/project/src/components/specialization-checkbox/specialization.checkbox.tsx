@@ -2,7 +2,7 @@ import {Role, roleClass, TrainingType} from '../../enums';
 import SpecCheckBtn from './spec-check-btn';
 import React, {useEffect, useState} from 'react';
 import {SPECIALIZATION_LIMIT} from '../../settings';
-import {ComponentVariant} from "../../component-variant";
+import {ComponentVariant} from '../../component-variant';
 
 
 type SpecializationCheckboxProps = {

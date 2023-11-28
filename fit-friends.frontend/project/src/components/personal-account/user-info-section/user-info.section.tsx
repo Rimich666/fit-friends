@@ -15,7 +15,7 @@ import {updateUserValidators, validate} from '../../../utils/validate';
 import {makeUpdateUserPayload} from '../../../helpers/make-update-user-payload';
 import {UserInterface} from '../../../types/user.interface';
 import {updateUserAction} from '../../../store/api-actions/users-actions';
-import {selectChangeUser, selectUpdateUser} from '../../../store/register-process/register-selectors';
+import {selectUpdateUser} from '../../../store/register-process/register-selectors';
 
 type UserInfoSectionProps = {
   user: UserInterface;

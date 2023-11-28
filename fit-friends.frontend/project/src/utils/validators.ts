@@ -18,9 +18,5 @@ export const required: GetValidator<void, Types> = () =>
   };
 
 export const arrayNotEmpty: GetValidator<void, Types> = () =>
-  (value) => {
-    return (value as string[]).length === 0 ?
-      'Выберите хотя бы один элемент.' : '';
-  };
-
-
+  (value) => (value as string[]).length === 0 ?
+    'Выберите хотя бы один элемент.' : '';

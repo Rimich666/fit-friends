@@ -1,6 +1,5 @@
 import {arrayNotEmpty, maxLength, minLength, required, Validator} from './validators';
 import {Field, Types} from '../types/field.interface';
-import {Gender, Level, TrainingTime, TrainingType} from "../enums";
 
 export const registerValidators: {[k: string]: Validator<Types>[]} = {
   name: [required(), maxLength(15), minLength(1)],
@@ -48,8 +47,8 @@ export const createTrainingValidators: {[k: string]: Validator<Types>[]} = {
   video: [required()],
 };
 
-export const validate = <T extends Field>(field: T, validators: {[k: string]: Validator<Types>[]}) => {
-  return Object.fromEntries(Object.keys(field).map((key) =>
+export const validate = <T extends Field>(field: T, validators: {[k: string]: Validator<Types>[]}) =>
+  Object.fromEntries(Object.keys(field).map((key) =>
     validators[key as keyof typeof validators] ?
       ([key, validators[key as keyof typeof validators]
         .reduce(
@@ -57,4 +56,3 @@ export const validate = <T extends Field>(field: T, validators: {[k: string]: Va
           , '')
       ]) : ([key, ''])
   ));
-};

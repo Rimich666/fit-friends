@@ -6,7 +6,7 @@ import {QuestionnaireInterface} from '../../types/auth/questionnaire.interface';
 import {RegisterUserInterface} from '../../types/auth/register-user.interface';
 import {RegisterErrorsInterface} from '../../types/auth/register-errors.interface';
 import {QuestionnaireErrorsInterface} from '../../types/auth/questionnaire-errors.interface';
-import {parseRegisterErrors, parseUpdateUserErrors} from '../../helpers/parse-register-errors';
+import {parseRegisterErrors, parseErrors} from '../../helpers/parse-register-errors';
 import {fillRegisterErrors} from '../../helpers/get-new-register-user';
 import {fillQuestionnaireErrors} from '../../helpers/get-new-questionnaire';
 import {UserInterface} from '../../types/user.interface';
@@ -119,7 +119,10 @@ export const registerProcess = createSlice({
         state.certificate = action.payload.map((certificate) =>
           ({...certificate, ext: `${certificate.path.substring(certificate.path.lastIndexOf('.'))}`}));
       })
-
+      .addCase(updateUserAction.pending, (state) => {
+        state.isChangeUserError = false;
+        state.isAnotherError = false;
+      })
       .addCase(updateUserAction.fulfilled, (state, action) => {
         state.changeUser = undefined as unknown as UpdateUserInterface;
         state.isChangeUserError = false;
@@ -129,7 +132,7 @@ export const registerProcess = createSlice({
 
       .addCase(updateUserAction.rejected, (state, action) => {
         if (action.error.code === 'Bad Request' && action.error.message) {
-          const errors = parseUpdateUserErrors(action.error.message);
+          const errors = parseErrors(action.error.message);
           state.changeUserErrors = fillUpdateUserErrors(errors);
           state.isChangeUserError = Object.values(state.changeUserErrors).join('').length > 0;
           return;

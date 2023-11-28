@@ -29,7 +29,6 @@ const refreshTokenFn = async () => {
         'Content-Type': 'application/json',
       }
     });
-    console.log(data);
     const { accessToken, refreshToken} = data;
 
     saveToken(accessToken);

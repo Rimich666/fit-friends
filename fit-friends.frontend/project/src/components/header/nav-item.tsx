@@ -1,6 +1,5 @@
 import {HeaderLink, HeaderPoint, HeaderTitle} from './nav';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../app-route';
 
 type NavItemProps = {
   point: HeaderPoint;

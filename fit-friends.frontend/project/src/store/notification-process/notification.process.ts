@@ -27,7 +27,6 @@ export const notificationProcess = createSlice({
       })
       .addCase(fetchNotifications.rejected, (state, action) => {
         state.isNotificationsLoading = false;
-      })
-    ;
+      });
   }
 });

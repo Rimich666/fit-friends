@@ -8,7 +8,6 @@ export default function WantTrainingButton(): JSX.Element {
   const dispatch = useAppDispatch();
 
   const clickHandle = () => {
-    console.log(id);
     dispatch(createQuestion(id));
   };
   return (

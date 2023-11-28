@@ -41,8 +41,7 @@ export const popupProcess = createSlice({
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
         state.pages = action.payload.pages;
-      })
-    ;
+      });
   }
 });
 

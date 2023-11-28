@@ -54,7 +54,7 @@ export const parseRegisterErrors = (errorString: string) => {
   return parsed;
 };
 
-export const parseUpdateUserErrors = (errorString: string) => {
+export const parseErrors = (errorString: string) => {
   let parsed = {};
   const errors = JSON.parse(errorString) as Array<string>;
   if (!Array.isArray(errors)) {

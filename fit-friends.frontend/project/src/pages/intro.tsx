@@ -2,8 +2,8 @@ import {NavLink, useNavigate} from 'react-router-dom';
 
 
 import {AppRoute} from '../app-route';
-import {dropRefresh} from "../servises/refresh-token";
-import {dropToken} from "../servises/token";
+import {dropRefresh} from '../servises/refresh-token';
+import {dropToken} from '../servises/token';
 
 export default function Intro(): JSX.Element {
   const navigate = useNavigate();

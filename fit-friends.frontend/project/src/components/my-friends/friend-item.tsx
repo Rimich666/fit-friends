@@ -1,7 +1,7 @@
 import {RequestState, TrainingType, TrainingTypeText, UserLocation} from '../../enums';
 import {Themes} from '../../settings';
-import {useAppDispatch} from "../../hooks";
-import {changeStateQuestion} from "../../store/api-actions/join-actions";
+import {useAppDispatch} from '../../hooks';
+import {changeStateQuestion} from '../../store/api-actions/join-actions';
 
 type FriendItemProps = {
   name: string;

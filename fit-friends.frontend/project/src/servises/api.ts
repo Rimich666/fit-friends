@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {REQUEST_TIMEOUT} from '../settings';
-import {getExp, getToken} from './token';
+import {getToken} from './token';
 import {getBaseUrl} from '../helpers/get-base-url';
 import {toast} from 'react-toastify';
 import {getErrorToastMessage} from './error-toast-message';

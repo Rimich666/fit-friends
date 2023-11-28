@@ -3,7 +3,7 @@ import {NameSpace} from '../../settings';
 import {ReviewState} from '../../types/states/review-state';
 import {ReviewInterface} from '../../types/review.interface';
 import {fillReview} from '../../helpers/fill-review';
-import {createFeedback, fetchFeedbacks} from "../api-actions/feedback-actions";
+import {createFeedback, fetchFeedbacks} from '../api-actions/feedback-actions';
 
 const initialState: ReviewState = {
   reviews: [],

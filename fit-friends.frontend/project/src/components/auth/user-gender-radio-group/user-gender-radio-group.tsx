@@ -2,7 +2,7 @@ import {Gender, GenderText, GenderTrainingText} from '../../../enums';
 import CustomToggleRadio from '../../custom-toggle-radio/custom-toggle-radio';
 import {useEffect, useState} from 'react';
 
-import {ComponentVariant} from "../../../component-variant";
+import {ComponentVariant} from '../../../component-variant';
 
 type UserGenderRadioGroupProps = {
   callback: (value: string) => void;

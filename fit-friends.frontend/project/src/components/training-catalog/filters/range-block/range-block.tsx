@@ -55,7 +55,6 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
   };
 
   const mouseLeaveHandle = () => {
-    console.log('mouseLeaveHandle');
     endDrag();
   };
 
@@ -99,8 +98,6 @@ export default function RangeBlock({formClass, type, callback}: RangeBlockProps)
   const mouseMaxDownHandle = (evt: React.MouseEvent) => {
     isDown.max = true;
   };
-
-  const onHandle = (on: string) => {console.log(on)};
 
   const onInput = ({min, max}: RangeConstraint) => {
     currentRange.max = max;

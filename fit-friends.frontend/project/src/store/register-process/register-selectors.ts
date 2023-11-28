@@ -8,8 +8,8 @@ import {createSelector} from '@reduxjs/toolkit';
 import {QuestionnaireInterface} from '../../types/auth/questionnaire.interface';
 import {UserInterface} from '../../types/user.interface';
 import {CertificateInterface} from '../../types/certificate.interface';
-import {UpdateUserErrorsInterface} from "../../types/update-user-errors.interface";
-import {UpdateUserInterface} from "../../types/update-user.interface";
+import {UpdateUserErrorsInterface} from '../../types/update-user-errors.interface';
+import {UpdateUserInterface} from '../../types/update-user.interface';
 
 export const selectRegisterUser = (state: RootState): RegisterUserInterface => state[NameSpace.Register].registerUser;
 

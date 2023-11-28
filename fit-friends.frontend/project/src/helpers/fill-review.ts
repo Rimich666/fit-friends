@@ -7,4 +7,4 @@ export const fillReview = (feedback: FeedbackInterface): ReviewInterface => ({
   avatar: feedback.author.avatarPath,
   rating: feedback.rating,
   comment: feedback.text,
-})
+});

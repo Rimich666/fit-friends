@@ -88,8 +88,7 @@ export const userProcess = createSlice({
       })
       .addCase(checkSubscribe.fulfilled, (state, action) => {
         state.isSubscribe = action.payload;
-      })
-    ;
+      });
   }
 });
 

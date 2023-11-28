@@ -74,7 +74,6 @@ export default function CertificateList(): JSX.Element {
     setSlideNumber(slideNumber + value);
   };
 
-  console.log(isDelete, length, indexes);
   if (isDelete) {
     return <SpinnerCircular/>;
   }

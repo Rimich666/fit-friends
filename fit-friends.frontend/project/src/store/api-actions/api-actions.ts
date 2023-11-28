@@ -78,7 +78,7 @@ export const updateTrainingCard = createAsyncThunk<TrainingInterface, UpdateTrai
   dispatch: AppDispatch;
   state: RootState;
   extra: AxiosInstance;
-}>(TypeAction.createTraining,
+}>(TypeAction.updateTraining,
   async (card: UpdateTrainingCard, {extra: axiosApi}) => {
     const {data} = await axiosApi.patch<TrainingInterface>(
       `${ApiRoute.Training}/${card.id}`,

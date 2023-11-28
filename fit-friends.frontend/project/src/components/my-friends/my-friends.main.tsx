@@ -2,10 +2,9 @@ import FriendList from './friend-list';
 import useFetchFriends from '../../hooks/use-fetch-friends';
 import {coachFriends} from './coach-friends';
 import {Role} from '../../enums';
-import {useNavigate} from "react-router-dom";
-import {useAppSelector} from "../../hooks";
-import {selectFriends} from "../../store/friends-process/friend.selectors";
-import {selectBackRoute} from "../../store/back-process/back.selectors";
+import {useNavigate} from 'react-router-dom';
+import {useAppSelector} from '../../hooks';
+import {selectBackRoute} from '../../store/back-process/back.selectors';
 
 type MyFriendsMainProps = {
   role: Role;

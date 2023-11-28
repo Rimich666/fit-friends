@@ -6,6 +6,8 @@ import {fillTrainingMiniCard} from '../../helpers/fill-training-card';
 import {ComponentVariant} from '../../component-variant';
 import {PopularTrainingItemProps} from '../../components/main-page/popular-training/popular-training.item';
 import {SpecialOfferInterface} from '../../components/main-page/special-offer/special-offer.item';
+import {CreateTrainingErrorsInterface} from '../../types/create-training-errors.interface';
+import {CreateTrainingInterface} from '../../types/create-training.interface';
 
 export const selectIsForYouLoading = (state: RootState): boolean => state[NameSpace.Training].isForYouLoading;
 
@@ -84,3 +86,15 @@ export const selectTrainingsForCoachCard = createSelector(
   [selectCoachCardTrainings, selectIsCoachCardLoading, selectIsCoachCardLoaded], (
     trainings, isLoading, isLoaded
   ) => ({trainings, isLoading, isLoaded}));
+
+export const selectCreateTrainingError = (state: RootState): CreateTrainingErrorsInterface =>
+  state[NameSpace.Training].createTrainingErrors;
+export const selectIsCreateTrainingError = (state: RootState): boolean =>
+  state[NameSpace.Training].isCreateTrainingError;
+export const selectCreatedTraining = (state: RootState): CreateTrainingInterface =>
+  state[NameSpace.Training].createTraining;
+
+export const selectCreateTraining =
+  createSelector([selectCreateTrainingError, selectIsCreateTrainingError, selectCreatedTraining],
+    (createTrainingErrors, isCreateTrainingError, createTraining) =>
+      ({createTrainingErrors, isCreateTrainingError, createTraining}));
