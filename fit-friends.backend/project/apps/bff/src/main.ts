@@ -17,7 +17,7 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   const configService = app.get(ConfigService);
 
-  const port = configService.get<number>('port');
+  const port = configService.get<number>('PORT');
   app.use(corsMiddleware);
   await app.listen(port);
   Logger.log(
