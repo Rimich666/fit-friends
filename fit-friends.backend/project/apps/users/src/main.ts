@@ -15,13 +15,15 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   const configService = app.get(ConfigService);
   const logger = new Logger('Users main');
-  logger.log(`Users port: ${configService.getOrThrow('port')}`);
-  const port = configService.get<number>('port');
+  logger.log(configService);
+  logger.log(`Users PORT: ${configService.getOrThrow('PORT')}`);
+
+  const port = configService.get<number>('PORT');
   await app.listen(port);
-  Logger.log(
+  logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
   );
-  Logger.log(
+  logger.log(
     `🎯  Current mode: ${configService.get('application.environment')}`
   );
 }

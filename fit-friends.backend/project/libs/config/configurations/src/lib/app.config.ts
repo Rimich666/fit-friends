@@ -36,6 +36,5 @@ export default registerAs('application', (): ApplicationConfig => {
       Error message: Application.${error.message}`,
     );
   }
-
   return config;
 });
