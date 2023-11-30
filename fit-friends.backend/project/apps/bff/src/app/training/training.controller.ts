@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Get,
@@ -44,7 +45,8 @@ export class TrainingController {
   @UseInterceptors(FileInterceptor('video'))
   async create(
     @UploadedFile(new ParseFilePipe({
-      validators: [new FileTypeValidator({types: ['avi', 'mov', 'mp4']})]})) file: Express.Multer.File,
+      validators: [new FileTypeValidator({types: ['avi', 'mov', 'mp4']})],
+      exceptionFactory: (error) => new BadRequestException(`Video ${[error]}`)})) file: Express.Multer.File,
     @Token() token: string,
     @Body('training', JsonPipe) dto: CreateTrainingDto,
     @Origin() origin: string) {

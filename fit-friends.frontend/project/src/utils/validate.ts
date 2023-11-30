@@ -47,6 +47,12 @@ export const createTrainingValidators: {[k: string]: Validator<Types>[]} = {
   video: [required()],
 };
 
+export const updateTrainingValidators: {[k: string]: Validator<Types>[]} = {
+  name: [required(), maxLength(15), minLength(1)],
+  description: [required()],
+  video: [required()],
+};
+
 export const validate = <T extends Field>(field: T, validators: {[k: string]: Validator<Types>[]}) =>
   Object.fromEntries(Object.keys(field).map((key) =>
     validators[key as keyof typeof validators] ?

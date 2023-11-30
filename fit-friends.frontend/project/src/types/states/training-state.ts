@@ -6,6 +6,7 @@ import {RegisterUserInterface} from "../auth/register-user.interface";
 import {RegisterErrorsInterface} from "../auth/register-errors.interface";
 import {CreateTrainingInterface} from "../create-training.interface";
 import {CreateTrainingErrorsInterface} from "../create-training-errors.interface";
+import {UpdateTrainingErrorInterface} from "../update-training-error.interface";
 export type RangeConstraint = {
   min: number;
   max: number;
@@ -43,7 +44,8 @@ export type TrainingState = {
   isPurchasesLoading: boolean;
   purchases: TrainingInterface[];
   isCreateTrainingError: boolean;
-  createTraining: CreateTrainingInterface;
   createTrainingErrors: CreateTrainingErrorsInterface;
+  isUpdateTrainingError: boolean;
+  updateTrainingErrors: UpdateTrainingErrorInterface;
   isAnotherError: boolean;
 };

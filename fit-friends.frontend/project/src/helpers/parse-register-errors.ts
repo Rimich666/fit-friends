@@ -1,3 +1,5 @@
+import {parseKey} from './parse-errors';
+
 const Mapping = {
   email: {
     class: 'user',
@@ -33,12 +35,6 @@ const Mapping = {
   }
 };
 
-const parseKey = (error: string) => {
-  const words = error.split(' ').map((word) => word.startsWith('addition.') ?
-    word.substring(9) : word);
-  return words[words.findIndex((item) => Object.keys(Mapping).includes(item))];
-};
-
 
 export const parseRegisterErrors = (errorString: string) => {
   let parsed = {user: {}, questionnaire: {}};
@@ -46,20 +42,10 @@ export const parseRegisterErrors = (errorString: string) => {
   if (!Array.isArray(errors)) {
     return parsed;
   }
-  parsed = errors.map((error) => ([parseKey(error), error]))
+  parsed = errors.map((error) => ([parseKey(error, Object.keys(Mapping)), error]))
     .reduce((acc, curr) => ({...acc, [Mapping[curr[0] as keyof typeof Mapping].class]:
           {...acc[Mapping[curr[0] as keyof typeof Mapping].class as keyof typeof parsed] ,
             [Mapping[curr[0] as keyof typeof Mapping].field]: curr[1]}}),
     parsed);
-  return parsed;
-};
-
-export const parseErrors = (errorString: string) => {
-  let parsed = {};
-  const errors = JSON.parse(errorString) as Array<string>;
-  if (!Array.isArray(errors)) {
-    return parsed;
-  }
-  parsed = Object.fromEntries(errors.map((error) => ([parseKey(error), error])));
   return parsed;
 };

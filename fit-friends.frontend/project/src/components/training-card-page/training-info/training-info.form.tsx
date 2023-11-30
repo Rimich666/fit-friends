@@ -50,6 +50,8 @@ export default function TrainingInfoForm(props: TrainingInfoFormProps): JSX.Elem
     onInputPrice(value);
   };
 
+  console.log(props);
+
   return (
     <form action="#" method="get">
       <div className="training-info__form-wrapper">

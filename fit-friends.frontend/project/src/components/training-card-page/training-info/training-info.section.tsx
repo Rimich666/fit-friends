@@ -2,16 +2,22 @@ import TrainingInfoHeader from './training-info.header';
 import TrainingInfoForm from './training-info.form';
 import {Role} from '../../../enums';
 import VideoBlock from './video-block';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {ButtonsMode, TrainingInfoMode} from './training-info-mode';
 import {useAppDispatch, useAppSelector} from '../../../hooks';
-import {selectCard, selectIsTrainingCardLoading} from '../../../store/training-process/training.selectors';
+import {
+  selectCard,
+  selectIsTrainingCardLoading,
+  selectUpdateTraining
+} from '../../../store/training-process/training.selectors';
 import {SpinnerCircular} from 'spinners-react';
 import {UpdateTrainingCardInterface} from '../../../types/update-training-card.interface';
 import {updateTrainingCard} from '../../../store/api-actions/api-actions';
 import {makeUpdateTrainingCardPayload} from '../../../helpers/make-update-training-payload';
 import {setBuy} from '../../../store/popup-process/popup.process';
 import {DISCOUNT} from '../../../settings';
+import {fillUpdateTrainingErrors, getEmptyUpdateTrainingErrors} from '../../../helpers/get-new-update-training';
+import {questionnaireValidators, updateTrainingValidators, validate} from '../../../utils/validate';
 
 type TrainingInfoSectionProps = {
   role: Role;
@@ -23,7 +29,30 @@ export default function TrainingInfoSection({role, onClickBuy}: TrainingInfoSect
   const isLoading = useAppSelector(selectIsTrainingCardLoading);
   const {coach, id, ...card} = useAppSelector(selectCard);
   const [changes] = useState<UpdateTrainingCardInterface>({training: {}, id: id});
+  const [errors, setErrors] = useState(getEmptyUpdateTrainingErrors());
   const dispatch = useAppDispatch();
+
+  const {
+    updateTrainingErrors,
+    isUpdateTrainingError,
+  } = useAppSelector(selectUpdateTraining);
+
+  useEffect(() => {
+    if (isUpdateTrainingError) {
+      setErrors({...updateTrainingErrors});
+    }
+  }, [isUpdateTrainingError]);
+
+  const saveChanges = () => {
+    const validateErrors = validate(errors.video ?
+      {...changes.training, video: changes.video as File} : {...changes.training}, updateTrainingValidators);
+    const isError = Object.values(validateErrors).join('').length > 0;
+    if (isError){
+      setErrors(fillUpdateTrainingErrors(validateErrors));
+      return;
+    }
+    dispatch(updateTrainingCard(makeUpdateTrainingCardPayload({...changes, id})));
+  };
 
   const onBuy = () => {
     dispatch(setBuy({
@@ -51,10 +80,6 @@ export default function TrainingInfoSection({role, onClickBuy}: TrainingInfoSect
   };
 
   const callbacks = {onInputPrice, onInputName, onInputDescription, onChangeDiscount, onBuy};
-
-  const saveChanges = () => {
-    dispatch(updateTrainingCard(makeUpdateTrainingCardPayload({...changes, id})));
-  };
 
   const onChangeMode = (value: string) => {
     if (value === ButtonsMode.save) {

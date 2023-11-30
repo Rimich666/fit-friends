@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import * as Joi from 'joi';
 import * as process from 'process';
+import {Logger} from '@nestjs/common';
 
 const DEFAULT_PORT = 3001;
 
@@ -20,7 +21,8 @@ export default registerAs('application', (): ApplicationConfig => {
     environment: process.env.NODE_ENV || environmentValue.development,
     port: parseInt(process.env.PORT || DEFAULT_PORT.toString(), 10),
   };
-
+  const logger = new Logger('AppConfig');
+  logger.log(`application port = ${config.port}`);
   const validationSchema = Joi.object<ApplicationConfig>({
     environment: Joi.string().valid(...Object.values(environmentValue)).required(),
     port: Joi.number().port().default(DEFAULT_PORT),

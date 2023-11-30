@@ -15,13 +15,12 @@ import FileLoad from '../../file-load/file-load';
 import {createTrainingValidators, validate} from '../../../utils/validate';
 import {createTrainingAction} from '../../../store/api-actions/api-actions';
 import {ComponentVariant} from '../../../component-variant';
-import {selectCurrentUser} from '../../../store/register-process/register-selectors';
 import {selectCreateTraining} from '../../../store/training-process/training.selectors';
+import {getSelfId} from '../../../servises/token';
 
 export default function CreateTrainingForm(): JSX.Element {
   const [training] = useState(getNewCreateTraining());
   const [errors, setErrors] = useState(getEmptyCreateTrainingErrors());
-  // const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useAppDispatch();
 
   const {createTrainingErrors, isCreateTrainingError} =
@@ -33,7 +32,7 @@ export default function CreateTrainingForm(): JSX.Element {
     }
   }, [isCreateTrainingError]);
 
-  const userId = useAppSelector(selectCurrentUser).id;
+  const userId = getSelfId();
 
   const onInputName = (text: string) => {
     training.name = text;

@@ -36,10 +36,10 @@ export const fillCreateTrainingErrors = (errors: {[k: string]: string}): CreateT
   {
     name: errors.name ? errors.name : '',
     level: errors.level ? errors.level : '',
-    trainingType: errors.trainingType ? errors.trainingType : '',
-    trainingTime: errors.trainingTime ? errors.trainingTime : '',
+    trainingType: errors.trainingtype ? errors.trainingtype : '',
+    trainingTime: errors.trainingtime ? errors.trainingtime : '',
     price: errors.price ? errors.price : '',
-    caloriesCount: errors.caloriesCount ? errors.caloriesCount : '',
+    caloriesCount: errors.caloriescount ? errors.caloriescount : '',
     description: errors.description ? errors.description : '',
     gender: errors.gender ? errors.gender : '',
     video: errors.video ? errors.video : '',

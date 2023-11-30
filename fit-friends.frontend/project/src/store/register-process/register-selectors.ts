@@ -9,7 +9,6 @@ import {QuestionnaireInterface} from '../../types/auth/questionnaire.interface';
 import {UserInterface} from '../../types/user.interface';
 import {CertificateInterface} from '../../types/certificate.interface';
 import {UpdateUserErrorsInterface} from '../../types/update-user-errors.interface';
-import {UpdateUserInterface} from '../../types/update-user.interface';
 
 export const selectRegisterUser = (state: RootState): RegisterUserInterface => state[NameSpace.Register].registerUser;
 
@@ -43,12 +42,10 @@ export const selectUpdateUserError = (state: RootState): UpdateUserErrorsInterfa
   state[NameSpace.Register].changeUserErrors;
 export const selectIsUpdateUserError = (state: RootState): boolean =>
   state[NameSpace.Register].isChangeUserError;
-export const selectChangeUser = (state: RootState): UpdateUserInterface =>
-  state[NameSpace.Register].changeUser;
 
-export const selectUpdateUser = createSelector([selectUpdateUserError, selectIsUpdateUserError, selectChangeUser],
-  (changeUserErrors, isChangeUserError, changeUser) =>
-    ({changeUserErrors, isChangeUserError, changeUser}));
+export const selectUpdateUser = createSelector([selectUpdateUserError, selectIsUpdateUserError],
+  (changeUserErrors, isChangeUserError) =>
+    ({changeUserErrors, isChangeUserError}));
 
 export const selectCurrentUser = (state: RootState): UserInterface => state[NameSpace.Register].currentUser;
 

@@ -15,10 +15,11 @@ import {fillTrainingCard, fillUpdateTrainingCard, getEmptyTrainingCard} from '..
 import {createFeedback} from '../api-actions/feedback-actions';
 import {fillCoachCardTraining} from '../../helpers/fill-coach-card-training';
 import {fillSpecialOffers} from '../../helpers/fill-special-offers';
-import {parseErrors} from '../../helpers/parse-register-errors';
-import {CreateTrainingInterface} from '../../types/create-training.interface';
 import {CreateTrainingErrorsInterface} from '../../types/create-training-errors.interface';
 import {fillCreateTrainingErrors} from '../../helpers/get-new-create-training';
+import {trainingErrorKeys, parseErrors} from '../../helpers/parse-errors';
+import {UpdateTrainingErrorInterface} from '../../types/update-training-error.interface';
+import {fillUpdateTrainingErrors} from '../../helpers/get-new-update-training';
 
 const initialState: TrainingState = {
   forYouTrainings: [],
@@ -56,8 +57,10 @@ const initialState: TrainingState = {
   purchases: [],
 
   isCreateTrainingError: false,
-  createTraining: undefined as unknown as CreateTrainingInterface,
   createTrainingErrors: undefined as unknown as CreateTrainingErrorsInterface,
+
+  isUpdateTrainingError: false,
+  updateTrainingErrors: undefined as unknown as UpdateTrainingErrorInterface,
   isAnotherError: false
 };
 
@@ -186,20 +189,38 @@ export const trainingProcess = createSlice({
         state.isAnotherError = false;
       })
       .addCase(createTrainingAction.fulfilled, (state, action) => {
-        state.createTraining = undefined as unknown as CreateTrainingInterface;
         state.isCreateTrainingError = false;
         state.createTrainingErrors = undefined as unknown as CreateTrainingErrorsInterface;
       })
 
       .addCase(createTrainingAction.rejected, (state, action) => {
         if (action.error.code === 'Bad Request' && action.error.message) {
-          const errors = parseErrors(action.error.message);
+          const errors = parseErrors(action.error.message, trainingErrorKeys);
           state.createTrainingErrors = fillCreateTrainingErrors(errors);
           state.isCreateTrainingError = Object.values(state.createTrainingErrors).join('').length > 0;
           return;
         }
         state.isAnotherError = true;
-      });
+      })
+      .addCase(updateTrainingCard.pending, (state) => {
+        state.isUpdateTrainingError = false;
+        state.isAnotherError = false;
+      })
+      .addCase(updateTrainingCard.fulfilled, (state, action) => {
+        state.isUpdateTrainingError = false;
+        state.updateTrainingErrors = undefined as unknown as UpdateTrainingErrorInterface;
+      })
+
+      .addCase(updateTrainingCard.rejected, (state, action) => {
+        if (action.error.code === 'Bad Request' && action.error.message) {
+          const errors = parseErrors(action.error.message, trainingErrorKeys);
+          state.updateTrainingErrors = fillUpdateTrainingErrors(errors);
+          state.isUpdateTrainingError = Object.values(state.updateTrainingErrors).join('').length > 0;
+          return;
+        }
+        state.isAnotherError = true;
+      })
+    ;
 
   }
 });
