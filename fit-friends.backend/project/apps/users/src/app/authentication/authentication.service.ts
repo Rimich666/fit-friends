@@ -24,7 +24,7 @@ export class AuthenticationService {
 
 
   public async register(dto: CreateUserDto): Promise<UserInterface> {
-    const {email, name, password} = dto;
+    const {email, password} = dto;
 
     const user = {
       ...dto,

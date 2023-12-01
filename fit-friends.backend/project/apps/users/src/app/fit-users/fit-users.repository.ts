@@ -1,7 +1,7 @@
 import {Injectable} from '@nestjs/common';
 import {Model} from 'mongoose';
 import {InjectModel} from '@nestjs/mongoose';
-import {Order, UserInterface} from '@project/shared-types';
+import {Field, Order, UserInterface} from '@project/shared-types';
 import {FitUserModel} from '@project/fit-users.model';
 import {UserEntity} from './user.entity';
 import {UsersFilterDto} from '@project/shared-dto';
@@ -26,7 +26,7 @@ export class FitUsersRepository {
 
   private async makeFilter(filters: UsersFilterDto) {
     const getOption = (filter: {[p: string]: string | string[]}, key: string) => {
-      if (key === 'trainingType') {
+      if (key === Field.trainingType) {
         return {$elemMatch: {$in: [...filter[key]]}};
       }
       return {$in: [...filter[key]]};

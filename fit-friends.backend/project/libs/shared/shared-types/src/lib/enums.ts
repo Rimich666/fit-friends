@@ -63,3 +63,7 @@ export enum RequestState {
   rejected = 'rejected',
   consideration = 'consideration'
 }
+
+export enum Field {
+  trainingType= 'trainingType'
+}

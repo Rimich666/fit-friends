@@ -10,14 +10,14 @@ import { AppModule } from './app/app.module';
 import {ConfigService} from '@nestjs/config';
 
 async function bootstrap() {
+  const GLOBAL_PREFIX = '';
   const app = await NestFactory.create(AppModule);
-  const globalPrefix = '';
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(GLOBAL_PREFIX);
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT');
   await app.listen(port);
   Logger.log(
-    `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`
+    `🚀 Application is running on: http://localhost:${port}/${GLOBAL_PREFIX}`
   );
   Logger.log(
     `🎯  Current mode: ${configService.get('application.environment')}`
