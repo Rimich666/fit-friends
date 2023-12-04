@@ -1,8 +1,6 @@
 import {CoachTrainingsFilterInterface} from '../types/filters/coach-trainings-filter.interface';
 import {LIMIT} from '../settings';
 
-// const LIMIT = 12;
-
 enum QueryKey {
   time = 'trainingTime',
   priceMin = 'priceMin',

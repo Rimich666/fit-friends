@@ -4,7 +4,7 @@ import {useAppSelector} from '../../../hooks';
 import {selectTrainingsForCoachCard} from '../../../store/training-process/training.selectors';
 import {SpinnerCircular} from 'spinners-react';
 import NotFoundMain from '../../main-not-found/not-found.main';
-import WantTrainingButton from './wantTraining.button';
+import WantTrainingButton from './want-training.button';
 import AgreementCheck from './agreement.check';
 
 type CoachCardProps = {

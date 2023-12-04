@@ -1,4 +1,3 @@
-import {CertificateItemProps} from './certificate.item';
 
 export const certificates = [
   {
