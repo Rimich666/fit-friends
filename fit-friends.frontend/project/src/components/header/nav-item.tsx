@@ -9,7 +9,9 @@ type NavItemProps = {
 export default function NavItem({point, isActive}: NavItemProps): JSX.Element {
   return (
     <li className="main-nav__item">
-      <Link className={`main-nav__link ${isActive ? 'is-active' : ''}`} to={HeaderLink[point]} aria-label={HeaderTitle[point]}>
+      <Link className={`main-nav__link ${isActive ? 'is-active' : ''}`} to={HeaderLink[point]}
+        aria-label={HeaderTitle[point]} data-testid={`nav-item-${point}`}
+      >
         <svg width="18" height="18" aria-hidden="true">
           <use xlinkHref={`#icon-${point}`}/>
         </svg>

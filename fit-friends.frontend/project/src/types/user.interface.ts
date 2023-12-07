@@ -1,5 +1,5 @@
 import {Gender, Level, Role, TrainingTime, TrainingType, UserLocation} from '../enums';
-import {CertificateInterface} from "./certificate.interface";
+import {CertificateInterface} from './certificate.interface';
 
 export interface UserInterface {
   id: string;

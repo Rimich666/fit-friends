@@ -21,7 +21,7 @@ export default function SelectRoleButton(props: SelectRoleGroupButton): JSX.Elem
     <div className="role-btn">
       <label>
         <input className="visually-hidden" type="radio" name="role" value={props.value} checked={props.checked}
-          onChange={changeHandle}
+          onChange={changeHandle} data-testid = {`select-role-button-${props.value}`}
         />
         <span className="role-btn__icon">
           <svg width="12" height="13" aria-hidden="true">

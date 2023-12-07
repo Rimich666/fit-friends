@@ -39,7 +39,7 @@ export enum RangeName {
 export enum H1 {
   trainingCatalog = 'Каталог тренировок',
   myTraining = 'Мои тренировки',
-  userCatalog = 'Каталог пользователя'
+  userCatalog = 'Каталог пользователей'
 }
 
 export enum FilterTitle {

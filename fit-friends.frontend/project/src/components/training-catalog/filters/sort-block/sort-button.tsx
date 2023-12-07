@@ -18,7 +18,7 @@ export default function SortButton({sort, isCheck, callback}: SortButtonProps): 
   };
   return (
     <label>
-      <input type="radio" name="sort" checked={isCheck} value={sort} onClick={clickHandle}/>
+      <input type="radio" name="sort" checked={isCheck} value={sort} onClick={clickHandle} data-testid={sort}/>
       <span className="btn-radio-sort__label">{TrainingSort[sort as keyof typeof TrainingSort]}</span>
     </label>
   );

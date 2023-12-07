@@ -20,6 +20,7 @@ export default function CustomToggleRadio(props: CustomToggleRadioProps): JSX.El
           checked={props.checked}
           value={props.value}
           onChange={changeHandle}
+          data-testid={`radio-button-${props.value}`}
         />
         <span className="custom-toggle-radio__icon"/>
         <span className="custom-toggle-radio__label">{props.text}</span>

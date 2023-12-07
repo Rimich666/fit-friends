@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {FriendInterface} from '../types/friend.interface';
 import {fetchFriends} from '../store/api-actions/friends-actions';
 
-export default function useFetchFriends(friends: FriendInterface[]) {
+export default function useFetchFriends() {
   const dispatch = useAppDispatch();
   const [fetch] = useState({first: true});
   useEffect(() => {

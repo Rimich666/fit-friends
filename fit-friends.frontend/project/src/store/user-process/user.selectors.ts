@@ -23,8 +23,6 @@ export const selectIsCompanyLoaded = (state: RootState): boolean => state[NameSp
 
 export const selectCompany = (state: RootState): UserInterface[] => state[NameSpace.User].company;
 
-// export const selectFriends = (state: RootState): FriendInterface[] => state[NameSpace.User].friends;
-
 export const selectUserCatalog = (state: RootState): UserCardInterface[] => state[NameSpace.User].catalog;
 
 export const selectIsFriend = (state: RootState): boolean => state[NameSpace.User].isFriend;

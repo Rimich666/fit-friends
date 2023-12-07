@@ -48,6 +48,7 @@ export default function CustomSelect({errorMessage, ...props}: CustomSelectProps
         aria-label="Выберите одну из опций"
         onClick={arrowClickHandle}
         disabled={props.disabled}
+        data-testid={'arrow-button'}
       >
         <span className="custom-select__text">{selection}</span>
         <span className="custom-select__icon">
@@ -57,9 +58,11 @@ export default function CustomSelect({errorMessage, ...props}: CustomSelectProps
         </span>
       </button>
       <span className="custom-select__error">{errorMessage}</span>
-      <ul className="custom-select__list" role="listbox">
+      <ul className="custom-select__list" role="listbox" data-testid={'select-list'}>
         {Object.keys(props.options).map((key) => (
-          <li className="custom-select__item" title={key} key={key} onClick={selectHandle}>{props.options[key]}</li>
+          <li className="custom-select__item" title={key} key={key} onClick={selectHandle} data-testid={`select-item-${key}`}>
+            {props.options[key]}
+          </li>
         ))}
       </ul>
     </div>

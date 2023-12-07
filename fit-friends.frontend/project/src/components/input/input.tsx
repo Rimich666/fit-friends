@@ -34,7 +34,9 @@ export default function Input({errorMessage, value, ...props}: InputProps): JSX.
       <div className={`training-info__input training-info__input--${props.class}`}>
         <label>
           <span className="training-info__label">{props.label}</span>
-          <input type={props.type} name={props.name} value={input} onInput={inputHandle} disabled={props.disabled}/>
+          <input type={props.type} name={props.name} value={input} onInput={inputHandle}
+            disabled={props.disabled} data-testid={props.testId}
+          />
         </label>
         <div className="training-info__error">{errorMessage}</div>
       </div>
@@ -45,7 +47,7 @@ export default function Input({errorMessage, value, ...props}: InputProps): JSX.
           {props.label.length > 0 && <span className="custom-input__label">{props.label}</span>}
           <span className="custom-input__wrapper">
             <input type={props.type} name={props.name} autoComplete={props.autoComplete}
-              value={input} onInput={inputHandle} disabled={props.disabled}
+              value={input} onInput={inputHandle} disabled={props.disabled} data-testid={props.testId}
             />
             {props.text.length > 0 && <span className="custom-input__text">{props.text}</span>}
           </span>

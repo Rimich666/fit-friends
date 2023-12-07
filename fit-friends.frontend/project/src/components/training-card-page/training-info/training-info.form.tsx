@@ -113,7 +113,7 @@ export default function TrainingInfoForm(props: TrainingInfoFormProps): JSX.Elem
             />}
           {props.role === Role.coach && (
             <button className="btn-flat btn-flat--light btn-flat--underlined training-info__discount" type="button"
-              disabled={props.isDisabled} onClick={clickHandle}
+              disabled={props.isDisabled} onClick={clickHandle} data-testid={'training-info-discount-btn'}
             >
               <svg width="14" height="14" aria-hidden="true">
                 <use xlinkHref="#icon-discount"/>

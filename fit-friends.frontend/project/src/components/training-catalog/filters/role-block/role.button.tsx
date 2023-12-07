@@ -18,7 +18,7 @@ export default function RoleButton({role, isCheck, callback}: RoleButtonProps): 
 
   return (
     <label>
-      <input type="radio" name="sort" checked={isCheck} value={role} onClick={clickHandle}/>
+      <input type="radio" name="sort" checked={isCheck} value={role} onClick={clickHandle} data-testid={`check-sort-${role}`}/>
       <span className="btn-radio-sort__label">{RoleSort[role as keyof typeof RoleSort]}</span>
     </label>
   );

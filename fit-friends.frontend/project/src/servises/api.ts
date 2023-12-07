@@ -8,7 +8,7 @@ import {browserHistory} from '../browser-history';
 
 import {AppRoute} from '../app-route';
 import {ApiRoute} from '../api-route';
-import {memoizedRefreshToken} from './refresh-token';
+import {getRefresh, memoizedRefreshToken,} from './refresh-token';
 
 type ErrorData = {
   statusCode: string;
@@ -50,7 +50,7 @@ export const createAPI = (): AxiosInstance => {
         browserHistory.push(AppRoute.Main);
       }
       if (error?.response?.status === 401) {
-        const accessToken = await memoizedRefreshToken();
+        const accessToken = await memoizedRefreshToken(getRefresh());
         if (accessToken) {
           config.headers = {
             ...config.headers,

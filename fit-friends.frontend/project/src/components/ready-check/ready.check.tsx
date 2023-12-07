@@ -23,7 +23,7 @@ export default function ReadyCheck({isChecked, ...props}: RedyCheckProps): JSX.E
       <label>
         <input type="checkbox" value={name[props.variant as keyof typeof name]}
           name={name[props.variant as keyof typeof name]} checked={isCheck}
-          onChange={changeHandle} disabled={props.isDisabled}
+          onChange={changeHandle} disabled={props.isDisabled} data-testid={'ready-check'}
         />
         <span className={svgClass[props.variant as keyof typeof svgClass]}>
           <svg width="9" height="6" aria-hidden="true">

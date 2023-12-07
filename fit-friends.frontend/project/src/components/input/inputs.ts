@@ -4,6 +4,7 @@ export interface InputAttributes {
   label: string;
   name: string;
   text: string;
+  testId: string;
   autoComplete?: string;
 }
 
@@ -29,35 +30,40 @@ export const Inputs: InputsType = {
     name: 'email',
     class: 'sign-in__input',
     label: 'E-mail',
-    text: ''
+    text: '',
+    testId: 'login-email',
   },
   loginPassword: {
     type: 'password',
     name: 'password',
     class: 'sign-in__input',
     label: 'Пароль',
-    text: ''
+    text: '',
+    testId: 'login-password',
   },
   name: {
     type: 'text',
     name: 'name',
     class: '',
     label: 'Имя',
-    text: ''
+    text: '',
+    testId: 'name',
   },
   registerEmail: {
     type: 'email',
     name: 'email',
     class: '',
     label: 'E-mail',
-    text: ''
+    text: '',
+    testId: 'register-email',
   },
   birthday: {//max="2099-12-31"
     type: 'date',
     name: 'birthday',
     class: '',
     label: 'Дата рождения',
-    text: ''
+    text: '',
+    testId: 'birthday',
   },
   registerPassword: {
     type: 'password',
@@ -65,55 +71,63 @@ export const Inputs: InputsType = {
     class: 'sign-in__input',
     label: 'Пароль',
     autoComplete: 'off',
-    text: ''
+    text: '',
+    testId: 'register-password',
   },
   trainingCalories: {
     type: 'number',
     name: 'calories-lose',
     class: 'custom-input--with-text-right questionnaire-user__input',
     label: '',
-    text: 'ккал'
+    text: 'ккал',
+    testId: 'training-calories',
   },
   daysCalories: {
     type: 'number',
     name: 'calories-waste',
     class: 'custom-input--with-text-right questionnaire-user__input',
     label: '',
-    text: 'ккал'
+    text: 'ккал',
+    testId: 'days-calories',
   },
   trainingName: {
     type: 'text',
     name: 'training-name',
     class: 'create-training__input',
     label: 'Название тренировки',
-    text: ''
+    text: '',
+    testId: 'training-name',
   },
   cardTrainingName: {
     type: 'text',
     name: 'training',
     class: 'training',
     label: '',
-    text: ''
+    text: '',
+    testId: 'card-trainingName',
   },
   cardTrainingPrice: {
     type: 'number',
     name: 'price',
     class: 'price',
     label: 'Стоимость',
-    text: ''
+    text: '',
+    testId: 'card-training-price',
   },
   trainingCaloriesTraining: {
     type: 'number',
     name: 'calories',
     class: 'custom-input--with-text-right',
     label: 'Сколько калорий потратим',
-    text: 'ккал'
+    text: 'ккал',
+    testId: 'training-calories-training',
   },
   price: {
     type: 'number',
     name: 'price',
     class: 'custom-input--with-text-right',
     label: 'Стоимость тренировки',
-    text: '₽'
+    text: '₽',
+    testId: 'price',
   },
 };

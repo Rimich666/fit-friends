@@ -9,7 +9,7 @@ const initialState: BalanceState = {
 };
 
 export const balanceProcess = createSlice({
-  name: NameSpace.Orders,
+  name: NameSpace.Balance,
   initialState,
   reducers: {},
   extraReducers(builder) {

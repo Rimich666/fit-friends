@@ -153,9 +153,6 @@ export const trainingProcess = createSlice({
         state.isTrainingCardLoading = false;
       })
 
-      .addCase(updateTrainingCard.fulfilled, (state, action) => {
-        state.trainingCard = fillUpdateTrainingCard(action.payload, state.trainingCard);
-      })
       .addCase(createFeedback.fulfilled, (state, action) => {
         state.trainingCard = {...state.trainingCard, rating: action.payload.rating};
       })
@@ -207,10 +204,10 @@ export const trainingProcess = createSlice({
         state.isAnotherError = false;
       })
       .addCase(updateTrainingCard.fulfilled, (state, action) => {
+        state.trainingCard = fillUpdateTrainingCard(action.payload, state.trainingCard);
         state.isUpdateTrainingError = false;
         state.updateTrainingErrors = undefined as unknown as UpdateTrainingErrorInterface;
       })
-
       .addCase(updateTrainingCard.rejected, (state, action) => {
         if (action.error.code === 'Bad Request' && action.error.message) {
           const errors = parseErrors(action.error.message, trainingErrorKeys);

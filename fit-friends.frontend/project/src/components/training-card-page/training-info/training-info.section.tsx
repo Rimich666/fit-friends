@@ -17,7 +17,7 @@ import {makeUpdateTrainingCardPayload} from '../../../helpers/make-update-traini
 import {setBuy} from '../../../store/popup-process/popup.process';
 import {DISCOUNT} from '../../../settings';
 import {fillUpdateTrainingErrors, getEmptyUpdateTrainingErrors} from '../../../helpers/get-new-update-training';
-import {questionnaireValidators, updateTrainingValidators, validate} from '../../../utils/validate';
+import {updateTrainingValidators, validate} from '../../../utils/validate';
 
 type TrainingInfoSectionProps = {
   role: Role;

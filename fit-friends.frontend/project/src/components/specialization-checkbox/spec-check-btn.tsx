@@ -23,7 +23,7 @@ export default function SpecCheckBtn({isChecked, ...props}: SpecCheckBtnProps): 
     <div className="btn-checkbox">
       <label>
         <input className="visually-hidden" type="checkbox" name="specialisation" disabled={props.disabled}
-          value={props.value} checked={isCheck} onChange={changeHandle}
+          value={props.value} checked={isCheck} onChange={changeHandle} data-testid={`spec-check-btn-${props.value}`}
         />
         <span className="btn-checkbox__btn">{TrainingTypeText[props.value as keyof typeof TrainingTypeText]}</span>
       </label>

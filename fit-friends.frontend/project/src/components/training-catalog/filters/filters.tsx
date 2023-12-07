@@ -1,14 +1,15 @@
 import {FormClass, getCheckType, RangeTypes} from '../variances';
 import RangeBlock from './range-block/range-block';
 import {ComponentVariant} from '../../../component-variant';
-import FilterCheckBlock from './filter-check-block';
-import LevelRadioBlock from '../../level-radio-block';
+import FilterCheckBlock from './check-block/filter-check-block';
+import LevelRadioBlock from '../../level-radio-block/level-radio-block';
 import {Level, Role} from '../../../enums';
 import {RangeConstraint} from '../../../types/states/training-state';
 import SortBlock from './sort-block/sort-block';
 import RoleBlock from './role-block/role-block';
 import React, {useState} from 'react';
-import {initCheckBox} from './init-check-box';
+import {initCheckBox} from './check-block/init-check-box';
+
 
 type FiltersProps = {
   variant: ComponentVariant;

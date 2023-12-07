@@ -1,8 +1,8 @@
 import Logo from '../logo/logo';
 import SpecializationCheckbox from '../specialization-checkbox/specialization.checkbox';
 import {Level, Role, TrainingTime} from '../../enums';
-import LevelRadioBlock from '../level-radio-block';
-import TimeRadioBlock from '../time-radio-block';
+import LevelRadioBlock from '../level-radio-block/level-radio-block';
+import TimeRadioBlock from '../time-radio-block/time-radio-block';
 import CaloriesBlock from './calories-block';
 import React, {useEffect, useState} from 'react';
 import {

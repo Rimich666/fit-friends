@@ -17,7 +17,7 @@ export default function Friends({role}: FriendsProps): JSX.Element {
         <title>Список друзей — FitFriends</title>
       </Helmet>
       <Header/>
-      <MyFriendsMain role={role}/>
+      <MyFriendsMain/>
     </>
   );
 }

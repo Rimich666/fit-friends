@@ -2,7 +2,8 @@ import {publicApi} from './public.api';
 import {EndPoints} from '../api-route';
 import {dropToken, getToken, saveToken} from './token';
 import {TokenType} from '../types/auth/login.types';
-import mem from 'mem';
+import memoizeOne from 'memoize-one';
+
 
 export const REFRESH_TOKEN_KEY_NAME = 'refresh-fit-friends-token';
 
@@ -21,11 +22,11 @@ export const dropRefresh = (): void => {
   localStorage.removeItem(REFRESH_TOKEN_KEY_NAME);
 };
 
-const refreshTokenFn = async () => {
+export const refreshTokenFn = async (token: Refresh) => {
   try {
     const {data} = await publicApi.post<TokenType>(`/${EndPoints.refresh}`, {},{
       headers: {
-        'Authorization': `Bearer ${getRefresh()}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       }
     });
@@ -41,8 +42,4 @@ const refreshTokenFn = async () => {
   return getToken();
 };
 
-const maxAge = 10000;
-
-export const memoizedRefreshToken = mem(refreshTokenFn, {
-  maxAge,
-});
+export const memoizedRefreshToken = memoizeOne(refreshTokenFn);

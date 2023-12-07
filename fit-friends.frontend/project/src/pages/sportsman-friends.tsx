@@ -6,7 +6,7 @@ export default function SportsmanFriends(): JSX.Element {
   return (
     <>
       <Header/>
-      <MyFriendsMain role={Role.sportsman}/>
+      <MyFriendsMain/>
     </>
   );
 }

@@ -1,26 +1,16 @@
 import FriendList from './friend-list';
 import useFetchFriends from '../../hooks/use-fetch-friends';
-import {coachFriends} from './coach-friends';
-import {Role} from '../../enums';
 import {useNavigate} from 'react-router-dom';
 import {useAppSelector} from '../../hooks';
 import {selectBackRoute} from '../../store/back-process/back.selectors';
 
-type MyFriendsMainProps = {
-  role: Role;
-}
-
-const friends = {
-  coach: coachFriends,
-};
-
-export default function MyFriendsMain(props: MyFriendsMainProps): JSX.Element {
+export default function MyFriendsMain(): JSX.Element {
   const navigate = useNavigate();
   const backRoute = useAppSelector(selectBackRoute);
   const clickBackHandle = () => {
     navigate(backRoute);
   };
-  useFetchFriends(friends[props.role as keyof typeof friends]);
+  useFetchFriends();
   return (
     <main>
       <section className="friends-list">

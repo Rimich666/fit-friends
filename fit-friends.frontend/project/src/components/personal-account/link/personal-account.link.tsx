@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
 import {PersonalAccountLinkInterFace} from './personal-account-link.interface';
 
-export default function PersonalAccountLink({href, text, icon}: PersonalAccountLinkInterFace): JSX.Element {
+export default function PersonalAccountLink({href, text, icon, id}: PersonalAccountLinkInterFace): JSX.Element {
   return (
-    <Link className="thumbnail-link thumbnail-link--theme-light" to={href}>
+    <Link className="thumbnail-link thumbnail-link--theme-light" to={href} data-testid={id}>
       <div className="thumbnail-link__icon thumbnail-link__icon--theme-light">
         <svg width="30" height="26" aria-hidden="true">
           <use xlinkHref={icon}/>

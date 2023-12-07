@@ -5,7 +5,7 @@ import ButtonBlock from '../buttons-block/button-block';
 import {ComponentVariant} from '../../../component-variant';
 import {useNavigate} from 'react-router-dom';
 import {useState} from 'react';
-import {initCheckBox} from '../filters/init-check-box';
+import {initCheckBox} from '../filters/check-block/init-check-box';
 import {CoachTrainingsFilterInterface} from '../../../types/filters/coach-trainings-filter.interface';
 import {useAppDispatch} from '../../../hooks';
 import {TrainingSort} from '../filters/sort-block/sort-button';
