@@ -7,4 +7,5 @@ export { default as httpConfig } from './lib/http.config';
 export { default as jwtUsersConfig } from './lib/jwt-users.config';
 export { default as rabbitConfig } from './lib/rabbit.config';
 export { default as mailConfig } from './lib/mail.config';
+export { default as staticConfig } from './lib/static.config';
 export * from './lib/env-paths';

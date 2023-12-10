@@ -15,7 +15,7 @@ import { HttpModule } from '@nestjs/axios';
 import { getHttpOptions } from '@project/modules-options';
 import { FeedbackController } from './feedback.controller';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { Static } from '@project/shared-constants';
+import {ConfigService} from '@nestjs/config';
 import { AuthenticationService } from './authentication/authentication.service';
 import { FitUsersService } from './fit-users/fit-users.service';
 import { TrainingService } from './training/training.service';
@@ -28,9 +28,10 @@ import { CertificatesController } from './certificates.controller';
     HttpModule.registerAsync(getHttpOptions('http')),
     NotifyModule,
     ServeStaticModule.forRootAsync({
-      useFactory: () => {
-        const rootPath = Static.ROOT_PATH;
-        const serveRoot = Static.SERVE_ROOT;
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => {
+        const rootPath = configService.get<string>('static.rootPath');
+        const serveRoot = configService.get<string>('static.serveRoot');
         return [
           {
             rootPath,

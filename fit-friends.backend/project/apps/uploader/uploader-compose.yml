@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  fit-friend.uploader.mongo:
+    image: mongo:4.2
+    restart: always
+    container_name: fit-friend.uploader.mongo
+
+    env_file:
+      - .fit-friends.uploader.mongo.env
+
+    volumes:
+      - fit-friend.mongo.uploader:/data/db
+
+    networks:
+      - fit-friend.uploader
+
+  fit-friend.uploader.mongo.express:
+    image: mongo-express
+    restart: always
+    container_name: fit-friend.uploader.mongo.ui
+    ports:
+      - '8083:8081'
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test
+      ME_CONFIG_MONGODB_URL: mongodb://admin:test@fit-friend.uploader.mongo:27017/
+
+    networks:
+      - fit-friend.uploader
+
+  fit-friends.uploader:
+    container_name: fit-friend.uploader
+    depends_on:
+      - fit-friend.uploader.mongo
+    restart: always
+    image: fit-friends.uploader:latest
+    env_file:
+      - .fit-friends.uploader.env
+    ports:
+      - "3222:3222"
+    networks:
+      - fit-friend.uploader
+      - fit-friends.bff
+    volumes:
+      - type: bind
+        source: ./uploads
+        target: /opt/fit-friends-uploader/uploads
+
+volumes:
+  fit-friend.mongo.uploader:
+
+networks:
+  fit-friend.uploader:
+    driver: bridge
+  fit-friends.bff:
+    external: true

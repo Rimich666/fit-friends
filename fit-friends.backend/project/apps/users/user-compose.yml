@@ -1,0 +1,48 @@
+version: '3.9'
+services:
+  fit-friend.users.mongo:
+    image: mongo:4.2
+    restart: always
+    container_name: fit-friend-users_mongodb
+    env_file:
+      - .fit-friends.users.mongo.env
+    volumes:
+      - fit-friend-users_data:/data/db
+    networks:
+      - fit-friend.users
+
+  fit-friend.mongodb-express:
+    image: mongo-express:latest
+    restart: always
+    container_name: fit-friend-users_mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test
+      ME_CONFIG_MONGODB_URL: mongodb://admin:test@fit-friend-users_mongodb:27017/
+    networks:
+      - fit-friend.users
+
+  fit-friends.users:
+    container_name: fit-friend.users
+    depends_on:
+      - fit-friend.users.mongo
+    restart: always
+    image: fit-friends.users:latest
+    env_file:
+      - .fit-friends.users.env
+    ports:
+      - "3111:3111"
+    networks:
+      - fit-friend.users
+      - fit-friends.bff
+
+volumes:
+  fit-friend-users_data:
+
+networks:
+  fit-friend.users:
+    driver: bridge
+  fit-friends.bff:
+    external: true

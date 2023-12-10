@@ -1,0 +1,37 @@
+version: '3.9'
+services:
+  fit-friend.coaching.postgres:
+    image: postgres:16-alpine
+    container_name: fit-friend.coaching.postgres
+    env_file:
+      - .fit-friends.coaching.postgres.env
+    volumes:
+      - fit-friend.postgres.coaching:/var/lib/postgresql/data
+    networks:
+      - fit-friend.coaching
+
+  fit-friends.coaching:
+    container_name: fit-friend.coaching
+    depends_on:
+      - fit-friend.coaching.postgres
+    restart: always
+    image: fit-friends.coaching:latest
+    env_file:
+      - .fit-friends.coaching.env
+    ports:
+      - "3444:3444"
+    networks:
+      - fit-friend.coaching
+      - fit-friends.rabbit
+      - fit-friends.bff
+
+volumes:
+  fit-friend.postgres.coaching:
+
+networks:
+  fit-friend.coaching:
+      driver: bridge
+  fit-friends.rabbit:
+    external: true
+  fit-friends.bff:
+    external: true

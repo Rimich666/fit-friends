@@ -16,12 +16,22 @@
         "tsConfig": "apps/uploader/tsconfig.app.json",
         "assets": ["apps/uploader/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/uploader/webpack.config.js"
+        "webpackConfig": "apps/uploader/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
         "production": {}
       }
+    },
+    "buildImage": {
+	    "executor": "nx:run-commands",
+	    "options": {
+		    "commands": [
+			    "nx run uploader:build",
+			    "docker build --file apps/uploader/Dockerfile --tag fit-friends.uploader:latest ."
+		    ]
+	    }
     },
     "serve": {
       "executor": "@nx/js:node",

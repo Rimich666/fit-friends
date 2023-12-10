@@ -16,7 +16,8 @@
         "tsConfig": "apps/fill-base/tsconfig.app.json",
         "assets": ["apps/fill-base/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/fill-base/webpack.config.js"
+        "webpackConfig": "apps/fill-base/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},

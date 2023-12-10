@@ -16,12 +16,22 @@
         "tsConfig": "apps/users/tsconfig.app.json",
         "assets": ["apps/users/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/users/webpack.config.js"
+        "webpackConfig": "apps/users/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
         "production": {}
       }
+    },
+    "buildImage": {
+	    "executor": "nx:run-commands",
+	    "options": {
+		    "commands": [
+			    "nx run users:build",
+			    "docker build --file apps/users/Dockerfile --tag fit-friends.users:latest ."
+		    ]
+	    }
     },
     "serve": {
       "executor": "@nx/js:node",

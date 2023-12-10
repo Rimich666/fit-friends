@@ -1,0 +1,70 @@
+version: '3.9'
+services:
+  fit-friends.notify.fakesmtp:
+    image: gessnerfl/fake-smtp-server
+    container_name: fit-friends.notify.fakesmtp
+    hostname: fakesmtp
+    networks:
+      - fit-friend.notify
+
+  fit-friends.notify.rabbitmq:
+    image: rabbitmq:3.11-management
+    container_name: fit-friends.notify.rabbitmq
+    ports:
+      - '1088:15672'
+      - '5672:5672'
+    env_file:
+      - .fit-friends.notify.rabbit.env
+    networks:
+      - fit-friend.notify
+      - fit-friends.rabbit
+
+  fit-friend.notify.mongo:
+    image: mongo:4.2
+    restart: always
+    container_name: fit-friend-notify_mongodb
+    env_file:
+      - .fit-friends.notify.mongo.env
+    volumes:
+      - fit-friend-notify_data:/data/db
+    networks:
+      - fit-friend.notify
+
+  fit-friend.mongodb-express:
+    image: mongo-express:latest
+    restart: always
+    container_name: fit-friend-notify_mongo-express
+    ports:
+      - "8084:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: test
+      ME_CONFIG_MONGODB_URL: mongodb://admin:test@fit-friend-notify_mongodb:27017/
+    networks:
+      - fit-friend.notify
+
+  fit-friends.notify:
+    container_name: fit-friend.notify
+    depends_on:
+      - fit-friend.notify.mongo
+      - fit-friends.notify.rabbitmq
+    restart: always
+    image: fit-friends.notify:latest
+    env_file:
+      - .fit-friends.notify.env
+    ports:
+      - "3555:3555"
+    networks:
+      - fit-friend.notify
+      - fit-friends.bff
+
+volumes:
+  fit-friend-notify_data:
+
+networks:
+  fit-friend.notify:
+    driver: bridge
+  fit-friends.rabbit:
+    external: true
+  fit-friends.bff:
+    external: true

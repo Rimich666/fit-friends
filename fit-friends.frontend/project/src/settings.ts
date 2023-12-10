@@ -1,5 +1,3 @@
-
-
 export enum Accept {
   avatar = '[.png", ".jpg", ".jpeg"]',
   certificate = '[.png", ".jpg", ".jpeg", ".pdf"]',

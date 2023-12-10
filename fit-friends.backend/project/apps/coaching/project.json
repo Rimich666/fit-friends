@@ -16,12 +16,22 @@
         "tsConfig": "apps/coaching/tsconfig.app.json",
         "assets": ["apps/coaching/src/assets"],
         "isolatedConfig": true,
-        "webpackConfig": "apps/coaching/webpack.config.js"
+        "webpackConfig": "apps/coaching/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "development": {},
         "production": {}
       }
+    },
+    "buildImage": {
+	    "executor": "nx:run-commands",
+	    "options": {
+		    "commands": [
+			    "nx run coaching:build",
+			    "docker build --file apps/coaching/Dockerfile --tag fit-friends.coaching:latest ."
+		    ]
+	    }
     },
     "serve": {
       "executor": "@nx/js:node",
