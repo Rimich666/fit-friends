@@ -2,7 +2,7 @@ import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import RegisterForm from './register-form';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {defaultState} from '../../../mocks/default-state';
+import {defaultState} from '../../../mocks/states/default-state';
 
 const mockStore = configureMockStore();
 

@@ -1,4 +1,4 @@
-import {Gender, TrainingTime, TrainingType} from '../enums';
+import {Gender, TrainingTime, TrainingType} from '../../enums';
 
 export const trainingData = {
   coach: {

@@ -11,7 +11,7 @@ import * as token from '../../servises/token';
 import {Role} from '../../enums';
 import {NameSpace} from '../../settings';
 import {coachFriends} from '../../mocks/coach-friends';
-import {defaultState} from '../../mocks/default-state';
+import {defaultState} from '../../mocks/states/default-state';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

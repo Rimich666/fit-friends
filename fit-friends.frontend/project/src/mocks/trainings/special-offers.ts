@@ -1,4 +1,4 @@
-import {SpecialOfferInterface} from '../components/main-page/special-offer/special-offer.item';
+import {SpecialOfferInterface} from '../../components/main-page/special-offer/special-offer.item';
 
 export const specialProps: SpecialOfferInterface[] = [
   {

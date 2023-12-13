@@ -1,4 +1,4 @@
-import {TrainingType, UserLocation} from '../enums';
+import {TrainingType, UserLocation} from '../../enums';
 
 export const user = {
   src: '',

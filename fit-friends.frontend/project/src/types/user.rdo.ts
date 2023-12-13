@@ -1,4 +1,4 @@
-import {CertificateInterface} from "./certificate.interface";
+import {CertificateInterface} from './certificate.interface';
 
 export interface SportsmanRdo {
   trainingTime: string;

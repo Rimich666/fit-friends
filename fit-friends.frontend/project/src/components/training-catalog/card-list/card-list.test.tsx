@@ -4,7 +4,7 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import HistoryRouter from '../../history-route/history-route';
 import {render, screen} from '@testing-library/react';
-import {defaultState} from '../../../mocks/default-state';
+import {defaultState} from '../../../mocks/states/default-state';
 import React from 'react';
 import CardList from './card.list';
 import {ComponentVariant} from '../../../component-variant';

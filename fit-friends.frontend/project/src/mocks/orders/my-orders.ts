@@ -1,5 +1,5 @@
-import {TrainingType} from '../enums';
-import {MyOrderInterface} from '../types/card-interface';
+import {TrainingType} from '../../enums';
+import {MyOrderInterface} from '../../types/card-interface';
 
 export const ordersData: MyOrderInterface[] = [
   {

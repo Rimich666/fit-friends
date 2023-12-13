@@ -1,4 +1,4 @@
-import {ReviewInterface} from '../types/review.interface';
+import {ReviewInterface} from '../../types/review.interface';
 
 export const reviewsData: ReviewInterface[] = [
   {

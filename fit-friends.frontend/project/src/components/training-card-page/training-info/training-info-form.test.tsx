@@ -4,11 +4,11 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import HistoryRouter from '../../history-route/history-route';
 import {render, screen, waitFor} from '@testing-library/react';
-import {defaultState} from '../../../mocks/default-state';
+import {defaultState} from '../../../mocks/states/default-state';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import TrainingInfoForm from './training-info.form';
-import {trainingData} from '../../../mocks/training-data';
+import {trainingData} from '../../../mocks/trainings/training-data';
 import {Role} from '../../../enums';
 
 const middlewares = [thunk];

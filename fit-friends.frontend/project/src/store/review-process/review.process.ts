@@ -1,7 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../settings';
 import {ReviewState} from '../../types/states/review-state';
-import {ReviewInterface} from '../../types/review.interface';
 import {fillReview} from '../../helpers/fill-review';
 import {createFeedback, fetchFeedbacks} from '../api-actions/feedback-actions';
 
@@ -12,11 +11,7 @@ const initialState: ReviewState = {
 export const reviewsProcess = createSlice({
   name: NameSpace.Reviews,
   initialState,
-  reducers: {
-    loadReviews: (state, action: PayloadAction<ReviewInterface[]>) => {
-      state.reviews = action.payload;
-    }
-  },
+  reducers: {},
   extraReducers(builder) {
     builder
       .addCase(fetchFeedbacks.fulfilled, (state, action) => {
@@ -27,5 +22,3 @@ export const reviewsProcess = createSlice({
       });
   }
 });
-
-export const {loadReviews} = reviewsProcess.actions;

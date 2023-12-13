@@ -12,7 +12,7 @@ export const createOrderAction = createAsyncThunk<number, CreateOrderInterface, 
   extra: AxiosInstance;
 }>(
   TypeAction.createOrder,
-  async (payload, {dispatch, extra: axiosApi}) => {
+  async (payload, {extra: axiosApi}) => {
     const {data} = await axiosApi.post<number>(
       ApiRoute.Order,
       payload);
@@ -26,7 +26,7 @@ export const fetchOrders = createAsyncThunk<GetOrdersInterface, string, {
   extra: AxiosInstance;
 }>(
   TypeAction.fetchOrders,
-  async (options, {dispatch, extra: axiosApi}) => {
+  async (options, {extra: axiosApi}) => {
     const {data, headers} = await axiosApi.get<OrderRdo[]>(`${ApiRoute.Order}?${options}`);
     return {data, pages: parseInt(headers['list-size'], 10)};
   }

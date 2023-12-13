@@ -1,6 +1,6 @@
 import {render, screen} from '@testing-library/react';
 import {Provider} from 'react-redux';
-import {defaultState} from '../../../mocks/default-state';
+import {defaultState} from '../../../mocks/states/default-state';
 import CreateTrainingForm from './create-training.form';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import * as token from '../../../servises/token';

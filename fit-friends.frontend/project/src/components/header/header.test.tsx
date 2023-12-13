@@ -4,7 +4,7 @@ import Header from './header';
 import {configureMockStore, MockStore} from '@jedmao/redux-mock-store';
 import {createMemoryHistory} from 'history';
 import HistoryRouter from '../history-route/history-route';
-import {defaultState} from '../../mocks/default-state';
+import {defaultState} from '../../mocks/states/default-state';
 import thunk from 'redux-thunk';
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';

@@ -1,5 +1,5 @@
-import {CardInterface} from '../types/card-interface';
-import {TrainingType} from '../enums';
+import {CardInterface} from '../../types/card-interface';
+import {TrainingType} from '../../enums';
 
 
 export const cardData: CardInterface[] = [

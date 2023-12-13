@@ -6,7 +6,7 @@ import HistoryRouter from '../../history-route/history-route';
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../../app-route';
 import {render, screen, waitFor} from '@testing-library/react';
-import {defaultState} from '../../../mocks/default-state';
+import {defaultState} from '../../../mocks/states/default-state';
 import React from 'react';
 import PersonalAccountUser from './personal-account-user';
 import userEvent from '@testing-library/user-event';

@@ -1,4 +1,3 @@
-import {TrainingInterface} from "./training.interface";
 
 export interface OrderRdo {
   name: string;

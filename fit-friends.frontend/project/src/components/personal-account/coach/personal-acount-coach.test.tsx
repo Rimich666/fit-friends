@@ -9,7 +9,7 @@ import {Provider} from 'react-redux';
 import {Route, Routes} from 'react-router-dom';
 import {AppRoute} from '../../../app-route';
 import PersonalAccountCoach from './personal-account-coach';
-import {defaultState} from '../../../mocks/default-state';
+import {defaultState} from '../../../mocks/states/default-state';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

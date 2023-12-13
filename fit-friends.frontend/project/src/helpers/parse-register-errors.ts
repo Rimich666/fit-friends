@@ -17,15 +17,15 @@ const Mapping = {
     class: 'user',
     field: 'location',
   },
-  trainingCalories: {
+  trainingcalories: {
     class: 'questionnaire',
     field: 'trainingCalories',
   },
-  daysCalories: {
+  dayscalories: {
     class: 'questionnaire',
     field: 'daysCalories',
   },
-  trainingType: {
+  trainingtype: {
     class: 'questionnaire',
     field: 'trainingType',
   },

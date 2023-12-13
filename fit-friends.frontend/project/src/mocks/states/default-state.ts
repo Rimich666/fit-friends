@@ -1,16 +1,16 @@
-import {NameSpace} from "../settings";
-import {certificates} from './certificates';
-import {user} from './user';
-import {validationConstraints} from '../validation-constraints';
-import {RangeConstraint} from '../types/states/training-state';
-import {cardData} from './card-data';
-import {trainingData} from './training-data';
-import {specialProps} from './special-offers';
-import {userCardData} from './user-card-data';
-import {AppRoute} from '../app-route';
-import {ordersData} from './my-orders';
-import {reviewsData} from './reviews-data';
-import {coachFriends} from './coach-friends';
+import {NameSpace} from '../../settings';
+import {certificates} from '../certificates';
+import {user} from '../users/user';
+import {validationConstraints} from '../../validation-constraints';
+import {RangeConstraint} from '../../types/states/training-state';
+import {cardData} from '../trainings/card-data';
+import {trainingData} from '../trainings/training-data';
+import {specialProps} from '../trainings/special-offers';
+import {userCardData} from '../users/user-card-data';
+import {AppRoute} from '../../app-route';
+import {ordersData} from '../orders/my-orders';
+import {reviewsData} from '../feedback/reviews-data';
+import {coachFriends} from '../coach-friends';
 
 export const defaultState = {
   [NameSpace.Register]: {

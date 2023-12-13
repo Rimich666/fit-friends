@@ -10,7 +10,6 @@ import {
 } from '../api-actions/api-actions';
 import {RangeConstraint, TrainingState} from '../../types/states/training-state';
 import {validationConstraints} from '../../validation-constraints';
-import {TrainingCardInterface} from '../../types/training-card.interface';
 import {fillTrainingCard, fillUpdateTrainingCard, getEmptyTrainingCard} from '../../helpers/fill-training-card';
 import {createFeedback} from '../api-actions/feedback-actions';
 import {fillCoachCardTraining} from '../../helpers/fill-coach-card-training';
@@ -68,9 +67,6 @@ export const trainingProcess = createSlice({
   name: NameSpace.Training,
   initialState,
   reducers: {
-    loadTrainingCard: (state, action: PayloadAction<TrainingCardInterface>) => {
-      state.trainingCard = action.payload;
-    },
     setIsTrainingCardLoading: (sate, action: PayloadAction<boolean>) => {
       sate.isTrainingCardLoading = action.payload;
     }
@@ -216,10 +212,8 @@ export const trainingProcess = createSlice({
           return;
         }
         state.isAnotherError = true;
-      })
-    ;
-
+      });
   }
 });
 
-export const {loadTrainingCard, setIsTrainingCardLoading} = trainingProcess.actions;
+export const {setIsTrainingCardLoading} = trainingProcess.actions;

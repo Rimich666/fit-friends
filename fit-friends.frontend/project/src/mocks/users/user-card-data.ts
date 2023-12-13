@@ -1,4 +1,4 @@
-import {Role, TrainingType, UserLocation} from '../enums';
+import {Role, TrainingType, UserLocation} from '../../enums';
 
 export const userCardData = [
   {

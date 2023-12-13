@@ -23,7 +23,7 @@ export const changeStateQuestion = createAsyncThunk<RequestInterface, RequestInt
 }>(
   TypeAction.changeStateQuestion,
   async (payload, {extra: axiosApi}) => {
-    const {data} = await axiosApi.patch<RequestInterface>(ApiRoute.Join,payload);
+    const {data} = await axiosApi.patch<RequestInterface>(ApiRoute.Join, payload);
     return data;
   }
 );
