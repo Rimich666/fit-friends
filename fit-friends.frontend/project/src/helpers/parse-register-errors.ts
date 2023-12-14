@@ -5,6 +5,10 @@ const Mapping = {
     class: 'user',
     field: 'email',
   },
+  avatar: {
+    class: 'user',
+    field: 'avatar',
+  },
   name: {
     class: 'user',
     field: 'name',
@@ -42,8 +46,9 @@ export const parseRegisterErrors = (errorString: string) => {
   if (!Array.isArray(errors)) {
     return parsed;
   }
-  parsed = errors.map((error) => ([parseKey(error, Object.keys(Mapping)), error]))
-    .reduce((acc, curr) => ({...acc, [Mapping[curr[0] as keyof typeof Mapping].class]:
+  parsed = errors.map((error) => ([parseKey(error, Object.keys(Mapping)), error])).filter((item) => item[0] !== undefined)
+    .reduce((acc, curr) =>
+      ({...acc, [Mapping[curr[0] as keyof typeof Mapping].class]:
           {...acc[Mapping[curr[0] as keyof typeof Mapping].class as keyof typeof parsed] ,
             [Mapping[curr[0] as keyof typeof Mapping].field]: curr[1]}}),
     parsed);

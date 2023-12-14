@@ -1,8 +1,9 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
-  Inject, ParseFilePipe,
+  Inject, Logger, ParseFilePipe,
   Post, UploadedFiles,
   UseFilters,
   UseInterceptors,
@@ -50,6 +51,8 @@ export class AuthenticationController {
     })) files: UserFilesType,
     @Body() dto: CreateUserDto,
     @Token() token: string){
+    const logger = new Logger('AuthenticationController');
+    logger.log(`${this.url}${EndPoints.register}`);
     return this.authService.register(dto, files, token, `${this.url}${EndPoints.register}`);
   }
 

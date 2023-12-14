@@ -11,7 +11,7 @@ export class FilesTypeValidator extends FileValidator {
     };
     return Object.values(files).reduce((acc, arr) =>
       acc.concat(arr), []).filter((file) => file['isError']).map((file) =>
-      `File '${file.originalname}' is not a ${errorText[this.validationOptions[file.fieldname]]}.`).join('\n');
+      `${file.fieldname} '${file.originalname}' is not a ${errorText[this.validationOptions[file.fieldname]]}.`).join('\n');
   }
 
   isValid(files: {[f: string]: Express.Multer.File[] | IFile[]}): boolean | Promise<boolean> {

@@ -1,8 +1,9 @@
-import {ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus} from '@nestjs/common';
+import {ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus, Logger} from '@nestjs/common';
 import { Response } from 'express';
 import { AxiosError } from 'axios';
 
 const INTERNAL_SERVER_ERROR_MESSAGE = 'Internal server error';
+const logger = new Logger('AxiosExceptionFilter');
 
 @Catch(Error)
 export class AxiosExceptionFilter implements ExceptionFilter {
@@ -32,7 +33,15 @@ export class AxiosExceptionFilter implements ExceptionFilter {
         });
       return;
     }
-    const statusCode = exception.getStatus();
+    logger.log(`exception: ${exception}`);
+
+    let statusCode = null as unknown as HttpStatus;
+    try {
+      statusCode = exception.getStatus();
+    } catch {
+      statusCode = HttpStatus.INTERNAL_SERVER_ERROR;
+    }
+
     if (statusCode === 400) {
       const errResponse = exception.getResponse();
       const statusText = errResponse['error'] || '';
