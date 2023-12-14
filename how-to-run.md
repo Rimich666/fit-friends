@@ -19,25 +19,25 @@
 2. Альтернатива: Или создать
    1. Перейти в директорию: `./fit-friend.backend/project`
    2. Сбилдить сервисы:
-      1. nx run users:build  
-      2. nx run uploader:build 
-      3. nx run notify:build
-      4. nx run coaching:build
-      5. nx run bff:build
+      1. `nx run users:build`  
+      2. `nx run uploader:build` 
+      3. `nx run notify:build`
+      4. `nx run coaching:build`
+      5. `nx run bff:build`
    3. Построить docker images
-      1. docker build --no-cache --file apps/uploader/Dockerfile --tag fit-friends.uploader:latest .
-      2. docker build --no-cache --file apps/users/Dockerfile --tag fit-friends.users:latest .   
-      3. docker build --no-cache --file apps/coaching/Dockerfile --tag fit-friends.coaching:latest .
-      4. docker build --no-cache --file apps/notify/Dockerfile --tag fit-friends.notify:latest .
-      5. docker build --no-cache --file apps/bff/Dockerfile --tag fit-friends.bff:latest .
+      1. `docker build --no-cache --file apps/uploader/Dockerfile --tag fit-friends.uploader:latest .`
+      2. `docker build --no-cache --file apps/users/Dockerfile --tag fit-friends.users:latest .`   
+      3. `docker build --no-cache --file apps/coaching/Dockerfile --tag fit-friends.coaching:latest .`
+      4. `docker build --no-cache --file apps/notify/Dockerfile --tag fit-friends.notify:latest .`
+      5. `docker build --no-cache --file apps/bff/Dockerfile --tag fit-friends.bff:latest .`
        
    4. Перейти в директорию: `./fit-friend.frontend/project`
    5. Сбилдить приложение: `npm run build`
    6. Построить docker image: `docker build --file Dockerfile --tag fit-friends.frontend:latest .` 
 
 3. Создать внешние сети:
-   1. docker network create fit-friends.rabbit
-   2. docker network create fit-friends.bff
+   1. `docker network create fit-friends.rabbit`
+   2. `docker network create fit-friends.bff`
 
 4. Создать .env файлы
    1. `./fit-friend.backend/project/apps/uploader/.fit-friends.uploader.env`
