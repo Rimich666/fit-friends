@@ -1,20 +1,15 @@
-import {createAPI} from "../../servises/api";
-import MockAdapter from "axios-mock-adapter";
-import thunk from "redux-thunk";
-import {configureMockStore} from "@jedmao/redux-mock-store";
-import {RootState} from "../index";
-import {Action, ThunkDispatch} from "@reduxjs/toolkit";
-import {fetchCompany, fetchUser, fetchUsers} from "../api-actions/users-actions";
-import {fakeUserRdo} from "../../mocks/users/fake-user-rdo";
-import {fillUser} from "../../helpers/fill-user";
-import {makeFakeUsersRdo} from "../../mocks/users/make-fake-users-rdo";
-import {ApiRoute, EndPoints} from "../../api-route";
-import {LIMIT} from "../../settings";
-import {fetchBalance, subBalance} from "../api-actions/balance-actions";
-import {balanceProcess} from "./balance.process";
-import {BalanceState} from "../../types/states/balance-state";
-import {createOrderAction} from "../api-actions/order.action";
-import {createBalance, createOrder} from "../../mocks/orders/create-order";
+import {createAPI} from '../../servises/api';
+import MockAdapter from 'axios-mock-adapter';
+import thunk from 'redux-thunk';
+import {configureMockStore} from '@jedmao/redux-mock-store';
+import {RootState} from '../index';
+import {Action, ThunkDispatch} from '@reduxjs/toolkit';
+import {ApiRoute} from '../../api-route';
+import {fetchBalance, subBalance} from '../api-actions/balance-actions';
+import {balanceProcess} from './balance.process';
+import {BalanceState} from '../../types/states/balance-state';
+import {createOrderAction} from '../api-actions/order.action';
+import {createBalance, createOrder} from '../../mocks/orders/create-order';
 
 describe('Reducer: user', () => {
   let state: BalanceState;

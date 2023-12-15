@@ -1,7 +1,6 @@
 import {Gender, Level, TrainingTime} from '../../enums';
 import {MyOrderInterface} from '../../types/card-interface';
 import {ordersData} from './my-orders';
-import {OrderRdo} from "../../types/order-rdo";
 
 const fakeOrderRdo = {
   level: Level.professional,

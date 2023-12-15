@@ -25,4 +25,4 @@ export const makeFakeGetTrainings = {
   data: makeFakeTrainings(),
   maxPrice: 3500,
   pages: 6
-}
+};

@@ -1,10 +1,14 @@
 import React from 'react';
 import {Direction} from '../enums';
 
-export default function CertificatePopup(): JSX.Element {
+type CertificatePopupProps = {
+  callback: () => void;
+}
+
+export default function CertificatePopup(props: CertificatePopupProps): JSX.Element {
   const isPdf = true;
   const clickHandle = () => {
-    console.log('clickHandle');
+    props.callback();
   };
   const src = '/img/content/certificates-and-diplomas/certificate-3.jpg';
   const alt = '';

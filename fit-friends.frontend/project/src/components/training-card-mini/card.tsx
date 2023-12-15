@@ -59,18 +59,20 @@ export default function Card(props: CardProps): JSX.Element {
             <p className="thumbnail-training__text">{props.description}</p>
           </div>
           {props.variant === ComponentVariant.myOrders ?
-            <a className="btn-flat btn-flat--underlined thumbnail-training__button-orders" href="#">
+            <Link className="btn-flat btn-flat--underlined thumbnail-training__button-orders"
+              to={`${miniCardLink[props.variant as keyof typeof miniCardLink]}/${props.id}`}
+            >
               <svg width="18" height="18" aria-hidden="true">
                 <use xlinkHref="#icon-info"></use>
               </svg>
               <span>Подробнее</span>
-            </a> :
+            </Link> :
             <div className="thumbnail-training__button-wrapper">
               <Link className="btn btn--small thumbnail-training__button-catalog"
                 to={`${miniCardLink[props.variant as keyof typeof miniCardLink]}/${props.id}`}
               >Подробнее
               </Link>
-              <a className="btn btn--small btn--outlined thumbnail-training__button-catalog" href="#">Отзывы</a>
+              <Link className="btn btn--small btn--outlined thumbnail-training__button-catalog" to={'#'}>Отзывы</Link>
             </div>}
         </div>
         {(props.variant === ComponentVariant.myOrders && props.total && props.count ) &&

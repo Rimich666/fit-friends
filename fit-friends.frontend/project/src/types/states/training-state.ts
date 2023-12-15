@@ -2,11 +2,8 @@ import {TrainingInterface} from '../training.interface';
 import {TrainingCardInterface} from '../training-card.interface';
 import {PopularTrainingItemProps} from '../../components/main-page/popular-training/popular-training.item';
 import {SpecialOfferInterface} from '../../components/main-page/special-offer/special-offer.item';
-import {RegisterUserInterface} from "../auth/register-user.interface";
-import {RegisterErrorsInterface} from "../auth/register-errors.interface";
-import {CreateTrainingInterface} from "../create-training.interface";
-import {CreateTrainingErrorsInterface} from "../create-training-errors.interface";
-import {UpdateTrainingErrorInterface} from "../update-training-error.interface";
+import {CreateTrainingErrorsInterface} from '../create-training-errors.interface';
+import {UpdateTrainingErrorInterface} from '../update-training-error.interface';
 export type RangeConstraint = {
   min: number;
   max: number;

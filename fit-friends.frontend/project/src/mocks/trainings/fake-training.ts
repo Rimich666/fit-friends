@@ -1,4 +1,4 @@
-import {Gender, Level, TrainingTime, TrainingType} from "../../enums";
+import {Gender, Level, TrainingTime, TrainingType} from '../../enums';
 
 export const fakeTraining = {
   id: 25,

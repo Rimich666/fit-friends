@@ -1,5 +1,4 @@
 import {Gender, Level, Role, TrainingType, UserLocation} from '../../enums';
-import {RegisterDto} from '../../types/auth/register.dto';
 
 export const fakeUserRdo = {
   id: 'id',

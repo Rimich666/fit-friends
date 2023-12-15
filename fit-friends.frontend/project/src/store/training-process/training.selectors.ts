@@ -7,7 +7,7 @@ import {ComponentVariant} from '../../component-variant';
 import {PopularTrainingItemProps} from '../../components/main-page/popular-training/popular-training.item';
 import {SpecialOfferInterface} from '../../components/main-page/special-offer/special-offer.item';
 import {CreateTrainingErrorsInterface} from '../../types/create-training-errors.interface';
-import {UpdateTrainingErrorInterface} from "../../types/update-training-error.interface";
+import {UpdateTrainingErrorInterface} from '../../types/update-training-error.interface';
 
 export const selectIsForYouLoading = (state: RootState): boolean => state[NameSpace.Training].isForYouLoading;
 
