@@ -61,7 +61,7 @@ export default function Questionnaire(): JSX.Element {
   };
 
   const onSelectFile = (selectedFile: File[]) => {
-    questionnaire.certificate = selectedFile;
+    questionnaire.certificate.splice(0, questionnaire.certificate.length, ...selectedFile);
     errors.certificate = '';
   };
 
