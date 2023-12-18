@@ -38,10 +38,13 @@ export default function Questionnaire(): JSX.Element {
     question,
   } = useAppSelector(selectQuestion);
 
+  console.log(isQuestionnaireError);
+
   useEffect(() => {
     if (isQuestionnaireError) {
       setErrors({...questionnaireErrors});
       setQuestion({...question, trainingType: [...question.trainingType]});
+      console.log(question);
     }
   }, [isQuestionnaireError]);
 

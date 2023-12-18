@@ -78,6 +78,9 @@ export const registerProcess = createSlice({
           state.registerErrors = fillRegisterErrors(errors.user);
           state.questionnaireErrors = fillQuestionnaireErrors(errors.questionnaire);
           state.questionnaireIsError = Object.values(state.questionnaireErrors).join('').length > 0;
+          console.log(action.error.message);
+          console.log(state.questionnaireErrors);
+          console.log(state.questionnaireIsError);
           state.registerIsError = Object.values(state.registerErrors).join('').length > 0;
           return;
         }

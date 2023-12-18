@@ -36,6 +36,14 @@ const Mapping = {
   description: {
     field: 'description',
     class: ''
+  },
+  merits: {
+    field: 'merits',
+    class: 'questionnaire'
+  },
+  certificate: {
+    field: 'merits',
+    class: 'questionnaire'
   }
 };
 
